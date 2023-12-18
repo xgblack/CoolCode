@@ -1,0 +1,157 @@
+# IDEA运行的时候，需要在VM options中添加 -Dspring.profiles.active=dev或者在环境变量中添加spring.profiles.active=dev
+# 也可以在application.yaml中添加spring.profiles.active=dev
+#服务器配置
+server:
+  port: 8888 #端口号
+  compression:
+    enabled: true #开启压缩
+  undertow:
+    threads:
+      # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+      io: 16
+      # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
+      worker: 400
+    # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+    buffer-size: 1024
+    # 是否分配的直接内存,如果设置为true,则会使用操作系统的内存,这样会减少一次拷贝,但是会增加一次内存分配
+    direct-buffers: true
+  tomcat:
+    basedir: logs/tomcat #tomcat的工作目录(项目路径)
+    accesslog:
+      enabled: true #开启访问日志
+      prefix: access_log #访问日志文件名前缀
+      suffix: .log #访问日志文件名后缀
+#    ssl:
+#      key-alias: myhttps #证书别名
+#      key-store: classpath:myhttps.jks #证书路径
+#      key-store-password: admin #证书密码
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/bootdemo?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+    username: root
+    password: admin
+    druid:
+      #初始化大小
+      initialSize: 10
+      #最小值
+      minIdle: 8
+      #最大值
+      maxActive: 80
+      #最大等待时间，配置获取连接等待超时，时间单位都是毫秒ms
+      maxWait: 6000
+      #配置间隔多久才进行一次检测，检测需要关闭的空闲连接
+      timeBetweenEvictionRunsMillis: 30000
+      #配置一个连接在池中最小生存的时间
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，
+      #'wall'用于防火墙，SpringBoot中没有log4j，我改成了log4j2
+      filters: stat,wall,log4j2
+      #最大PSCache连接
+      maxPoolPreparedStatementPerConnectionSize: 20
+      useGlobalDataSourceStat: true
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+      # 配置StatFilter
+      web-stat-filter:
+        #默认为false，设置为true启动
+        enabled: true
+        url-pattern: "/*"
+        exclusions: "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"
+      #配置StatViewServlet
+      stat-view-servlet:
+        url-pattern: "/druid/*"
+        login-username: admin
+        login-password: admin123
+        #是否可以重置
+        reset-enable: true
+        #启用
+        enabled: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    locale: zh
+
+
+
+
+#spring:
+#  datasource:
+#    dynamic:
+#      datasource:
+#        master:
+#          driver-class-name: com.mysql.cj.jdbc.Driver
+#          url: jdbc:mysql://127.0.0.1:3306/bootdemo?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+#          username: root
+#          password: admin
+#        slave_1:
+#          driver-class-name: org.postgresql.Driver
+#          url: jdbc:postgresql://127.0.0.1:5432/bootdemopg
+#          username: postgres
+#          password: admin
+
+
+# 日志配置
+logging:
+  level:
+    com.xgblack: debug
+    org.springframework: warn
+    com.baomidou.example.mapper: debug
+
+# 数据源及mybatis、mybatis-flex配置
+mybatis-flex:
+  # 搜索指定包别名
+  typeAliasesPackage: com.xgblack.**.domain
+  # 不支持多包, 如有需要可在注解配置 或 提升扫包等级：com.**.**.mapper
+  mapper-package: com.xgblack.**.mapper
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapper-locations: classpath*:mapper/**/*.xml
+
+  #本部分（Configuration）的配置都为 MyBatis 原生支持的配置，有关配置请参考:https://mybatis.org/mybatis-3/zh/configuration.html#%E8%AE%BE%E7%BD%AE%EF%BC%88settings%EF%BC%89
+  configuration:
+    # 自动驼峰命名规则（camel case）映射
+    mapUnderscoreToCamelCase: true
+    # MyBatis 自动映射策略
+    # NONE：不启用 PARTIAL：只对非嵌套 resultMap 自动映射 FULL：对所有 resultMap 自动映射
+    autoMappingBehavior: FULL
+    # MyBatis 自动映射时未知列或未知属性处理策
+    # NONE：不做处理 WARNING：打印相关警告 FAILING：抛出异常和详细信息
+    autoMappingUnknownColumnBehavior: NONE
+    # 更详细的日志输出 会有性能损耗 org.apache.ibatis.logging.stdout.StdOutImpl
+    # 关闭日志记录  org.apache.ibatis.logging.nologging.NoLoggingImpl
+    # 默认日志输出 org.apache.ibatis.logging.slf4j.Slf4jImpl
+    logImpl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    cacheEnabled: true
+
+  # MyBatis-Flex全局配置
+  global-config:
+    # 是否控制台打印 MyBatis-Flex 的 LOGO 及版本号
+    print-banner: true
+    # 逻辑删除数据存在标记值
+    normal-value-of-logic-delete: 0
+    # 逻辑删除数据删除标记值
+    deleted-value-of-logic-delete: 1
+    #全局的 ID 生成策略配置
+    key-config:
+      #自增的方式
+      key-type: auto
+#  admin-config:
+#    enable: true
+#    endpoint: http://admin-host:8080/message/collect
+#    secret-key: secretKey
+
+
+
+
+app:
+  java:
+    # 项目版本。注入Maven中的配置
+    version: @java.version@
+
