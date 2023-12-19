@@ -27,15 +27,6 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     locale: zh
 
-# 日志配置
-logging:
-  file:
-    # 日志文件名，全路径. logback-spring.xml中通过LOG_FILE获取
-    name: /data/logs/${spring.application.name}/app.log
-  level:
-    com.xgblack: trace
-    org.springframework: warn
-
 
 # 数据源及mybatis、mybatis-flex配置
 mybatis-flex:
@@ -79,12 +70,16 @@ mybatis-flex:
 #    endpoint: http://admin-host:8080/message/collect
 #    secret-key: secretKey
 
-
+# 日志配置
+logging:
+  file:
+    # 日志文件名，全路径. logback-spring.xml中通过LOG_FILE获取
+    name: /data/logs/${spring.application.name}/app.log
+  level:
+    com.xgblack: trace
+    org.springframework: warn
 
 app:
-  java:
-    # 项目版本。注入Maven中的配置
-    version: @java.version@
   # 调试模式
   security:
     mock-enable: true
