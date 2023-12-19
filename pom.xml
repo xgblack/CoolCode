@@ -13,7 +13,7 @@
 	<groupId>com.xgblack</groupId>
 	<artifactId>cool</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>cool</name>
+	<name>cool-code-boot</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>21</java.version>
