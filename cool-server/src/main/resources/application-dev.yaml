@@ -25,7 +25,8 @@ spring:
       max-file-size: 100MB
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
-    locale: zh
+    locale: zh_CN
+    time-zone: GMT+8
 
 
 # 数据源及mybatis、mybatis-flex配置
