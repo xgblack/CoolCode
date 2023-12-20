@@ -25,6 +25,7 @@ public class TestController {
      */
     @GetMapping("detail")
     public StudentResp testResp() {
+        //throw new RuntimeException("1122");
         return new StudentResp().setId(2L).setAge(18).setName("张三").setBirthday(LocalDateTime.now()).setDate(new Date()).setLocalDate(LocalDate.now());
     }
 
