@@ -14,8 +14,10 @@
 
 		<module>cool-framework</module>
 
+		<module>cool-web</module>
+
 		<module>cool-server</module>
-		<module>cool-framework/cool-spring-boot-starter-banner</module>
+
 	</modules>
 
 	<name>cool-code-boot</name>

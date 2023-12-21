@@ -53,6 +53,32 @@
                 <version>${revision}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.xgblack.cool</groupId>
+                <artifactId>cool-web-infrastructure</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xgblack.cool</groupId>
+                <artifactId>cool-web-client</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xgblack.cool</groupId>
+                <artifactId>cool-web-domain</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xgblack.cool</groupId>
+                <artifactId>cool-web-app</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xgblack.cool</groupId>
+                <artifactId>cool-web-adapter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
 
             <!-- 统一依赖管理 -->
             <dependency>
