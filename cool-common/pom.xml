@@ -6,16 +6,19 @@
     <parent>
         <groupId>com.xgblack</groupId>
         <artifactId>cool-code-boot</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
-
     <artifactId>cool-common</artifactId>
+
+    <name>${project.artifactId}</name>
+    <description>通用</description>
+    <url>https://blog.xgblack.cn</url>
+
 
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
         </dependency>
         <!-- MapStruct begin -->
         <dependency>
