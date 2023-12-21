@@ -31,12 +31,12 @@
 
 		<spring.boot.version>3.2.0</spring.boot.version>
 		<maven-surefire-plugin.version>3.2.3</maven-surefire-plugin.version>
-		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+		<maven-compiler-plugin.version>3.12.0</maven-compiler-plugin.version>
 		<native-maven-plugin.version>0.9.28</native-maven-plugin.version>
 
 
 		<!-- TODO: 看看咋放到 bom 里 -->
-		<lombok.version>1.18.20</lombok.version>
+		<lombok.version>1.18.30</lombok.version>
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
 	</properties>
 

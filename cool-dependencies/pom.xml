@@ -23,8 +23,10 @@
         <mysql.version>8.2.0</mysql.version>
         <druid-spring-boot.version>1.2.20</druid-spring-boot.version>
         <guava.version>33.0.0-jre</guava.version>
+
         <lombok.version>1.18.30</lombok.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
+
         <hutool.version>5.8.23</hutool.version>
         <minio.version>8.5.7</minio.version>
         <tobato.version>1.27.2</tobato.version>
