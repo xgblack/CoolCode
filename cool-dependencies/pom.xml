@@ -47,6 +47,11 @@
                 <artifactId>cool-common</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <dependency>
+                <groupId>com.xgblack</groupId>
+                <artifactId>cool-spring-boot-starter-banner</artifactId>
+                <version>${revision}</version>
+            </dependency>
 
 
             <!-- 统一依赖管理 -->

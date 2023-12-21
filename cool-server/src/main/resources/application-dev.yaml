@@ -93,7 +93,7 @@ logging:
     com.xgblack: trace
     org.springframework: warn
 
-app:
+cool-code:
   # 调试模式
   security:
     mock-enable: true

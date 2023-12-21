@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.xgblack.cool.framework.banner.config.CoolBannerAutoConfiguration

@@ -2,6 +2,10 @@ spring:
   profiles:
     active: dev
 
+cool-code:
+  info:
+    version: 1.0.0
+
 # 统一异常和统一返回
 graceful-response:
   # 自定义Response类的全限定名，默认为空。
