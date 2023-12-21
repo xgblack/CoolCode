@@ -12,7 +12,7 @@
 
 		<module>cool-dependencies</module>
 
-		<module>cool-common</module>
+		<module>cool-framework</module>
 
 		<module>cool-server</module>
 	</modules>
