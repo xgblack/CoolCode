@@ -17,11 +17,6 @@
             <groupId>com.xgblack.cool</groupId>
             <artifactId>cool-web-client</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.xgblack</groupId>
-            <artifactId>cool-common</artifactId>
-        </dependency>
-
 
     </dependencies>
 

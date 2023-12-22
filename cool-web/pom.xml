@@ -12,9 +12,10 @@
     <groupId>com.xgblack.cool</groupId>
     <artifactId>cool-web</artifactId>
     <packaging>pom</packaging>
+
     <modules>
-        <module>cool-web-client</module>
         <module>cool-web-domain</module>
+        <module>cool-web-client</module>
         <module>cool-web-infrastructure</module>
         <module>cool-web-app</module>
         <module>cool-web-adapter</module>

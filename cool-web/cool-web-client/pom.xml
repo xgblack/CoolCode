@@ -11,6 +11,15 @@
 
     <artifactId>cool-web-client</artifactId>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>com.xgblack</groupId>
+            <artifactId>cool-common</artifactId>
+        </dependency>
+
+    </dependencies>
+
 
 
 </project>

@@ -1,13 +1,9 @@
-package com.xgblack.cool.controller;
+package com.xgblack.cool.web;
 
-import com.xgblack.cool.controller.req.StudentReq;
-import com.xgblack.cool.controller.resp.StudentResp;
+
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 测试接口
@@ -23,19 +19,19 @@ public class TestController {
      * 详情
      * @return
      */
-    @GetMapping("detail")
+    /*@GetMapping("detail")
     public StudentResp testResp() {
         //throw new RuntimeException("1122");
         return new StudentResp().setId(2L).setAge(18).setName("张三").setBirthday(LocalDateTime.now()).setDate(new Date()).setLocalDate(LocalDate.now());
-    }
+    }*/
 
     /**
      * 新增
      * @param req
      */
-    @PostMapping
+    /*@PostMapping
     public void add(@RequestBody StudentReq req) {
         log.info("student req = {}", req);
-    }
+    }*/
 
 }
