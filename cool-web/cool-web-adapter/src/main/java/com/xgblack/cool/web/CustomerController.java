@@ -1,17 +1,11 @@
 package com.xgblack.cool.web;
 
-import com.alibaba.cola.dto.MultiResponse;
-import com.alibaba.cola.dto.Response;
-import com.alibaba.demo.api.CustomerServiceI;
-import com.alibaba.demo.dto.CustomerAddCmd;
-import com.alibaba.demo.dto.CustomerListByNameQry;
-import com.alibaba.demo.dto.data.CustomerDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 
-@RestController
+
+//@RestController
 public class CustomerController {
 
-    @Autowired
+    /*@Autowired
     private CustomerServiceI customerService;
 
     @GetMapping(value = "/helloworld")
@@ -29,5 +23,5 @@ public class CustomerController {
     @PostMapping(value = "/customer")
     public Response addCustomer(@RequestBody CustomerAddCmd customerAddCmd){
         return customerService.addCustomer(customerAddCmd);
-    }
+    }*/
 }
