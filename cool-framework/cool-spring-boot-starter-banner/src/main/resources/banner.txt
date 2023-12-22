@@ -1,4 +1,4 @@
-                 ${AnsiColor.BRIGHT_GREEN}Cool Code Boot Server${AnsiColor.BRIGHT_BLACK}
+                 ${AnsiColor.GREEN}Cool Code Boot Server${AnsiColor.BLACK}
       ___           ___           ___
      /  /\         /  /\         /  /\
     /  /:/        /  /::\       /  /::\
@@ -10,5 +10,5 @@
    \  \:\/:/     \  \:\/:/     \  \:\/:/      \  \::/
     \  \::/       \  \::/       \  \::/        \__\/
      \__\/         \__\/         \__\/
-:: ${AnsiColor.BRIGHT_GREEN}Spring Boot${AnsiColor.BRIGHT_BLACK} ::                      (${AnsiColor.BRIGHT_GREEN}${spring-boot.version}${AnsiColor.BRIGHT_BLACK})
-:: ${AnsiColor.BRIGHT_GREEN}Application${AnsiColor.BRIGHT_BLACK} ::                      (${AnsiColor.BRIGHT_GREEN}${cool-code.info.version}${AnsiColor.BRIGHT_BLACK})
+:: ${AnsiColor.GREEN}Spring Boot${AnsiColor.BRIGHT_BLACK} ::                      (${AnsiColor.GREEN}${spring-boot.version}${AnsiColor.BLACK})
+:: ${AnsiColor.GREEN}Application${AnsiColor.BRIGHT_BLACK} ::                      (${AnsiColor.GREEN}${cool-code.info.version}${AnsiColor.BLACK})
