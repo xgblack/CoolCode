@@ -1,9 +1,8 @@
 package com.xgblack.cool.dto;
 
-import com.alibaba.cola.dto.Query;
-import lombok.Data;
 
-@Data
-public class CustomerListByNameQry extends Query{
+
+//@Data
+public class CustomerListByNameQry /*extends Query*/{
    private String name;
 }
