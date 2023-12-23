@@ -22,7 +22,7 @@
 
         <dependency>
             <groupId>com.xgblack.cool</groupId>
-            <artifactId>cool-web-adapter</artifactId>
+            <artifactId>cool-module-system-adapter</artifactId>
         </dependency>
 
         <dependency>

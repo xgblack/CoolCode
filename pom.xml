@@ -9,13 +9,13 @@
 	<packaging>pom</packaging>
 
 	<modules>
-
+		<!--依赖版本控制-->
 		<module>cool-dependencies</module>
-
+		<!--封装框架-->
 		<module>cool-framework</module>
-
-		<module>cool-web</module>
-
+		<!--系统功能模块-->
+		<module>cool-module-system</module>
+		<!--启动模块-->
 		<module>cool-server</module>
 
 	</modules>
@@ -75,6 +75,7 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>${maven-compiler-plugin.version}</version>
 					<configuration>
+						<parameters>true</parameters>
 						<source>${java.version}</source>
 						<target>${java.version}</target>
 						<encoding>${project.build.sourceEncoding}</encoding>

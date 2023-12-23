@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.xgblack</groupId>
+        <artifactId>cool-code-boot</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <groupId>com.xgblack.cool</groupId>
+    <artifactId>cool-module-system</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>cool-module-system-domain</module>
+        <module>cool-module-system-client</module>
+        <module>cool-module-system-infrastructure</module>
+        <module>cool-module-system-app</module>
+        <module>cool-module-system-adapter</module>
+    </modules>
+
+
+</project>

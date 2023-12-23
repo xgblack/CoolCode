@@ -56,27 +56,27 @@
 
             <dependency>
                 <groupId>com.xgblack.cool</groupId>
-                <artifactId>cool-web-infrastructure</artifactId>
+                <artifactId>cool-module-system-infrastructure</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.xgblack.cool</groupId>
-                <artifactId>cool-web-client</artifactId>
+                <artifactId>cool-module-system-client</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.xgblack.cool</groupId>
-                <artifactId>cool-web-domain</artifactId>
+                <artifactId>cool-module-system-domain</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.xgblack.cool</groupId>
-                <artifactId>cool-web-app</artifactId>
+                <artifactId>cool-module-system-app</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.xgblack.cool</groupId>
-                <artifactId>cool-web-adapter</artifactId>
+                <artifactId>cool-module-system-adapter</artifactId>
                 <version>${revision}</version>
             </dependency>
 
