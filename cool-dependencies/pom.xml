@@ -22,6 +22,7 @@
 
         <mysql.version>8.2.0</mysql.version>
         <druid-spring-boot.version>1.2.20</druid-spring-boot.version>
+        <mybatis-flex.version>1.7.5</mybatis-flex.version>
         <guava.version>33.0.0-jre</guava.version>
 
         <lombok.version>1.18.30</lombok.version>
@@ -55,27 +56,27 @@
 
             <dependency>
                 <groupId>com.xgblack.cool</groupId>
-                <artifactId>cool-web-infrastructure</artifactId>
+                <artifactId>cool-module-system-infrastructure</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.xgblack.cool</groupId>
-                <artifactId>cool-web-client</artifactId>
+                <artifactId>cool-module-system-client</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.xgblack.cool</groupId>
-                <artifactId>cool-web-domain</artifactId>
+                <artifactId>cool-module-system-domain</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.xgblack.cool</groupId>
-                <artifactId>cool-web-app</artifactId>
+                <artifactId>cool-module-system-app</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.xgblack.cool</groupId>
-                <artifactId>cool-web-adapter</artifactId>
+                <artifactId>cool-module-system-adapter</artifactId>
                 <version>${revision}</version>
             </dependency>
 
