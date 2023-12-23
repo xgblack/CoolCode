@@ -14,9 +14,19 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.xgblack</groupId>
-            <artifactId>cool-common</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
+        <!-- MapStruct begin -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+        </dependency>
+        <!-- MapStruct end -->
 
     </dependencies>
 
