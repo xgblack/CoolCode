@@ -19,10 +19,11 @@ server:
 
 spring:
   application:
-    name: ccboot
+    name: cc-server
   servlet:
     multipart:
-      max-file-size: 100MB
+      max-file-size: 50MB # 单个文件大小
+      max-request-size: 200MB # 设置总上传的文件大小
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     locale: zh_CN
