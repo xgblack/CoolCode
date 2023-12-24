@@ -41,6 +41,7 @@
 		<!-- TODO: 看看咋放到 bom 里 -->
 		<lombok.version>1.18.30</lombok.version>
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
+		<mybatis-flex.version>1.7.5</mybatis-flex.version>
 	</properties>
 
 	<dependencyManagement>
@@ -89,6 +90,11 @@
 								<groupId>org.mapstruct</groupId>
 								<artifactId>mapstruct-processor</artifactId>
 								<version>${mapstruct.version}</version>
+							</path>
+							<path>
+								<groupId>com.mybatis-flex</groupId>
+								<artifactId>mybatis-flex-processor</artifactId>
+								<version>${mybatis-flex.version}</version>
 							</path>
 						</annotationProcessorPaths>
 					</configuration>

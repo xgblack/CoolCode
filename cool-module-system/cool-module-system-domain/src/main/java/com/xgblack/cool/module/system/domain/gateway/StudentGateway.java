@@ -1,7 +1,9 @@
 package com.xgblack.cool.module.system.domain.gateway;
 
 
+import com.xgblack.cool.framework.common.pojo.PageResult;
 import com.xgblack.cool.module.system.domain.student.Student;
+import com.xgblack.cool.module.system.dto.student.StudentPageQry;
 
 /**
  * StudentGateway
@@ -16,4 +18,6 @@ public interface StudentGateway {
     void update(Student student);
 
     void delete(Long id);
+
+    PageResult<Student> getPage(StudentPageQry qry);
 }

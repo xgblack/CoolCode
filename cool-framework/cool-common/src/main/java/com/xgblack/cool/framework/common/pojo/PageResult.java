@@ -1,11 +1,13 @@
 package com.xgblack.cool.framework.common.pojo;
 
-import cn.hutool.core.collection.CollUtil;
+import com.mybatisflex.core.FlexGlobalConfig;
+import com.mybatisflex.core.paginate.Page;
 import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -21,30 +23,36 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PageResult<T> implements Serializable {
-    private List<T> list;
+    /**
+     * 当前页数据。
+     */
+    private List<T> records = Collections.emptyList();
 
-    private Long total;
+    private long pageNumber = 1;
+
+    /**
+     * 每页数据数量。
+     */
+    private long pageSize;
+
+    /**
+     * 总页数。
+     */
+    private long totalPage;
+
+    /**
+     * 总数据数量。
+     */
+    private long totalRow;
 
 
-    public PageResult(Long total) {
-        this.list = new ArrayList<>();
-        this.total = total;
-    }
 
     public static <T> PageResult<T> empty() {
-        return new PageResult<>(0L);
+        return new PageResult<>(new ArrayList<>(), 1, FlexGlobalConfig.getDefaultConfig().getDefaultPageSize(), 0, 0);
     }
 
-    public static <T> PageResult<T> empty(Long total) {
-        return new PageResult<>(total);
-    }
-
-    public static <T> PageResult<T> of(List<T> list, Long total) {
-        return new PageResult<>(list, total);
-    }
-
-    public static <T> PageResult<T> of(List<T> list) {
-        return new PageResult<>(list, CollUtil.isEmpty(list) ? 0L : list.size());
+    public static <T> PageResult<T> of(Page<T> page) {
+        return new PageResult<>(page.getRecords(), page.getPageNumber(), page.getPageSize(), page.getTotalPage(), page.getTotalRow());
     }
 
 

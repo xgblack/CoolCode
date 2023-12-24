@@ -2,7 +2,7 @@
 package com.xgblack.cool.module.system.executor;
 
 
-import com.xgblack.cool.module.system.convertor.StudentConvert;
+import com.xgblack.cool.module.system.convertor.StudentConvertor;
 import com.xgblack.cool.module.system.domain.gateway.StudentGateway;
 import com.xgblack.cool.module.system.dto.student.StudentEditCmd;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +18,6 @@ public class StudentEditCmdExe {
 
 
     public void execute(StudentEditCmd cmd) {
-        gateway.update(StudentConvert.INSTANCE.convertDTO2Entity(cmd));
+        gateway.update(StudentConvertor.INSTANCE.convertDTO2Entity(cmd));
     }
 }

@@ -44,6 +44,12 @@
             <artifactId>jakarta.validation-api</artifactId>
             <scope>provided</scope> <!-- 设置为 provided，主要是 PageParam 使用到 -->
         </dependency>
+        <!--Mybatis Flex-->
+        <dependency>
+            <groupId>com.mybatis-flex</groupId>
+            <artifactId>mybatis-flex-spring-boot-starter</artifactId>
+            <scope>provided</scope> <!-- 设置为 provided，主要是 PageParam PageResult 使用到 -->
+        </dependency>
 
         <!-- Spring 核心 -->
         <dependency>

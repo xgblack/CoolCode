@@ -12,6 +12,11 @@
     <artifactId>cool-module-system-client</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>com.xgblack</groupId>
+            <artifactId>cool-common</artifactId>
+            <version>${revision}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>

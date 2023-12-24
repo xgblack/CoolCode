@@ -1,9 +1,11 @@
 package com.xgblack.cool.module.system.web;
 
 
+import com.xgblack.cool.framework.common.pojo.PageResult;
 import com.xgblack.cool.module.system.api.StudentServiceI;
 import com.xgblack.cool.module.system.dto.student.StudentAddCmd;
 import com.xgblack.cool.module.system.dto.student.StudentEditCmd;
+import com.xgblack.cool.module.system.dto.student.StudentPageQry;
 import com.xgblack.cool.module.system.dto.student.clientobject.StudentCO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -44,6 +46,16 @@ public class StudentController {
     @GetMapping("{id}")
     public StudentCO detail(@PathVariable Long id) {
         return studentService.getDetail(id);
+    }
+
+    /**
+     * 分页查询
+     * @param qry
+     * @return
+     */
+    @GetMapping
+    public PageResult<StudentCO> page(StudentPageQry qry) {
+        return studentService.getPage(qry);
     }
 
     /**
