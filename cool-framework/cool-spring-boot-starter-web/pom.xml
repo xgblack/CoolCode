@@ -10,6 +10,11 @@
     </parent>
 
     <artifactId>cool-spring-boot-starter-web</artifactId>
+    <packaging>jar</packaging>
+
+    <name>${project.artifactId}</name>
+    <description>Web 基础组件</description>
+    <url>https://blog.xgblack.cn</url>
 
     <dependencies>
 

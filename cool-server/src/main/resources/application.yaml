@@ -2,9 +2,10 @@ spring:
   profiles:
     active: dev
 
-cool-code:
+cc:
   info:
     version: 1.0.0
+    base-package: com.xgblack.cool
 
 # 统一异常和统一返回
 graceful-response:

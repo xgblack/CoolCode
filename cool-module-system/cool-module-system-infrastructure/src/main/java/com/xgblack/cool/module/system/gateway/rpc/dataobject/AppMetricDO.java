@@ -1,4 +1,4 @@
-package com.xgblack.cool.module.system.gatewayimpl.rpc.dataobject;
+package com.xgblack.cool.module.system.gateway.rpc.dataobject;
 
 
 public class AppMetricDO {

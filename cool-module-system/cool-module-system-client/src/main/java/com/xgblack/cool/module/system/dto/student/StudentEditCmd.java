@@ -1,8 +1,6 @@
-package com.xgblack.cool.module.system.gatewayimpl.database.dataobject;
+package com.xgblack.cool.module.system.dto.student;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDate;
@@ -10,14 +8,13 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
- * @author xg BLACK
- * @date 2023/12/23 19:30
+ * @author xg black
+ * @date 2023/12/20 17:43
  */
-@Getter
-@Setter
-@ToString
+@Data
 @Accessors(chain = true)
-public class StudentDO {
+public class StudentEditCmd {
+
     private Long id;
     private String name;
     private Integer age;

@@ -12,4 +12,8 @@ import com.xgblack.cool.module.system.domain.student.Student;
 public interface StudentGateway {
     void create(Student student);
     Student getById(Long id);
+
+    void update(Student student);
+
+    void delete(Long id);
 }

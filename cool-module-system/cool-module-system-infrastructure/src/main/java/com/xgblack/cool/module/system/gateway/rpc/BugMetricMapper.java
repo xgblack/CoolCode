@@ -1,4 +1,4 @@
-package com.xgblack.cool.module.system.gatewayimpl.rpc;
+package com.xgblack.cool.module.system.gateway.rpc;
 
 
 /**

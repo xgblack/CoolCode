@@ -19,6 +19,7 @@
         <module>cool-common</module>
         <module>cool-spring-boot-starter-banner</module>
         <module>cool-spring-boot-starter-web</module>
+        <module>cool-spring-boot-starter-mybatis-flex</module>
     </modules>
 
     <build>

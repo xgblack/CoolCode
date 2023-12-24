@@ -11,6 +11,7 @@ import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
 /**
  * spring工具类 方便在非spring管理环境中获取bean
@@ -18,6 +19,7 @@ import org.springframework.context.ApplicationContextAware;
  * @date 2023/12/23 22:42
  */
 
+@Component
 public class SpringUtils implements BeanFactoryPostProcessor, ApplicationContextAware {
 
     /** Spring应用上下文环境 */

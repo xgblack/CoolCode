@@ -1,0 +1,2 @@
+com.xgblack.cool.framework.mybatis.config.CoolMybatisAutoConfiguration
+com.xgblack.cool.framework.datasource.config.CoolDataSourceAutoConfiguration

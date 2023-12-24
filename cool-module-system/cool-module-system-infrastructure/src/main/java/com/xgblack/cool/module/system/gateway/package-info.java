@@ -4,4 +4,4 @@
  * @date 2023/12/22 11:21
  */
 
-package com.xgblack.cool.module.system.gatewayimpl;
+package com.xgblack.cool.module.system.gateway;
