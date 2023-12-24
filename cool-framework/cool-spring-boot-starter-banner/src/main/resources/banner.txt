@@ -11,4 +11,4 @@
     \  \::/       \  \::/       \  \::/        \__\/
      \__\/         \__\/         \__\/
 :: ${AnsiColor.GREEN}Spring Boot${AnsiColor.BRIGHT_BLACK} ::                      (${AnsiColor.GREEN}${spring-boot.version}${AnsiColor.BLACK})
-:: ${AnsiColor.GREEN}Application${AnsiColor.BRIGHT_BLACK} ::                      (${AnsiColor.GREEN}${cool-code.info.version}${AnsiColor.BLACK})
+:: ${AnsiColor.GREEN}Application${AnsiColor.BRIGHT_BLACK} ::                      (${AnsiColor.GREEN}${cool-code.info.version}${AnsiColor.DEFAULT})
