@@ -6,6 +6,7 @@ import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.annotation.Table;
 import com.xgblack.cool.framework.mybatis.listener.DataInsertListener;
 import com.xgblack.cool.framework.mybatis.listener.DataUpdateListener;
+import com.xgblack.cool.framework.mybatis.type.StringListJsonTypeHandler;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,6 +15,7 @@ import lombok.experimental.Accessors;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author xg BLACK
@@ -38,6 +40,9 @@ public class StudentDO {
     private LocalDate localDate;
 
     private Date date;
+
+    @Column(typeHandler = StringListJsonTypeHandler.class)
+    private List<String> hobby;
 
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
