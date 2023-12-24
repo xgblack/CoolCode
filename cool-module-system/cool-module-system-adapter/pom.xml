@@ -19,8 +19,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>com.xgblack</groupId>
+            <artifactId>cool-spring-boot-starter-web</artifactId>
         </dependency>
 
         <!--<dependency>

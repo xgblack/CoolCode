@@ -18,6 +18,7 @@
     <modules>
         <module>cool-common</module>
         <module>cool-spring-boot-starter-banner</module>
+        <module>cool-spring-boot-starter-web</module>
     </modules>
 
     <build>

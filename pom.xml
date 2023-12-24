@@ -18,7 +18,7 @@
 		<!--启动模块-->
 		<module>cool-server</module>
 
-	</modules>
+    </modules>
 
 	<name>cool-code-boot</name>
 	<description>Cool Code Boot开发脚手架</description>
