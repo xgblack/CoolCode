@@ -1,7 +1,7 @@
 package com.xgblack.cool.module.system.executor.query;
 
 
-import com.xgblack.cool.module.system.convertor.StudentConvert;
+import com.xgblack.cool.module.system.convertor.StudentConvertor;
 import com.xgblack.cool.module.system.domain.gateway.StudentGateway;
 import com.xgblack.cool.module.system.dto.student.clientobject.StudentCO;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +16,6 @@ public class StudentByIdQryExe {
 
     public StudentCO execute(Long id) {
         //可以直接调用infra层查出DO
-        return StudentConvert.INSTANCE.convertClientObject(gateway.getById(id));
+        return StudentConvertor.INSTANCE.convertClientObject(gateway.getById(id));
     }
 }

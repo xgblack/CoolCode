@@ -12,11 +12,26 @@
     <artifactId>cool-module-system-client</artifactId>
 
     <dependencies>
-
         <dependency>
             <groupId>com.xgblack</groupId>
             <artifactId>cool-common</artifactId>
+            <version>${revision}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <!-- MapStruct begin -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+        </dependency>
+        <!-- MapStruct end -->
 
     </dependencies>
 

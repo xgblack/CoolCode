@@ -23,6 +23,7 @@
         <mysql.version>8.2.0</mysql.version>
         <druid-spring-boot.version>1.2.20</druid-spring-boot.version>
         <mybatis-flex.version>1.7.5</mybatis-flex.version>
+        <mybatis-spring.version>3.0.3</mybatis-spring.version>
         <guava.version>33.0.0-jre</guava.version>
 
         <lombok.version>1.18.30</lombok.version>
@@ -53,6 +54,17 @@
                 <artifactId>cool-spring-boot-starter-banner</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <dependency>
+                <groupId>com.xgblack</groupId>
+                <artifactId>cool-spring-boot-starter-web</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xgblack</groupId>
+                <artifactId>cool-spring-boot-starter-mybatis-flex</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>com.xgblack.cool</groupId>
@@ -90,6 +102,14 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>com.mybatis-flex</groupId>
+                <artifactId>mybatis-flex-dependencies</artifactId>
+                <version>${mybatis-flex.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
@@ -105,11 +125,10 @@
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid-spring-boot.version}</version>
             </dependency>
-            <!--Mybatis Flex-->
             <dependency>
-                <groupId>com.mybatis-flex</groupId>
-                <artifactId>mybatis-flex-spring-boot-starter</artifactId>
-                <version>${mybatis-flex.version}</version>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis-spring.version}</version>
             </dependency>
 
             <dependency>

@@ -6,6 +6,7 @@ import lombok.experimental.Accessors;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author xg black
@@ -19,4 +20,6 @@ public class StudentAddCmd {
     private LocalDateTime birthday;
     private LocalDate localDate;
     private Date date;
+
+    private List<String> hobby;
 }
