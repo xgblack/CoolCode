@@ -1,1 +1,2 @@
+com.xgblack.cool.framework.mvc.config.CoolWebMvcAutoConfiguration
 com.xgblack.cool.framework.apilog.config.CoolApiLogAutoConfiguration
