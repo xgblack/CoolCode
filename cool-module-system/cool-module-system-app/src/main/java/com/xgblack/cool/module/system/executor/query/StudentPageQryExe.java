@@ -18,6 +18,6 @@ public class StudentPageQryExe {
 
     public PageResult<StudentCO> execute(StudentPageQry qry) {
         //可以直接调用infra层查出DO
-        return StudentConvertor.INSTANCE.convertDO2Page(gateway.getPage(qry));
+        return StudentConvertor.INSTANCE.convertEntity2COPageResult(gateway.getPage(qry));
     }
 }

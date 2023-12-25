@@ -35,7 +35,7 @@ public class StudentGatewayImpl implements StudentGateway {
 
     @Override
     public Student getById(Long id) {
-        return StudentConvertor.INSTANCE.convertEntity(studentMapper.selectOneById(id));
+        return StudentConvertor.INSTANCE.convertDO2Entity(studentMapper.selectOneById(id));
     }
 
     @Override
@@ -50,7 +50,7 @@ public class StudentGatewayImpl implements StudentGateway {
 
     public PageResult<Student> getPage(StudentPageQry qry) {
 
-        return StudentConvertor.INSTANCE.convertDO2Page(
+        return StudentConvertor.INSTANCE.convertDO2EntityPage(
                 QueryChain.of(studentMapper)
                         .from(STUDENT)
                         .and(STUDENT.NAME.like(qry.getName(), StrUtil.isNotBlank(qry.getName()))) //可以用where也可以直接用and

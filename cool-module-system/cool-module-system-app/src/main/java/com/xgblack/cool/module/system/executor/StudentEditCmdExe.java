@@ -18,6 +18,6 @@ public class StudentEditCmdExe {
 
 
     public void execute(StudentEditCmd cmd) {
-        gateway.update(StudentConvertor.INSTANCE.convertDTO2Entity(cmd));
+        gateway.update(StudentConvertor.INSTANCE.toEntity(cmd));
     }
 }
