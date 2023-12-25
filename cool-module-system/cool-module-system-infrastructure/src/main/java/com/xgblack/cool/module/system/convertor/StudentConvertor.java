@@ -1,6 +1,7 @@
 package com.xgblack.cool.module.system.convertor;
 
 import com.mybatisflex.core.paginate.Page;
+import com.xgblack.cool.framework.common.convertor.Convertor;
 import com.xgblack.cool.framework.common.pojo.PageResult;
 import com.xgblack.cool.module.system.domain.student.Student;
 import com.xgblack.cool.module.system.dto.student.StudentAddCmd;
@@ -15,13 +16,12 @@ import org.mapstruct.factory.Mappers;
  * @date 2023/12/23 19:16
  */
 @Mapper
-public interface StudentConvertor extends Convertor<StudentCO, Student, StudentDO>{
+public interface StudentConvertor extends Convertor<StudentCO, Student, StudentDO> {
     StudentConvertor INSTANCE = Mappers.getMapper(StudentConvertor.class);
 
-    Student convertDTO2Entity(StudentAddCmd cmd);
-    Student convertDTO2Entity(StudentEditCmd cmd);
+    Student toEntity(StudentAddCmd cmd);
+    Student toEntity(StudentEditCmd cmd);
 
-    PageResult<StudentCO> convertDO2Page(PageResult<Student> page);
     PageResult<Student> convertDO2Page(Page<StudentDO> page);
 
 

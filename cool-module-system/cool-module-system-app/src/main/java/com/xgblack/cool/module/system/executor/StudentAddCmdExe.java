@@ -18,6 +18,6 @@ public class StudentAddCmdExe {
 
 
     public void execute(StudentAddCmd cmd) {
-        gateway.create(StudentConvertor.INSTANCE.convertDTO2Entity(cmd));
+        gateway.create(StudentConvertor.INSTANCE.toEntity(cmd));
     }
 }

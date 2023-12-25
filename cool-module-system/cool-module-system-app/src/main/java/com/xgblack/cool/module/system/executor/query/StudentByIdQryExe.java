@@ -16,6 +16,6 @@ public class StudentByIdQryExe {
 
     public StudentCO execute(Long id) {
         //可以直接调用infra层查出DO
-        return StudentConvertor.INSTANCE.convertClientObject(gateway.getById(id));
+        return StudentConvertor.INSTANCE.convertEntity2CO(gateway.getById(id));
     }
 }
