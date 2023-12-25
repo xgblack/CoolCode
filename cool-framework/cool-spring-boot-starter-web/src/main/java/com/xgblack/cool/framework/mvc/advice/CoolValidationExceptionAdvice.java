@@ -93,26 +93,32 @@ public class CoolValidationExceptionAdvice {
         //hibernate.validator.fail_fast=true
         List<FieldError> fieldErrors = e.getFieldErrors();
         if (!CollectionUtils.isEmpty(fieldErrors)) {
-            FieldError fieldError = fieldErrors.get(0);
-            String fieldName = fieldError.getField();
-            Object target = e.getTarget();
-            Field field = null;
+            ValidationStatusCode annotation = null;
             Class<?> clazz = null;
-            Object obj = target;
-            if (fieldName.contains(".")) {
-                String[] strings = fieldName.split("\\.");
-                for (String fName : strings) {
-                    clazz = obj.getClass();
-                    field = obj.getClass().getDeclaredField(fName);
-                    field.setAccessible(true);
-                    obj = field.get(obj);
+            for (FieldError fieldError : fieldErrors) {
+                String fieldName = fieldError.getField();
+                Object target = e.getTarget();
+                Field field = null;
+
+                Object obj = target;
+                if (fieldName.contains(".")) {
+                    String[] strings = fieldName.split("\\.");
+                    for (String fName : strings) {
+                        clazz = obj.getClass();
+                        field = obj.getClass().getDeclaredField(fName);
+                        field.setAccessible(true);
+                        obj = field.get(obj);
+                    }
+                } else {
+                    clazz = target.getClass();
+                    field = target.getClass().getDeclaredField(fieldName);
                 }
-            } else {
-                clazz = target.getClass();
-                field = target.getClass().getDeclaredField(fieldName);
+                annotation = field.getAnnotation(ValidationStatusCode.class);
+                if (annotation != null) {
+                    break;
+                }
             }
 
-            ValidationStatusCode annotation = field.getAnnotation(ValidationStatusCode.class);
             //属性上找到注解
             if (annotation != null) {
                 code = annotation.code();
