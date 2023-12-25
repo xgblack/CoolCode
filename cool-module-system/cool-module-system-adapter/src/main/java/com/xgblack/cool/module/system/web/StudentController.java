@@ -9,6 +9,7 @@ import com.xgblack.cool.module.system.dto.student.StudentPageQry;
 import com.xgblack.cool.module.system.dto.student.clientobject.StudentCO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -63,7 +64,7 @@ public class StudentController {
      * @param cmd
      */
     @PostMapping
-    public void add(@RequestBody StudentAddCmd cmd) {
+    public void add(@RequestBody @Validated StudentAddCmd cmd) {
         studentService.save(cmd);
     }
 
@@ -81,7 +82,7 @@ public class StudentController {
      * @param cmd
      */
     @PutMapping
-    public void edit(@RequestBody StudentEditCmd cmd) {
+    public void edit(@RequestBody @Validated StudentEditCmd cmd) {
         studentService.update(cmd);
     }
 

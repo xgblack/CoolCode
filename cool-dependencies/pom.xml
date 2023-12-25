@@ -37,7 +37,7 @@
         <sms4j.starter.version>3.0.4</sms4j.starter.version>
         <wx-java.version>4.5.7.B</wx-java.version>
         <infinispan.version>15.0.0.Dev05</infinispan.version>
-        <graceful-response.version>3.3.0-boot3</graceful-response.version>
+        <graceful-response.version>3.4.0-boot3</graceful-response.version>
     </properties>
 
     <dependencyManagement>
