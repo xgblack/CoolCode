@@ -18,16 +18,28 @@ import java.util.Collections;
 @Getter
 @Setter
 public class CoolResponse implements Response {
+    /**
+     * 响应码
+     */
     private Long code;
 
-    private Long timestamp = System.currentTimeMillis();
-
+    /**
+     * 响应信息
+     */
     private String msg;
 
+    /**
+     * 响应数据
+     */
     private Object data = Collections.EMPTY_MAP;
 
     /**
-     * 拓展字段
+     * 响应时间戳
+     */
+    private Long timestamp = System.currentTimeMillis();
+
+    /**
+     * 拓展信息
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Object extend;

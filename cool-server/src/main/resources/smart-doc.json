@@ -1,0 +1,12 @@
+{
+  "outPath": "src/main/resources/static/doc",
+  "serverUrl": "http://127.0.0.1",
+  "serverEnv": "http://{{server}}",
+  "style": "xt256",
+  "openUrl": "http://localhost:7700/api",
+  "appToken": "a517eb3be25c44578ab4ca4d9b279fd0",
+  "debugEnvName": "测试环境",
+  "debugEnvUrl": "http://127.0.0.1:8990",
+  "replace": true,
+  "tornaDebug": true
+}
