@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.xgblack</groupId>
-	<artifactId>cool-code-boot</artifactId>
+	<artifactId>cool-code</artifactId>
 	<version>${revision}</version>
 	<packaging>pom</packaging>
 
-	<name>cool-code-boot</name>
+	<name>CoolCode</name>
 	<description>Cool Code Boot开发脚手架</description>
 	<url>https://www.xgblack.cn</url>
 
