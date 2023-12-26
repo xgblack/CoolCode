@@ -1,6 +1,7 @@
 package com.xgblack.cool.framework.mvc.config;
 
-import com.feiniaojin.gracefulresponse.EnableGracefulResponse;
+
+import com.xgblack.cool.framework.response.EnableGracefulResponse;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 
 /**

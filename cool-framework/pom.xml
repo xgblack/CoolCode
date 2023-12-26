@@ -13,13 +13,14 @@
     <packaging>pom</packaging>
 
     <description>技术组件</description>
-    <url>https://blog.xgblack.cn</url>
+    <url>https://www.xgblack.cn</url>
 
     <modules>
         <module>cool-common</module>
         <module>cool-spring-boot-starter-banner</module>
         <module>cool-spring-boot-starter-web</module>
         <module>cool-spring-boot-starter-mybatis-flex</module>
+        <module>cool-spring-boot-starter-response</module>
     </modules>
 
     <build>

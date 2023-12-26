@@ -1,4 +1,5 @@
-package com.xgblack.cool.framework.mvc.advice;
+package com.xgblack.cool.framework.response.advice;
+
 
 import com.xgblack.cool.framework.response.GracefulResponseProperties;
 import com.xgblack.cool.framework.response.api.ResponseFactory;
@@ -11,6 +12,7 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.core.annotation.Order;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -34,15 +36,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- * 覆盖graceful response 中的参数校验
- * @author xg black
- * @date 2023/12/25 13:30
- */
 @Slf4j
 @ControllerAdvice
-@Order(99)
-public class CoolValidationExceptionAdvice {
+@Order(100)
+public class ValidationExceptionAdvice {
+
     @Resource
     private RequestMappingHandlerMapping requestMappingHandlerMapping;
 
@@ -59,7 +57,8 @@ public class CoolValidationExceptionAdvice {
     @ResponseBody
     public Response exceptionHandler(Exception e) throws Exception {
 
-        if (e instanceof MethodArgumentNotValidException || e instanceof BindException) {
+        if (e instanceof MethodArgumentNotValidException
+                || e instanceof BindException) {
             ResponseStatus responseStatus = this.handleBindException((BindException) e);
             return responseFactory.newInstance(responseStatus);
         }
@@ -76,12 +75,7 @@ public class CoolValidationExceptionAdvice {
     //Controller方法>Controller类>DTO入参属性>DTO入参类>配置文件默认参数码>默认错误码
     private ResponseStatus handleBindException(BindException e) throws Exception {
         List<ObjectError> allErrors = e.getBindingResult().getAllErrors();
-        String msg = allErrors.stream().map(error -> {
-            if (error instanceof FieldError fieldError) {
-                return fieldError.getField() + ":" + fieldError.getDefaultMessage();
-            }
-            return error.getDefaultMessage();
-        }).collect(Collectors.joining(";"));
+        String msg = allErrors.stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining(";"));
         String code;
         //Controller方法上的注解
         ValidationStatusCode validateStatusCode = this.findValidationStatusCodeInController();
@@ -93,32 +87,26 @@ public class CoolValidationExceptionAdvice {
         //hibernate.validator.fail_fast=true
         List<FieldError> fieldErrors = e.getFieldErrors();
         if (!CollectionUtils.isEmpty(fieldErrors)) {
-            ValidationStatusCode annotation = null;
+            FieldError fieldError = fieldErrors.get(0);
+            String fieldName = fieldError.getField();
+            Object target = e.getTarget();
+            Field field = null;
             Class<?> clazz = null;
-            for (FieldError fieldError : fieldErrors) {
-                String fieldName = fieldError.getField();
-                Object target = e.getTarget();
-                Field field = null;
-
-                Object obj = target;
-                if (fieldName.contains(".")) {
-                    String[] strings = fieldName.split("\\.");
-                    for (String fName : strings) {
-                        clazz = obj.getClass();
-                        field = obj.getClass().getDeclaredField(fName);
-                        field.setAccessible(true);
-                        obj = field.get(obj);
-                    }
-                } else {
-                    clazz = target.getClass();
-                    field = target.getClass().getDeclaredField(fieldName);
+            Object obj = target;
+            if (fieldName.contains(".")) {
+                String[] strings = fieldName.split("\\.");
+                for (String fName : strings) {
+                    clazz = obj.getClass();
+                    field = obj.getClass().getDeclaredField(fName);
+                    field.setAccessible(true);
+                    obj = field.get(obj);
                 }
-                annotation = field.getAnnotation(ValidationStatusCode.class);
-                if (annotation != null) {
-                    break;
-                }
+            } else {
+                clazz = target.getClass();
+                field = target.getClass().getDeclaredField(fieldName);
             }
 
+            ValidationStatusCode annotation = field.getAnnotation(ValidationStatusCode.class);
             //属性上找到注解
             if (annotation != null) {
                 code = annotation.code();

@@ -4,8 +4,8 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.NumberUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.feiniaojin.gracefulresponse.data.Response;
-import com.feiniaojin.gracefulresponse.data.ResponseStatus;
+import com.xgblack.cool.framework.response.data.Response;
+import com.xgblack.cool.framework.response.data.ResponseStatus;
 import lombok.Getter;
 import lombok.Setter;
 
