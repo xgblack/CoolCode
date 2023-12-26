@@ -1,4 +1,4 @@
-package com.xgblack.cool.framework.apilog.config;
+package com.xgblack.cool.framework.web.apilog.config;
 
 /*@AutoConfiguration(after = YudaoWebAutoConfiguration.class)*/
 public class CoolApiLogAutoConfiguration {

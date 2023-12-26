@@ -1,4 +1,4 @@
-package com.xgblack.cool.framework.mvc.advice;
+package com.xgblack.cool.framework.web.mvc.advice;
 
 import com.xgblack.cool.framework.response.GracefulResponseProperties;
 import com.xgblack.cool.framework.response.api.ResponseFactory;

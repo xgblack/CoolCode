@@ -1,4 +1,4 @@
-package com.xgblack.cool.framework.mvc.response;
+package com.xgblack.cool.framework.web.mvc.response;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.NumberUtil;

@@ -1,4 +1,4 @@
-package com.xgblack.cool.framework.mvc.config;
+package com.xgblack.cool.framework.web.mvc.config;
 
 
 import com.xgblack.cool.framework.response.EnableGracefulResponse;
