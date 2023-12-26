@@ -19,9 +19,6 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-	<scm>
-		<tag>main</tag>
-	</scm>
 	<developers>
 		<developer>
 			<name>xgblack</name>
@@ -58,7 +55,6 @@
 		<native-maven-plugin.version>0.9.28</native-maven-plugin.version>
 
 
-		<!-- TODO: 看看咋放到 bom 里 -->
 		<lombok.version>1.18.30</lombok.version>
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
 		<mybatis-flex.version>1.7.5</mybatis-flex.version>
