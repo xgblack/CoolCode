@@ -3,26 +3,31 @@ package com.xgblack.cool.framework.response.defaults;
 /**
  * 默认的响应码和提示信息
  */
-public class DefaultConstants {
+public interface DefaultConstants {
 
     /**
      * 默认的成功响应码
      */
-    public static final String DEFAULT_SUCCESS_CODE = "0";
+    long DEFAULT_SUCCESS_CODE = 0L;
 
     /**
      * 默认的成功提示信息
      */
-    public static final String DEFAULT_SUCCESS_MSG = "ok";
+    String DEFAULT_SUCCESS_MSG = "ok";
 
     /**
      * 默认的错误码
      */
-    public static final String DEFAULT_ERROR_CODE = "1";
+    long DEFAULT_ERROR_CODE = -1L;
 
     /**
      * 默认的错误提示
      */
-    public static final String DEFAULT_ERROR_MSG = "error";
+    String DEFAULT_ERROR_MSG = "error";
+
+    /**
+     * 默认的参数校验错误码
+     */
+    long DEFAULT_PARAM_ERROR_CODE = -1L;
 
 }

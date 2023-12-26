@@ -1,7 +1,7 @@
 package com.xgblack.cool.framework.response.advice;
 
-import com.xgblack.cool.framework.response.GracefulResponseProperties;
-import com.xgblack.cool.framework.response.api.ExcludeFromGracefulResponse;
+import com.xgblack.cool.framework.response.CoolResponseProperties;
+import com.xgblack.cool.framework.response.api.ExcludeFromCoolResponse;
 import com.xgblack.cool.framework.response.api.ResponseFactory;
 import com.xgblack.cool.framework.response.data.Response;
 import jakarta.annotation.Resource;
@@ -34,7 +34,7 @@ public class NotVoidResponseBodyAdvice implements ResponseBodyAdvice<Object> {
     @Resource
     private ResponseFactory responseFactory;
     @Resource
-    private GracefulResponseProperties properties;
+    private CoolResponseProperties properties;
 
     /**
      * 路径过滤器
@@ -52,19 +52,21 @@ public class NotVoidResponseBodyAdvice implements ResponseBodyAdvice<Object> {
     public boolean supports(MethodParameter methodParameter,
                             Class<? extends HttpMessageConverter<?>> clazz) {
         Method method = methodParameter.getMethod();
+        //TODO:String直接原样返回
+        /*if (StringHttpMessageConverter.class.isAssignableFrom(clazz)) {
+            return true;
+        }*/
 
         //method为空、返回值为void、非JSON，直接跳过
-        if (Objects.isNull(method)
-                || method.getReturnType().equals(Void.TYPE)
-                || !MappingJackson2HttpMessageConverter.class.isAssignableFrom(clazz)) {
-            log.debug("Graceful Response:method为空、返回值为void、非JSON，跳过");
+        if (Objects.isNull(method) || method.getReturnType().equals(Void.TYPE) || !MappingJackson2HttpMessageConverter.class.isAssignableFrom(clazz)) {
+            log.trace("Cool Response:method为空、返回值为void、非JSON，跳过");
             return false;
         }
 
-        //有ExcludeFromGracefulResponse注解修饰的，也跳过
-        if (method.isAnnotationPresent(ExcludeFromGracefulResponse.class)) {
-            if (log.isDebugEnabled()) {
-                log.debug("Graceful Response:方法被@ExcludeFromGracefulResponse注解修饰，跳过:methodName={}", method.getName());
+        //有ExcludeFromCoolResponse注解修饰的，也跳过
+        if (method.isAnnotationPresent(ExcludeFromCoolResponse.class)) {
+            if (log.isTraceEnabled()) {
+                log.trace("Cool Response:方法被@ExcludeFromCoolResponse注解修饰，跳过:methodName={}", method.getName());
             }
             return false;
         }
@@ -75,11 +77,11 @@ public class NotVoidResponseBodyAdvice implements ResponseBodyAdvice<Object> {
             // 获取请求所在类的的包名
             String packageName = method.getDeclaringClass().getPackage().getName();
             if (excludePackages.stream().anyMatch(item -> ANT_PATH_MATCHER.match(item, packageName))) {
-                log.debug("Graceful Response:匹配到excludePackages例外配置，跳过:packageName={},", packageName);
+                log.trace("Cool Response:匹配到excludePackages例外配置，跳过:packageName={},", packageName);
                 return false;
             }
         }
-        log.debug("Graceful Response:非空返回值，需要进行封装");
+        //log.trace("Cool Response:非空返回值，需要进行封装");
         return true;
     }
 
@@ -95,9 +97,9 @@ public class NotVoidResponseBodyAdvice implements ResponseBodyAdvice<Object> {
         } else if (body instanceof Response) {
             return body;
         } else {
-            if (log.isDebugEnabled()) {
+            if (log.isTraceEnabled()) {
                 String path = serverHttpRequest.getURI().getPath();
-                log.debug("Graceful Response:非空返回值，执行封装:path={}", path);
+                log.trace("Cool Response:非空返回值，执行封装:path={}", path);
             }
             return responseFactory.newSuccessInstance(body);
         }

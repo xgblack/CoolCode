@@ -9,19 +9,19 @@ import com.xgblack.cool.framework.response.api.ResponseFactory;
 import com.xgblack.cool.framework.response.api.ResponseStatusFactory;
 import com.xgblack.cool.framework.response.defaults.DefaultResponseFactory;
 import com.xgblack.cool.framework.response.defaults.DefaultResponseStatusFactoryImpl;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * 全局返回值处理的自动配置.
  *
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
-@Configuration
-@EnableConfigurationProperties(GracefulResponseProperties.class)
-public class AutoConfig {
+@AutoConfiguration
+@EnableConfigurationProperties(CoolResponseProperties.class)
+public class CoolResponseAutoConfig {
 
     @Bean
     @ConditionalOnMissingBean(value = GlobalExceptionAdvice.class)

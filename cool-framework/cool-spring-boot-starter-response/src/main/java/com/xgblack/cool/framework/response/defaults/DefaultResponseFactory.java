@@ -1,65 +1,36 @@
 package com.xgblack.cool.framework.response.defaults;
 
 
-import com.xgblack.cool.framework.response.GracefulResponseProperties;
 import com.xgblack.cool.framework.response.api.ResponseFactory;
 import com.xgblack.cool.framework.response.api.ResponseStatusFactory;
 import com.xgblack.cool.framework.response.data.Response;
 import com.xgblack.cool.framework.response.data.ResponseStatus;
 import jakarta.annotation.Resource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
-
-import java.util.Objects;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 提供的默认的ResponseBeanFactory实现.
  *
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
+@Slf4j
 public class DefaultResponseFactory implements ResponseFactory {
-
-    private final Logger logger = LoggerFactory.getLogger(DefaultResponseFactory.class);
-
-    private static final Integer RESPONSE_STYLE_0 = 0;
-
-    private static final Integer RESPONSE_STYLE_1 = 1;
 
     @Resource
     private ResponseStatusFactory responseStatusFactory;
 
-    @Resource
-    private GracefulResponseProperties properties;
+    //private final CoolResponseProperties properties;
 
     @Override
     public Response newEmptyInstance() {
-        try {
-            String responseClassFullName = properties.getResponseClassFullName();
-
-            //配置了Response的全限定名，即自定义了Response，用配置的进行返回
-            if (StringUtils.hasLength(responseClassFullName)) {
-                Object newInstance = Class.forName(responseClassFullName).getConstructor().newInstance();
-                return (Response) newInstance;
-            } else {
-                //没有配Response的全限定名，则创建DefaultResponse
-                return generateDefaultResponse();
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        //返回默认响应体。此处可以增加判断逻辑 通过配置文件配置 responseClassFullName 全限定类名 来达到灵活自定义响应体格式的目的。本项目只需要默认的足够
+        return generateDefaultResponse();
     }
 
     private Response generateDefaultResponse() {
-        Integer responseStyle = properties.getResponseStyle();
-        if (Objects.isNull(responseStyle) || RESPONSE_STYLE_0.equals(responseStyle)) {
-            return new DefaultResponseImplStyle0();
-        } else if (RESPONSE_STYLE_1.equals(responseStyle)) {
-            return new DefaultResponseImplStyle1();
-        } else {
-            logger.error("不支持的Response style类型,responseStyle={}", responseStyle);
-            throw new IllegalArgumentException("不支持的Response style类型");
-        }
+        //Integer responseStyle = properties.getResponseStyle();
+        //此处可通过配置 responseStyle 达到灵活切换响应体格式的目的
+        return new DefaultResponse();
     }
 
     @Override

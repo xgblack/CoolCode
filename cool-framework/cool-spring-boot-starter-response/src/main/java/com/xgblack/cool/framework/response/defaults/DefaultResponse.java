@@ -1,9 +1,6 @@
-package com.xgblack.cool.framework.web.mvc.response;
+package com.xgblack.cool.framework.response.defaults;
 
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.util.NumberUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.xgblack.cool.framework.response.data.Response;
 import com.xgblack.cool.framework.response.data.ResponseStatus;
 import lombok.Getter;
@@ -12,12 +9,13 @@ import lombok.Setter;
 import java.util.Collections;
 
 /**
- * @author xg black
+ * 默认响应体
+ * @author <a href="https://www.xgblack.cn">xg black</a>
  * @date 2023/12/25 17:53
  */
 @Getter
 @Setter
-public class CoolResponse implements Response {
+public class DefaultResponse implements Response {
     /**
      * 响应码
      */
@@ -38,20 +36,10 @@ public class CoolResponse implements Response {
      */
     private Long timestamp = System.currentTimeMillis();
 
-    /**
-     * 拓展信息
-     */
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Object extend;
 
     @Override
     public void setStatus(ResponseStatus statusLine) {
-        if (NumberUtil.isNumber(statusLine.getCode())) {
-            this.code = Convert.toLong(statusLine.getCode());
-        } else {
-            this.code = -1L;
-            this.extend = statusLine.getCode();
-        }
+        this.code = statusLine.getCode();
         this.msg = statusLine.getMsg();
     }
 

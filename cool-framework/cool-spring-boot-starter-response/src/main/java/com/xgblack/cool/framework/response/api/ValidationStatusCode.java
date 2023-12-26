@@ -8,7 +8,7 @@ import java.lang.annotation.*;
 /**
  * 指定参数校验的异常码
  */
-@Target({ElementType.TYPE, ElementType.FIELD, ElementType.METHOD})
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface ValidationStatusCode {
@@ -18,5 +18,5 @@ public @interface ValidationStatusCode {
      *
      * @return 异常对应的错误码
      */
-    String code() default DefaultConstants.DEFAULT_ERROR_CODE;
+    long code() default DefaultConstants.DEFAULT_ERROR_CODE;
 }

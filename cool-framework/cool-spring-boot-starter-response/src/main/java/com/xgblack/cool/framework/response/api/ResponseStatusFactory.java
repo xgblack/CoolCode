@@ -10,24 +10,24 @@ public interface ResponseStatusFactory {
     /**
      * 获得响应成功的ResponseMeta.
      *
-     * @return
+     * @return ResponseStatus
      */
     ResponseStatus defaultSuccess();
 
     /**
      * 获得失败的ResponseMeta.
      *
-     * @return
+     * @return ResponseStatus
      */
     ResponseStatus defaultError();
 
 
     /**
      * 从code和msg创建ResponseStatus
-     * @param code
-     * @param msg
-     * @return
+     * @param code 响应码
+     * @param msg 响应信息
+     * @return ResponseStatus
      */
-    ResponseStatus newInstance(String code,String msg);
+    ResponseStatus newInstance(Long code,String msg);
 
 }

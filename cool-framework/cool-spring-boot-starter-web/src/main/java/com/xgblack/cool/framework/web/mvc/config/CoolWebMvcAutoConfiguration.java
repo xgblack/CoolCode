@@ -1,7 +1,6 @@
 package com.xgblack.cool.framework.web.mvc.config;
 
 
-import com.xgblack.cool.framework.response.EnableGracefulResponse;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 
 /**
@@ -10,7 +9,6 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
  */
 
 @AutoConfiguration
-@EnableGracefulResponse
 public class CoolWebMvcAutoConfiguration {
 
 }

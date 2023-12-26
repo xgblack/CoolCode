@@ -1,13 +1,11 @@
 package com.xgblack.cool.framework.response;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+@Slf4j
 public abstract class AbstractExceptionAliasRegisterConfig implements ApplicationContextAware {
-
-    private final Logger logger = LoggerFactory.getLogger(AbstractExceptionAliasRegisterConfig.class);
 
     protected abstract void registerAlias(ExceptionAliasRegister register);
 
@@ -18,7 +16,7 @@ public abstract class AbstractExceptionAliasRegisterConfig implements Applicatio
             ExceptionAliasRegister aliasRegister = applicationContext.getBean(ExceptionAliasRegister.class);
             this.registerAlias(aliasRegister);
         } catch (Exception e) {
-            logger.warn("未从ApplicationContext中获取到ExceptionAliasRegister实例， @ExceptionAliasFor注解将无效", e);
+            log.warn("未从ApplicationContext中获取到ExceptionAliasRegister实例， @ExceptionAliasFor注解将无效", e);
         }
     }
 

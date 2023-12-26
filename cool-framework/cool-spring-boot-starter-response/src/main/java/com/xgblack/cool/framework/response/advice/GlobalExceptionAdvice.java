@@ -1,15 +1,17 @@
 package com.xgblack.cool.framework.response.advice;
 
 
+import cn.hutool.core.exceptions.ExceptionUtil;
 import com.xgblack.cool.framework.response.ExceptionAliasRegister;
-import com.xgblack.cool.framework.response.GracefulResponseException;
-import com.xgblack.cool.framework.response.GracefulResponseProperties;
+import com.xgblack.cool.framework.response.BaseException;
+import com.xgblack.cool.framework.response.CoolResponseProperties;
 import com.xgblack.cool.framework.response.api.ExceptionAliasFor;
 import com.xgblack.cool.framework.response.api.ExceptionMapper;
 import com.xgblack.cool.framework.response.api.ResponseFactory;
 import com.xgblack.cool.framework.response.api.ResponseStatusFactory;
 import com.xgblack.cool.framework.response.data.Response;
 import com.xgblack.cool.framework.response.data.ResponseStatus;
+import com.xgblack.cool.framework.response.defaults.DefaultConstants;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
@@ -39,10 +41,10 @@ public class GlobalExceptionAdvice implements ApplicationContextAware {
     private ExceptionAliasRegister exceptionAliasRegister;
 
     @Resource
-    private GracefulResponseProperties gracefulResponseProperties;
+    private CoolResponseProperties coolResponseProperties;
 
     @Resource
-    private GracefulResponseProperties properties;
+    private CoolResponseProperties properties;
 
     /**
      * 异常处理逻辑.
@@ -53,12 +55,12 @@ public class GlobalExceptionAdvice implements ApplicationContextAware {
     @ExceptionHandler({Throwable.class})
     @ResponseBody
     public Response exceptionHandler(Throwable throwable) {
-        if (gracefulResponseProperties.isPrintExceptionInGlobalAdvice()) {
-            log.error("Graceful Response:GlobalExceptionAdvice捕获到异常,message=[{}]", throwable.getMessage(), throwable);
+        if (coolResponseProperties.isPrintExceptionInGlobalAdvice()) {
+            log.error("GlobalExceptionAdvice捕获到异常, exception : {}", ExceptionUtil.stacktraceToString(throwable));
         }
         ResponseStatus statusLine;
-        if (throwable instanceof GracefulResponseException) {
-            statusLine = fromGracefulResponseExceptionInstance((GracefulResponseException) throwable);
+        if (throwable instanceof BaseException) {
+            statusLine = fromBaseExceptionInstance((BaseException) throwable);
         } else {
             //校验异常转自定义异常
             statusLine = fromExceptionInstance(throwable);
@@ -66,15 +68,24 @@ public class GlobalExceptionAdvice implements ApplicationContextAware {
         return responseFactory.newInstance(statusLine);
     }
 
-    private ResponseStatus fromGracefulResponseExceptionInstance(GracefulResponseException exception) {
-        String code = exception.getCode();
+    /**
+     * 根据异常基类 返回响应
+     * @param exception
+     * @return
+     */
+    private ResponseStatus fromBaseExceptionInstance(BaseException exception) {
+        Long code = exception.getCode();
         if (code == null) {
-            code = properties.getDefaultErrorCode();
+            code = DefaultConstants.DEFAULT_ERROR_CODE;
         }
-        return responseStatusFactory.newInstance(code,
-                exception.getMsg());
+        return responseStatusFactory.newInstance(code, exception.getMsg());
     }
 
+    /**
+     * 非异常基类及其子类
+     * @param throwable
+     * @return
+     */
     private ResponseStatus fromExceptionInstance(Throwable throwable) {
 
         Class<? extends Throwable> clazz = throwable.getClass();
@@ -91,16 +102,14 @@ public class GlobalExceptionAdvice implements ApplicationContextAware {
                     return responseStatusFactory.newInstance(exceptionMapper.code(), throwableMessage);
                 }
             }
-            return responseStatusFactory.newInstance(exceptionMapper.code(),
-                    exceptionMapper.msg());
+            return responseStatusFactory.newInstance(exceptionMapper.code(), exceptionMapper.msg());
         }
 
         //2.有@ExceptionAliasFor异常别名注解，获取已注册的别名信息
         if (exceptionAliasRegister != null) {
             ExceptionAliasFor exceptionAliasFor = exceptionAliasRegister.getExceptionAliasFor(clazz);
             if (exceptionAliasFor != null) {
-                return responseStatusFactory.newInstance(exceptionAliasFor.code(),
-                        exceptionAliasFor.msg());
+                return responseStatusFactory.newInstance(exceptionAliasFor.code(), exceptionAliasFor.msg());
             }
         }
         ResponseStatus defaultError = responseStatusFactory.defaultError();

@@ -9,13 +9,13 @@ public interface ResponseStatus {
      *
      * @param code 设置的响应码.
      */
-    void setCode(String code);
+    void setCode(Long code);
 
     /**
      * 获得响应码.
      *
      */
-    String getCode();
+    Long getCode();
 
     /**
      * 设置响应提示信息.

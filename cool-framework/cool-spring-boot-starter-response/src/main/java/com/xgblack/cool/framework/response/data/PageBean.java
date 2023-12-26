@@ -5,6 +5,7 @@ import java.util.List;
 /**
  * @author <a href="mailto:qinyujie@gingo.cn">Yujie</a>
  */
+@Deprecated
 public class PageBean<T> {
 
   private Integer pageSize;

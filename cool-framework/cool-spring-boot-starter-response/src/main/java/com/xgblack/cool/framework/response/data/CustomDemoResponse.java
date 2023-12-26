@@ -1,27 +1,27 @@
-package com.xgblack.cool.framework.response.defaults;
+package com.xgblack.cool.framework.response.data;
 
-
-import com.xgblack.cool.framework.response.data.Response;
-import com.xgblack.cool.framework.response.data.ResponseStatus;
+import lombok.experimental.Accessors;
 
 import java.util.Collections;
 
 /**
- * 默认的Response实现
- * 包装成统一响应的JavaBean.
- *
+ * 自定义响应体
+ * 作为示例，并无实际作用
  * @author <a href="https://www.xgblack.cn">xg black</a>
+ * @date 2023/12/26 23:19
  */
-public class DefaultResponseImplStyle0 implements Response {
+
+@Accessors(chain = true)
+public class CustomDemoResponse implements Response {
 
     private ResponseStatus status;
-    
+
     private Object payload = Collections.emptyMap();
 
-    public DefaultResponseImplStyle0() {
+    public CustomDemoResponse() {
     }
 
-    public DefaultResponseImplStyle0(Object payload) {
+    public CustomDemoResponse(Object payload) {
         this.payload = payload;
     }
 

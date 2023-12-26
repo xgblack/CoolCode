@@ -14,6 +14,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@Import(AutoConfig.class)
-public @interface EnableGracefulResponse {
+@Import(CoolResponseAutoConfig.class)
+public @interface EnableCoolResponse {
 }

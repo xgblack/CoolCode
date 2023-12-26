@@ -1,21 +1,20 @@
 package com.xgblack.cool.framework.response.advice;
 
 
-import com.xgblack.cool.framework.response.GracefulResponseProperties;
+import com.xgblack.cool.framework.response.CoolResponseProperties;
 import com.xgblack.cool.framework.response.api.ResponseFactory;
 import com.xgblack.cool.framework.response.api.ResponseStatusFactory;
 import com.xgblack.cool.framework.response.api.ValidationStatusCode;
 import com.xgblack.cool.framework.response.data.Response;
 import com.xgblack.cool.framework.response.data.ResponseStatus;
+import com.xgblack.cool.framework.response.defaults.DefaultConstants;
 import jakarta.annotation.Resource;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.core.annotation.Order;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -30,9 +29,9 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExecutionChain;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -51,14 +50,13 @@ public class ValidationExceptionAdvice {
     private ResponseFactory responseFactory;
 
     @Resource
-    private GracefulResponseProperties gracefulResponseProperties;
+    private CoolResponseProperties coolResponseProperties;
 
     @ExceptionHandler(value = {BindException.class, ValidationException.class, MethodArgumentNotValidException.class})
     @ResponseBody
     public Response exceptionHandler(Exception e) throws Exception {
 
-        if (e instanceof MethodArgumentNotValidException
-                || e instanceof BindException) {
+        if (e instanceof MethodArgumentNotValidException || e instanceof BindException) {
             ResponseStatus responseStatus = this.handleBindException((BindException) e);
             return responseFactory.newInstance(responseStatus);
         }
@@ -72,61 +70,37 @@ public class ValidationExceptionAdvice {
     }
 
     //Controller方法的参数校验码
-    //Controller方法>Controller类>DTO入参属性>DTO入参类>配置文件默认参数码>默认错误码
+    //Controller方法>Controller类>DTO入参类>配置文件默认参数码>默认错误码
     private ResponseStatus handleBindException(BindException e) throws Exception {
         List<ObjectError> allErrors = e.getBindingResult().getAllErrors();
-        String msg = allErrors.stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining(";"));
-        String code;
+        String msg = allErrors.stream().map(error -> {
+            if (error instanceof FieldError fieldError) {
+                return fieldError.getField() + ":" + fieldError.getDefaultMessage();
+            }
+            return error.getDefaultMessage();
+        }).collect(Collectors.joining(";"));
+        Long code;
         //Controller方法上的注解
         ValidationStatusCode validateStatusCode = this.findValidationStatusCodeInController();
         if (validateStatusCode != null) {
             code = validateStatusCode.code();
             return responseStatusFactory.newInstance(code, msg);
         }
-        //属性校验上的注解，只会取第一个属性上的注解，因此要配置
-        //hibernate.validator.fail_fast=true
         List<FieldError> fieldErrors = e.getFieldErrors();
         if (!CollectionUtils.isEmpty(fieldErrors)) {
-            FieldError fieldError = fieldErrors.get(0);
-            String fieldName = fieldError.getField();
             Object target = e.getTarget();
-            Field field = null;
-            Class<?> clazz = null;
-            Object obj = target;
-            if (fieldName.contains(".")) {
-                String[] strings = fieldName.split("\\.");
-                for (String fName : strings) {
-                    clazz = obj.getClass();
-                    field = obj.getClass().getDeclaredField(fName);
-                    field.setAccessible(true);
-                    obj = field.get(obj);
-                }
-            } else {
-                clazz = target.getClass();
-                field = target.getClass().getDeclaredField(fieldName);
-            }
-
-            ValidationStatusCode annotation = field.getAnnotation(ValidationStatusCode.class);
-            //属性上找到注解
-            if (annotation != null) {
-                code = annotation.code();
-                return responseStatusFactory.newInstance(code, msg);
-            }
+            Class<?> clazz = target.getClass();
             //类上面找到注解
-            annotation = clazz.getAnnotation(ValidationStatusCode.class);
+            ValidationStatusCode annotation = clazz.getAnnotation(ValidationStatusCode.class);
+            //判断DTO类上是否定义
             if (annotation != null) {
                 code = annotation.code();
                 return responseStatusFactory.newInstance(code, msg);
             }
         }
-        //默认的参数异常码
-        code = gracefulResponseProperties.getDefaultValidateErrorCode();
-        if (StringUtils.hasLength(code)) {
-            return responseStatusFactory.newInstance(code, msg);
-        }
-        //默认的异常码
-        code = gracefulResponseProperties.getDefaultErrorCode();
-        return responseStatusFactory.newInstance(code, msg);
+        //默认的参数异常码 / 默认的异常码
+        code = coolResponseProperties.getDefaultValidateErrorCode();
+        return responseStatusFactory.newInstance(Objects.requireNonNullElse(code, DefaultConstants.DEFAULT_ERROR_CODE), msg);
     }
 
     /**
@@ -148,21 +122,17 @@ public class ValidationExceptionAdvice {
 
         ConstraintViolationException exception = (ConstraintViolationException) e;
         Set<ConstraintViolation<?>> violationSet = exception.getConstraintViolations();
+        //TODO ：格式可优化
         String msg = violationSet.stream().map(s -> s.getConstraintDescriptor().getMessageTemplate()).collect(Collectors.joining(";"));
-        String code;
+        Long code;
         ValidationStatusCode validationStatusCode = this.findValidationStatusCodeInController();
         if (validationStatusCode != null) {
             code = validationStatusCode.code();
             return responseStatusFactory.newInstance(code, msg);
         }
         //默认的参数异常码
-        code = gracefulResponseProperties.getDefaultValidateErrorCode();
-        if (StringUtils.hasLength(code)) {
-            return responseStatusFactory.newInstance(code, msg);
-        }
-        //默认的异常码
-        code = gracefulResponseProperties.getDefaultErrorCode();
-        return responseStatusFactory.newInstance(code, msg);
+        code = coolResponseProperties.getDefaultValidateErrorCode();
+        return responseStatusFactory.newInstance(Objects.requireNonNullElse(code, DefaultConstants.DEFAULT_ERROR_CODE), msg);
     }
 
     /**

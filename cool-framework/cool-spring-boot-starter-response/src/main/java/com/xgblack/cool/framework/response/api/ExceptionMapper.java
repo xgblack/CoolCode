@@ -19,14 +19,14 @@ public @interface ExceptionMapper {
      *
      * @return 异常对应的错误码
      */
-    String code() default "ERROR";
+    long code() default -1;
 
     /**
      * 异常信息.
      *
      * @return 异常对应的提示信息
      */
-    String msg() default "Poor network quality!";
+    String msg() default "server error!";
 
     /**
      * 异常信息是否支持替换

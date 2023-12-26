@@ -20,7 +20,7 @@ public @interface ExceptionAliasFor {
      *
      * @return 异常对应的错误码
      */
-    String code() default DefaultConstants.DEFAULT_ERROR_CODE;
+    long code() default DefaultConstants.DEFAULT_ERROR_CODE;
 
     /**
      * 异常信息.
