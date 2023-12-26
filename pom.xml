@@ -8,6 +8,30 @@
 	<version>${revision}</version>
 	<packaging>pom</packaging>
 
+	<name>cool-code-boot</name>
+	<description>Cool Code Boot开发脚手架</description>
+	<url>https://blog.xgblack.cn</url>
+
+	<licenses>
+		<license>
+			<name>The MIT License (MIT)</name>
+			<url>https://mit-license.org/</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<tag>main</tag>
+	</scm>
+	<developers>
+		<developer>
+			<name>xgblack</name>
+			<email>xgblack@qq.com</email>
+			<organization>free</organization>
+		</developer>
+	</developers>
+
+
+
 	<modules>
 		<!--依赖版本控制-->
 		<module>cool-dependencies</module>
@@ -18,11 +42,7 @@
 		<!--启动模块-->
 		<module>cool-server</module>
 
-    </modules>
-
-	<name>cool-code-boot</name>
-	<description>Cool Code Boot开发脚手架</description>
-	<url>https://blog.xgblack.cn</url>
+	</modules>
 
 	<properties>
 		<revision>1.0.0</revision>
