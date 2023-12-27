@@ -1,4 +1,4 @@
-package com.xgblack.cool.framework.response;
+package com.xgblack.cool.framework.response.config;
 
 
 import lombok.Getter;

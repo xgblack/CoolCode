@@ -2,15 +2,15 @@ package com.xgblack.cool.framework.response.advice;
 
 import com.xgblack.cool.framework.common.response.Response;
 import com.xgblack.cool.framework.common.response.api.ResponseFactory;
-import com.xgblack.cool.framework.response.CoolResponseProperties;
 import com.xgblack.cool.framework.response.api.ExcludeFromCoolResponse;
+import com.xgblack.cool.framework.response.config.CoolResponseProperties;
+import com.xgblack.cool.framework.response.handler.CharSequenceOrMappingJackson2HttpMessageConverter;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.util.AntPathMatcher;
@@ -55,10 +55,20 @@ public class NotVoidResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
 
         //method为空、返回值为void、非JSON，直接跳过
-        if (Objects.isNull(method) || method.getReturnType().equals(Void.TYPE) || !MappingJackson2HttpMessageConverter.class.isAssignableFrom(clazz)) {
-            log.trace("Cool Response:method为空、返回值为void、非JSON，跳过");
+        if (Objects.isNull(method) || method.getReturnType().equals(Void.TYPE) ) {
+            //log.trace("Cool Response:method为空、返回值为void，跳过");
             return false;
         }
+        /*if (!MappingJackson2HttpMessageConverter.class.isAssignableFrom(clazz) && !StringHttpMessageConverter.class.isAssignableFrom(clazz)  ) {
+            log.trace("Cool Response:非JSON、非字符类型，跳过");
+            return false;
+        }*/
+        if (!CharSequenceOrMappingJackson2HttpMessageConverter.class.isAssignableFrom(clazz) ) {
+            log.trace("Cool Response:非JSON、非字符类型，跳过");
+            return false;
+        }
+
+
 
         //有ExcludeFromCoolResponse注解修饰的，也跳过
         if (method.isAnnotationPresent(ExcludeFromCoolResponse.class)) {

@@ -35,7 +35,10 @@ public class StudentController {
     public String testStr() {
         //return responseFactory.newSuccessInstance("only string response");
         //return Collections.singletonMap("resp", "resp is ok");
+
         return "resp is ok";
+        //return 'a';
+
         //StudentCO studentCO = null;
         //CoolThrowable.dataFoundAssert(studentCO);
         //return studentCO.toString();

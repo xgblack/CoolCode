@@ -6,7 +6,7 @@ import com.xgblack.cool.framework.common.response.Response;
 import com.xgblack.cool.framework.common.response.ResponseStatus;
 import com.xgblack.cool.framework.common.response.api.ResponseFactory;
 import com.xgblack.cool.framework.common.response.api.ResponseStatusFactory;
-import com.xgblack.cool.framework.response.CoolResponseProperties;
+import com.xgblack.cool.framework.response.config.CoolResponseProperties;
 import com.xgblack.cool.framework.response.api.ValidationStatusCode;
 import jakarta.annotation.Resource;
 import jakarta.validation.ConstraintViolation;
