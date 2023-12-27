@@ -115,18 +115,6 @@ mybatis-flex:
 #    endpoint: http://admin-host:8080/message/collect
 #    secret-key: secretKey
 
-# 统一异常和统一返回 https://doc.feiniaojin.com/
-graceful-response:
-  # 是否打印异常日志，默认为false
-  print-exception-in-global-advice: true
-  # 例外包路径(支持数字, *和**通配符匹配)，该包路径下的controller将被忽略处理
-  exclude-packages:
-    - org.springframework.boot.actuate.*
-    - springfox.**
-  # 设置是否将原生异常错误信息detailMessage字段填充到Response的msg中
-  # 默认为false，即不打开
-  origin-exception-using-detail-message: true
-
 
 # 日志配置
 logging:
@@ -142,4 +130,14 @@ cc:
   security:
     mock-enable: true
     mock-secret: coolcode
-
+  response:
+    # 全局的参数校验错误码，默认等于default-error-code=-1
+    default-validate-error-code: -1
+    # 是否打印异常日志，默认为false
+    print-exception-in-global-advice: true
+    # 例外包路径(支持数字, *和**通配符匹配)，该包路径下的controller将被忽略处理
+    exclude-packages:
+      - org.springframework.boot.actuate.*
+    # 设置是否将原生异常错误信息detailMessage字段填充到Response的msg中。（IllegalArgumentException、IllegalStateException异常默认包装）
+    # 默认为false，开发测试环境可以打开，线上环境建议关闭
+    origin-exception-using-detail-message: true

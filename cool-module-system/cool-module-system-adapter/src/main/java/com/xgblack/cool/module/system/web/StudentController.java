@@ -12,9 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.Map;
-
 /**
  * 测试接口
  * @author xg black
@@ -35,9 +32,17 @@ public class StudentController {
      * @return
      */
     @GetMapping("string")
-    public Map<String, String> testStr() {
+    public String testStr() {
         //return responseFactory.newSuccessInstance("only string response");
-        return Collections.singletonMap("resp", "resp is ok");
+        //return Collections.singletonMap("resp", "resp is ok");
+
+        return "resp is ok";
+        //return 'a';
+
+        //StudentCO studentCO = null;
+        //CoolThrowable.dataFoundAssert(studentCO);
+        //return studentCO.toString();
+        //return CoolRespUtils.fail();
     }
 
     /**

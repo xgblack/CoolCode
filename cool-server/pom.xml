@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.xgblack</groupId>
-        <artifactId>cool-code-boot</artifactId>
+        <artifactId>cool-code</artifactId>
         <version>${revision}</version>
     </parent>
 
@@ -14,7 +14,7 @@
     <artifactId>cool-code-server</artifactId>
     <name>cool-code-server</name>
     <description>Cool Code Boot服务</description>
-    <url>https://blog.xgblack.cn</url>
+    <url>https://www.xgblack.cn</url>
 
 
 
@@ -46,10 +46,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.graalvm.buildtools</groupId>

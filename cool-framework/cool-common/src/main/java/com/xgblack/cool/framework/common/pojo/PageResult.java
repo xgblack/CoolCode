@@ -28,6 +28,9 @@ public class PageResult<T> implements Serializable {
      */
     private List<T> records = Collections.emptyList();
 
+    /**
+     * 页码
+     */
     private long pageNumber = 1;
 
     /**

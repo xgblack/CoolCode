@@ -11,7 +11,7 @@
 
     <name>${project.artifactId}</name>
     <description>基础 bom 文件，管理整个项目的依赖版本</description>
-    <url>https://blog.xgblack.cn</url>
+    <url>https://www.xgblack.cn</url>
 
 
     <properties>
@@ -37,7 +37,6 @@
         <sms4j.starter.version>3.0.4</sms4j.starter.version>
         <wx-java.version>4.5.7.B</wx-java.version>
         <infinispan.version>15.0.0.Dev05</infinispan.version>
-        <graceful-response.version>3.4.0-boot3</graceful-response.version>
     </properties>
 
     <dependencyManagement>
@@ -62,6 +61,11 @@
             <dependency>
                 <groupId>com.xgblack</groupId>
                 <artifactId>cool-spring-boot-starter-mybatis-flex</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xgblack</groupId>
+                <artifactId>cool-spring-boot-starter-response</artifactId>
                 <version>${revision}</version>
             </dependency>
 
@@ -179,12 +183,6 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>easyexcel</artifactId>
                 <version>${easyexcel.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.feiniaojin</groupId>
-                <artifactId>graceful-response</artifactId>
-                <version>${graceful-response.version}</version>
             </dependency>
 
             <!--短信-->

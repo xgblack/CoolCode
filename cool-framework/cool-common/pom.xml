@@ -12,7 +12,7 @@
 
     <name>${project.artifactId}</name>
     <description>通用</description>
-    <url>https://blog.xgblack.cn</url>
+    <url>https://www.xgblack.cn</url>
 
 
     <dependencies>
@@ -78,6 +78,12 @@
             <artifactId>spring-context-support</artifactId>
             <scope>provided</scope> <!-- 设置为 provided，只有工具类需要使用到 -->
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
 
     </dependencies>
 

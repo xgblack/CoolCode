@@ -4,9 +4,30 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.xgblack</groupId>
-	<artifactId>cool-code-boot</artifactId>
+	<artifactId>cool-code</artifactId>
 	<version>${revision}</version>
 	<packaging>pom</packaging>
+
+	<name>CoolCode</name>
+	<description>Cool Code Boot开发脚手架</description>
+	<url>https://www.xgblack.cn</url>
+
+	<licenses>
+		<license>
+			<name>The MIT License (MIT)</name>
+			<url>https://mit-license.org/</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<name>xgblack</name>
+			<email>xgblack@qq.com</email>
+			<organization>free</organization>
+		</developer>
+	</developers>
+
+
 
 	<modules>
 		<!--依赖版本控制-->
@@ -18,11 +39,7 @@
 		<!--启动模块-->
 		<module>cool-server</module>
 
-    </modules>
-
-	<name>cool-code-boot</name>
-	<description>Cool Code Boot开发脚手架</description>
-	<url>https://blog.xgblack.cn</url>
+	</modules>
 
 	<properties>
 		<revision>1.0.0</revision>
@@ -38,7 +55,6 @@
 		<native-maven-plugin.version>0.9.28</native-maven-plugin.version>
 
 
-		<!-- TODO: 看看咋放到 bom 里 -->
 		<lombok.version>1.18.30</lombok.version>
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
 		<mybatis-flex.version>1.7.5</mybatis-flex.version>
@@ -99,8 +115,47 @@
 						</annotationProcessorPaths>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>com.ly.smart-doc</groupId>
+					<artifactId>smart-doc-maven-plugin</artifactId>
+					<version>3.0.1</version>
+					<configuration>
+						<configFile>./src/main/resources/smart-doc.json</configFile>
+						<projectName>${project.description}</projectName>
+						<includes>
+							<!-- 使用了mybatis-plus的Page分页需要include所使用的源码包 -->
+							<!--<include>com.baomidou:mybatis-plus-extension</include>-->
+							<!-- 使用了mybatis-plus的IPage分页需要include mybatis-plus-core-->
+							<!--<include>com.baomidou:mybatis-plus-core</include>-->
+							<!-- 使用了jpa的分页需要include所使用的源码包 -->
+							<!--<include>org.springframework.data:spring-data-commons</include>-->
+						</includes>
+					</configuration>
+					<executions>
+						<execution>
+							<!--如果不需要在执行编译时启动smart-doc，则将phase注释掉-->
+							<phase>compile</phase>
+							<goals>
+								<!--smart-doc提供了html、openapi、markdown等goal，可按需配置-->
+								<goal>openapi</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
 			</plugins>
 		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>com.ly.smart-doc</groupId>
+				<artifactId>smart-doc-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+		</plugins>
+
 	</build>
 
 

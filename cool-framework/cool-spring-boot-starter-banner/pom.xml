@@ -15,7 +15,7 @@
 
     <name>${project.artifactId}</name>
     <description>Banner 用于在 console 控制台，打印信息</description>
-    <url>https://blog.xgblack.cn</url>
+    <url>https://www.xgblack.cn</url>
 
     <dependencies>
         <dependency>

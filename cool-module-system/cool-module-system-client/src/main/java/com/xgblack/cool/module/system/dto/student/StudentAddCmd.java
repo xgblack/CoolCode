@@ -1,6 +1,5 @@
 package com.xgblack.cool.module.system.dto.student;
 
-import com.feiniaojin.gracefulresponse.api.ValidationStatusCode;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -19,15 +18,36 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 public class StudentAddCmd {
-    @ValidationStatusCode
+    /**
+     * 姓名
+     */
+    //@ValidationStatusCode
     @NotBlank(message = "姓名不能为空")
     private String name;
+
+    /**
+     * 年龄
+     */
     @NotNull
     private Integer age;
+    /**
+     * 生日
+     */
     private LocalDateTime birthday;
+
+    /**
+     * 日期
+     */
     private LocalDate localDate;
+
+    /**
+     * 日期时间
+     */
     private Date date;
-    //@NotEmpty(message = "请至少输入一个")
+
+    /**
+     * 爱好
+     */
     @Size(min = 1)
     private List<String> hobby;
 }
