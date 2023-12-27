@@ -1,25 +1,23 @@
 package com.xgblack.cool.framework.response.advice;
 
 
+import com.xgblack.cool.framework.common.constants.DefaultResponseConstants;
+import com.xgblack.cool.framework.common.response.Response;
+import com.xgblack.cool.framework.common.response.ResponseStatus;
+import com.xgblack.cool.framework.common.response.api.ResponseFactory;
+import com.xgblack.cool.framework.common.response.api.ResponseStatusFactory;
 import com.xgblack.cool.framework.response.CoolResponseProperties;
-import com.xgblack.cool.framework.response.api.ResponseFactory;
-import com.xgblack.cool.framework.response.api.ResponseStatusFactory;
 import com.xgblack.cool.framework.response.api.ValidationStatusCode;
-import com.xgblack.cool.framework.response.data.Response;
-import com.xgblack.cool.framework.response.data.ResponseStatus;
-import com.xgblack.cool.framework.response.defaults.DefaultConstants;
 import jakarta.annotation.Resource;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.annotation.Order;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestAttributes;
@@ -36,8 +34,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
-@ControllerAdvice
-@Order(100)
+//@ControllerAdvice
+//@Order(100)
 public class ValidationExceptionAdvice {
 
     @Resource
@@ -100,7 +98,7 @@ public class ValidationExceptionAdvice {
         }
         //默认的参数异常码 / 默认的异常码
         code = coolResponseProperties.getDefaultValidateErrorCode();
-        return responseStatusFactory.newInstance(Objects.requireNonNullElse(code, DefaultConstants.DEFAULT_ERROR_CODE), msg);
+        return responseStatusFactory.newInstance(Objects.requireNonNullElse(code, DefaultResponseConstants.DEFAULT_ERROR_CODE), msg);
     }
 
     /**
@@ -132,7 +130,7 @@ public class ValidationExceptionAdvice {
         }
         //默认的参数异常码
         code = coolResponseProperties.getDefaultValidateErrorCode();
-        return responseStatusFactory.newInstance(Objects.requireNonNullElse(code, DefaultConstants.DEFAULT_ERROR_CODE), msg);
+        return responseStatusFactory.newInstance(Objects.requireNonNullElse(code, DefaultResponseConstants.DEFAULT_ERROR_CODE), msg);
     }
 
     /**

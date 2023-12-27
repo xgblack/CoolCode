@@ -36,6 +36,10 @@ public class StudentController {
         //return responseFactory.newSuccessInstance("only string response");
         //return Collections.singletonMap("resp", "resp is ok");
         return "resp is ok";
+        //StudentCO studentCO = null;
+        //CoolThrowable.dataFoundAssert(studentCO);
+        //return studentCO.toString();
+        //return CoolRespUtils.fail();
     }
 
     /**

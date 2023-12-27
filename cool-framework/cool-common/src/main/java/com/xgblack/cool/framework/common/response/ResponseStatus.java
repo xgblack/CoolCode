@@ -1,4 +1,4 @@
-package com.xgblack.cool.framework.response.data;
+package com.xgblack.cool.framework.common.response;
 
 /**
  * @author <a href="mailto:qinyujie@gingo.cn">Yujie</a>

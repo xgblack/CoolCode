@@ -1,9 +1,9 @@
-package com.xgblack.cool.framework.response.defaults;
+package com.xgblack.cool.framework.common.constants;
 
 /**
  * 默认的响应码和提示信息
  */
-public interface DefaultConstants {
+public interface DefaultResponseConstants {
 
     /**
      * 默认的成功响应码

@@ -1,7 +1,7 @@
-package com.xgblack.cool.framework.response.api;
+package com.xgblack.cool.framework.common.response.api;
 
 
-import com.xgblack.cool.framework.response.data.ResponseStatus;
+import com.xgblack.cool.framework.common.response.ResponseStatus;
 
 /**
  * @author <a href="mailto:qinyujie@gingo.cn">Yujie</a>

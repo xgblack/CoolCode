@@ -185,12 +185,6 @@
                 <version>${easyexcel.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.feiniaojin</groupId>
-                <artifactId>graceful-response</artifactId>
-                <version>${graceful-response.version}</version>
-            </dependency>
-
             <!--短信-->
             <dependency>
                 <groupId>org.dromara.sms4j</groupId>

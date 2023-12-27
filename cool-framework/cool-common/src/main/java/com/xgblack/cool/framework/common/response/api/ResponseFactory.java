@@ -1,8 +1,8 @@
-package com.xgblack.cool.framework.response.api;
+package com.xgblack.cool.framework.common.response.api;
 
 
-import com.xgblack.cool.framework.response.data.Response;
-import com.xgblack.cool.framework.response.data.ResponseStatus;
+import com.xgblack.cool.framework.common.response.Response;
+import com.xgblack.cool.framework.common.response.ResponseStatus;
 
 /**
  * ResponseBean的工厂类，用于生成ResponseBean.

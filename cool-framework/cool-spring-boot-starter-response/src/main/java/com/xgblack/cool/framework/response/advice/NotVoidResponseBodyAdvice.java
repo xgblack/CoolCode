@@ -1,9 +1,9 @@
 package com.xgblack.cool.framework.response.advice;
 
+import com.xgblack.cool.framework.common.response.Response;
+import com.xgblack.cool.framework.common.response.api.ResponseFactory;
 import com.xgblack.cool.framework.response.CoolResponseProperties;
 import com.xgblack.cool.framework.response.api.ExcludeFromCoolResponse;
-import com.xgblack.cool.framework.response.api.ResponseFactory;
-import com.xgblack.cool.framework.response.data.Response;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
@@ -52,10 +52,7 @@ public class NotVoidResponseBodyAdvice implements ResponseBodyAdvice<Object> {
     public boolean supports(MethodParameter methodParameter,
                             Class<? extends HttpMessageConverter<?>> clazz) {
         Method method = methodParameter.getMethod();
-        //TODO:String直接原样返回
-        /*if (StringHttpMessageConverter.class.isAssignableFrom(clazz)) {
-            return true;
-        }*/
+
 
         //method为空、返回值为void、非JSON，直接跳过
         if (Objects.isNull(method) || method.getReturnType().equals(Void.TYPE) || !MappingJackson2HttpMessageConverter.class.isAssignableFrom(clazz)) {
@@ -96,11 +93,13 @@ public class NotVoidResponseBodyAdvice implements ResponseBodyAdvice<Object> {
             return responseFactory.newSuccessInstance();
         } else if (body instanceof Response) {
             return body;
-        } else {
-            if (log.isTraceEnabled()) {
+        }/* else if (body instanceof String) {
+            return responseFactory.newSuccessInstance(body);
+        } */else {
+            /*if (log.isTraceEnabled()) {
                 String path = serverHttpRequest.getURI().getPath();
                 log.trace("Cool Response:非空返回值，执行封装:path={}", path);
-            }
+            }*/
             return responseFactory.newSuccessInstance(body);
         }
     }

@@ -1,10 +1,11 @@
 package com.xgblack.cool.framework.response.defaults;
 
 
-import com.xgblack.cool.framework.response.api.ResponseFactory;
-import com.xgblack.cool.framework.response.api.ResponseStatusFactory;
-import com.xgblack.cool.framework.response.data.Response;
-import com.xgblack.cool.framework.response.data.ResponseStatus;
+import com.xgblack.cool.framework.common.response.defaults.DefaultResponse;
+import com.xgblack.cool.framework.common.response.api.ResponseFactory;
+import com.xgblack.cool.framework.common.response.api.ResponseStatusFactory;
+import com.xgblack.cool.framework.common.response.Response;
+import com.xgblack.cool.framework.common.response.ResponseStatus;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 

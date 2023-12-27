@@ -1,10 +1,11 @@
-package com.xgblack.cool.framework.response.defaults;
+package com.xgblack.cool.framework.common.response.defaults;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.xgblack.cool.framework.response.data.Response;
-import com.xgblack.cool.framework.response.data.ResponseStatus;
+import com.xgblack.cool.framework.common.response.Response;
+import com.xgblack.cool.framework.common.response.ResponseStatus;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Collections;
 
@@ -15,6 +16,7 @@ import java.util.Collections;
  */
 @Getter
 @Setter
+@ToString
 public class DefaultResponse implements Response {
     /**
      * 响应码

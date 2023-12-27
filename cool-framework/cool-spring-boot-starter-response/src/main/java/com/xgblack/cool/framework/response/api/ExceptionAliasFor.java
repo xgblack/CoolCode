@@ -1,7 +1,7 @@
 package com.xgblack.cool.framework.response.api;
 
 
-import com.xgblack.cool.framework.response.defaults.DefaultConstants;
+import com.xgblack.cool.framework.common.constants.DefaultResponseConstants;
 
 import java.lang.annotation.*;
 
@@ -20,14 +20,14 @@ public @interface ExceptionAliasFor {
      *
      * @return 异常对应的错误码
      */
-    long code() default DefaultConstants.DEFAULT_ERROR_CODE;
+    long code() default DefaultResponseConstants.DEFAULT_ERROR_CODE;
 
     /**
      * 异常信息.
      *
      * @return 异常对应的提示信息
      */
-    String msg() default DefaultConstants.DEFAULT_ERROR_MSG;
+    String msg() default DefaultResponseConstants.DEFAULT_ERROR_MSG;
 
     /**
      * 作为某些异常的别名

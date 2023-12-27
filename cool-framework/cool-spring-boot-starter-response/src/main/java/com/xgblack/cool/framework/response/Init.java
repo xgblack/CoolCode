@@ -2,6 +2,7 @@ package com.xgblack.cool.framework.response;
 
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 /**
  * 启动
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 @Slf4j
+@Component
 public class Init {
 
     @PostConstruct

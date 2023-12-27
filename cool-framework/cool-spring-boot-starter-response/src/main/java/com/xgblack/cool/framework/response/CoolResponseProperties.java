@@ -37,27 +37,27 @@ public class CoolResponseProperties {
     /**
      * 默认的Response实现类名称，配置了responseClassFullName，则responseStyle不生效
      */
-    //private String responseClassFullName = "com.xgblack.cool.framework.response.defaults.DefaultResponse";
+    //private String responseClassFullName = "com.xgblack.cool.framework.common.response.defaults.DefaultResponse";
 
     /**
      * 默认的成功返回码
      */
-    //private String defaultSuccessCode = String.valueOf(DefaultConstants.DEFAULT_SUCCESS_CODE);
+    //private String defaultSuccessCode = String.valueOf(DefaultResponseConstants.DEFAULT_SUCCESS_CODE);
 
     /**
      * 默认的成功提示
      */
-    //private String defaultSuccessMsg = DefaultConstants.DEFAULT_SUCCESS_MSG;
+    //private String defaultSuccessMsg = DefaultResponseConstants.DEFAULT_SUCCESS_MSG;
 
     /**
      * 默认的失败码
      */
-    //private String defaultErrorCode = String.valueOf(DefaultConstants.DEFAULT_ERROR_CODE);
+    //private String defaultErrorCode = String.valueOf(DefaultResponseConstants.DEFAULT_ERROR_CODE);
 
     /**
      * 默认的失败提示
      */
-    //private String defaultErrorMsg = DefaultConstants.DEFAULT_ERROR_MSG;
+    //private String defaultErrorMsg = DefaultResponseConstants.DEFAULT_ERROR_MSG;
 
     /**
      * Validate异常码，不提供的话默认DefaultConstants.DEFAULT_ERROR_CODE

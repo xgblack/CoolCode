@@ -2,16 +2,16 @@ package com.xgblack.cool.framework.response.advice;
 
 
 import cn.hutool.core.exceptions.ExceptionUtil;
-import com.xgblack.cool.framework.response.ExceptionAliasRegister;
-import com.xgblack.cool.framework.response.BaseException;
+import com.xgblack.cool.framework.common.constants.DefaultResponseConstants;
+import com.xgblack.cool.framework.common.exception.BaseException;
+import com.xgblack.cool.framework.common.response.Response;
+import com.xgblack.cool.framework.common.response.ResponseStatus;
+import com.xgblack.cool.framework.common.response.api.ResponseFactory;
+import com.xgblack.cool.framework.common.response.api.ResponseStatusFactory;
 import com.xgblack.cool.framework.response.CoolResponseProperties;
+import com.xgblack.cool.framework.response.ExceptionAliasRegister;
 import com.xgblack.cool.framework.response.api.ExceptionAliasFor;
 import com.xgblack.cool.framework.response.api.ExceptionMapper;
-import com.xgblack.cool.framework.response.api.ResponseFactory;
-import com.xgblack.cool.framework.response.api.ResponseStatusFactory;
-import com.xgblack.cool.framework.response.data.Response;
-import com.xgblack.cool.framework.response.data.ResponseStatus;
-import com.xgblack.cool.framework.response.defaults.DefaultConstants;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
@@ -76,7 +76,7 @@ public class GlobalExceptionAdvice implements ApplicationContextAware {
     private ResponseStatus fromBaseExceptionInstance(BaseException exception) {
         Long code = exception.getCode();
         if (code == null) {
-            code = DefaultConstants.DEFAULT_ERROR_CODE;
+            code = DefaultResponseConstants.DEFAULT_ERROR_CODE;
         }
         return responseStatusFactory.newInstance(code, exception.getMsg());
     }
@@ -114,9 +114,12 @@ public class GlobalExceptionAdvice implements ApplicationContextAware {
         }
         ResponseStatus defaultError = responseStatusFactory.defaultError();
 
-        //3. 原生异常+originExceptionUsingDetailMessage=true
+
+        //3. 例外的异常类型 比如断言可能会抛出的IllegalArgumentException
+        // 会造成其他地方抛出的此类异常也会包装后返回
+        //4. 原生异常+originExceptionUsingDetailMessage=true
         //如果有自定义的异常信息，原生异常将直接使用异常信息进行返回，不再返回默认错误提示
-        if (properties.getOriginExceptionUsingDetailMessage()) {
+        if (throwable instanceof IllegalArgumentException || properties.getOriginExceptionUsingDetailMessage()) {
             String throwableMessage = throwable.getMessage();
             if (throwableMessage != null) {
                 defaultError.setMsg(throwableMessage);

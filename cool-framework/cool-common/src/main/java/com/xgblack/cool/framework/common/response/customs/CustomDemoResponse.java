@@ -1,5 +1,7 @@
-package com.xgblack.cool.framework.response.data;
+package com.xgblack.cool.framework.common.response.customs;
 
+import com.xgblack.cool.framework.common.response.Response;
+import com.xgblack.cool.framework.common.response.ResponseStatus;
 import lombok.experimental.Accessors;
 
 import java.util.Collections;

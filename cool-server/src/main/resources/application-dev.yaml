@@ -138,6 +138,6 @@ cc:
     # 例外包路径(支持数字, *和**通配符匹配)，该包路径下的controller将被忽略处理
     exclude-packages:
       - org.springframework.boot.actuate.*
-    # 设置是否将原生异常错误信息detailMessage字段填充到Response的msg中
-    # 默认为false，即不打开
+    # 设置是否将原生异常错误信息detailMessage字段填充到Response的msg中。（IllegalArgumentException、IllegalStateException异常默认包装）
+    # 默认为false，开发测试环境可以打开，线上环境建议关闭
     origin-exception-using-detail-message: true

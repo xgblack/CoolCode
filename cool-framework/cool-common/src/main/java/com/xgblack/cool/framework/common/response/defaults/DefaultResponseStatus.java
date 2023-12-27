@@ -1,7 +1,7 @@
-package com.xgblack.cool.framework.response.defaults;
+package com.xgblack.cool.framework.common.response.defaults;
 
 
-import com.xgblack.cool.framework.response.data.ResponseStatus;
+import com.xgblack.cool.framework.common.response.ResponseStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

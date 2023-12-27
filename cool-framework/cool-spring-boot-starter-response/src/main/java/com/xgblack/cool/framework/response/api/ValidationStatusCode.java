@@ -1,7 +1,7 @@
 package com.xgblack.cool.framework.response.api;
 
 
-import com.xgblack.cool.framework.response.defaults.DefaultConstants;
+import com.xgblack.cool.framework.common.constants.DefaultResponseConstants;
 
 import java.lang.annotation.*;
 
@@ -18,5 +18,5 @@ public @interface ValidationStatusCode {
      *
      * @return 异常对应的错误码
      */
-    long code() default DefaultConstants.DEFAULT_ERROR_CODE;
+    long code() default DefaultResponseConstants.DEFAULT_ERROR_CODE;
 }
