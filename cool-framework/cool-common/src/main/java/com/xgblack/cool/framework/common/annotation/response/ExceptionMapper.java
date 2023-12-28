@@ -1,4 +1,4 @@
-package com.xgblack.cool.framework.response.api;
+package com.xgblack.cool.framework.common.annotation.response;
 
 
 import java.lang.annotation.*;

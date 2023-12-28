@@ -1,7 +1,7 @@
 package com.xgblack.cool.framework.response.config;
 
 
-import com.xgblack.cool.framework.response.api.ExceptionAliasFor;
+import com.xgblack.cool.framework.common.annotation.response.ExceptionAliasFor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.ConcurrentHashMap;

@@ -2,7 +2,7 @@ package com.xgblack.cool.framework.response.advice;
 
 import com.xgblack.cool.framework.common.response.Response;
 import com.xgblack.cool.framework.common.response.api.ResponseFactory;
-import com.xgblack.cool.framework.response.api.ExcludeFromCoolResponse;
+import com.xgblack.cool.framework.common.annotation.response.ExcludeFromCoolResponse;
 import com.xgblack.cool.framework.response.config.CoolResponseProperties;
 import com.xgblack.cool.framework.response.handler.CharSequenceOrMappingJackson2HttpMessageConverter;
 import jakarta.annotation.Resource;
