@@ -29,7 +29,7 @@
         <lombok.version>1.18.30</lombok.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
 
-        <hutool.version>5.8.23</hutool.version>
+        <hutool.version>5.8.24</hutool.version>
         <minio.version>8.5.7</minio.version>
         <tobato.version>1.27.2</tobato.version>
         <caffeine.version>3.1.8</caffeine.version>
