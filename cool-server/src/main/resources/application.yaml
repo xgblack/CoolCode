@@ -1,6 +1,9 @@
 spring:
   profiles:
     active: dev
+  threads:
+    virtual:
+      enabled: true # 虚拟线程，需jdk21 + Spring Boot 3.2
 
 cc:
   info:
