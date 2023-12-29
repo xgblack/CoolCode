@@ -1,4 +1,4 @@
-package com.xgblack.cool.framework.web.jackson.core.databind;
+package com.xgblack.cool.framework.response.databind;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;

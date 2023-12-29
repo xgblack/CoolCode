@@ -1,16 +1,17 @@
 package com.xgblack.cool.framework.response.advice;
 
+import com.xgblack.cool.framework.common.annotation.response.ExcludeFromCoolResponse;
 import com.xgblack.cool.framework.common.response.Response;
 import com.xgblack.cool.framework.common.response.api.ResponseFactory;
-import com.xgblack.cool.framework.common.annotation.response.ExcludeFromCoolResponse;
 import com.xgblack.cool.framework.response.config.CoolResponseProperties;
-import com.xgblack.cool.framework.response.handler.CharSequenceOrMappingJackson2HttpMessageConverter;
+import com.xgblack.cool.framework.response.config.CoolWebMvcConfig;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.util.AntPathMatcher;
@@ -42,7 +43,9 @@ public class NotVoidResponseBodyAdvice implements ResponseBodyAdvice<Object> {
     private static final AntPathMatcher ANT_PATH_MATCHER = new AntPathMatcher();
 
     /**
-     * 只处理不返回void的，并且MappingJackson2HttpMessageConverter支持的类型.
+     * 只处理不返回void的，并且MappingJackson2HttpMessageConverter支持的类型.<br></br>
+     * 包装String类型需要在 {@link CoolWebMvcConfig#extendMessageConverters(List)} 将converters顺序调整一下，
+     * 使MappingJackson2HttpMessageConverter早于StringHttpMessageConverter
      *
      * @param methodParameter 方法参数
      * @param clazz           处理器
@@ -59,16 +62,10 @@ public class NotVoidResponseBodyAdvice implements ResponseBodyAdvice<Object> {
             //log.trace("Cool Response:method为空、返回值为void，跳过");
             return false;
         }
-        /*if (!MappingJackson2HttpMessageConverter.class.isAssignableFrom(clazz) && !StringHttpMessageConverter.class.isAssignableFrom(clazz)  ) {
-            log.trace("Cool Response:非JSON、非字符类型，跳过");
-            return false;
-        }*/
-        if (!CharSequenceOrMappingJackson2HttpMessageConverter.class.isAssignableFrom(clazz) ) {
+        if (!MappingJackson2HttpMessageConverter.class.isAssignableFrom(clazz)) {
             log.trace("Cool Response:非JSON、非字符类型，跳过");
             return false;
         }
-
-
 
         //有ExcludeFromCoolResponse注解修饰的，也跳过
         if (method.isAnnotationPresent(ExcludeFromCoolResponse.class)) {
@@ -103,9 +100,7 @@ public class NotVoidResponseBodyAdvice implements ResponseBodyAdvice<Object> {
             return responseFactory.newSuccessInstance();
         } else if (body instanceof Response) {
             return body;
-        }/* else if (body instanceof String) {
-            return responseFactory.newSuccessInstance(body);
-        } */else {
+        } else {
             /*if (log.isTraceEnabled()) {
                 String path = serverHttpRequest.getURI().getPath();
                 log.trace("Cool Response:非空返回值，执行封装:path={}", path);
