@@ -68,6 +68,11 @@
                 <artifactId>cool-spring-boot-starter-response</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <dependency>
+                <groupId>com.xgblack</groupId>
+                <artifactId>cool-spring-boot-starter-security</artifactId>
+                <version>${revision}</version>
+            </dependency>
 
 
             <dependency>
