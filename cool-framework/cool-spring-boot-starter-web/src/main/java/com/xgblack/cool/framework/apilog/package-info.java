@@ -5,4 +5,4 @@
  *
  * @author 芋道源码
  */
-package com.xgblack.cool.framework.web.apilog;
+package com.xgblack.cool.framework.apilog;

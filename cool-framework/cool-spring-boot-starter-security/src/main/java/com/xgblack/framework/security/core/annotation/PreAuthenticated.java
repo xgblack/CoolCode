@@ -1,4 +1,4 @@
-package com.xgblack.framework.security.annotation;
+package com.xgblack.framework.security.core.annotation;
 
 import java.lang.annotation.*;
 

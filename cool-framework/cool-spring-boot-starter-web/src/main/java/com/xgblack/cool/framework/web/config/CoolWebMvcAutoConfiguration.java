@@ -1,4 +1,4 @@
-package com.xgblack.cool.framework.web.mvc.config;
+package com.xgblack.cool.framework.web.config;
 
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;

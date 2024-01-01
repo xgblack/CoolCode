@@ -37,6 +37,7 @@
         <sms4j.starter.version>3.0.4</sms4j.starter.version>
         <wx-java.version>4.5.7.B</wx-java.version>
         <infinispan.version>15.0.0.Dev05</infinispan.version>
+        <transmittable-thread-local.version>2.14.5</transmittable-thread-local.version>
     </properties>
 
     <dependencyManagement>
@@ -188,6 +189,12 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>easyexcel</artifactId>
                 <version>${easyexcel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId> <!-- 解决 ThreadLocal 父子线程的传值问题 -->
+                <version>${transmittable-thread-local.version}</version>
             </dependency>
 
             <!--短信-->

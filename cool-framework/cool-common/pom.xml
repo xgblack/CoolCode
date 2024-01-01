@@ -84,6 +84,11 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>transmittable-thread-local</artifactId> <!-- 解决 ThreadLocal 父子线程的传值问题 -->
+        </dependency>
+
 
     </dependencies>
 

@@ -30,4 +30,14 @@ public interface DefaultResponseConstants {
      */
     long DEFAULT_PARAM_ERROR_CODE = -1L;
 
+
+
+    /** 账号未登录 */
+    long UNAUTHORIZED_ERROR_CODE = 401;
+    /** 没有该操作权限 */
+    long FORBIDDEN_ERROR_CODE = 403;
+    /** 请求未找到 */
+    long NOT_FOUND_ERROR_CODE = 404;
+
+
 }
