@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
  *
  * @author 芋道源码
  */
+@Deprecated
 @Data
 @Accessors(chain = true)
 public class OAuth2AccessTokenRespDTO implements Serializable {

@@ -1,67 +1,86 @@
 package com.xgblack.framework.security.core;
 
-import cn.hutool.core.map.MapUtil;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xgblack.cool.framework.common.enums.UserTypeEnum;
-import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.Getter;
+import lombok.ToString;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.SpringSecurityCoreVersion;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
 
+import java.io.Serial;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
- * 登录用户信息
+ * 扩展用户信息
  *
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 
-@Setter
-@Getter
+
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
-@Accessors(chain = true)
-public class LoginUser {
+public class LoginUser extends User implements OAuth2AuthenticatedPrincipal {
+
+    @Serial
+    private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
+
+    /**
+     * 扩展属性，方便存放oauth 上下文相关信息
+     */
+    private final Map<String, Object> attributes = new HashMap<>();
 
     /**
      * 用户编号
      */
-    private Long id;
+    @Getter
+    private final Long id;
     /**
      * 用户类型
      *
      * 关联 {@link UserTypeEnum}
      */
-    private Integer userType;
+    @Getter
+    private final Integer userType;
+
+    @Getter
+    private final Long deptId;
+
     /**
      * 租户编号
      */
-    private Long tenantId;
+    @Getter
+    private final Long tenantId;
+
+    public LoginUser(Long id, Integer userType, Long deptId, Long tenantId,String username, String password, String phone, boolean enabled,
+                     boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked,
+                     Collection<? extends GrantedAuthority> authorities) {
+        super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
+        this.id = id;
+        this.userType = userType;
+        this.deptId = deptId;
+        this.tenantId = tenantId;
+    }
+
     /**
+     * TODO
      * 授权范围
      */
-    private List<String> scopes;
+    //private final List<String> scopes;
 
-    // ========== 上下文 ==========
+
     /**
-     * 上下文字段，不进行持久化
-     *
-     * 1. 用于基于 LoginUser 维度的临时缓存
+     * Get the OAuth 2.0 token attributes
+     * @return the OAuth 2.0 token attributes
      */
-    @JsonIgnore
-    private Map<String, Object> context;
-
-    public void setContext(String key, Object value) {
-        if (context == null) {
-            context = new HashMap<>();
-        }
-        context.put(key, value);
+    @Override
+    public Map<String, Object> getAttributes() {
+        return this.attributes;
     }
 
-    public <T> T getContext(String key, Class<T> type) {
-        return MapUtil.get(context, key, type);
+    @Override
+    public String getName() {
+        return this.getUsername();
     }
-
-
 }

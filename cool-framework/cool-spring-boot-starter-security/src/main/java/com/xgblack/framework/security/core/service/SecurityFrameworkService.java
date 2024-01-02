@@ -4,7 +4,7 @@ package com.xgblack.framework.security.core.service;
  * Security 框架 Service 接口，定义权限相关的校验操作
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
-
+@Deprecated
 public interface SecurityFrameworkService {
     /**
      * 判断是否有权限

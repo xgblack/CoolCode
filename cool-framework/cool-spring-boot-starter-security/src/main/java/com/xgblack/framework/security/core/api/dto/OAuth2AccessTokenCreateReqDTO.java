@@ -11,6 +11,7 @@ import java.util.List;
  *
  * @author 芋道源码
  */
+@Deprecated
 @Data
 public class OAuth2AccessTokenCreateReqDTO implements Serializable {
 

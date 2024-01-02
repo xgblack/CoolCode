@@ -9,7 +9,7 @@ import jakarta.validation.Valid;
  * OAuth2.0 Token API 接口
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
-
+@Deprecated
 public interface OAuth2TokenApi {
 
     /**

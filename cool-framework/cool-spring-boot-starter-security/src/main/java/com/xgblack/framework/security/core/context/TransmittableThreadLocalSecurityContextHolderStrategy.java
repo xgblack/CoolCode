@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
  *
  * @author 芋道源码
  */
+@Deprecated
 public class TransmittableThreadLocalSecurityContextHolderStrategy implements SecurityContextHolderStrategy {
 
     /**
