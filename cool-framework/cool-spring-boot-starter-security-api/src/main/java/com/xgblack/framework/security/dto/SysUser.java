@@ -1,4 +1,4 @@
-package com.xgblack.framework.security.core.api.dto;
+package com.xgblack.framework.security.dto;
 
 import lombok.Getter;
 import lombok.Setter;

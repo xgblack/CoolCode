@@ -2,11 +2,11 @@ package com.xgblack.framework.security.core.service;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
-import com.xgblack.cool.framework.common.constants.CommonConstants;
+import com.xgblack.framework.security.constans.CommonConstants;
 import com.xgblack.cool.framework.common.constants.SecurityConstants;
 import com.xgblack.cool.framework.common.response.Response;
 import com.xgblack.framework.security.core.LoginUser;
-import com.xgblack.framework.security.core.api.dto.SysUser;
+import com.xgblack.framework.security.dto.SysUser;
 import com.xgblack.framework.security.core.api.dto.UserInfo;
 import org.springframework.core.Ordered;
 import org.springframework.security.core.GrantedAuthority;

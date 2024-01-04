@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.xgblack.cool.framework.common.constants;
+package com.xgblack.framework.security.constans;
 
 /**
  * TODO

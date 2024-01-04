@@ -17,9 +17,11 @@
     <url>https://www.xgblack.cn</url>
 
     <dependencies>
+
         <dependency>
             <groupId>com.xgblack</groupId>
-            <artifactId>cool-common</artifactId>
+            <artifactId>cool-spring-boot-starter-security-api</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <!-- Spring 核心 -->
@@ -55,9 +57,6 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-jose</artifactId>
         </dependency>
-
-
-        <!-- 业务组件api TODO -->
 
 
     </dependencies>
