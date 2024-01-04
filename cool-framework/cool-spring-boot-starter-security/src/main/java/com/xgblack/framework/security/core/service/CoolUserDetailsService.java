@@ -1,7 +1,24 @@
 package com.xgblack.framework.security.core.service;
 
+import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.StrUtil;
+import com.xgblack.cool.framework.common.constants.CommonConstants;
+import com.xgblack.cool.framework.common.constants.SecurityConstants;
+import com.xgblack.cool.framework.common.response.Response;
+import com.xgblack.framework.security.core.LoginUser;
+import com.xgblack.framework.security.core.api.dto.SysUser;
+import com.xgblack.framework.security.core.api.dto.UserInfo;
 import org.springframework.core.Ordered;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author <a href="https://www.xgblack.cn">xg black</a>
@@ -32,8 +49,11 @@ public interface CoolUserDetailsService extends UserDetailsService, Ordered {
      * @param result 用户信息
      * @return UserDetails
      */
-    /*default UserDetails getUserDetails(R<UserInfo> result) {
-        UserInfo info = RetOps.of(result).getData().orElseThrow(() -> new UsernameNotFoundException("用户不存在"));
+    default UserDetails getUserDetails(Response result) {
+        UserInfo info = result.getPayload() instanceof UserInfo ? (UserInfo) result.getPayload() : null;
+        if (info == null) {
+            throw new UsernameNotFoundException("用户不存在");
+        }
 
         Set<String> dbAuthsSet = new HashSet<>();
 
@@ -50,18 +70,18 @@ public interface CoolUserDetailsService extends UserDetailsService, Ordered {
         SysUser user = info.getSysUser();
 
         // 构造security用户
-        return new PigUser(user.getUserId(), user.getDeptId(), user.getUsername(),
+        return new LoginUser(user.getUserId(),null, user.getDeptId(),null, user.getUsername(),
                 SecurityConstants.BCRYPT + user.getPassword(), user.getPhone(), true, true, true,
                 StrUtil.equals(user.getLockFlag(), CommonConstants.STATUS_NORMAL), authorities);
-    }*/
+    }
 
     /**
      * 通过用户实体查询
-     * @param pigUser user
+     * @param user 用户
      * @return
      */
-    /*default UserDetails loadUserByUser(PigUser pigUser) {
-        return this.loadUserByUsername(pigUser.getUsername());
-    }*/
+    default UserDetails loadUserByUser(LoginUser user) {
+        return this.loadUserByUsername(user.getUsername());
+    }
 
 }
