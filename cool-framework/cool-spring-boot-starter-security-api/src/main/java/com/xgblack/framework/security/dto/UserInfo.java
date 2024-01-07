@@ -1,6 +1,5 @@
-package com.xgblack.framework.security.core.api.dto;
+package com.xgblack.framework.security.dto;
 
-import com.xgblack.framework.security.dto.SysUser;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

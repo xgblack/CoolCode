@@ -2,12 +2,10 @@ package com.xgblack.framework.security.core.service;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
-import com.xgblack.framework.security.constans.CommonConstants;
 import com.xgblack.cool.framework.common.constants.SecurityConstants;
-import com.xgblack.cool.framework.common.response.Response;
-import com.xgblack.framework.security.core.LoginUser;
+import com.xgblack.framework.security.constans.CommonConstants;
 import com.xgblack.framework.security.dto.SysUser;
-import com.xgblack.framework.security.core.api.dto.UserInfo;
+import com.xgblack.framework.security.dto.UserInfo;
 import org.springframework.core.Ordered;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -46,11 +44,10 @@ public interface CoolUserDetailsService extends UserDetailsService, Ordered {
     /**
      * TODO
      * 构建userdetails
-     * @param result 用户信息
+     * @param info 用户信息
      * @return UserDetails
      */
-    default UserDetails getUserDetails(Response result) {
-        UserInfo info = result.getPayload() instanceof UserInfo ? (UserInfo) result.getPayload() : null;
+    default UserDetails getUserDetails(UserInfo info) {
         if (info == null) {
             throw new UsernameNotFoundException("用户不存在");
         }

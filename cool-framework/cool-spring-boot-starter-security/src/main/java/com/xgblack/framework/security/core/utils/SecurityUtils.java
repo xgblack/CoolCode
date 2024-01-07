@@ -3,7 +3,7 @@ package com.xgblack.framework.security.core.utils;
 import cn.hutool.core.util.StrUtil;
 import com.xgblack.cool.framework.common.constants.SecurityConstants;
 import com.xgblack.cool.framework.web.core.utils.WebFrameworkUtils;
-import com.xgblack.framework.security.core.LoginUser;
+import com.xgblack.framework.security.core.service.LoginUser;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.experimental.UtilityClass;
 import org.springframework.lang.Nullable;

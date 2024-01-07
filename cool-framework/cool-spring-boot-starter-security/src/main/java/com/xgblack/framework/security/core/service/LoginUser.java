@@ -1,4 +1,4 @@
-package com.xgblack.framework.security.core;
+package com.xgblack.framework.security.core.service;
 
 import com.xgblack.cool.framework.common.enums.UserTypeEnum;
 import lombok.Getter;

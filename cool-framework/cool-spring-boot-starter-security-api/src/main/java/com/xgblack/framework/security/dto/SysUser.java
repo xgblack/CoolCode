@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 /**
  * 用户DTO
  * TODO：封装到公共api中
+ * TODO：可以与DTO合并
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 @Getter

@@ -4,7 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.xgblack.cool.framework.web.core.utils.WebFrameworkUtils;
 import com.xgblack.framework.security.config.SecurityProperties;
-import com.xgblack.framework.security.core.LoginUser;
+import com.xgblack.framework.security.core.service.LoginUser;
 import com.xgblack.framework.security.core.api.OAuth2TokenApi;
 import com.xgblack.framework.security.core.api.dto.OAuth2AccessTokenCheckRespDTO;
 import com.xgblack.framework.security.core.utils.SecurityUtils;
