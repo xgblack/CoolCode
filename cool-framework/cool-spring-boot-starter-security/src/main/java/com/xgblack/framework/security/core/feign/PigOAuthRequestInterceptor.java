@@ -1,20 +1,5 @@
 package com.xgblack.framework.security.core.feign;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
-import com.pig4cloud.pig.common.core.constant.SecurityConstants;
-import com.pig4cloud.pig.common.core.util.WebUtils;
-import feign.RequestInterceptor;
-import feign.RequestTemplate;
-import jakarta.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
-import org.springframework.security.oauth2.core.OAuth2AccessToken;
-import org.springframework.security.oauth2.server.resource.web.BearerTokenResolver;
-
-import java.util.Collection;
-
 /**
  * oauth2 feign token传递
  *
@@ -23,11 +8,12 @@ import java.util.Collection;
  * @author lengleng
  * @date 2022/5/29
  */
-@Slf4j
-@RequiredArgsConstructor
-public class PigOAuthRequestInterceptor implements RequestInterceptor {
+//TODO
+//@Slf4j
+//@RequiredArgsConstructor
+public class PigOAuthRequestInterceptor /*implements RequestInterceptor*/ {
 
-	private final BearerTokenResolver tokenResolver;
+	//private final BearerTokenResolver tokenResolver;
 
 	/**
 	 * Create a template with the header of provided name and extracted extract </br>
@@ -37,7 +23,7 @@ public class PigOAuthRequestInterceptor implements RequestInterceptor {
 	 * 2. 根据authentication 还原请求token
 	 * @param template
 	 */
-	@Override
+	/*@Override
 	public void apply(RequestTemplate template) {
 		Collection<String> fromHeader = template.headers().get(SecurityConstants.FROM);
 		// 带from 请求直接跳过
@@ -58,6 +44,6 @@ public class PigOAuthRequestInterceptor implements RequestInterceptor {
 		template.header(HttpHeaders.AUTHORIZATION,
 				String.format("%s %s", OAuth2AccessToken.TokenType.BEARER.getValue(), token));
 
-	}
+	}*/
 
 }

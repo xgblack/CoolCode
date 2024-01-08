@@ -40,13 +40,13 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 @EnableMethodSecurity
 @RequiredArgsConstructor
-public class PigResourceServerConfiguration {
+public class CoolResourceServerConfiguration {
 
 	protected final ResourceAuthExceptionEntryPoint resourceAuthExceptionEntryPoint;
 
 	private final PermitAllUrlProperties permitAllUrl;
 
-	private final PigBearerTokenExtractor pigBearerTokenExtractor;
+	private final CoolBearerTokenExtractor pigBearerTokenExtractor;
 
 	private final OpaqueTokenIntrospector customOpaqueTokenIntrospector;
 

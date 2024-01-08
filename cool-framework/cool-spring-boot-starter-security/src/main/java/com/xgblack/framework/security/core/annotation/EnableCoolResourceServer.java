@@ -16,9 +16,8 @@
 
 package com.xgblack.framework.security.core.annotation;
 
-import com.pig4cloud.pig.common.security.component.PigResourceServerAutoConfiguration;
-import com.pig4cloud.pig.common.security.component.PigResourceServerConfiguration;
-import com.pig4cloud.pig.common.security.feign.PigFeignClientConfiguration;
+import com.xgblack.framework.security.core.component.CoolResourceServerAutoConfiguration;
+import com.xgblack.framework.security.core.component.CoolResourceServerConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
@@ -28,13 +27,13 @@ import java.lang.annotation.*;
  * @date 2022-06-04
  * <p>
  * 资源服务注解
+ * TODO
  */
 @Documented
 @Inherited
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-@Import({ PigResourceServerAutoConfiguration.class, PigResourceServerConfiguration.class,
-		PigFeignClientConfiguration.class })
-public @interface EnablePigResourceServer {
+@Import({ CoolResourceServerAutoConfiguration.class, CoolResourceServerConfiguration.class/*, CoolFeignClientConfiguration.class*/ })
+public @interface EnableCoolResourceServer {
 
 }

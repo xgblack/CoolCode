@@ -17,8 +17,8 @@
 package com.xgblack.framework.security.core.component;
 
 import cn.hutool.core.util.StrUtil;
-import com.pig4cloud.pig.common.core.constant.SecurityConstants;
-import com.pig4cloud.pig.common.security.annotation.Inner;
+import com.xgblack.cool.framework.common.constants.SecurityConstants;
+import com.xgblack.framework.security.core.annotation.Inner;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -39,7 +39,7 @@ import org.springframework.security.access.AccessDeniedException;
 @Slf4j
 @Aspect
 @RequiredArgsConstructor
-public class PigSecurityInnerAspect implements Ordered {
+public class CoolSecurityInnerAspect implements Ordered {
 
 	private final HttpServletRequest request;
 

@@ -16,12 +16,11 @@
 
 package com.xgblack.framework.security.core.service;
 
-import com.pig4cloud.pig.admin.api.dto.UserDTO;
-import com.pig4cloud.pig.admin.api.dto.UserInfo;
-import com.pig4cloud.pig.admin.api.feign.RemoteUserService;
-import com.pig4cloud.pig.common.core.constant.CacheConstants;
-import com.pig4cloud.pig.common.core.constant.SecurityConstants;
-import com.pig4cloud.pig.common.core.util.R;
+
+import com.xgblack.cool.framework.common.constants.CacheConstants;
+import com.xgblack.cool.framework.common.constants.SecurityConstants;
+import com.xgblack.framework.security.dto.UserInfo;
+import com.xgblack.framework.security.service.RemoteUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -55,11 +54,9 @@ public class CoolAppUserDetailsServiceImpl implements CoolUserDetailsService {
 			return (LoginUser) cache.get(phone).get();
 		}
 
-		UserDTO userDTO = new UserDTO();
-		userDTO.setPhone(phone);
-		R<UserInfo> result = remoteUserService.info(userDTO, SecurityConstants.FROM_IN);
+		UserInfo info = remoteUserService.info(null, phone);
 
-		UserDetails userDetails = getUserDetails(result);
+		UserDetails userDetails = getUserDetails(info);
 		if (cache != null) {
 			cache.put(phone, userDetails);
 		}
@@ -68,12 +65,12 @@ public class CoolAppUserDetailsServiceImpl implements CoolUserDetailsService {
 
 	/**
 	 * check-token 使用
-	 * @param pigUser user
+	 * @param loginUser user
 	 * @return
 	 */
 	@Override
-	public UserDetails loadUserByUser(LoginUser pigUser) {
-		return this.loadUserByUsername(pigUser.getPhone());
+	public UserDetails loadUserByUser(LoginUser loginUser) {
+		return this.loadUserByUsername(loginUser.getPhone());
 	}
 
 	/**

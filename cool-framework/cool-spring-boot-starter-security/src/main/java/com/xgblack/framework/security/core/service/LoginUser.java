@@ -48,12 +48,18 @@ public class LoginUser extends User implements OAuth2AuthenticatedPrincipal {
     private final Long deptId;
 
     /**
+     * 手机号
+     */
+    @Getter
+    private final String phone;
+
+    /**
      * 租户编号
      */
     @Getter
     private final Long tenantId;
 
-    public LoginUser(Long id, Integer userType, Long deptId, Long tenantId,String username, String password, String phone, boolean enabled,
+    public LoginUser(Long id, Integer userType, Long deptId, Long tenantId, String username, String password, String phone, boolean enabled,
                      boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked,
                      Collection<? extends GrantedAuthority> authorities) {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
@@ -61,6 +67,7 @@ public class LoginUser extends User implements OAuth2AuthenticatedPrincipal {
         this.userType = userType;
         this.deptId = deptId;
         this.tenantId = tenantId;
+        this.phone = phone;
     }
 
     /**

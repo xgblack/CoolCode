@@ -17,8 +17,9 @@
 package com.xgblack.framework.security.core.component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pig4cloud.pig.common.core.constant.CommonConstants;
-import com.pig4cloud.pig.common.core.util.R;
+import com.xgblack.cool.framework.common.response.Response;
+import com.xgblack.cool.framework.common.utils.response.CoolRespUtils;
+import com.xgblack.framework.security.constans.CommonConstants;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +39,7 @@ import java.io.PrintWriter;
  * @date 2019/2/1
  *
  * 客户端异常处理 AuthenticationException 不同细化异常处理
+ * TODO
  */
 @RequiredArgsConstructor
 public class ResourceAuthExceptionEntryPoint implements AuthenticationEntryPoint {
@@ -52,19 +54,17 @@ public class ResourceAuthExceptionEntryPoint implements AuthenticationEntryPoint
 			AuthenticationException authException) {
 		response.setCharacterEncoding(CommonConstants.UTF8);
 		response.setContentType(CommonConstants.CONTENT_TYPE);
-		R<String> result = new R<>();
-		result.setCode(CommonConstants.FAIL);
+		Response result = CoolRespUtils.fail();
 		response.setStatus(HttpStatus.UNAUTHORIZED.value());
 		if (authException != null) {
-			result.setMsg("error");
-			result.setData(authException.getMessage());
+			result.setPayload(authException.getMessage());
 		}
 
+
 		// 针对令牌过期返回特殊的 424
-		if (authException instanceof InvalidBearerTokenException
-				|| authException instanceof InsufficientAuthenticationException) {
+		if (authException instanceof InvalidBearerTokenException || authException instanceof InsufficientAuthenticationException) {
 			response.setStatus(HttpStatus.FAILED_DEPENDENCY.value());
-			result.setMsg(this.messageSource.getMessage("OAuth2ResourceOwnerBaseAuthenticationProvider.tokenExpired",
+			result.setPayload(this.messageSource.getMessage("OAuth2ResourceOwnerBaseAuthenticationProvider.tokenExpired",
 					null, LocaleContextHolder.getLocale()));
 		}
 		PrintWriter printWriter = response.getWriter();

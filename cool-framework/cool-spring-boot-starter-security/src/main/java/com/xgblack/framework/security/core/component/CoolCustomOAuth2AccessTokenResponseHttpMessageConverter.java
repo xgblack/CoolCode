@@ -1,7 +1,7 @@
 package com.xgblack.framework.security.core.component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pig4cloud.pig.common.core.util.SpringContextHolder;
+import com.xgblack.cool.framework.common.utils.spring.SpringUtils;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpOutputMessage;
@@ -21,7 +21,7 @@ import java.util.Map;
  * @author lengleng
  * @date 2023/6/28
  */
-public class PigCustomOAuth2AccessTokenResponseHttpMessageConverter
+public class CoolCustomOAuth2AccessTokenResponseHttpMessageConverter
 		extends OAuth2AccessTokenResponseHttpMessageConverter {
 
 	private static final ParameterizedTypeReference<Map<String, Object>> STRING_OBJECT_MAP = new ParameterizedTypeReference<Map<String, Object>>() {
@@ -36,7 +36,7 @@ public class PigCustomOAuth2AccessTokenResponseHttpMessageConverter
 			Map<String, Object> tokenResponseParameters = this.accessTokenResponseParametersConverter
 				.convert(tokenResponse);
 
-			ObjectMapper objectMapper = SpringContextHolder.getBean(ObjectMapper.class);
+			ObjectMapper objectMapper = SpringUtils.getBean(ObjectMapper.class);
 			GenericHttpMessageConverter<Object> jsonMessageConverter = new MappingJackson2HttpMessageConverter(
 					objectMapper);
 			jsonMessageConverter.write(tokenResponseParameters, STRING_OBJECT_MAP.getType(), MediaType.APPLICATION_JSON,

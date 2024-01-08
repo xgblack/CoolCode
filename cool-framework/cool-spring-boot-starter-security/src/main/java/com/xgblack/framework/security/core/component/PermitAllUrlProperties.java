@@ -18,7 +18,7 @@ package com.xgblack.framework.security.core.component;
 
 import cn.hutool.core.util.ReUtil;
 import cn.hutool.extra.spring.SpringUtil;
-import com.pig4cloud.pig.common.security.annotation.Inner;
+import com.xgblack.framework.security.core.annotation.Inner;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
