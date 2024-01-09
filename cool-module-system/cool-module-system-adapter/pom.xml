@@ -23,10 +23,10 @@
             <artifactId>cool-spring-boot-starter-web</artifactId>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>com.xgblack</groupId>
             <artifactId>cool-spring-boot-starter-security</artifactId>
-        </dependency>
+        </dependency>-->
 
 
         <dependency>
