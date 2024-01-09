@@ -24,8 +24,8 @@ import java.util.Set;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(value = "system_users", onInsert = DataInsertListener.class, onUpdate = DataUpdateListener.class)
-public class AdminUserDO {
+@Table(value = "sys_user", onInsert = DataInsertListener.class, onUpdate = DataUpdateListener.class)
+public class UserDO {
     /**
      * 用户ID
      */
@@ -41,55 +41,53 @@ public class AdminUserDO {
      * 因为目前使用 BCryptPasswordEncoder 加密器，所以无需自己处理 salt 盐
      */
     private String password;
+
+    //TODO
+    private String salt;
+
     /**
      * 用户昵称
      */
     private String nickname;
     /**
-     * 备注
+     * 手机号码
      */
-    private String remark;
+    private String phone;
     /**
-     * 部门 ID
+     * 用户头像
      */
-    private Long deptId;
-    /**
-     * 岗位编号数组
-     */
-    @Column(typeHandler = LongSetJsonTypeHandler.class)
-    private Set<Long> postIds;
+    private String avatar;
     /**
      * 用户邮箱
      */
     private String email;
     /**
-     * 手机号码
+     * 部门 ID
      */
-    private String mobile;
+    private Long deptId;
+
+    /**
+     * 岗位编号数组
+     */
+    @Column(typeHandler = LongSetJsonTypeHandler.class)
+    private Set<Long> postIds;
+
+
     /**
      * 用户性别
      * <p>
      * 枚举类 {@link SexEnum}
      */
     private Integer sex;
-    /**
-     * 用户头像
-     */
-    private String avatar;
-    /**
-     * 帐号状态
-     * <p>
-     * 枚举 {@link CommonStatusEnum}
-     */
-    private Integer status;
+
     /**
      * 最后登录IP
      */
-    private String loginIp;
+    //private String loginIp;
     /**
      * 最后登录时间
      */
-    private LocalDateTime loginDate;
+    //private LocalDateTime loginDate;
 
     /**
      * 创建时间
@@ -107,9 +105,44 @@ public class AdminUserDO {
      * 更新者id
      */
     private Long updater;
+
     /**
      * 是否删除
      */
     @Column(isLogicDelete = true)
     private Boolean deleted;
+
+    /**
+     * 是否锁定
+     */
+    private Boolean locked;
+
+    private Long tenantId;
+
+
+
+    /**
+     * 微信openid
+     */
+    private String wxOpenid;
+
+    /**
+     * 微信小程序openId
+     */
+    private String miniOpenid;
+
+    /**
+     * QQ openid
+     */
+    private String qqOpenid;
+
+    /**
+     * 码云唯一标识
+     */
+    private String giteeLogin;
+
+    /**
+     * 开源中国唯一标识
+     */
+    private String oscId;
 }

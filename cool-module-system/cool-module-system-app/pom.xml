@@ -27,10 +27,6 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.xgblack</groupId>
-            <artifactId>cool-spring-boot-starter-security-api</artifactId>
-        </dependency>
 
         <!-- JSR 303 Validation -->
         <!--<dependency>

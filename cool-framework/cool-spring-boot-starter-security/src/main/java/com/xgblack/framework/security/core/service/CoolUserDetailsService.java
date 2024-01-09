@@ -1,9 +1,7 @@
 package com.xgblack.framework.security.core.service;
 
 import cn.hutool.core.util.ArrayUtil;
-import cn.hutool.core.util.StrUtil;
 import com.xgblack.cool.framework.common.constants.SecurityConstants;
-import com.xgblack.framework.security.constans.CommonConstants;
 import com.xgblack.framework.security.dto.SysUser;
 import com.xgblack.framework.security.dto.UserInfo;
 import org.springframework.core.Ordered;
@@ -67,9 +65,9 @@ public interface CoolUserDetailsService extends UserDetailsService, Ordered {
         SysUser user = info.getSysUser();
 
         // 构造security用户
-        return new LoginUser(user.getUserId(),null, user.getDeptId(),null, user.getUsername(),
+        return new LoginUser(user.getId(), null, user.getDeptId(), user.getTenantId(), user.getUsername(),
                 SecurityConstants.BCRYPT + user.getPassword(), user.getPhone(), true, true, true,
-                StrUtil.equals(user.getLockFlag(), CommonConstants.STATUS_NORMAL), authorities);
+                !user.getLocked(), authorities);
     }
 
     /**

@@ -38,15 +38,11 @@ public class UserDTO extends SysUser {
 	 */
 	private List<Long> role;
 
-	/**
-	 * 部门id
-	 */
-	//private Long deptId;
 
 	/**
 	 * 岗位ID
 	 */
-	private List<Long> post;
+	//private List<Long> post;
 
 	/**
 	 * 新密码
