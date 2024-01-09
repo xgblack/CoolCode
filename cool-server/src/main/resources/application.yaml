@@ -1,11 +1,183 @@
-spring:
-  profiles:
-    active: dev
-  threads:
-    virtual:
-      enabled: true # 虚拟线程，需jdk21 + Spring Boot 3.2
+#服务器配置
+server:
+  port: 8990
+  compression:
+    enabled: true #开启压缩
+    mime-types: application/json
+    min-response-size: 300KB
+#  undertow:
+#    threads:
+#      io: 16 # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+#      worker: 400  # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
+#    buffer-size: 1024  # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+#    direct-buffers: true  # 是否分配的直接内存,如果设置为true,则会使用操作系统的内存,这样会减少一次拷贝,但是会增加一次内存分配
+#    ssl:
+#      key-alias: myhttps #证书别名
+#      key-store: classpath:myhttps.jks #证书路径
+#      key-store-password: admin #证书密码
+
 
 cc:
   info:
     version: 1.0.0
     base-package: com.xgblack.cool
+  # 调试模式
+  security:
+    mock-enable: true
+    mock-secret: coolcode
+  response:
+    # 全局的参数校验错误码，默认等于default-error-code=-1
+    default-validate-error-code: -1
+    # 是否打印异常日志，默认为false
+    print-exception-in-global-advice: true
+    # 例外包路径(支持数字, *和**通配符匹配)，该包路径下的controller将被忽略处理
+    exclude-packages:
+      - org.springframework.boot.actuate.*
+    # 设置是否将原生异常错误信息detailMessage字段填充到Response的msg中。（IllegalArgumentException、IllegalStateException异常默认包装）
+    # 默认为false，开发测试环境可以打开，线上环境建议关闭
+    origin-exception-using-detail-message: true
+
+
+spring:
+  application:
+    name: cc-server
+  profiles:
+    active: dev
+  threads:
+    virtual:
+      enabled: true # 虚拟线程，需jdk21 + Spring Boot 3.2
+  servlet:
+    multipart:
+      max-file-size: 50MB # 单个文件大小
+      max-request-size: 200MB # 设置总上传的文件大小
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: ${mysql.url:jdbc:mysql://localhost:3306/cool_code_server?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull}
+    username: ${mysql.username:root}
+    password: ${mysql.password:admin}
+    druid:
+      #初始化大小
+      initialSize: 10
+      #最小值
+      minIdle: 8
+      #最大值
+      maxActive: 80
+      #最大等待时间，配置获取连接等待超时，时间单位都是毫秒ms
+      maxWait: 6000
+      #配置间隔多久才进行一次检测，检测需要关闭的空闲连接
+      timeBetweenEvictionRunsMillis: 30000
+      #配置一个连接在池中最小生存的时间
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，
+      #'wall'用于防火墙，SpringBoot中没有log4j，我改成了log4j2
+      filters: stat,wall,log4j2
+      #最大PSCache连接
+      maxPoolPreparedStatementPerConnectionSize: 20
+      useGlobalDataSourceStat: true
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+      # 配置StatFilter
+      web-stat-filter:
+        #默认为false，设置为true启动
+        enabled: true
+        url-pattern: "/*"
+        exclusions: "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"
+      #配置StatViewServlet
+      stat-view-servlet:
+        url-pattern: "/druid/*"
+        login-username: admin
+        login-password: admin123
+        #是否可以重置
+        reset-enable: true
+        #启用
+        enabled: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    locale: zh_CN
+    time-zone: GMT+8
+
+
+# 数据源及mybatis、mapper-flex配置
+mybatis-flex:
+  # 搜索指定包别名
+  type-aliases-package: com.xgblack.cool.module.**.database.dataobject
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapper-locations: classpath*:mapper/**/*.xml
+  #本部分（Configuration）的配置都为 MyBatis 原生支持的配置，有关配置请参考:https://mybatis.org/mybatis-3/zh/configuration.html#%E8%AE%BE%E7%BD%AE%EF%BC%88settings%EF%BC%89
+  configuration:
+    # 自动驼峰命名规则（camel case）映射
+    mapUnderscoreToCamelCase: true
+    # MyBatis 自动映射策略
+    # NONE：不启用 PARTIAL：只对非嵌套 resultMap 自动映射 FULL：对所有 resultMap 自动映射
+    autoMappingBehavior: FULL
+    # MyBatis 自动映射时未知列或未知属性处理策
+    # NONE：不做处理 WARNING：打印相关警告 FAILING：抛出异常和详细信息
+    autoMappingUnknownColumnBehavior: NONE
+    # 更详细的日志输出 会有性能损耗 org.apache.ibatis.logging.stdout.StdOutImpl
+    # 关闭日志记录  org.apache.ibatis.logging.nologging.NoLoggingImpl
+    # 默认日志输出 org.apache.ibatis.logging.slf4j.Slf4jImpl
+    logImpl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    cacheEnabled: true
+  # MyBatis-Flex全局配置
+  global-config:
+    # 是否控制台打印 MyBatis-Flex 的 LOGO 及版本号
+    print-banner: true
+    # 逻辑删除数据存在标记值
+    normal-value-of-logic-delete: 0
+    # 逻辑删除数据删除标记值
+    deleted-value-of-logic-delete: 1
+    #全局的 ID 生成策略配置
+    key-config:
+      #自增的方式
+      key-type: auto
+#  admin-config:
+#    enable: true
+#    endpoint: http://admin-host:8080/message/collect
+#    secret-key: secretKey
+
+
+# 日志配置
+logging:
+  file:
+    # 日志文件名，全路径. logback-spring.xml中通过LOG_FILE获取
+    name: /data/logs/${spring.application.name:cc-server}/app.log
+  level:
+    com.xgblack: info
+    org.springframework: warn
+
+
+
+
+---
+spring.config.activate.on-profile: dev,local
+server:
+  port: 8990
+logging:
+  file:
+    name: /data/logs/${spring.application.name:cc-server}/app.log
+  level:
+    com.xgblack: trace
+mysql.url: jdbc:mysql://localhost:3306/cool_code_server?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull
+mysql.username: root
+mysql.password: admin
+
+
+
+
+---
+spring.config.activate.on-profile: test,prod
+server:
+  port: 8990
+logging.file.name: /data/logs/${spring.application.name:cc-server}/app.log
+cc:
+  response:
+    print-exception-in-global-advice: true
+    exclude-packages:
+      - org.springframework.boot.actuate.*
+    origin-exception-using-detail-message: false
