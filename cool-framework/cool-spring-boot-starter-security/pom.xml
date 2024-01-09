@@ -60,6 +60,7 @@
         <dependency>
             <groupId>com.xgblack</groupId>
             <artifactId>cool-spring-boot-starter-redis</artifactId>
+            <optional>true</optional>
         </dependency>
 
 
