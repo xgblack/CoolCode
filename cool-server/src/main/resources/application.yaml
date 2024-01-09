@@ -101,6 +101,27 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     locale: zh_CN
     time-zone: GMT+8
+  cache:
+    type: redis
+  data:
+    redis:
+      host: local
+      port: 6379
+      password: admin
+      database: 15
+      timeout: 5000
+
+
+## spring security 对外暴露接口设置
+security:
+  oauth2:
+    ignore:
+      urls:
+        - /webjars/**
+        - /static/doc/**
+        - /token/check_token
+        - /error
+        - /actuator/**
 
 
 # 数据源及mybatis、mapper-flex配置
