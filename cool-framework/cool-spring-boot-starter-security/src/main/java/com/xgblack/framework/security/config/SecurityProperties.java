@@ -2,9 +2,6 @@ package com.xgblack.framework.security.config;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.Collections;
 import java.util.List;
@@ -14,9 +11,10 @@ import java.util.List;
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 
-@Data
-@Validated
-@ConfigurationProperties(prefix = "cc.security")
+@Deprecated
+//@Data
+//@Validated
+//@ConfigurationProperties(prefix = "cc.security")
 public class SecurityProperties {
     /**
      * HTTP 请求时，访问令牌的请求 Header

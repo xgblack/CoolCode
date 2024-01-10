@@ -37,7 +37,7 @@
         <sms4j.starter.version>3.1.0</sms4j.starter.version>
         <wx-java.version>4.5.7.B</wx-java.version>
         <infinispan.version>15.0.0.Dev05</infinispan.version>
-        <transmittable-thread-local.version>2.14.5</transmittable-thread-local.version>
+        <captcha.version>2.2.3</captcha.version>
     </properties>
 
     <dependencyManagement>
@@ -201,10 +201,11 @@
                 <version>${easyexcel.version}</version>
             </dependency>
 
+            <!-- 调用验证码核心模块 -->
             <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>transmittable-thread-local</artifactId> <!-- 解决 ThreadLocal 父子线程的传值问题 -->
-                <version>${transmittable-thread-local.version}</version>
+                <groupId>io.springboot.plugin</groupId>
+                <artifactId>captcha-core</artifactId>
+                <version>${captcha.version}</version>
             </dependency>
 
             <!--短信-->

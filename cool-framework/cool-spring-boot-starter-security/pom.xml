@@ -63,6 +63,12 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- 调用验证码核心模块 -->
+        <dependency>
+            <groupId>io.springboot.plugin</groupId>
+            <artifactId>captcha-core</artifactId>
+        </dependency>
+
 
 
     </dependencies>

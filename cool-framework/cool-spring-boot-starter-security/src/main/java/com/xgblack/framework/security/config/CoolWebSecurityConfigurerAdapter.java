@@ -6,7 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
  * 自定义的 Spring Security 配置适配器实现
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
-
+@Deprecated
 //@AutoConfiguration
 //@EnableMethodSecurity(securedEnabled = true)
 public class CoolWebSecurityConfigurerAdapter {

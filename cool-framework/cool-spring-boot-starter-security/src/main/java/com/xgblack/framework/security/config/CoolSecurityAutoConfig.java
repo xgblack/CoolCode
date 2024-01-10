@@ -1,6 +1,5 @@
 package com.xgblack.framework.security.config;
 
-import com.xgblack.framework.security.core.context.TransmittableThreadLocalSecurityContextHolderStrategy;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
@@ -10,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
  */
 //@AutoConfiguration
 //@EnableConfigurationProperties(SecurityProperties.class)
+@Deprecated
 public class CoolSecurityAutoConfig {
 
     //@Resource
