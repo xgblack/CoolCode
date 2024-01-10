@@ -9,8 +9,8 @@ import org.mapstruct.factory.Mappers;
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 @Mapper
-public interface UserInfoConvert {
-    UserInfoConvert INSTANCE = Mappers.getMapper(UserInfoConvert.class);
+public interface UserInfoConvertor {
+    UserInfoConvertor INSTANCE = Mappers.getMapper(UserInfoConvertor.class);
 
     SysUser convertDO2DTO(UserDO data);
 }

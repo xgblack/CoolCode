@@ -74,29 +74,23 @@ public class SysOauthClientDetails implements Serializable {
      */
     private String autoapprove;
 
-    /**
-     * 删除标记
-     */
-    private String delFlag;
-
-    /**
-     * 创建人
-     */
-    private String createBy;
-
-    /**
-     * 修改人
-     */
-    private String updateBy;
+    //private Boolean deleted;
 
     /**
      * 创建时间
      */
     private LocalDateTime createTime;
-
     /**
-     * 更新时间
+     * 最后更新时间
      */
     private LocalDateTime updateTime;
+    /**
+     * 创建者id
+     */
+    private Long creator;
+    /**
+     * 更新者id
+     */
+    private Long updater;
 
 }

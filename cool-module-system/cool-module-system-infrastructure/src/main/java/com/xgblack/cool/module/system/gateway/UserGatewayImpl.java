@@ -2,7 +2,7 @@ package com.xgblack.cool.module.system.gateway;
 
 import cn.hutool.core.util.StrUtil;
 import com.mybatisflex.core.query.QueryChain;
-import com.xgblack.cool.module.system.convertor.UserInfoConvert;
+import com.xgblack.cool.module.system.convertor.UserInfoConvertor;
 import com.xgblack.cool.module.system.domain.gateway.UserGateway;
 import com.xgblack.cool.module.system.gateway.database.dataobject.UserDO;
 import com.xgblack.cool.module.system.gateway.database.mapper.UserMapper;
@@ -35,7 +35,7 @@ public class UserGatewayImpl implements UserGateway, RemoteUserService {
         // TODO:设置角色列表 （ID）
         // TODO:设置权限列表（menu.permission）
         UserInfo info = new UserInfo();
-        info.setSysUser(UserInfoConvert.INSTANCE.convertDO2DTO(userDO));
+        info.setSysUser(UserInfoConvertor.INSTANCE.convertDO2DTO(userDO));
         return info;
     }
 
