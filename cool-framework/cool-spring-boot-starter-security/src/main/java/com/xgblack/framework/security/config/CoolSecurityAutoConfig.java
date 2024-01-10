@@ -1,46 +1,40 @@
 package com.xgblack.framework.security.config;
 
-import jakarta.annotation.Resource;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import com.xgblack.framework.security.core.context.TransmittableThreadLocalSecurityContextHolderStrategy;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  * Spring Security 自动配置类
  * 注意，不能和 {@link CoolWebSecurityConfigurerAdapter} 用一个，原因是会导致初始化报错。参见 <a href="https://stackoverflow.com/questions/53847050/spring-boot-delegatebuilder-cannot-be-null-on-autowiring-authenticationmanager">文档</a>。
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
-@AutoConfiguration
-@EnableConfigurationProperties(SecurityProperties.class)
+//@AutoConfiguration
+//@EnableConfigurationProperties(SecurityProperties.class)
 public class CoolSecurityAutoConfig {
 
-    @Resource
-    private SecurityProperties securityProperties;
+    //@Resource
+    //private SecurityProperties securityProperties;
 
     /**
      * 内置一个userService，用于查询用户信息
      * 后面通过定义接口从数据库查询
      * @return
      */
-    @Bean
+    /*@Bean
     UserDetailsService userDetailsService() {
         InMemoryUserDetailsManager users = new InMemoryUserDetailsManager();
         users.createUser(User.withUsername("xgblack").password("{noop}123").roles("admin").build());
         users.createUser(User.withUsername("admin").password("{noop}123").roles("admin").build());
         return users;
-    }
+    }*/
 
-    @Bean
+    /*@Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return web -> {
             //通常是用来放行静态资源的
             web.ignoring().requestMatchers("/static/doc/*.json");
         };
-    }
+    }*/
 
     /*@Bean
     public SecurityFilterChain securityFilterChain() {

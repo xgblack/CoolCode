@@ -33,10 +33,9 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 /**
- * @author lengleng
- * @date 2020-03-11
- * <p>
  * 资源服务器对外直接暴露URL,如果设置contex-path 要特殊处理
+ *
+ * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 @Slf4j
 @ConfigurationProperties(prefix = "security.oauth2.ignore")

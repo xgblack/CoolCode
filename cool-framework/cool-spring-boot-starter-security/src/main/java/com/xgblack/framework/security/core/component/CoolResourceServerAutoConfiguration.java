@@ -58,8 +58,7 @@ public class CoolResourceServerAutoConfiguration {
 	 * @return ResourceAuthExceptionEntryPoint
 	 */
 	@Bean
-	public ResourceAuthExceptionEntryPoint resourceAuthExceptionEntryPoint(ObjectMapper objectMapper,
-			MessageSource securityMessageSource) {
+	public ResourceAuthExceptionEntryPoint resourceAuthExceptionEntryPoint(ObjectMapper objectMapper, MessageSource securityMessageSource) {
 		return new ResourceAuthExceptionEntryPoint(objectMapper, securityMessageSource);
 	}
 

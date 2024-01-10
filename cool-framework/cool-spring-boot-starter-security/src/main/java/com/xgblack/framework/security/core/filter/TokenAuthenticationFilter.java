@@ -1,22 +1,7 @@
 package com.xgblack.framework.security.core.filter;
 
-import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.StrUtil;
-import com.xgblack.cool.framework.web.core.utils.WebFrameworkUtils;
 import com.xgblack.framework.security.config.SecurityProperties;
 import com.xgblack.framework.security.core.service.LoginUser;
-import com.xgblack.framework.security.core.api.OAuth2TokenApi;
-import com.xgblack.framework.security.core.api.dto.OAuth2AccessTokenCheckRespDTO;
-import com.xgblack.framework.security.core.utils.SecurityUtils;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.web.filter.OncePerRequestFilter;
-
-import java.io.IOException;
 
 /**
  * Token 过滤器，验证 token 的有效性
@@ -24,16 +9,16 @@ import java.io.IOException;
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 @Deprecated
-@RequiredArgsConstructor
-public class TokenAuthenticationFilter extends OncePerRequestFilter {
+//@RequiredArgsConstructor
+public class TokenAuthenticationFilter /*extends OncePerRequestFilter*/ {
 
-    private final SecurityProperties securityProperties;
+    //private final SecurityProperties securityProperties;
 
     //private final GlobalExceptionHandler globalExceptionHandler;
 
-    private final OAuth2TokenApi oauth2TokenApi;
+    //private final OAuth2TokenApi oauth2TokenApi;
 
-    @Override
+    /*@Override
     @SuppressWarnings("NullableProblems")
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
@@ -62,9 +47,9 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
         // 继续过滤链
         chain.doFilter(request, response);
-    }
+    }*/
 
-    private LoginUser buildLoginUserByToken(String token, Integer userType) {
+    /*private LoginUser buildLoginUserByToken(String token, Integer userType) {
         try {
             OAuth2AccessTokenCheckRespDTO accessToken = oauth2TokenApi.checkAccessToken(token);
             if (accessToken == null) {
@@ -82,11 +67,11 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             //        .setTenantId(accessToken.getTenantId()).setScopes(accessToken.getScopes());
             //fixme
             return null;
-        } catch (/*ServiceException serviceException*/ Exception e) {
+        } catch (*//*ServiceException serviceException*//* Exception e) {
             // 校验 Token 不通过时，考虑到一些接口是无需登录的，所以直接返回 null 即可
             return null;
         }
-    }
+    }*/
 
     /**
      * 模拟登录用户，方便日常开发调试
@@ -98,7 +83,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
      * @param userType 用户类型
      * @return 模拟的 LoginUser
      */
-    private LoginUser mockLoginUser(HttpServletRequest request, String token, Integer userType) {
+    /*private LoginUser mockLoginUser(HttpServletRequest request, String token, Integer userType) {
         if (!securityProperties.getMockEnable()) {
             return null;
         }
@@ -112,6 +97,6 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         //        .setTenantId(WebFrameworkUtils.getTenantId(request));
         //fixme
         return null;
-    }
+    }*/
 
 }
