@@ -14,6 +14,7 @@ import com.xgblack.framework.security.core.component.PermitAllUrlProperties;
 import com.xgblack.framework.security.core.component.ResourceAuthExceptionEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -44,6 +45,7 @@ import java.util.Arrays;
  * @author lengleng
  * @date 2018/6/22 认证服务器配置
  */
+@ComponentScan(basePackages="com.xgblack.framework")
 @Configuration
 @RequiredArgsConstructor
 public class AuthorizationServerConfiguration {
@@ -52,13 +54,13 @@ public class AuthorizationServerConfiguration {
 
 	protected final ResourceAuthExceptionEntryPoint resourceAuthExceptionEntryPoint;
 
-	private final CoolBearerTokenExtractor pigBearerTokenExtractor;
+	private final CoolBearerTokenExtractor coolBearerTokenExtractor;
 
 	private final OpaqueTokenIntrospector customOpaqueTokenIntrospector;
 
 	private final PermitAllUrlProperties permitAllUrl;
 
-	private final CoolLoginPreFilter pigLoginPreFilter;
+	private final CoolLoginPreFilter coolLoginPreFilter;
 
 	@Bean
 	@Order(Ordered.HIGHEST_PRECEDENCE)
@@ -67,7 +69,7 @@ public class AuthorizationServerConfiguration {
 			CoolAuthenticationFailureEventHandler failureEventHandler) throws Exception {
 		OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
 
-		http.addFilterAfter(pigLoginPreFilter, UsernamePasswordAuthenticationFilter.class);
+		http.addFilterAfter(coolLoginPreFilter, UsernamePasswordAuthenticationFilter.class);
 		http.with(authorizationServerConfigurer.tokenEndpoint((tokenEndpoint) -> {// 个性化认证授权端点
 			tokenEndpoint.accessTokenRequestConverter(accessTokenRequestConverter()) // 注入自定义的授权认证Converter
 				.accessTokenResponseHandler(successEventHandler) // 登录成功处理器
@@ -94,7 +96,7 @@ public class AuthorizationServerConfiguration {
 			.oauth2ResourceServer(
 					oauth2 -> oauth2.opaqueToken(token -> token.introspector(customOpaqueTokenIntrospector))
 						.authenticationEntryPoint(resourceAuthExceptionEntryPoint)
-						.bearerTokenResolver(pigBearerTokenExtractor))
+						.bearerTokenResolver(coolBearerTokenExtractor))
 			.exceptionHandling(configurer -> configurer.authenticationEntryPoint(resourceAuthExceptionEntryPoint))
 			.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
 			.csrf(AbstractHttpConfigurer::disable);

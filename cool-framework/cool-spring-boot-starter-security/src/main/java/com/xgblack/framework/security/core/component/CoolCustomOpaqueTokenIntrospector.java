@@ -19,6 +19,7 @@ import org.springframework.security.oauth2.server.authorization.OAuth2Authorizat
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
 import org.springframework.security.oauth2.server.resource.InvalidBearerTokenException;
 import org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector;
+import org.springframework.stereotype.Component;
 
 import java.security.Principal;
 import java.util.Comparator;
@@ -31,6 +32,7 @@ import java.util.Optional;
  * @date 2022/5/28
  */
 @Slf4j
+@Component
 @RequiredArgsConstructor
 public class CoolCustomOpaqueTokenIntrospector implements OpaqueTokenIntrospector {
 

@@ -11,6 +11,7 @@ import org.springframework.security.oauth2.server.authorization.OAuth2Authorizat
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationCode;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import java.time.temporal.ChronoUnit;
@@ -23,6 +24,7 @@ import java.util.concurrent.TimeUnit;
  * @author lengleng
  * @date 2022/5/27
  */
+@Component
 @RequiredArgsConstructor
 public class CoolRedisOAuth2AuthorizationService implements OAuth2AuthorizationService {
 

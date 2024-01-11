@@ -23,6 +23,7 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.server.resource.BearerTokenError;
 import org.springframework.security.oauth2.server.resource.BearerTokenErrors;
 import org.springframework.security.oauth2.server.resource.web.BearerTokenResolver;
+import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 import org.springframework.util.StringUtils;
@@ -34,6 +35,7 @@ import java.util.regex.Pattern;
  * @author caiqy
  * @date 2020.05.15
  */
+@Component
 public class CoolBearerTokenExtractor implements BearerTokenResolver {
 
 	private static final Pattern authorizationPattern = Pattern.compile("^Bearer (?<token>[a-zA-Z0-9-:._~+/]+=*)$",

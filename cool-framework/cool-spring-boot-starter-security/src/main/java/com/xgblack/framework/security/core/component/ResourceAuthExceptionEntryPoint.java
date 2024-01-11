@@ -31,6 +31,7 @@ import org.springframework.security.authentication.InsufficientAuthenticationExc
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.server.resource.InvalidBearerTokenException;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.stereotype.Component;
 
 import java.io.PrintWriter;
 
@@ -38,6 +39,7 @@ import java.io.PrintWriter;
  * 客户端异常处理 AuthenticationException 不同细化异常处理
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
+@Component
 @RequiredArgsConstructor
 public class ResourceAuthExceptionEntryPoint implements AuthenticationEntryPoint {
 
