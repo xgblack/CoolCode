@@ -69,6 +69,21 @@
             <artifactId>captcha-core</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+        </dependency>
+        <!-- mybatis-plus 3.5.3及以上版本 才支持 spring boot 3-->
+        <dependency>
+            <groupId>com.xgblack</groupId>
+            <artifactId>cool-spring-boot-starter-mybatis-flex</artifactId>
+        </dependency>
+        <!-- 添加spring security cas支持 -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-cas</artifactId>
+        </dependency>
+
 
 
     </dependencies>
