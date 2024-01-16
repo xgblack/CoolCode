@@ -1,4 +1,4 @@
-package com.xgblack.framework.security.dto;
+package com.xgblack.cool.framework.security.dto;
 
 import lombok.Data;
 

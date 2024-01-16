@@ -1,4 +1,4 @@
-package com.xgblack.framework.redis.config;
+package com.xgblack.cool.framework.redis.config;
 
 import cn.hutool.core.util.ReflectUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;

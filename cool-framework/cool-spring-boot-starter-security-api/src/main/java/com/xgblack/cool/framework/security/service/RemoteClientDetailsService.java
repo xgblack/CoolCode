@@ -1,6 +1,6 @@
-package com.xgblack.framework.security.service;
+package com.xgblack.cool.framework.security.service;
 
-import com.xgblack.framework.security.dto.SysOauthClientDetails;
+import com.xgblack.cool.framework.security.dto.SysOauthClientDetails;
 
 import java.util.List;
 

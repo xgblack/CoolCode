@@ -1,7 +1,7 @@
 package com.xgblack.cool.module.system.convertor;
 
 import com.xgblack.cool.module.system.gateway.database.dataobject.OauthClientDO;
-import com.xgblack.framework.security.dto.SysOauthClientDetails;
+import com.xgblack.cool.framework.security.dto.SysOauthClientDetails;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

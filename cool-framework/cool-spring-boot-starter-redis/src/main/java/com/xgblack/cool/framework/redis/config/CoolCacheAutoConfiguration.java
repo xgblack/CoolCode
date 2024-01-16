@@ -1,4 +1,4 @@
-package com.xgblack.framework.redis.config;
+package com.xgblack.cool.framework.redis.config;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.cache.CacheProperties;

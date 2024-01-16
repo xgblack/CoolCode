@@ -112,16 +112,6 @@ spring:
       timeout: 5000
 
 
-## spring security 对外暴露接口设置
-security:
-  oauth2:
-    ignore:
-      urls:
-        - /webjars/**
-        - /static/doc/**
-        - /token/check_token
-        - /error
-        - /actuator/**
 
 
 # 数据源及mybatis、mapper-flex配置

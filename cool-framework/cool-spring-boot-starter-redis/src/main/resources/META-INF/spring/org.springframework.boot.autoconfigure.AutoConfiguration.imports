@@ -1,2 +1,2 @@
-com.xgblack.framework.redis.config.CoolRedisAutoConfiguration
-com.xgblack.framework.redis.config.CoolCacheAutoConfiguration
+com.xgblack.cool.framework.redis.config.CoolRedisAutoConfiguration
+com.xgblack.cool.framework.redis.config.CoolCacheAutoConfiguration
