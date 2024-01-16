@@ -9,7 +9,7 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>cool-spring-boot-starter-security</artifactId>
+    <artifactId>cool-spring-boot-starter-security-old</artifactId>
     <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>
@@ -72,5 +72,6 @@
 
 
     </dependencies>
+
 
 </project>

@@ -1,3 +1,4 @@
+com.xgblack.framework.security.config.AuthorizationServerConfiguration
 com.xgblack.framework.security.core.service.CoolUserDetailsServiceImpl
 com.xgblack.framework.security.core.service.CoolAppUserDetailsServiceImpl
 com.xgblack.framework.security.core.service.CoolRedisOAuth2AuthorizationService
