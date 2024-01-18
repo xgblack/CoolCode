@@ -38,8 +38,10 @@
 		<module>cool-module-system</module>
 		<!--启动模块-->
 		<module>cool-server</module>
+		<!--示例模块-->
+        <module>cool-example</module>
 
-	</modules>
+    </modules>
 
 	<properties>
 		<revision>1.0.0</revision>
