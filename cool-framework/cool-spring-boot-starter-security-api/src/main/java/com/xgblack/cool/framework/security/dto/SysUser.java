@@ -34,13 +34,9 @@ public class SysUser implements Serializable {
     private String username;
     /**
      * 加密后的密码
-     * <p>
-     * 因为目前使用 BCryptPasswordEncoder 加密器，所以无需自己处理 salt 盐
      */
     private String password;
 
-    //TODO
-    private String salt;
 
     /**
      * 用户昵称

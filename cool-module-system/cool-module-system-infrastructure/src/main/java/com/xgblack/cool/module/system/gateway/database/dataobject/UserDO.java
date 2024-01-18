@@ -42,9 +42,6 @@ public class UserDO {
      */
     private String password;
 
-    //TODO
-    private String salt;
-
     /**
      * 用户昵称
      */
