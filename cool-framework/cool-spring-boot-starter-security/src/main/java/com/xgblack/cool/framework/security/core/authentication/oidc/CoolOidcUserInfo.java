@@ -13,11 +13,11 @@ import java.util.function.Consumer;
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 
-public class MyOidcUserInfo extends OidcUserInfo {
+public class CoolOidcUserInfo extends OidcUserInfo {
     private static final long serialVersionUID = 610L;
     private final Map<String, Object> claims;
 
-    public MyOidcUserInfo(Map<String, Object> claims) {
+    public CoolOidcUserInfo(Map<String, Object> claims) {
         super(claims);
         Assert.notEmpty(claims, "claims cannot be empty");
         this.claims = Collections.unmodifiableMap(new LinkedHashMap(claims));
@@ -31,7 +31,7 @@ public class MyOidcUserInfo extends OidcUserInfo {
         if (this == obj) {
             return true;
         } else if (obj != null && this.getClass() == obj.getClass()) {
-            MyOidcUserInfo that = (MyOidcUserInfo)obj;
+            CoolOidcUserInfo that = (CoolOidcUserInfo)obj;
             return this.getClaims().equals(that.getClaims());
         } else {
             return false;
@@ -42,8 +42,8 @@ public class MyOidcUserInfo extends OidcUserInfo {
         return this.getClaims().hashCode();
     }
 
-    public static MyOidcUserInfo.Builder myBuilder() {
-        return new MyOidcUserInfo.Builder();
+    public static CoolOidcUserInfo.Builder myBuilder() {
+        return new CoolOidcUserInfo.Builder();
     }
 
     public static final class Builder {
@@ -52,50 +52,50 @@ public class MyOidcUserInfo extends OidcUserInfo {
         private Builder() {
         }
 
-        public MyOidcUserInfo.Builder claim(String name, Object value) {
+        public CoolOidcUserInfo.Builder claim(String name, Object value) {
             this.claims.put(name, value);
             return this;
         }
 
-        public MyOidcUserInfo.Builder claims(Consumer<Map<String, Object>> claimsConsumer) {
+        public CoolOidcUserInfo.Builder claims(Consumer<Map<String, Object>> claimsConsumer) {
             claimsConsumer.accept(this.claims);
             return this;
         }
 
-        public MyOidcUserInfo.Builder username(String username) {
+        public CoolOidcUserInfo.Builder username(String username) {
             return this.claim("username", username);
         }
 
-        public MyOidcUserInfo.Builder name(String name) {
+        public CoolOidcUserInfo.Builder name(String name) {
             return this.claim("name", name);
         }
 
-        public MyOidcUserInfo.Builder description(String description) {
+        public CoolOidcUserInfo.Builder description(String description) {
             return this.claim("description", description);
         }
 
-        public MyOidcUserInfo.Builder status(Integer status) {
+        public CoolOidcUserInfo.Builder status(Integer status) {
             return this.claim("status", status);
         }
 
-        public MyOidcUserInfo.Builder phoneNumber(String phoneNumber) {
+        public CoolOidcUserInfo.Builder phoneNumber(String phoneNumber) {
             return this.claim("phone_number", phoneNumber);
         }
 
-        public MyOidcUserInfo.Builder email(String email) {
+        public CoolOidcUserInfo.Builder email(String email) {
             return this.claim("email", email);
         }
 
-        public MyOidcUserInfo.Builder profile(String profile) {
+        public CoolOidcUserInfo.Builder profile(String profile) {
             return this.claim("profile", profile);
         }
 
-        public MyOidcUserInfo.Builder address(String address) {
+        public CoolOidcUserInfo.Builder address(String address) {
             return this.claim("address", address);
         }
 
-        public MyOidcUserInfo build() {
-            return new MyOidcUserInfo(this.claims);
+        public CoolOidcUserInfo build() {
+            return new CoolOidcUserInfo(this.claims);
         }
 
     }

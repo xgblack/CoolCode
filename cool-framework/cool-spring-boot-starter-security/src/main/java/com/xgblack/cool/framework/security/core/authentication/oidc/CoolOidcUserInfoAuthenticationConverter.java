@@ -13,9 +13,9 @@ import org.springframework.security.web.authentication.AuthenticationConverter;
  */
 
 @RequiredArgsConstructor
-public class MyOidcUserInfoAuthenticationConverter implements AuthenticationConverter {
+public class CoolOidcUserInfoAuthenticationConverter implements AuthenticationConverter {
 
-    private final MyOidcUserInfoService oidcUserInfoService;
+    private final CoolOidcUserInfoService oidcUserInfoService;
 
 
     @Nullable
@@ -24,7 +24,7 @@ public class MyOidcUserInfoAuthenticationConverter implements AuthenticationConv
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         //查询用户信息
-        MyOidcUserInfo myOidcUserInfo = oidcUserInfoService.loadUser(authentication.getName());
+        CoolOidcUserInfo myOidcUserInfo = oidcUserInfoService.loadUser(authentication.getName());
 
         //返回自定义的OidcUserInfoAuthenticationToken
         return new OidcUserInfoAuthenticationToken(authentication, myOidcUserInfo);

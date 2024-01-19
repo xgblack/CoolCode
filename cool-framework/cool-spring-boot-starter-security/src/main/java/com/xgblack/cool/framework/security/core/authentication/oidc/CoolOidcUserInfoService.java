@@ -13,18 +13,18 @@ import java.util.Map;
  */
 
 @Service
-public class MyOidcUserInfoService {
+public class CoolOidcUserInfoService {
     @Resource
     private RemoteUserService userService;
 
-    public MyOidcUserInfo loadUser(String username) {
+    public CoolOidcUserInfo loadUser(String username) {
         UserInfo info = userService.info(username, null);
-        return new MyOidcUserInfo(this.createUser(info.getSysUser()));
+        return new CoolOidcUserInfo(this.createUser(info.getSysUser()));
     }
 
     private Map<String, Object> createUser(SysUser sysUser) {
         //TODO: 自定义
-        return MyOidcUserInfo.myBuilder()
+        return CoolOidcUserInfo.myBuilder()
                 .name(sysUser.getNickname())
                 .username(sysUser.getUsername())
                 .description("11111")

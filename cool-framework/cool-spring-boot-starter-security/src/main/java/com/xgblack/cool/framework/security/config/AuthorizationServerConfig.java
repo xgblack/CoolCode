@@ -9,9 +9,9 @@ import com.xgblack.cool.framework.security.core.authentication.device.DeviceClie
 import com.xgblack.cool.framework.security.core.authentication.device.DeviceClientAuthenticationProvider;
 import com.xgblack.cool.framework.security.core.authentication.mobile.MobileGrantAuthenticationConverter;
 import com.xgblack.cool.framework.security.core.authentication.mobile.MobileGrantAuthenticationProvider;
-import com.xgblack.cool.framework.security.core.authentication.oidc.MyOidcUserInfoAuthenticationConverter;
-import com.xgblack.cool.framework.security.core.authentication.oidc.MyOidcUserInfoAuthenticationProvider;
-import com.xgblack.cool.framework.security.core.authentication.oidc.MyOidcUserInfoService;
+import com.xgblack.cool.framework.security.core.authentication.oidc.CoolOidcUserInfoAuthenticationConverter;
+import com.xgblack.cool.framework.security.core.authentication.oidc.CoolOidcUserInfoAuthenticationProvider;
+import com.xgblack.cool.framework.security.core.authentication.oidc.CoolOidcUserInfoService;
 import com.xgblack.cool.framework.security.core.authentication.password.PasswordGrantAuthenticationConverter;
 import com.xgblack.cool.framework.security.core.authentication.password.PasswordGrantAuthenticationProvider;
 import jakarta.annotation.Resource;
@@ -69,7 +69,7 @@ public class AuthorizationServerConfig {
     @Resource
     private UserDetailsService userDetailsService;
     @Resource
-    private MyOidcUserInfoService oidcUserInfoService;
+    private CoolOidcUserInfoService oidcUserInfoService;
 
 
     /**
@@ -125,8 +125,8 @@ public class AuthorizationServerConfig {
                 //自定义oidc
                 .oidc(oidcCustomizer->{
                     oidcCustomizer.userInfoEndpoint(userInfoEndpointCustomizer->{
-                        userInfoEndpointCustomizer.userInfoRequestConverter(new MyOidcUserInfoAuthenticationConverter(oidcUserInfoService));
-                        userInfoEndpointCustomizer.authenticationProvider(new MyOidcUserInfoAuthenticationProvider(authorizationService));
+                        userInfoEndpointCustomizer.userInfoRequestConverter(new CoolOidcUserInfoAuthenticationConverter(oidcUserInfoService));
+                        userInfoEndpointCustomizer.authenticationProvider(new CoolOidcUserInfoAuthenticationProvider(authorizationService));
                     });
                 });
 
@@ -243,7 +243,7 @@ public class AuthorizationServerConfig {
     }
 
     @Bean
-    public OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer(MyOidcUserInfoService myOidcUserInfoService) {
+    public OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer(CoolOidcUserInfoService myOidcUserInfoService) {
 
         return context -> {
             JwsHeader.Builder headers = context.getJwsHeader();

@@ -22,12 +22,12 @@ import java.util.function.Function;
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 @Slf4j
-public class MyOidcUserInfoAuthenticationProvider implements AuthenticationProvider {
+public class CoolOidcUserInfoAuthenticationProvider implements AuthenticationProvider {
 
     private final OAuth2AuthorizationService authorizationService;
-    private Function<OidcUserInfoAuthenticationContext, MyOidcUserInfo> userInfoMapper = new MyOidcUserInfoAuthenticationProvider.DefaultOidcUserInfoMapper();
+    private Function<OidcUserInfoAuthenticationContext, CoolOidcUserInfo> userInfoMapper = new CoolOidcUserInfoAuthenticationProvider.DefaultOidcUserInfoMapper();
 
-    public MyOidcUserInfoAuthenticationProvider(OAuth2AuthorizationService authorizationService) {
+    public CoolOidcUserInfoAuthenticationProvider(OAuth2AuthorizationService authorizationService) {
         Assert.notNull(authorizationService, "authorizationService cannot be null");
         this.authorizationService = authorizationService;
     }
@@ -54,7 +54,7 @@ public class MyOidcUserInfoAuthenticationProvider implements AuthenticationProvi
                     throw new OAuth2AuthenticationException("invalid_token");
                 } else {
                     //从认证结果中获取userInfo
-                    MyOidcUserInfo myOidcUserInfo = (MyOidcUserInfo)userInfoAuthentication.getUserInfo();
+                    CoolOidcUserInfo myOidcUserInfo = (CoolOidcUserInfo)userInfoAuthentication.getUserInfo();
                     //从authorizedAccessToken中获取授权范围
                     Set<String> scopeSet = (HashSet<String>)authorizedAccessToken.getClaims().get("scope") ;
                     //获取授权范围对应userInfo的字段信息
@@ -63,7 +63,7 @@ public class MyOidcUserInfoAuthenticationProvider implements AuthenticationProvi
                         this.log.trace("Authenticated user info request");
                     }
                     //构造新的OidcUserInfoAuthenticationToken
-                    return new OidcUserInfoAuthenticationToken(accessTokenAuthentication, new MyOidcUserInfo(claims));
+                    return new OidcUserInfoAuthenticationToken(accessTokenAuthentication, new CoolOidcUserInfo(claims));
                 }
             }
         } else {
@@ -75,12 +75,12 @@ public class MyOidcUserInfoAuthenticationProvider implements AuthenticationProvi
         return OidcUserInfoAuthenticationToken.class.isAssignableFrom(authentication);
     }
 
-    public void setUserInfoMapper(Function<OidcUserInfoAuthenticationContext, MyOidcUserInfo> userInfoMapper) {
+    public void setUserInfoMapper(Function<OidcUserInfoAuthenticationContext, CoolOidcUserInfo> userInfoMapper) {
         Assert.notNull(userInfoMapper, "userInfoMapper cannot be null");
         this.userInfoMapper = userInfoMapper;
     }
 
-    private static final class DefaultOidcUserInfoMapper implements Function<OidcUserInfoAuthenticationContext, MyOidcUserInfo> {
+    private static final class DefaultOidcUserInfoMapper implements Function<OidcUserInfoAuthenticationContext, CoolOidcUserInfo> {
         private static final List<String> EMAIL_CLAIMS = Arrays.asList("email", "email_verified");
         private static final List<String> PHONE_CLAIMS = Arrays.asList("phone_number", "phone_number_verified");
         private static final List<String> PROFILE_CLAIMS = Arrays.asList("name", "username", "description", "status", "profile");
@@ -88,12 +88,12 @@ public class MyOidcUserInfoAuthenticationProvider implements AuthenticationProvi
         private DefaultOidcUserInfoMapper() {
         }
 
-        public MyOidcUserInfo apply(OidcUserInfoAuthenticationContext authenticationContext) {
+        public CoolOidcUserInfo apply(OidcUserInfoAuthenticationContext authenticationContext) {
             OAuth2Authorization authorization = authenticationContext.getAuthorization();
             OidcIdToken idToken = (OidcIdToken)authorization.getToken(OidcIdToken.class).getToken();
             OAuth2AccessToken accessToken = authenticationContext.getAccessToken();
             Map<String, Object> scopeRequestedClaims = getClaimsRequestedByScope(idToken.getClaims(), accessToken.getScopes());
-            return new MyOidcUserInfo(scopeRequestedClaims);
+            return new CoolOidcUserInfo(scopeRequestedClaims);
         }
 
         private static Map<String, Object> getClaimsRequestedByScope(Map<String, Object> claims, Set<String> requestedScopes) {
