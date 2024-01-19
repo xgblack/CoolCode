@@ -7,6 +7,8 @@ import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import com.xgblack.cool.framework.security.core.authentication.device.DeviceClientAuthenticationConverter;
 import com.xgblack.cool.framework.security.core.authentication.device.DeviceClientAuthenticationProvider;
+import com.xgblack.cool.framework.security.core.authentication.mobile.MobileGrantAuthenticationConverter;
+import com.xgblack.cool.framework.security.core.authentication.mobile.MobileGrantAuthenticationProvider;
 import com.xgblack.cool.framework.security.core.authentication.password.PasswordGrantAuthenticationConverter;
 import com.xgblack.cool.framework.security.core.authentication.password.PasswordGrantAuthenticationProvider;
 import org.springframework.context.annotation.Bean;
@@ -91,13 +93,15 @@ public class AuthorizationServerConfig {
                 .authorizationEndpoint(authorizationEndpoint ->
                         authorizationEndpoint.consentPage(CUSTOM_CONSENT_PAGE_URI))
                 //设置自定义密码模式
-                .tokenEndpoint(tokenEndpoint ->
-                        tokenEndpoint
-                                .accessTokenRequestConverter(
-                                        new PasswordGrantAuthenticationConverter())
-                                .authenticationProvider(
-                                        new PasswordGrantAuthenticationProvider(
-                                                authorizationService, tokenGenerator)))
+                .tokenEndpoint(tokenEndpoint -> tokenEndpoint
+                                .accessTokenRequestConverter(new PasswordGrantAuthenticationConverter())
+                                .authenticationProvider(new PasswordGrantAuthenticationProvider(authorizationService, tokenGenerator))
+                )
+                //设置自定义手机验证码模式
+                .tokenEndpoint(tokenEndpoint -> tokenEndpoint
+                                .accessTokenRequestConverter(new MobileGrantAuthenticationConverter())
+                                .authenticationProvider(new MobileGrantAuthenticationProvider(authorizationService, tokenGenerator))
+                )
                 //开启OpenID Connect 1.0（其中oidc为OpenID Connect的缩写）。
                 .oidc(Customizer.withDefaults());
 
@@ -112,7 +116,7 @@ public class AuthorizationServerConfig {
                 .oauth2ResourceServer(oauth2ResourceServer ->
                         oauth2ResourceServer.jwt(Customizer.withDefaults()));
 
-        return http.build();
+        return  http.build();
     }
 
 
