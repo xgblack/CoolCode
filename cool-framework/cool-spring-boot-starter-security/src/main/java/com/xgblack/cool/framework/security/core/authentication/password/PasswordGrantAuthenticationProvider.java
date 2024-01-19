@@ -11,6 +11,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.*;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
+import org.springframework.security.oauth2.core.oidc.OidcIdToken;
+import org.springframework.security.oauth2.core.oidc.OidcScopes;
+import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.authorization.OAuth2Authorization;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
@@ -22,8 +26,10 @@ import org.springframework.security.oauth2.server.authorization.token.DefaultOAu
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
 import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -44,6 +50,8 @@ public class PasswordGrantAuthenticationProvider implements AuthenticationProvid
     private final OAuth2AuthorizationService authorizationService;
     private final OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator;
 
+    private static final OAuth2TokenType ID_TOKEN_TOKEN_TYPE = new OAuth2TokenType(OidcParameterNames.ID_TOKEN);
+
 
     public PasswordGrantAuthenticationProvider(OAuth2AuthorizationService authorizationService,
                                                OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator) {
@@ -55,8 +63,7 @@ public class PasswordGrantAuthenticationProvider implements AuthenticationProvid
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        PasswordGrantAuthenticationToken passwordGrantAuthenticationToken =
-                (PasswordGrantAuthenticationToken) authentication;
+        PasswordGrantAuthenticationToken passwordGrantAuthenticationToken = (PasswordGrantAuthenticationToken) authentication;
 
         Map<String, Object> additionalParameters = passwordGrantAuthenticationToken.getAdditionalParameters();
         //授权类型
@@ -71,8 +78,7 @@ public class PasswordGrantAuthenticationProvider implements AuthenticationProvid
         Set<String> requestScopeSet = Stream.of(requestScopesStr.split(" ")).collect(Collectors.toSet());
 
         // Ensure the client is authenticated
-        OAuth2ClientAuthenticationToken clientPrincipal =
-                getAuthenticatedClientElseThrowInvalidClient(passwordGrantAuthenticationToken);
+        OAuth2ClientAuthenticationToken clientPrincipal = getAuthenticatedClientElseThrowInvalidClient(passwordGrantAuthenticationToken);
         RegisteredClient registeredClient = clientPrincipal.getRegisteredClient();
 
         // Ensure the client is configured to use this authorization grant type
@@ -109,8 +115,7 @@ public class PasswordGrantAuthenticationProvider implements AuthenticationProvid
         OAuth2TokenContext tokenContext = tokenContextBuilder.tokenType(OAuth2TokenType.ACCESS_TOKEN).build();
         OAuth2Token generatedAccessToken = this.tokenGenerator.generate(tokenContext);
         if (generatedAccessToken == null) {
-            OAuth2Error error = new OAuth2Error(OAuth2ErrorCodes.SERVER_ERROR,
-                    "The token generator failed to generate the access token.", ERROR_URI);
+            OAuth2Error error = new OAuth2Error(OAuth2ErrorCodes.SERVER_ERROR, "The token generator failed to generate the access token.", ERROR_URI);
             throw new OAuth2AuthenticationException(error);
         }
 
@@ -150,12 +155,48 @@ public class PasswordGrantAuthenticationProvider implements AuthenticationProvid
             authorizationBuilder.refreshToken(refreshToken);
         }
 
+        //获取客户端权限范围和请求参数权限范围的交集
+        Set<String> scopes = this.getInterseSet(registeredClient.getScopes(),requestScopeSet);
+        // ----- ID token -----
+        OidcIdToken idToken;
+        if (scopes.contains(OidcScopes.OPENID)) {
+            // @formatter:off
+            tokenContext = tokenContextBuilder
+                    .tokenType(ID_TOKEN_TOKEN_TYPE)
+                    .authorization(authorizationBuilder.build())	// ID token customizer may need access to the access token and/or refresh token
+                    .build();
+            // @formatter:on
+            OAuth2Token generatedIdToken = this.tokenGenerator.generate(tokenContext);
+            if (!(generatedIdToken instanceof Jwt)) {
+                OAuth2Error error = new OAuth2Error(OAuth2ErrorCodes.SERVER_ERROR, "The token generator failed to generate the ID token.", ERROR_URI);
+                throw new OAuth2AuthenticationException(error);
+            }
+
+            if (log.isTraceEnabled()) {
+                log.trace("Generated id token");
+            }
+
+            idToken = new OidcIdToken(generatedIdToken.getTokenValue(), generatedIdToken.getIssuedAt(),
+                    generatedIdToken.getExpiresAt(), ((Jwt) generatedIdToken).getClaims());
+            authorizationBuilder.token(idToken, (metadata) ->{
+                        metadata.put(OAuth2Authorization.Token.CLAIMS_METADATA_NAME, idToken.getClaims());
+                    }
+            );
+        } else {
+            idToken = null;
+        }
+
         //保存认证信息
         OAuth2Authorization authorization = authorizationBuilder.build();
         this.authorizationService.save(authorization);
 
         if (log.isTraceEnabled()) {
             log.trace("Saved authorization");
+        }
+
+        if (idToken != null) {
+            additionalParameters = new HashMap<>();
+            additionalParameters.put(OidcParameterNames.ID_TOKEN, idToken.getTokenValue());
         }
 
         if (log.isTraceEnabled()) {
@@ -180,6 +221,26 @@ public class PasswordGrantAuthenticationProvider implements AuthenticationProvid
             return clientPrincipal;
         }
         throw new OAuth2AuthenticationException(OAuth2ErrorCodes.INVALID_CLIENT);
+    }
+
+    /**
+     * @param set1
+     * @param set2
+     * @return
+     * @author  Rommel
+     * @date    2023/7/21-3:11
+     * @version 1.0
+     * @description  取两个集合的交集
+     */
+    private Set<String> getInterseSet(Set<String> set1,Set<String> set2){
+        if(CollectionUtils.isEmpty(set1)|| CollectionUtils.isEmpty(set2)){
+            return  Set.of();
+        }
+        Set<String> set = set1.stream().filter(set2::contains).collect(Collectors.toSet());
+        if(CollectionUtils.isEmpty(set)){
+            set = Set.of();
+        }
+        return set;
     }
 
 
