@@ -9,8 +9,12 @@ import com.xgblack.cool.framework.security.core.authentication.device.DeviceClie
 import com.xgblack.cool.framework.security.core.authentication.device.DeviceClientAuthenticationProvider;
 import com.xgblack.cool.framework.security.core.authentication.mobile.MobileGrantAuthenticationConverter;
 import com.xgblack.cool.framework.security.core.authentication.mobile.MobileGrantAuthenticationProvider;
+import com.xgblack.cool.framework.security.core.authentication.oidc.MyOidcUserInfoAuthenticationConverter;
+import com.xgblack.cool.framework.security.core.authentication.oidc.MyOidcUserInfoAuthenticationProvider;
+import com.xgblack.cool.framework.security.core.authentication.oidc.MyOidcUserInfoService;
 import com.xgblack.cool.framework.security.core.authentication.password.PasswordGrantAuthenticationConverter;
 import com.xgblack.cool.framework.security.core.authentication.password.PasswordGrantAuthenticationProvider;
+import jakarta.annotation.Resource;
 import org.apache.catalina.util.StandardSessionIdGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +24,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
@@ -44,7 +51,9 @@ import java.security.KeyPairGenerator;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.time.Instant;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -56,6 +65,11 @@ import java.util.UUID;
 public class AuthorizationServerConfig {
 
     private static final String CUSTOM_CONSENT_PAGE_URI = "/oauth2/consent";
+
+    @Resource
+    private UserDetailsService userDetailsService;
+    @Resource
+    private MyOidcUserInfoService oidcUserInfoService;
 
 
     /**
@@ -107,7 +121,14 @@ public class AuthorizationServerConfig {
                                 .authenticationProvider(new MobileGrantAuthenticationProvider(authorizationService, tokenGenerator))
                 )
                 //开启OpenID Connect 1.0（其中oidc为OpenID Connect的缩写）。
-                .oidc(Customizer.withDefaults());
+                //.oidc(Customizer.withDefaults());
+                //自定义oidc
+                .oidc(oidcCustomizer->{
+                    oidcCustomizer.userInfoEndpoint(userInfoEndpointCustomizer->{
+                        userInfoEndpointCustomizer.userInfoRequestConverter(new MyOidcUserInfoAuthenticationConverter(oidcUserInfoService));
+                        userInfoEndpointCustomizer.authenticationProvider(new MyOidcUserInfoAuthenticationProvider(authorizationService));
+                    });
+                });
 
         //设置登录地址，需要进行认证的请求被重定向到该地址
         http
@@ -214,7 +235,7 @@ public class AuthorizationServerConfig {
     @Bean
     OAuth2TokenGenerator<?> tokenGenerator(JWKSource<SecurityContext> jwkSource) {
         JwtGenerator jwtGenerator = new JwtGenerator(new NimbusJwtEncoder(jwkSource));
-        jwtGenerator.setJwtCustomizer(jwtCustomizer());
+        jwtGenerator.setJwtCustomizer(jwtCustomizer(oidcUserInfoService));
         OAuth2AccessTokenGenerator accessTokenGenerator = new OAuth2AccessTokenGenerator();
         OAuth2RefreshTokenGenerator refreshTokenGenerator = new OAuth2RefreshTokenGenerator();
         return new DelegatingOAuth2TokenGenerator(
@@ -222,21 +243,32 @@ public class AuthorizationServerConfig {
     }
 
     @Bean
-    public OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer() {
+    public OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer(MyOidcUserInfoService myOidcUserInfoService) {
+
         return context -> {
             JwsHeader.Builder headers = context.getJwsHeader();
             JwtClaimsSet.Builder claims = context.getClaims();
             if (context.getTokenType().equals(OAuth2TokenType.ACCESS_TOKEN)) {
                 // Customize headers/claims for access_token
+                claims.claims(claimsConsumer->{
+                    UserDetails userDetails = userDetailsService.loadUserByUsername(context.getPrincipal().getName());
+                    claimsConsumer.merge("scope",userDetails.getAuthorities(),(scope,authorities)->{
+                        Set<String> scopeSet = (Set<String>)scope;
+                        Collection<SimpleGrantedAuthority> simpleGrantedAuthorities = (Collection<SimpleGrantedAuthority>)authorities;
+                        simpleGrantedAuthorities.stream().forEach(simpleGrantedAuthority -> {
+                            if(!scopeSet.contains(simpleGrantedAuthority.getAuthority())){
+                                scopeSet.add(simpleGrantedAuthority.getAuthority());
+                            }
+                        });
+                        return scopeSet;
+                    });
+                });
 
             } else if (context.getTokenType().getValue().equals(OidcParameterNames.ID_TOKEN)) {
                 // Customize headers/claims for id_token
                 claims.claim(IdTokenClaimNames.AUTH_TIME, Date.from(Instant.now()));
                 StandardSessionIdGenerator standardSessionIdGenerator = new StandardSessionIdGenerator();
                 claims.claim("sid", standardSessionIdGenerator.generateSessionId());
-
-                //其他自定义信息
-                claims.claim("msg", "sysUserEntity.getName()");
             }
         };
     }
