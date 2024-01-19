@@ -18,6 +18,7 @@
 
     <modules>
         <module>cool-spring-oauth-client</module>
+        <module>cool-spring-oauth-resource</module>
     </modules>
 
 

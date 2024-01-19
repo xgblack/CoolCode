@@ -113,6 +113,11 @@ spring:
 
 
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 
 # 数据源及mybatis、mapper-flex配置
 mybatis-flex:
