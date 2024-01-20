@@ -2,6 +2,8 @@ package com.xgblack.cool.framework.response.advice;
 
 
 import cn.hutool.core.exceptions.ExceptionUtil;
+import com.xgblack.cool.framework.common.annotation.response.ExceptionAliasFor;
+import com.xgblack.cool.framework.common.annotation.response.ExceptionMapper;
 import com.xgblack.cool.framework.common.constants.DefaultResponseConstants;
 import com.xgblack.cool.framework.common.exception.BaseException;
 import com.xgblack.cool.framework.common.response.Response;
@@ -10,15 +12,11 @@ import com.xgblack.cool.framework.common.response.api.ResponseFactory;
 import com.xgblack.cool.framework.common.response.api.ResponseStatusFactory;
 import com.xgblack.cool.framework.response.config.CoolResponseProperties;
 import com.xgblack.cool.framework.response.config.ExceptionAliasRegister;
-import com.xgblack.cool.framework.common.annotation.response.ExceptionAliasFor;
-import com.xgblack.cool.framework.common.annotation.response.ExceptionMapper;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.core.annotation.Order;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,8 +26,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 @Slf4j
-@ControllerAdvice
-@Order(200)
+//@ControllerAdvice
+//@Order(200)
 public class GlobalExceptionAdvice implements ApplicationContextAware {
 
     @Resource

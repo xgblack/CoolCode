@@ -14,6 +14,7 @@ import com.xgblack.cool.framework.security.core.authentication.oidc.CoolOidcUser
 import com.xgblack.cool.framework.security.core.authentication.oidc.CoolOidcUserInfoService;
 import com.xgblack.cool.framework.security.core.authentication.password.PasswordGrantAuthenticationConverter;
 import com.xgblack.cool.framework.security.core.authentication.password.PasswordGrantAuthenticationProvider;
+import com.xgblack.cool.framework.security.core.exception.MyAuthenticationEntryPoint;
 import jakarta.annotation.Resource;
 import org.apache.catalina.util.StandardSessionIdGenerator;
 import org.springframework.context.annotation.Bean;
@@ -108,8 +109,7 @@ public class AuthorizationServerConfig {
                                 .authenticationConverter(deviceClientAuthenticationConverter)
                                 .authenticationProvider(deviceClientAuthenticationProvider)
                 )
-                .authorizationEndpoint(authorizationEndpoint ->
-                        authorizationEndpoint.consentPage(CUSTOM_CONSENT_PAGE_URI))
+                .authorizationEndpoint(authorizationEndpoint -> authorizationEndpoint.consentPage(CUSTOM_CONSENT_PAGE_URI))
                 //设置自定义密码模式
                 .tokenEndpoint(tokenEndpoint -> tokenEndpoint
                                 .accessTokenRequestConverter(new PasswordGrantAuthenticationConverter())
@@ -137,9 +137,9 @@ public class AuthorizationServerConfig {
                                 new LoginUrlAuthenticationEntryPoint("/login"),
                                 new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
                         )
+                        .authenticationEntryPoint(new MyAuthenticationEntryPoint())
                 )
-                .oauth2ResourceServer(oauth2ResourceServer ->
-                        oauth2ResourceServer.jwt(Customizer.withDefaults()));
+                .oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(Customizer.withDefaults()));
 
         return  http.build();
     }
