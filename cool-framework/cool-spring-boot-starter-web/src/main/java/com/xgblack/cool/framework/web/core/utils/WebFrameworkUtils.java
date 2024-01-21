@@ -49,9 +49,9 @@ public class WebFrameworkUtils {
      * @param request 请求
      * @param userType 用户类型
      */
-    public static void setLoginUserType(ServletRequest request, Integer userType) {
+    /*public static void setLoginUserType(ServletRequest request, Integer userType) {
         request.setAttribute(REQUEST_ATTRIBUTE_LOGIN_USER_TYPE, userType);
-    }
+    }*/
 
     /**
      * 获得当前用户的编号，从请求中
