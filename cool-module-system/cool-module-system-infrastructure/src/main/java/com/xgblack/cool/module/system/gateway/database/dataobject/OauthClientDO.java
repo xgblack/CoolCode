@@ -6,12 +6,14 @@ import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.annotation.Table;
 import com.xgblack.cool.framework.mybatis.listener.DataInsertListener;
 import com.xgblack.cool.framework.mybatis.listener.DataUpdateListener;
+import com.xgblack.cool.framework.mybatis.type.StringListTypeHandler;
 import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author <a href="https://www.xgblack.cn">xg black</a>
@@ -54,7 +56,8 @@ public class OauthClientDO implements Serializable {
     /**
      * 授权方式[A,B,C]
      */
-    private String[] authorizedGrantTypes;
+    @Column(typeHandler = StringListTypeHandler.class )
+    private List<String> authorizedGrantTypes;
 
     /**
      * 回调地址

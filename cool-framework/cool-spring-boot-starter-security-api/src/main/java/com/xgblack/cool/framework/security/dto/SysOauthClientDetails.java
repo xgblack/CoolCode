@@ -5,6 +5,7 @@ import lombok.Data;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 客户端信息
@@ -42,7 +43,7 @@ public class SysOauthClientDetails implements Serializable {
     /**
      * 授权方式[A,B,C]
      */
-    private String[] authorizedGrantTypes;
+    private List<String> authorizedGrantTypes;
 
     /**
      * 回调地址
