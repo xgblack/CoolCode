@@ -23,7 +23,6 @@
         <module>cool-spring-boot-starter-mybatis-flex</module>
         <module>cool-spring-boot-starter-redis</module>
         <module>cool-spring-boot-starter-security-api</module>
-        <!--<module>cool-spring-boot-starter-security-old</module>-->
         <module>cool-spring-boot-starter-security</module>
     </modules>
 

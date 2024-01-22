@@ -47,6 +47,12 @@ public class OAuth2EndpointUtils {
                 && request.getParameter(PkceParameterNames.CODE_VERIFIER) != null;
     }
 
+    /**
+     * 抛出 OAuth 2.0 异常
+     * @param errorCode 异常码
+     * @param parameterName 参数名
+     * @param errorUri 错误链接
+     */
     public void throwError(String errorCode, String parameterName, String errorUri) {
         OAuth2Error error = new OAuth2Error(errorCode, "OAuth 2.0 Parameter: " + parameterName, errorUri);
         throw new OAuth2AuthenticationException(error);

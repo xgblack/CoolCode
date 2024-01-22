@@ -1,8 +1,0 @@
-com.xgblack.framework.security.config.AuthorizationServerConfiguration
-com.xgblack.framework.security.core.service.CoolUserDetailsServiceImpl
-com.xgblack.framework.security.core.service.CoolAppUserDetailsServiceImpl
-com.xgblack.framework.security.core.service.CoolRedisOAuth2AuthorizationService
-com.xgblack.framework.security.core.service.CoolRedisOAuth2AuthorizationConsentService
-com.xgblack.framework.security.core.component.CoolSecurityInnerAspect
-com.xgblack.framework.security.core.component.CoolSecurityMessageSourceConfiguration
-com.xgblack.framework.security.core.service.CoolRemoteRegisteredClientRepository

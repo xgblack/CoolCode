@@ -3,7 +3,7 @@ package com.xgblack.cool.framework.security.core.constant;
 /**
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
-
+@Deprecated
 public class OAuth2Constant {
 
     /**
