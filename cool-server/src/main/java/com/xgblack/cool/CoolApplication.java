@@ -1,8 +1,10 @@
 package com.xgblack.cool;
 
+import com.xgblack.cool.framework.security.annotation.EnableCoolResourceServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@EnableCoolResourceServer
 @SpringBootApplication
 public class CoolApplication {
 
