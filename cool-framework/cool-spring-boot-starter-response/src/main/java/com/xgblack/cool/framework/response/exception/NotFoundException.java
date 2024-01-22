@@ -1,6 +1,6 @@
 package com.xgblack.cool.framework.response.exception;
 
-import com.xgblack.cool.framework.response.api.ExceptionAliasFor;
+import com.xgblack.cool.framework.common.annotation.response.ExceptionAliasFor;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 

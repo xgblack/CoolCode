@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.xgblack</groupId>
+        <artifactId>cool-example</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+
+    <packaging>jar</packaging>
+
+    <artifactId>cool-spring-oauth-resource</artifactId>
+    <name>${project.artifactId}</name>
+    <description>oauth资源服务器</description>
+    <url>https://www.xgblack.cn</url>
+
+    <dependencies>
+        <!--spring-boot-starter-oauth2-resource-server-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+        <!--spring-boot-starter-web-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

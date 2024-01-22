@@ -9,6 +9,7 @@ import com.xgblack.cool.module.system.dto.student.StudentPageQry;
 import com.xgblack.cool.module.system.dto.student.clientobject.StudentCO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,6 +50,7 @@ public class StudentController {
      * 详情
      * @return
      */
+    @PreAuthorize("hasAuthority('SCOPE_Message')")
     @GetMapping("{id}")
     public StudentCO detail(@PathVariable Long id) {
         return studentService.getDetail(id);
@@ -59,6 +61,7 @@ public class StudentController {
      * @param qry
      * @return
      */
+    @PreAuthorize("hasAuthority('SCOPE_profile')")
     @GetMapping
     public PageResult<StudentCO> page(StudentPageQry qry) {
         return studentService.getPage(qry);

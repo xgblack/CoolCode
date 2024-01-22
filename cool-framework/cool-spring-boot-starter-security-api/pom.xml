@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.xgblack</groupId>
+        <artifactId>cool-framework</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>cool-spring-boot-starter-security-api</artifactId>
+
+    <packaging>jar</packaging>
+
+    <name>${project.artifactId}</name>
+    <description>Security Api 用户认证、权限校验api</description>
+    <url>https://www.xgblack.cn</url>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.xgblack</groupId>
+            <artifactId>cool-common</artifactId>
+        </dependency>
+
+
+    </dependencies>
+
+</project>

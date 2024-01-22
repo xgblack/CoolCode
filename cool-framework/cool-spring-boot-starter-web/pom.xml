@@ -17,6 +17,10 @@
     <url>https://www.xgblack.cn</url>
 
     <dependencies>
+        <dependency>
+            <groupId>com.xgblack</groupId>
+            <artifactId>cool-common</artifactId>
+        </dependency>
 
         <!-- Web 相关 -->
         <dependency>
@@ -43,6 +47,10 @@
                     <artifactId>spring-boot-configuration-processor</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
 

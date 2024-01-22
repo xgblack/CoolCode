@@ -1,0 +1,7 @@
+com.xgblack.cool.framework.security.core.service.CoolUserDetailsServiceImpl
+com.xgblack.cool.framework.security.core.service.CoolAppUserDetailsServiceImpl
+com.xgblack.cool.framework.security.core.service.CoolRedisOAuth2AuthorizationService
+com.xgblack.cool.framework.security.core.service.CoolRedisOAuth2AuthorizationConsentService
+com.xgblack.cool.framework.security.core.component.CoolSecurityInnerAspect
+com.xgblack.cool.framework.security.config.CoolSecurityMessageSourceConfiguration
+com.xgblack.cool.framework.security.core.service.CoolRemoteRegisteredClientRepository

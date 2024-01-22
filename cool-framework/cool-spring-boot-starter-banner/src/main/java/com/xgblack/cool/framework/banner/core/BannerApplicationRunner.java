@@ -21,18 +21,20 @@ public class BannerApplicationRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        ThreadUtil.execute(() -> {
-            // 延迟 1 秒，可以保证输出到结尾
-            ThreadUtil.sleep(1, TimeUnit.SECONDS);
-            log.info("""
+        Thread.ofVirtual()
+                .name("banner-virtual-thread")
+                .start(() -> {
+                    // 延迟 1 秒，可以保证输出到结尾
+                    ThreadUtil.sleep(1, TimeUnit.SECONDS);
+                    log.info("""
 
                             \t----------------------------------------------------------
                             \t项目启动成功！
                             \t项目地址: \t{}\s
                             \t----------------------------------------------------------""",
-                    "http://localhost:" + port
-            );
-        });
+                            "http://localhost:" + port
+                    );
+                });
     }
 
     /*private static boolean isNotPresent(String className) {

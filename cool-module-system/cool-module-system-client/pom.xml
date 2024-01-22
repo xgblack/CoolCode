@@ -19,24 +19,14 @@
         </dependency>
 
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <!-- MapStruct begin -->
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct-processor</artifactId>
-        </dependency>
-        <!-- MapStruct end -->
-
-        <dependency>
             <groupId>com.xgblack</groupId>
             <artifactId>cool-spring-boot-starter-web</artifactId>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xgblack</groupId>
+            <artifactId>cool-spring-boot-starter-security-api</artifactId>
         </dependency>
 
 
