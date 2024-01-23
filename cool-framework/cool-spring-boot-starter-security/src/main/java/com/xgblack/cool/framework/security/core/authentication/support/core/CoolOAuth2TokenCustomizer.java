@@ -8,6 +8,7 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Toke
 
 /**
  * token 输出增强
+ * token json的属性增强
  *
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
@@ -21,7 +22,8 @@ public class CoolOAuth2TokenCustomizer implements OAuth2TokenCustomizer<OAuth2To
     @Override
     public void customize(OAuth2TokenClaimsContext context) {
         OAuth2TokenClaimsSet.Builder claims = context.getClaims();
-        claims.claim(SecurityConstants.DETAILS_LICENSE, SecurityConstants.PROJECT_LICENSE);
+        //TODO: 暂时删除证书地址信息
+        //claims.claim(SecurityConstants.DETAILS_LICENSE, SecurityConstants.PROJECT_LICENSE);
         String clientId = context.getAuthorizationGrant().getName();
         claims.claim(SecurityConstants.CLIENT_ID, clientId);
         // 客户端模式不返回具体用户信息

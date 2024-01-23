@@ -19,7 +19,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * Spring Security 的相关配置<p></p>
- * 资源服务器认证授权配置
+ * <p>资源服务器认证授权配置</p>
+ *
+ * <p>&#064;EnableMethodSecurity </p>
+ * <p>1.设置注解属性 jsr250Enabled = true 是为了启用JSR250注解支持，例如@RolesAllowed、@PermitAll和@DenyAll注解</p>
+ * <p>2.设置属性securedEnabled = true 是为了启用@Secured注解支持，不设置属性则添加Secured注解无效</p>
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 @Slf4j
