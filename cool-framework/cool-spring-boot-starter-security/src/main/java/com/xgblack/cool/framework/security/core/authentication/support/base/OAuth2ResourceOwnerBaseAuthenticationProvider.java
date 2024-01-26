@@ -3,8 +3,7 @@ package com.xgblack.cool.framework.security.core.authentication.support.base;
 import cn.hutool.extra.spring.SpringUtil;
 import com.xgblack.cool.framework.security.core.utils.OAuth2ErrorCodesExpand;
 import com.xgblack.cool.framework.security.core.utils.ScopeException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
@@ -33,10 +32,8 @@ import java.util.function.Supplier;
  * 处理自定义授权 抽象类
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
-
+@Slf4j
 public abstract class OAuth2ResourceOwnerBaseAuthenticationProvider<T extends OAuth2ResourceOwnerBaseAuthenticationToken> implements AuthenticationProvider {
-
-    private static final Logger LOGGER = LogManager.getLogger(OAuth2ResourceOwnerBaseAuthenticationProvider.class);
 
     private static final String ERROR_URI = "https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2.1";
 
@@ -117,7 +114,7 @@ public abstract class OAuth2ResourceOwnerBaseAuthenticationProvider<T extends OA
 
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = buildToken(reqParameters);
 
-            LOGGER.debug("got usernamePasswordAuthenticationToken=" + usernamePasswordAuthenticationToken);
+            log.debug("got usernamePasswordAuthenticationToken=" + usernamePasswordAuthenticationToken);
 
             Authentication usernamePasswordAuthentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
@@ -186,12 +183,12 @@ public abstract class OAuth2ResourceOwnerBaseAuthenticationProvider<T extends OA
 
             this.authorizationService.save(authorization);
 
-            LOGGER.debug("returning OAuth2AccessTokenAuthenticationToken");
+            log.debug("returning OAuth2AccessTokenAuthenticationToken");
 
             return new OAuth2AccessTokenAuthenticationToken(registeredClient, clientPrincipal, accessToken, refreshToken, Objects.requireNonNull(authorization.getAccessToken().getClaims()));
 
         } catch (Exception ex) {
-            LOGGER.error("problem in authenticate", ex);
+            log.error("problem in authenticate", ex);
             throw oAuth2AuthenticationException(authentication, (AuthenticationException) ex);
         }
 

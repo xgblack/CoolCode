@@ -1,8 +1,8 @@
 package com.xgblack.cool.framework.security.config;
 
 import com.xgblack.cool.framework.common.constants.SecurityConstants;
-import com.xgblack.cool.framework.security.core.authentication.support.CoolOAuth2AccessTokenGenerator;
 import com.xgblack.cool.framework.security.core.authentication.support.core.CoolDaoAuthenticationProvider;
+import com.xgblack.cool.framework.security.core.authentication.support.core.CoolOAuth2AccessTokenGenerator;
 import com.xgblack.cool.framework.security.core.authentication.support.core.CoolOAuth2TokenCustomizer;
 import com.xgblack.cool.framework.security.core.authentication.support.handler.*;
 import com.xgblack.cool.framework.security.core.authentication.support.mobile.MobileGrantAuthenticationConverter;

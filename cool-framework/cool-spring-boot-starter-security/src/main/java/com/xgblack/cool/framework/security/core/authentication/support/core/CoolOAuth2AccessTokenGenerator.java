@@ -1,4 +1,4 @@
-package com.xgblack.cool.framework.security.core.authentication.support;
+package com.xgblack.cool.framework.security.core.authentication.support.core;
 
 import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.keygen.Base64StringKeyGenerator;
@@ -19,6 +19,7 @@ import java.util.*;
 
 /**
  * 自定义token生成器
+ * @see OAuth2AccessTokenGenerator
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 

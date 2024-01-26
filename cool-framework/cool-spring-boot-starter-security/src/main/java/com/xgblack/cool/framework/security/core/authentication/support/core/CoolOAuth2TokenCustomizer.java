@@ -1,7 +1,6 @@
 package com.xgblack.cool.framework.security.core.authentication.support.core;
 
 import com.xgblack.cool.framework.common.constants.SecurityConstants;
-import com.xgblack.cool.framework.security.core.service.LoginUser;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenClaimsContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenClaimsSet;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
@@ -24,17 +23,17 @@ public class CoolOAuth2TokenCustomizer implements OAuth2TokenCustomizer<OAuth2To
         OAuth2TokenClaimsSet.Builder claims = context.getClaims();
         //TODO: 暂时删除证书地址信息
         //claims.claim(SecurityConstants.DETAILS_LICENSE, SecurityConstants.PROJECT_LICENSE);
-        String clientId = context.getAuthorizationGrant().getName();
-        claims.claim(SecurityConstants.CLIENT_ID, clientId);
+        //String clientId = context.getAuthorizationGrant().getName();
+        //claims.claim(SecurityConstants.CLIENT_ID, clientId);
         // 客户端模式不返回具体用户信息
         if (SecurityConstants.CLIENT_CREDENTIALS.equals(context.getAuthorizationGrantType().getValue())) {
             return;
         }
 
-        LoginUser loginUser = (LoginUser) context.getPrincipal().getPrincipal();
-        claims.claim(SecurityConstants.DETAILS_USER, loginUser);
-        claims.claim(SecurityConstants.DETAILS_USER_ID, loginUser.getId());
-        claims.claim(SecurityConstants.USERNAME, loginUser.getUsername());
+        //LoginUser loginUser = (LoginUser) context.getPrincipal().getPrincipal();
+        //claims.claim(SecurityConstants.DETAILS_USER, loginUser);
+        //claims.claim(SecurityConstants.DETAILS_USER_ID, loginUser.getId());
+        //claims.claim(SecurityConstants.USERNAME, loginUser.getUsername());
     }
 
 }
