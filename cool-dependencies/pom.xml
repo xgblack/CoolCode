@@ -36,8 +36,8 @@
         <caffeine.version>3.1.8</caffeine.version>
         <easyexcel.version>3.3.3</easyexcel.version>
         <sms4j.starter.version>3.1.0</sms4j.starter.version>
-        <wx-java.version>4.5.7.B</wx-java.version>
-        <infinispan.version>15.0.0.Dev05</infinispan.version>
+        <wx-java.version>4.6.0</wx-java.version>
+        <infinispan.version>15.0.0.Dev07</infinispan.version>
         <captcha.version>2.2.3</captcha.version>
     </properties>
 
