@@ -114,7 +114,7 @@ public abstract class OAuth2ResourceOwnerBaseAuthenticationProvider<T extends OA
 
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = buildToken(reqParameters);
 
-            log.debug("got usernamePasswordAuthenticationToken=" + usernamePasswordAuthenticationToken);
+            log.debug("got usernamePasswordAuthenticationToken={}", usernamePasswordAuthenticationToken);
 
             Authentication usernamePasswordAuthentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
@@ -207,8 +207,7 @@ public abstract class OAuth2ResourceOwnerBaseAuthenticationProvider<T extends OA
         }
 
         if (authenticationException instanceof BadCredentialsException) {
-            return new OAuth2AuthenticationException(
-                    new OAuth2Error(OAuth2ErrorCodesExpand.BAD_CREDENTIALS, this.messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"), ""));
+            return new OAuth2AuthenticationException(new OAuth2Error(OAuth2ErrorCodesExpand.BAD_CREDENTIALS, this.messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"), ""));
         }
 
         if (authenticationException instanceof LockedException) {

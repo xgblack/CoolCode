@@ -25,6 +25,11 @@ public class OAuth2EndpointUtils {
 
     public final String ACCESS_TOKEN_REQUEST_ERROR_URI = "https://datatracker.ietf.org/doc/html/rfc6749#section-5.2";
 
+    /**
+     * 解析Http请求参数
+     * @param request
+     * @return
+     */
     public MultiValueMap<String, String> getParameters(HttpServletRequest request) {
         Map<String, String[]> parameterMap = request.getParameterMap();
         MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>(parameterMap.size());
