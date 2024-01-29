@@ -1,7 +1,7 @@
 package com.xgblack.cool.framework.security.config;
 
 import com.xgblack.cool.framework.common.constants.SecurityConstants;
-import com.xgblack.cool.framework.security.core.authentication.support.core.CoolDaoAuthenticationProvider;
+import com.xgblack.cool.framework.security.core.authentication.support.core.CoolDaoUserDetailsAuthenticationProvider;
 import com.xgblack.cool.framework.security.core.authentication.support.core.CoolOAuth2AccessTokenGenerator;
 import com.xgblack.cool.framework.security.core.authentication.support.core.CoolOAuth2TokenCustomizer;
 import com.xgblack.cool.framework.security.core.authentication.support.handler.*;
@@ -179,7 +179,7 @@ public class CoolAuthorizationServerConfiguration {
         MobileGrantAuthenticationProvider mobileGrantAuthenticationProvider = new MobileGrantAuthenticationProvider(authenticationManager, authorizationService, oAuth2TokenGenerator());
 
         // 处理 UsernamePasswordAuthenticationToken
-        http.authenticationProvider(new CoolDaoAuthenticationProvider());
+        http.authenticationProvider(new CoolDaoUserDetailsAuthenticationProvider());
         // 处理 PasswordGrantAuthenticationToken
         http.authenticationProvider(passwordGrantAuthenticationProvider);
         // 处理 MobileGrantAuthenticationToken

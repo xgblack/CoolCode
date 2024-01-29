@@ -1,6 +1,7 @@
 package com.xgblack.cool.framework.common.constants;
 
 /**
+ * Security 相关常量
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 

@@ -10,7 +10,7 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import java.io.IOException;
 
 /**
- * sso 退出功能 ，根据客户端传入跳转
+ * sso 退出功能 ，根据客户端传入跳转 TODO
  *
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */

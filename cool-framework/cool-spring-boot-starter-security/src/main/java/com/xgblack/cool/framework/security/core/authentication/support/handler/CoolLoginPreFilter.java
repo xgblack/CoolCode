@@ -50,7 +50,7 @@ public class CoolLoginPreFilter extends OncePerRequestFilter {
             return;
         }
 
-        // 客户端配置跳过验证码
+        // 客户端配置跳过验证码 TODO: 验证码相关逻辑
 		/*boolean isIgnoreClient = ignoreClients.contains(WebUtils.getClientId());
 		if (isIgnoreClient) {
 			filterChain.doFilter(request, response);

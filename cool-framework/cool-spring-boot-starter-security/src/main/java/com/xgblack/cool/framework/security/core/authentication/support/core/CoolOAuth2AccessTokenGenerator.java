@@ -11,7 +11,6 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.settings.OAuth2TokenFormat;
 import org.springframework.security.oauth2.server.authorization.token.*;
 import org.springframework.util.Assert;
-import org.springframework.util.CollectionUtils;
 
 import java.time.Instant;
 import java.util.Base64;
@@ -59,9 +58,9 @@ public class CoolOAuth2AccessTokenGenerator implements OAuth2TokenGenerator<OAut
                 //.notBefore(issuedAt)
                 //.id(UUID.randomUUID().toString())
         ;
-        if (!CollectionUtils.isEmpty(context.getAuthorizedScopes())) {
-            claimsBuilder.claim(OAuth2ParameterNames.SCOPE, context.getAuthorizedScopes());
-        }
+        /*if (!CollectionUtils.isEmpty(context.getAuthorizedScopes())) {
+        }*/
+        claimsBuilder.claim(OAuth2ParameterNames.SCOPE, context.getAuthorizedScopes());
         // @formatter:on
 
         if (this.accessTokenCustomizer != null) {
@@ -88,7 +87,7 @@ public class CoolOAuth2AccessTokenGenerator implements OAuth2TokenGenerator<OAut
         }
 
         OAuth2TokenClaimsSet accessTokenClaimsSet = claimsBuilder.build();
-        //TODO：自定义生成的token
+
         return new CoolOAuth2AccessTokenGenerator.OAuth2AccessTokenClaims(OAuth2AccessToken.TokenType.BEARER, this.accessTokenGenerator.generateKey(),
                 issuedAt, expiresAt, context.getAuthorizedScopes(), accessTokenClaimsSet.getClaims());
     }
