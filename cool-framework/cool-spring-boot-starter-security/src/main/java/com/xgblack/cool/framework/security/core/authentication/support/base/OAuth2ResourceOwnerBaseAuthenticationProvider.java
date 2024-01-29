@@ -124,14 +124,14 @@ public abstract class OAuth2ResourceOwnerBaseAuthenticationProvider<T extends OA
                     .principal(usernamePasswordAuthentication)
                     .authorizationServerContext(AuthorizationServerContextHolder.getContext())
                     .authorizedScopes(authorizedScopes)
-                    .authorizationGrantType(AuthorizationGrantType.PASSWORD)
+                    .authorizationGrantType(resourceOwnerBaseAuthentication.getAuthorizationGrantType())
                     .authorizationGrant(resourceOwnerBaseAuthentication);
             // @formatter:on
 
             OAuth2Authorization.Builder authorizationBuilder = OAuth2Authorization
                     .withRegisteredClient(registeredClient)
                     .principalName(usernamePasswordAuthentication.getName())
-                    .authorizationGrantType(AuthorizationGrantType.PASSWORD)
+                    .authorizationGrantType(resourceOwnerBaseAuthentication.getAuthorizationGrantType())
                     // 0.4.0 新增的方法
                     .authorizedScopes(authorizedScopes);
 
