@@ -1,4 +1,4 @@
-package com.xgblack.cool.framework.security.core.authentication.support;
+package com.xgblack.cool.framework.security.core.authentication.support.core;
 
 import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.keygen.Base64StringKeyGenerator;
@@ -11,14 +11,15 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.settings.OAuth2TokenFormat;
 import org.springframework.security.oauth2.server.authorization.token.*;
 import org.springframework.util.Assert;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 
 import java.time.Instant;
-import java.util.*;
+import java.util.Base64;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 自定义token生成器
+ * @see OAuth2AccessTokenGenerator
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 
@@ -35,10 +36,10 @@ public class CoolOAuth2AccessTokenGenerator implements OAuth2TokenGenerator<OAut
             return null;
         }
 
-        String issuer = null;
+        /*String issuer = null;
         if (context.getAuthorizationServerContext() != null) {
             issuer = context.getAuthorizationServerContext().getIssuer();
-        }
+        }*/
         RegisteredClient registeredClient = context.getRegisteredClient();
 
         Instant issuedAt = Instant.now();
@@ -46,19 +47,20 @@ public class CoolOAuth2AccessTokenGenerator implements OAuth2TokenGenerator<OAut
 
         // @formatter:off
         OAuth2TokenClaimsSet.Builder claimsBuilder = OAuth2TokenClaimsSet.builder();
-        if (StringUtils.hasText(issuer)) {
+        /*if (StringUtils.hasText(issuer)) {
             claimsBuilder.issuer(issuer);
-        }
+        }*/
         claimsBuilder
                 .subject(context.getPrincipal().getName())
-                .audience(Collections.singletonList(registeredClient.getClientId()))
-                .issuedAt(issuedAt)
+                //.audience(Collections.singletonList(registeredClient.getClientId()))
+                //.issuedAt(issuedAt)
                 .expiresAt(expiresAt)
-                .notBefore(issuedAt)
-                .id(UUID.randomUUID().toString());
-        if (!CollectionUtils.isEmpty(context.getAuthorizedScopes())) {
-            claimsBuilder.claim(OAuth2ParameterNames.SCOPE, context.getAuthorizedScopes());
-        }
+                //.notBefore(issuedAt)
+                //.id(UUID.randomUUID().toString())
+        ;
+        /*if (!CollectionUtils.isEmpty(context.getAuthorizedScopes())) {
+        }*/
+        claimsBuilder.claim(OAuth2ParameterNames.SCOPE, context.getAuthorizedScopes());
         // @formatter:on
 
         if (this.accessTokenCustomizer != null) {
@@ -85,9 +87,9 @@ public class CoolOAuth2AccessTokenGenerator implements OAuth2TokenGenerator<OAut
         }
 
         OAuth2TokenClaimsSet accessTokenClaimsSet = claimsBuilder.build();
-        return new CoolOAuth2AccessTokenGenerator.OAuth2AccessTokenClaims(OAuth2AccessToken.TokenType.BEARER,
-                this.accessTokenGenerator.generateKey(), accessTokenClaimsSet.getIssuedAt(),
-                accessTokenClaimsSet.getExpiresAt(), context.getAuthorizedScopes(), accessTokenClaimsSet.getClaims());
+
+        return new CoolOAuth2AccessTokenGenerator.OAuth2AccessTokenClaims(OAuth2AccessToken.TokenType.BEARER, this.accessTokenGenerator.generateKey(),
+                issuedAt, expiresAt, context.getAuthorizedScopes(), accessTokenClaimsSet.getClaims());
     }
 
     /**
@@ -102,12 +104,14 @@ public class CoolOAuth2AccessTokenGenerator implements OAuth2TokenGenerator<OAut
         this.accessTokenCustomizer = accessTokenCustomizer;
     }
 
+    /**
+     * 自定义的返回体
+     */
     private static final class OAuth2AccessTokenClaims extends OAuth2AccessToken implements ClaimAccessor {
 
         private final Map<String, Object> claims;
 
-        private OAuth2AccessTokenClaims(TokenType tokenType, String tokenValue, Instant issuedAt, Instant expiresAt,
-                                        Set<String> scopes, Map<String, Object> claims) {
+        private OAuth2AccessTokenClaims(TokenType tokenType, String tokenValue, Instant issuedAt, Instant expiresAt, Set<String> scopes, Map<String, Object> claims) {
             super(tokenType, tokenValue, issuedAt, expiresAt, scopes);
             this.claims = claims;
         }

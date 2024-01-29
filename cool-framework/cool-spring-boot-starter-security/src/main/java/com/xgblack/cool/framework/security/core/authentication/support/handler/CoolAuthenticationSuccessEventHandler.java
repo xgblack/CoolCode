@@ -58,8 +58,7 @@ public class CoolAuthenticationSuccessEventHandler implements AuthenticationSucc
      */
     @SneakyThrows
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                        Authentication authentication) {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         OAuth2AccessTokenAuthenticationToken accessTokenAuthentication = (OAuth2AccessTokenAuthenticationToken) authentication;
         Map<String, Object> map = accessTokenAuthentication.getAdditionalParameters();
         //TODO 登录日志
@@ -84,8 +83,7 @@ public class CoolAuthenticationSuccessEventHandler implements AuthenticationSucc
         sendAccessTokenResponse(request, response, authentication);
     }
 
-    private void sendAccessTokenResponse(HttpServletRequest request, HttpServletResponse response,
-                                         Authentication authentication) throws IOException {
+    private void sendAccessTokenResponse(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
 
         OAuth2AccessTokenAuthenticationToken accessTokenAuthentication = (OAuth2AccessTokenAuthenticationToken) authentication;
 
@@ -110,6 +108,7 @@ public class CoolAuthenticationSuccessEventHandler implements AuthenticationSucc
 
         // 无状态 注意删除 context 上下文的信息
         SecurityContextHolder.clearContext();
+
 
         this.accessTokenHttpResponseConverter.write(accessTokenResponse, null, httpResponse);
     }

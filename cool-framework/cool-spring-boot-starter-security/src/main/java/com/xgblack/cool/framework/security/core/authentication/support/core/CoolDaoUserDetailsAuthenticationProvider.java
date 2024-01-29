@@ -38,10 +38,15 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 /**
+ * 授权方式提供者
+ * <p>
+ *     判断授权有效性，用户有效性，在判断用户是否有效性，它依赖于UserDetailsService实例
+ * </p>
+ *
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 @Slf4j
-public class CoolDaoAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
+public class CoolDaoUserDetailsAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
     /**
      * The plaintext password used to perform PasswordEncoder#matches(CharSequence, String)} on when the user is not found to avoid SEC-2056.
@@ -66,7 +71,7 @@ public class CoolDaoAuthenticationProvider extends AbstractUserDetailsAuthentica
     @Setter
     private UserDetailsPasswordService userDetailsPasswordService;
 
-    public CoolDaoAuthenticationProvider() {
+    public CoolDaoUserDetailsAuthenticationProvider() {
         setMessageSource(SpringUtil.getBean("securityMessageSource"));
         setPasswordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder());
     }
@@ -186,7 +191,7 @@ public class CoolDaoAuthenticationProvider extends AbstractUserDetailsAuthentica
      * @param presentedPassword 加密密码
      */
     private String decode(String presentedPassword) {
-        // 构建前端对应解密AES 因子 FIXME
+        // 构建前端对应解密AES 因子 FIXME: 优化为非对称加密
         String key = SpringUtil.getBean(Environment.class).getProperty("gateway.encodeKey", "pigxpigxpigxpigx");
         AES aes = new AES(Mode.CFB, Padding.NoPadding, new SecretKeySpec(key.getBytes(), "AES"), new IvParameterSpec(key.getBytes()));
         return aes.decryptStr(presentedPassword);

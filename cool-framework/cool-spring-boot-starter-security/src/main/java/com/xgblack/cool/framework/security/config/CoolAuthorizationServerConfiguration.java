@@ -1,15 +1,12 @@
 package com.xgblack.cool.framework.security.config;
 
 import com.xgblack.cool.framework.common.constants.SecurityConstants;
-import com.xgblack.cool.framework.security.core.authentication.support.CoolOAuth2AccessTokenGenerator;
-import com.xgblack.cool.framework.security.core.authentication.support.core.CoolDaoAuthenticationProvider;
+import com.xgblack.cool.framework.security.core.authentication.support.core.CoolDaoUserDetailsAuthenticationProvider;
+import com.xgblack.cool.framework.security.core.authentication.support.core.CoolOAuth2AccessTokenGenerator;
 import com.xgblack.cool.framework.security.core.authentication.support.core.CoolOAuth2TokenCustomizer;
 import com.xgblack.cool.framework.security.core.authentication.support.handler.*;
 import com.xgblack.cool.framework.security.core.authentication.support.mobile.MobileGrantAuthenticationConverter;
 import com.xgblack.cool.framework.security.core.authentication.support.mobile.MobileGrantAuthenticationProvider;
-import com.xgblack.cool.framework.security.core.authentication.support.oidc.CoolOidcUserInfoAuthenticationConverter;
-import com.xgblack.cool.framework.security.core.authentication.support.oidc.CoolOidcUserInfoAuthenticationProvider;
-import com.xgblack.cool.framework.security.core.authentication.support.oidc.CoolOidcUserInfoService;
 import com.xgblack.cool.framework.security.core.authentication.support.password.PasswordGrantAuthenticationConverter;
 import com.xgblack.cool.framework.security.core.authentication.support.password.PasswordGrantAuthenticationProvider;
 import com.xgblack.cool.framework.security.core.component.CoolBearerTokenExtractor;
@@ -67,9 +64,6 @@ public class CoolAuthorizationServerConfiguration {
     private final CoolLoginPreFilter coolLoginPreFilter;
 
 
-    private final CoolOidcUserInfoService oidcUserInfoService;
-
-
     /**
      * Spring Authorization Server 相关配置
      * 此处方法与下面defaultSecurityFilterChain都是SecurityFilterChain配置，配置的内容有点区别，
@@ -88,12 +82,6 @@ public class CoolAuthorizationServerConfiguration {
                             tokenEndpoint.accessTokenRequestConverter(accessTokenRequestConverter()) // 注入自定义的授权认证Converter
                                     .accessTokenResponseHandler(successEventHandler) // 登录成功处理器
                                     .errorResponseHandler(failureEventHandler);// 登录失败处理器
-                        })//TODO: 开启OpenID Connect 1.0（其中oidc为OpenID Connect的缩写）
-                        .oidc(oidcCustomizer -> {
-                            oidcCustomizer.userInfoEndpoint(userInfoEndpointCustomizer -> {
-                                userInfoEndpointCustomizer.userInfoRequestConverter(new CoolOidcUserInfoAuthenticationConverter(oidcUserInfoService));
-                                userInfoEndpointCustomizer.authenticationProvider(new CoolOidcUserInfoAuthenticationProvider(authorizationService));
-                            });
                         })
                         .clientAuthentication(oAuth2ClientAuthenticationConfigurer -> // 个性化客户端认证
                                 oAuth2ClientAuthenticationConfigurer.errorResponseHandler(failureEventHandler))// 处理客户端认证异常
@@ -191,137 +179,13 @@ public class CoolAuthorizationServerConfiguration {
         MobileGrantAuthenticationProvider mobileGrantAuthenticationProvider = new MobileGrantAuthenticationProvider(authenticationManager, authorizationService, oAuth2TokenGenerator());
 
         // 处理 UsernamePasswordAuthenticationToken
-        http.authenticationProvider(new CoolDaoAuthenticationProvider());
+        http.authenticationProvider(new CoolDaoUserDetailsAuthenticationProvider());
         // 处理 PasswordGrantAuthenticationToken
         http.authenticationProvider(passwordGrantAuthenticationProvider);
         // 处理 MobileGrantAuthenticationToken
         http.authenticationProvider(mobileGrantAuthenticationProvider);
     }
 
-
-    //*******************************************************************************
-
-
-    /**
-     * 客户端信息
-     * 对应表：oauth2_registered_client
-     */
-    /*@Bean
-    public RegisteredClientRepository registeredClientRepository(JdbcTemplate jdbcTemplate) {
-        return new JdbcRegisteredClientRepository(jdbcTemplate);
-    }*/
-
-
-    /**
-     * 授权信息
-     * 对应表：oauth2_authorization
-     */
-    /*@Bean
-    public OAuth2AuthorizationService authorizationService(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
-        return new JdbcOAuth2AuthorizationService(jdbcTemplate, registeredClientRepository);
-    }*/
-
-    /**
-     * 授权确认
-     * 对应表：oauth2_authorization_consent
-     */
-    /*@Bean
-    public OAuth2AuthorizationConsentService authorizationConsentService(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository) {
-        return new JdbcOAuth2AuthorizationConsentService(jdbcTemplate, registeredClientRepository);
-    }*/
-
-    /**
-     * 配置 JWK，为JWT(id_token)提供加密密钥，用于加密/解密或签名/验签
-     * JWK详细见：https://datatracker.ietf.org/doc/html/draft-ietf-jose-json-web-key-41
-     */
-    /*@Bean
-    public JWKSource<SecurityContext> jwkSource() {
-        KeyPair keyPair = generateRsaKey();
-        RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-        RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-        RSAKey rsaKey = new RSAKey.Builder(publicKey)
-                .privateKey(privateKey)
-                .keyID(UUID.randomUUID().toString())
-                .build();
-        JWKSet jwkSet = new JWKSet(rsaKey);
-        return new ImmutableJWKSet<>(jwkSet);
-    }*/
-
-    /**
-     * 生成RSA密钥对，给上面jwkSource() 方法的提供密钥对
-     */
-    /*private static KeyPair generateRsaKey() {
-        KeyPair keyPair;
-        try {
-            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(2048);
-            keyPair = keyPairGenerator.generateKeyPair();
-        } catch (Exception ex) {
-            throw new IllegalStateException(ex);
-        }
-        return keyPair;
-    }*/
-
-    /**
-     * 配置jwt解析器
-     */
-    /*@Bean
-    public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
-        return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
-    }*/
-
-    /**
-     * 配置认证服务器请求地址
-     */
-    /*@Bean
-    public AuthorizationServerSettings authorizationServerSettings() {
-        //什么都不配置，则使用默认地址
-        return AuthorizationServerSettings.builder().build();
-    }*/
-
-    /**
-     * 配置token生成器
-     */
-    /*@Bean
-    OAuth2TokenGenerator<?> tokenGenerator(JWKSource<SecurityContext> jwkSource) {
-        JwtGenerator jwtGenerator = new JwtGenerator(new NimbusJwtEncoder(jwkSource));
-        jwtGenerator.setJwtCustomizer(jwtCustomizer(oidcUserInfoService));
-        OAuth2AccessTokenGenerator accessTokenGenerator = new OAuth2AccessTokenGenerator();
-        OAuth2RefreshTokenGenerator refreshTokenGenerator = new OAuth2RefreshTokenGenerator();
-        return new DelegatingOAuth2TokenGenerator(
-                jwtGenerator, accessTokenGenerator, refreshTokenGenerator);
-    }*/
-
-    /*@Bean
-    public OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer(CoolOidcUserInfoService myOidcUserInfoService) {
-
-        return context -> {
-            JwsHeader.Builder headers = context.getJwsHeader();
-            JwtClaimsSet.Builder claims = context.getClaims();
-            if (context.getTokenType().equals(OAuth2TokenType.ACCESS_TOKEN)) {
-                // Customize headers/claims for access_token
-                claims.claims(claimsConsumer -> {
-                    UserDetails userDetails = userDetailsService.loadUserByUsername(context.getPrincipal().getName());
-                    claimsConsumer.merge("scope", userDetails.getAuthorities(), (scope, authorities) -> {
-                        Set<String> scopeSet = (Set<String>) scope;
-                        Collection<SimpleGrantedAuthority> simpleGrantedAuthorities = (Collection<SimpleGrantedAuthority>) authorities;
-                        simpleGrantedAuthorities.stream().forEach(simpleGrantedAuthority -> {
-                            if (!scopeSet.contains(simpleGrantedAuthority.getAuthority())) {
-                                scopeSet.add(simpleGrantedAuthority.getAuthority());
-                            }
-                        });
-                        return scopeSet;
-                    });
-                });
-
-            } else if (context.getTokenType().getValue().equals(OidcParameterNames.ID_TOKEN)) {
-                // Customize headers/claims for id_token
-                claims.claim(IdTokenClaimNames.AUTH_TIME, Date.from(Instant.now()));
-                StandardSessionIdGenerator standardSessionIdGenerator = new StandardSessionIdGenerator();
-                claims.claim("sid", standardSessionIdGenerator.generateSessionId());
-            }
-        };
-    }*/
 
 }
 

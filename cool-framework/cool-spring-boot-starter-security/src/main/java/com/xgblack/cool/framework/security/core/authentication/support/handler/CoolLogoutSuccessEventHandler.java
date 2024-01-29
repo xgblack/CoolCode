@@ -24,7 +24,7 @@ import org.springframework.security.web.authentication.preauth.PreAuthenticatedA
 import org.springframework.stereotype.Component;
 
 /**
- * 事件机制 退出登录 Handler
+ * 事件机制 退出登录 Handler TODO
  *
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */

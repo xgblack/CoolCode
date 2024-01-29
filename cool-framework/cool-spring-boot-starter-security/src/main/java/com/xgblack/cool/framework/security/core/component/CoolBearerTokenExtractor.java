@@ -49,12 +49,10 @@ public class CoolBearerTokenExtractor implements BearerTokenResolver {
         }
 
         final String authorizationHeaderToken = resolveFromAuthorizationHeader(request);
-        final String parameterToken = isParameterTokenSupportedForRequest(request)
-                ? resolveFromRequestParameters(request) : null;
+        final String parameterToken = isParameterTokenSupportedForRequest(request) ? resolveFromRequestParameters(request) : null;
         if (authorizationHeaderToken != null) {
             if (parameterToken != null) {
-                final BearerTokenError error = BearerTokenErrors
-                        .invalidRequest("Found multiple bearer tokens in the request");
+                final BearerTokenError error = BearerTokenErrors.invalidRequest("Found multiple bearer tokens in the request");
                 throw new OAuth2AuthenticationException(error);
             }
             return authorizationHeaderToken;
