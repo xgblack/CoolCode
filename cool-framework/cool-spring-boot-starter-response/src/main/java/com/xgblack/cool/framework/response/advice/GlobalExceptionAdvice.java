@@ -10,6 +10,7 @@ import com.xgblack.cool.framework.common.response.Response;
 import com.xgblack.cool.framework.common.response.ResponseStatus;
 import com.xgblack.cool.framework.common.response.api.ResponseFactory;
 import com.xgblack.cool.framework.common.response.api.ResponseStatusFactory;
+import com.xgblack.cool.framework.common.utils.response.CoolRespUtils;
 import com.xgblack.cool.framework.response.config.CoolResponseProperties;
 import com.xgblack.cool.framework.response.config.ExceptionAliasRegister;
 import jakarta.annotation.Resource;
@@ -17,8 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 /**
  * 全局异常处理.
@@ -43,6 +46,21 @@ public class GlobalExceptionAdvice implements ApplicationContextAware {
 
     @Resource
     private CoolResponseProperties properties;
+
+    /**
+     * 保持和低版本请求路径不存在的行为一致
+     * <p>
+     * <a href="https://github.com/spring-projects/spring-boot/issues/38733">[Spring Boot 3.2.0] 404 Not Found behavior #38733</a>
+     *
+     * @param exception
+     * @return 统一返回包装后的结果
+     */
+    @ExceptionHandler({NoResourceFoundException.class})
+    @org.springframework.web.bind.annotation.ResponseStatus(HttpStatus.NOT_FOUND)
+    public Response bindExceptionHandler(NoResourceFoundException exception) {
+        log.debug("请求路径 404 {}", exception.getMessage());
+        return CoolRespUtils.fail(exception.getMessage());
+    }
 
     /**
      * 异常处理逻辑.
