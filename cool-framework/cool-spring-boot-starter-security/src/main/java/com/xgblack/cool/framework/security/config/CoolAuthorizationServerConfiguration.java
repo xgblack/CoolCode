@@ -7,9 +7,6 @@ import com.xgblack.cool.framework.security.core.authentication.support.core.Cool
 import com.xgblack.cool.framework.security.core.authentication.support.handler.*;
 import com.xgblack.cool.framework.security.core.authentication.support.mobile.MobileGrantAuthenticationConverter;
 import com.xgblack.cool.framework.security.core.authentication.support.mobile.MobileGrantAuthenticationProvider;
-import com.xgblack.cool.framework.security.core.authentication.support.oidc.CoolOidcUserInfoAuthenticationConverter;
-import com.xgblack.cool.framework.security.core.authentication.support.oidc.CoolOidcUserInfoAuthenticationProvider;
-import com.xgblack.cool.framework.security.core.authentication.support.oidc.CoolOidcUserInfoService;
 import com.xgblack.cool.framework.security.core.authentication.support.password.PasswordGrantAuthenticationConverter;
 import com.xgblack.cool.framework.security.core.authentication.support.password.PasswordGrantAuthenticationProvider;
 import com.xgblack.cool.framework.security.core.component.CoolBearerTokenExtractor;
@@ -67,9 +64,6 @@ public class CoolAuthorizationServerConfiguration {
     private final CoolLoginPreFilter coolLoginPreFilter;
 
 
-    private final CoolOidcUserInfoService oidcUserInfoService;
-
-
     /**
      * Spring Authorization Server 相关配置
      * 此处方法与下面defaultSecurityFilterChain都是SecurityFilterChain配置，配置的内容有点区别，
@@ -88,12 +82,6 @@ public class CoolAuthorizationServerConfiguration {
                             tokenEndpoint.accessTokenRequestConverter(accessTokenRequestConverter()) // 注入自定义的授权认证Converter
                                     .accessTokenResponseHandler(successEventHandler) // 登录成功处理器
                                     .errorResponseHandler(failureEventHandler);// 登录失败处理器
-                        })//TODO: 开启OpenID Connect 1.0（其中oidc为OpenID Connect的缩写）
-                        .oidc(oidcCustomizer -> {
-                            oidcCustomizer.userInfoEndpoint(userInfoEndpointCustomizer -> {
-                                userInfoEndpointCustomizer.userInfoRequestConverter(new CoolOidcUserInfoAuthenticationConverter(oidcUserInfoService));
-                                userInfoEndpointCustomizer.authenticationProvider(new CoolOidcUserInfoAuthenticationProvider(authorizationService));
-                            });
                         })
                         .clientAuthentication(oAuth2ClientAuthenticationConfigurer -> // 个性化客户端认证
                                 oAuth2ClientAuthenticationConfigurer.errorResponseHandler(failureEventHandler))// 处理客户端认证异常
