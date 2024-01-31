@@ -78,32 +78,6 @@ public class UserDO {
     private Integer sex;
 
     /**
-     * 最后登录IP
-     */
-    //private String loginIp;
-    /**
-     * 最后登录时间
-     */
-    //private LocalDateTime loginDate;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-    /**
-     * 最后更新时间
-     */
-    private LocalDateTime updateTime;
-    /**
-     * 创建者id
-     */
-    private Long creator;
-    /**
-     * 更新者id
-     */
-    private Long updater;
-
-    /**
      * 是否删除
      */
     @Column(isLogicDelete = true)
@@ -116,7 +90,36 @@ public class UserDO {
 
     private Long tenantId;
 
+    private String remark;
 
+    /**
+     * 创建者id
+     */
+    private Long creator;
+    /**
+     * 更新者id
+     */
+    private Long updater;
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createTime;
+    /**
+     * 最后更新时间
+     */
+    private LocalDateTime updateTime;
+
+
+
+
+    /**
+     * 最后登录IP
+     */
+    //private String loginIp;
+    /**
+     * 最后登录时间
+     */
+    //private LocalDateTime loginDate;
 
     /**
      * 微信openid
