@@ -2,6 +2,7 @@ package com.xgblack.cool.module.system.gateway;
 
 import cn.hutool.core.util.StrUtil;
 import com.mybatisflex.core.query.QueryChain;
+import com.mybatisflex.core.update.UpdateChain;
 import com.xgblack.cool.framework.common.pojo.PageResult;
 import com.xgblack.cool.framework.security.dto.UserInfo;
 import com.xgblack.cool.framework.security.service.RemoteUserService;
@@ -9,6 +10,7 @@ import com.xgblack.cool.module.system.convertor.UserConvertor;
 import com.xgblack.cool.module.system.convertor.UserInfoConvertor;
 import com.xgblack.cool.module.system.domain.gateway.UserGateway;
 import com.xgblack.cool.module.system.domain.user.User;
+import com.xgblack.cool.module.system.dto.user.UserEditLockedCmd;
 import com.xgblack.cool.module.system.dto.user.UserPageQry;
 import com.xgblack.cool.module.system.gateway.database.dataobject.UserDO;
 import com.xgblack.cool.module.system.gateway.database.mapper.UserMapper;
@@ -82,5 +84,13 @@ public class UserGatewayImpl implements UserGateway, RemoteUserService {
                         .page(qry.buildPage())
         );
 
+    }
+
+    @Override
+    public void updateUserLocked(UserEditLockedCmd cmd) {
+        UpdateChain.of(userMapper)
+                .set(USER.LOCKED, cmd.getLocked())
+                .where(USER.ID.eq(cmd.getId()))
+                .update();
     }
 }

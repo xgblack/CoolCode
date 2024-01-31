@@ -1,14 +1,15 @@
 package com.xgblack.cool.module.system.web;
 
+import com.xgblack.cool.framework.common.pojo.PageResult;
 import com.xgblack.cool.module.system.api.UserServiceI;
 import com.xgblack.cool.module.system.dto.user.UserAddCmd;
-import jakarta.validation.Valid;
+import com.xgblack.cool.module.system.dto.user.UserEditCmd;
+import com.xgblack.cool.module.system.dto.user.UserEditLockedCmd;
+import com.xgblack.cool.module.system.dto.user.UserPageQry;
+import com.xgblack.cool.module.system.dto.user.clientobject.UserCO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 管理后台 - 用户
@@ -28,49 +29,46 @@ public class UserController {
      */
     @PostMapping
     //@PreAuthorize("@ss.hasPermission('system:user:create')")
-    public void addUser(@Valid @RequestBody UserAddCmd cmd) {
+    public void add(@Validated @RequestBody UserAddCmd cmd) {
         userService.save(cmd);
     }
 
-    /*@PutMapping
+    @PutMapping
     //@Operation(summary = "修改用户")
     //@PreAuthorize("@ss.hasPermission('system:user:update')")
-    public void updateUser(@Valid @RequestBody UserSaveReqVO reqVO) {
-        userService.updateUser(reqVO);
-        return success(true);
+    public void edit(@Validated @RequestBody UserEditCmd cmd) {
+        userService.update(cmd);
     }
 
     @DeleteMapping
     //@Operation(summary = "删除用户")
     //@Parameter(name = "id", description = "编号", required = true, example = "1024")
     //@PreAuthorize("@ss.hasPermission('system:user:delete')")
-    public void deleteUser(@RequestParam("id") Long id) {
-        userService.deleteUser(id);
-        return success(true);
+    public void delete(@RequestParam("id") Long id) {
+        userService.remove(id);
     }
 
-    @PutMapping("/update-password")
+    /*@PutMapping("/update-password")
     //@Operation(summary = "重置用户密码")
     //@PreAuthorize("@ss.hasPermission('system:user:update-password')")
     public void updateUserPassword(@Valid @RequestBody UserUpdatePasswordReqVO reqVO) {
         userService.updateUserPassword(reqVO.getId(), reqVO.getPassword());
         return success(true);
-    }
+    }*/
 
-    @PutMapping("/update-status")
+    @PutMapping("/update-locked")
     //@Operation(summary = "修改用户状态")
     //@PreAuthorize("@ss.hasPermission('system:user:update')")
-    public void updateUserStatus(@Valid @RequestBody UserUpdateStatusReqVO reqVO) {
-        userService.updateUserStatus(reqVO.getId(), reqVO.getStatus());
-        return success(true);
+    public void editLocked(@Validated @RequestBody UserEditLockedCmd cmd) {
+        userService.editLocked(cmd);
     }
 
     @GetMapping("/page")
     //@Operation(summary = "获得用户分页列表")
     //@PreAuthorize("@ss.hasPermission('system:user:list')")
-    public PageResult<UserRespVO> getUserPage(@Valid UserPageReqVO pageReqVO) {
+    public PageResult<UserCO> page(@Validated UserPageQry qry) {
         // 获得用户分页列表
-        PageResult<AdminUserDO> pageResult = userService.getUserPage(pageReqVO);
+        /*PageResult<AdminUserDO> pageResult = userService.getUserPage(pageReqVO);
         if (CollUtil.isEmpty(pageResult.getList())) {
             return success(new PageResult<>(pageResult.getTotal()));
         }
@@ -78,10 +76,11 @@ public class UserController {
         Map<Long, DeptDO> deptMap = deptService.getDeptMap(
                 convertList(pageResult.getList(), AdminUserDO::getDeptId));
         return success(new PageResult<>(UserConvert.INSTANCE.convertList(pageResult.getList(), deptMap),
-                pageResult.getTotal()));
+                pageResult.getTotal()));*/
+        return userService.getPage(qry);
     }
 
-    @GetMapping({"/list-all-simple", "/simple-list"})
+    /*@GetMapping({"/list-all-simple", "/simple-list"})
     //@Operation(summary = "获取用户精简信息列表", description = "只包含被开启的用户，主要用于前端的下拉选项")
     public List<UserSimpleRespVO> getSimpleUserList() {
         List<AdminUserDO> list = userService.getUserListByStatus(CommonStatusEnum.ENABLE.getStatus());
@@ -89,20 +88,21 @@ public class UserController {
         Map<Long, DeptDO> deptMap = deptService.getDeptMap(
                 convertList(list, AdminUserDO::getDeptId));
         return success(UserConvert.INSTANCE.convertSimpleList(list, deptMap));
-    }
+    }*/
 
     @GetMapping
     //@Operation(summary = "获得用户详情")
     //@Parameter(name = "id", description = "编号", required = true, example = "1024")
-    @PreAuthorize("@ss.hasPermission('system:user:query')")
-    public UserRespVO getUser(@RequestParam("id") Long id) {
-        AdminUserDO user = userService.getUser(id);
+    //@PreAuthorize("@ss.hasPermission('system:user:query')")
+    public UserCO detail(@RequestParam("id") Long id) {
+        /*AdminUserDO user = userService.getUser(id);
         // 拼接数据
         DeptDO dept = deptService.getDept(user.getDeptId());
-        return success(UserConvert.INSTANCE.convert(user, dept));
+        return success(UserConvert.INSTANCE.convert(user, dept));*/
+        return userService.getDetail(id);
     }
 
-    @GetMapping("/export")
+    /*@GetMapping("/export")
     //@Operation(summary = "导出用户")
     //@PreAuthorize("@ss.hasPermission('system:user:export')")
     //@OperateLog(type = EXPORT)
@@ -115,9 +115,9 @@ public class UserController {
                 convertList(list, AdminUserDO::getDeptId));
         ExcelUtils.write(response, "用户数据.xls", "数据", UserRespVO.class,
                 UserConvert.INSTANCE.convertList(list, deptMap));
-    }
+    }*/
 
-    @GetMapping("/get-import-template")
+    /*@GetMapping("/get-import-template")
     //@Operation(summary = "获得导入用户模板")
     public void importTemplate(HttpServletResponse response) throws IOException {
         // 手动创建导出 demo
@@ -129,9 +129,9 @@ public class UserController {
         );
         // 输出
         ExcelUtils.write(response, "用户导入模板.xls", "用户列表", UserImportExcelVO.class, list);
-    }
+    }*/
 
-    @PostMapping("/import")
+    /*@PostMapping("/import")
     //@Operation(summary = "导入用户")
     //@Parameters({
     //        @Parameter(name = "file", description = "Excel 文件", required = true),

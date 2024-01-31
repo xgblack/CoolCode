@@ -2,6 +2,7 @@ package com.xgblack.cool.module.system.domain.gateway;
 
 import com.xgblack.cool.framework.common.pojo.PageResult;
 import com.xgblack.cool.module.system.domain.user.User;
+import com.xgblack.cool.module.system.dto.user.UserEditLockedCmd;
 import com.xgblack.cool.module.system.dto.user.UserPageQry;
 
 /**
@@ -19,5 +20,7 @@ public interface UserGateway {
     void delete(Long id);
 
     PageResult<User> getPage(UserPageQry qry);
+
+    void updateUserLocked(UserEditLockedCmd cmd);
 
 }

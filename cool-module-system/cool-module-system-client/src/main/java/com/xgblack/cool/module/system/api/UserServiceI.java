@@ -3,6 +3,7 @@ package com.xgblack.cool.module.system.api;
 import com.xgblack.cool.framework.common.pojo.PageResult;
 import com.xgblack.cool.module.system.dto.user.UserAddCmd;
 import com.xgblack.cool.module.system.dto.user.UserEditCmd;
+import com.xgblack.cool.module.system.dto.user.UserEditLockedCmd;
 import com.xgblack.cool.module.system.dto.user.UserPageQry;
 import com.xgblack.cool.module.system.dto.user.clientobject.UserCO;
 
@@ -21,5 +22,7 @@ public interface UserServiceI {
     void update(UserEditCmd cmd);
 
     PageResult<UserCO> getPage(UserPageQry qry);
+
+    void editLocked(UserEditLockedCmd cmd);
 
 }
