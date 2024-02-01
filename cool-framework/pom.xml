@@ -24,6 +24,7 @@
         <module>cool-spring-boot-starter-redis</module>
         <module>cool-spring-boot-starter-security-api</module>
         <module>cool-spring-boot-starter-security</module>
+        <module>cool-spring-boot-starter-biz-tenant</module>
     </modules>
 
     <build>

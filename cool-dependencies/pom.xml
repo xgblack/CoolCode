@@ -85,6 +85,12 @@
                 <version>${revision}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.xgblack</groupId>
+                <artifactId>cool-spring-boot-starter-biz-tenant</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>com.xgblack.cool</groupId>
