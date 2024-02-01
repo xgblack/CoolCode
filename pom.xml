@@ -58,7 +58,7 @@
 
 
 		<lombok.version>1.18.30</lombok.version>
-		<mapstruct.version>1.5.5.Final</mapstruct.version>
+		<mapstruct.version>1.6.0.Beta1</mapstruct.version>
 		<mybatis-flex.version>1.7.5</mybatis-flex.version>
 	</properties>
 
