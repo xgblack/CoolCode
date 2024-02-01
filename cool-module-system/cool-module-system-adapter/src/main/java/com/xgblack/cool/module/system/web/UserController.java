@@ -33,6 +33,10 @@ public class UserController {
         userService.save(cmd);
     }
 
+    /**
+     * 修改用户
+     * @param cmd
+     */
     @PutMapping
     //@Operation(summary = "修改用户")
     //@PreAuthorize("@ss.hasPermission('system:user:update')")
@@ -40,6 +44,10 @@ public class UserController {
         userService.update(cmd);
     }
 
+    /**
+     * 删除用户
+     * @param id
+     */
     @DeleteMapping
     //@Operation(summary = "删除用户")
     //@Parameter(name = "id", description = "编号", required = true, example = "1024")
@@ -56,6 +64,10 @@ public class UserController {
         return success(true);
     }*/
 
+    /**
+     * 修改用户锁定状态
+     * @param cmd
+     */
     @PutMapping("/update-locked")
     //@Operation(summary = "修改用户状态")
     //@PreAuthorize("@ss.hasPermission('system:user:update')")
@@ -63,6 +75,11 @@ public class UserController {
         userService.editLocked(cmd);
     }
 
+    /**
+     * 分页查询
+     * @param qry
+     * @return
+     */
     @GetMapping("/page")
     //@Operation(summary = "获得用户分页列表")
     //@PreAuthorize("@ss.hasPermission('system:user:list')")
@@ -90,6 +107,11 @@ public class UserController {
         return success(UserConvert.INSTANCE.convertSimpleList(list, deptMap));
     }*/
 
+    /**
+     * 查询用户详情
+     * @param id
+     * @return
+     */
     @GetMapping
     //@Operation(summary = "获得用户详情")
     //@Parameter(name = "id", description = "编号", required = true, example = "1024")
