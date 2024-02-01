@@ -1,7 +1,6 @@
-package com.xgblack.cool.module.system.executor;
+package com.xgblack.cool.module.system.executor.user;
 
 import com.xgblack.cool.module.system.domain.gateway.UserGateway;
-import com.xgblack.cool.module.system.dto.user.UserAddCmd;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -13,13 +12,11 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class UserAddCmdExe {
-
+public class UserRemoveCmdExe {
     private final UserGateway gateway;
 
 
-    public void execute(UserAddCmd cmd) {
-        //TODO
-        //gateway.create(StudentConvertor.INSTANCE.toEntity(cmd));
+    public void execute(Long id) {
+        gateway.delete(id);
     }
 }

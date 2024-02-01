@@ -1,5 +1,5 @@
 
-package com.xgblack.cool.module.system.executor;
+package com.xgblack.cool.module.system.executor.student;
 
 
 import com.xgblack.cool.module.system.convertor.StudentConvertor;

@@ -1,9 +1,10 @@
-package com.xgblack.cool.module.system.executor.query;
+
+package com.xgblack.cool.module.system.executor.student;
 
 
 import com.xgblack.cool.module.system.convertor.StudentConvertor;
 import com.xgblack.cool.module.system.domain.gateway.StudentGateway;
-import com.xgblack.cool.module.system.dto.student.clientobject.StudentCO;
+import com.xgblack.cool.module.system.dto.student.StudentEditCmd;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -11,11 +12,12 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class StudentByIdQryExe {
+public class StudentEditCmdExe {
+
     private final StudentGateway gateway;
 
-    public StudentCO execute(Long id) {
-        //可以直接调用infra层查出DO
-        return StudentConvertor.INSTANCE.convertEntity2CO(gateway.getById(id));
+
+    public void execute(StudentEditCmd cmd) {
+        gateway.update(StudentConvertor.INSTANCE.toEntity(cmd));
     }
 }

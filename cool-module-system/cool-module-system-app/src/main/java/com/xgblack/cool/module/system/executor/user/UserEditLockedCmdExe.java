@@ -1,4 +1,4 @@
-package com.xgblack.cool.module.system.executor;
+package com.xgblack.cool.module.system.executor.user;
 
 import com.xgblack.cool.module.system.domain.gateway.UserGateway;
 import com.xgblack.cool.module.system.dto.user.UserEditLockedCmd;
