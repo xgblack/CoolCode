@@ -4,13 +4,13 @@ import com.mybatisflex.annotation.Column;
 import com.mybatisflex.annotation.Id;
 import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.annotation.Table;
+import com.xgblack.cool.framework.core.db.TenantBaseDO;
 import com.xgblack.cool.framework.mybatis.listener.DataInsertListener;
 import com.xgblack.cool.framework.mybatis.listener.DataUpdateListener;
 import com.xgblack.cool.framework.mybatis.type.LongSetJsonTypeHandler;
 import lombok.*;
 import lombok.experimental.Accessors;
 
-import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
@@ -25,7 +25,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(value = "sys_user", onInsert = DataInsertListener.class, onUpdate = DataUpdateListener.class)
-public class UserDO {
+public class UserDO extends TenantBaseDO {
     /**
      * 用户ID
      */
@@ -69,7 +69,6 @@ public class UserDO {
     @Column(typeHandler = LongSetJsonTypeHandler.class)
     private Set<Long> postIds;
 
-
     /**
      * 用户性别
      * <p>
@@ -78,39 +77,11 @@ public class UserDO {
     private Integer sex;
 
     /**
-     * 是否删除
-     */
-    @Column(isLogicDelete = true)
-    private Boolean deleted;
-
-    /**
      * 是否锁定
      */
     private Boolean locked;
 
-    private Long tenantId;
-
     private String remark;
-
-    /**
-     * 创建者id
-     */
-    private Long creator;
-    /**
-     * 更新者id
-     */
-    private Long updater;
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-    /**
-     * 最后更新时间
-     */
-    private LocalDateTime updateTime;
-
-
-
 
     /**
      * 最后登录IP
