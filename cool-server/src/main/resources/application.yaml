@@ -21,6 +21,9 @@ cc:
   info:
     version: 1.0.0
     base-package: com.xgblack.cool
+  sql:
+    # SQL审计日志
+    audit-enable: true
   # 调试模式
   security:
     mock-enable: true
