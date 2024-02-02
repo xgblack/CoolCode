@@ -81,6 +81,7 @@ public class UserGatewayImpl implements UserGateway, RemoteUserService {
                         .and(USER.LOCKED.eq(qry.getLocked(), qry.getLocked() != null))
                         .and(USER.CREATE_TIME.between(qry.getCreateTime(), qry.getCreateTime() != null))
                         //TODO: 处理部门
+                        .orderBy(USER.ID.desc())
                         .page(qry.buildPage())
         );
 
