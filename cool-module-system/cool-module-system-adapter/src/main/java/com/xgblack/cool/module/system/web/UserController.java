@@ -1,15 +1,17 @@
 package com.xgblack.cool.module.system.web;
 
-import com.xgblack.cool.framework.common.pojo.PageResult;
+import com.xgblack.cool.framework.common.pojo.dto.PageResult;
 import com.xgblack.cool.module.system.api.UserServiceI;
 import com.xgblack.cool.module.system.dto.user.UserAddCmd;
 import com.xgblack.cool.module.system.dto.user.UserEditCmd;
 import com.xgblack.cool.module.system.dto.user.UserEditLockedCmd;
 import com.xgblack.cool.module.system.dto.user.UserPageQry;
 import com.xgblack.cool.module.system.dto.user.clientobject.UserCO;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 管理后台 - 用户
@@ -46,7 +48,7 @@ public class UserController {
 
     /**
      * 删除用户
-     * @param id
+     * @param id 用户id
      */
     @DeleteMapping
     //@Operation(summary = "删除用户")
@@ -124,13 +126,26 @@ public class UserController {
         return userService.getDetail(id);
     }
 
+    /**
+     * 获取当前用户全部信息
+     * @return UserCO 当前用户信息
+     */
+    @GetMapping("info")
+    public UserCO info() {
+        /*AdminUserDO user = userService.getUser(id);
+        // 拼接数据
+        DeptDO dept = deptService.getDept(user.getDeptId());
+        return success(UserConvert.INSTANCE.convert(user, dept));*/
+        return null;
+    }
+
     /*@GetMapping("/export")
     //@Operation(summary = "导出用户")
     //@PreAuthorize("@ss.hasPermission('system:user:export')")
     //@OperateLog(type = EXPORT)
     public void exportUserList(@Validated UserPageReqVO exportReqVO,
                                HttpServletResponse response) throws IOException {
-        exportReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
+        exportReqVO.setPageSize(PageQuery.PAGE_SIZE_NONE);
         List<AdminUserDO> list = userService.getUserPage(exportReqVO).getList();
         // 输出 Excel
         Map<Long, DeptDO> deptMap = deptService.getDeptMap(
@@ -139,30 +154,35 @@ public class UserController {
                 UserConvert.INSTANCE.convertList(list, deptMap));
     }*/
 
-    /*@GetMapping("/get-import-template")
+    /**
+     * 获得导入用户模板
+     */
+    @GetMapping("/get-import-template")
     //@Operation(summary = "获得导入用户模板")
-    public void importTemplate(HttpServletResponse response) throws IOException {
+    public void importTemplate(HttpServletResponse response) {
         // 手动创建导出 demo
-        List<UserImportExcelVO> list = Arrays.asList(
+        /*List<UserImportExcelVO> list = Arrays.asList(
                 UserImportExcelVO.builder().username("yunai").deptId(1L).email("yunai@iocoder.cn").mobile("15601691300")
                         .nickname("芋道").status(CommonStatusEnum.ENABLE.getStatus()).sex(SexEnum.MALE.getSex()).build(),
                 UserImportExcelVO.builder().username("yuanma").deptId(2L).email("yuanma@iocoder.cn").mobile("15601701300")
                         .nickname("源码").status(CommonStatusEnum.DISABLE.getStatus()).sex(SexEnum.FEMALE.getSex()).build()
         );
         // 输出
-        ExcelUtils.write(response, "用户导入模板.xls", "用户列表", UserImportExcelVO.class, list);
-    }*/
+        ExcelUtils.write(response, "用户导入模板.xls", "用户列表", UserImportExcelVO.class, list);*/
+    }
 
-    /*@PostMapping("/import")
-    //@Operation(summary = "导入用户")
-    //@Parameters({
-    //        @Parameter(name = "file", description = "Excel 文件", required = true),
-    //        @Parameter(name = "updateSupport", description = "是否支持更新，默认为 false", example = "true")
-    //})
+    /**
+     * 导入用户
+     * @param file
+     * @param updateSupport
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("/import")
     //@PreAuthorize("@ss.hasPermission('system:user:import')")
-    public UserImportRespVO importExcel(@RequestParam("file") MultipartFile file,
-                                                      @RequestParam(value = "updateSupport", required = false, defaultValue = "false") Boolean updateSupport) throws Exception {
-        List<UserImportExcelVO> list = ExcelUtils.read(file, UserImportExcelVO.class);
-        return success(userService.importUserList(list, updateSupport));
-    }*/
+    public Object importExcel(@RequestParam("file") MultipartFile file, @RequestParam(value = "updateSupport", required = false, defaultValue = "false") Boolean updateSupport) throws Exception {
+        /*List<UserImportExcelVO> list = ExcelUtils.read(file, UserImportExcelVO.class);
+        return success(userService.importUserList(list, updateSupport));*/
+        return null;
+    }
 }

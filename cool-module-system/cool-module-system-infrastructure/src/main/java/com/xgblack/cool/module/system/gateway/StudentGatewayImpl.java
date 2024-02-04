@@ -3,7 +3,7 @@ package com.xgblack.cool.module.system.gateway;
 
 import cn.hutool.core.util.StrUtil;
 import com.mybatisflex.core.query.QueryChain;
-import com.xgblack.cool.framework.common.pojo.PageResult;
+import com.xgblack.cool.framework.common.pojo.dto.PageResult;
 import com.xgblack.cool.module.system.convertor.StudentConvertor;
 import com.xgblack.cool.module.system.domain.gateway.StudentGateway;
 import com.xgblack.cool.module.system.domain.student.Student;

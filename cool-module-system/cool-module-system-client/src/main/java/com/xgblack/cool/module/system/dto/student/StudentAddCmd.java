@@ -1,5 +1,6 @@
 package com.xgblack.cool.module.system.dto.student;
 
+import com.xgblack.cool.framework.common.pojo.dto.Command;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-public class StudentAddCmd {
+public class StudentAddCmd extends Command {
     /**
      * 姓名
      */

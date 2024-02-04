@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 异常基类
+ * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 @Getter
 @NoArgsConstructor

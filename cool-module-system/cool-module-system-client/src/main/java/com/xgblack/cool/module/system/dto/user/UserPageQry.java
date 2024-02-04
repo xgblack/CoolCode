@@ -1,6 +1,6 @@
 package com.xgblack.cool.module.system.dto.user;
 
-import com.xgblack.cool.framework.common.pojo.PageParam;
+import com.xgblack.cool.framework.common.pojo.dto.PageQuery;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,7 +19,7 @@ import static com.xgblack.cool.framework.common.utils.date.DateUtils.FORMAT_YEAR
 @Setter
 @ToString
 @Accessors(chain = true)
-public class UserPageQry extends PageParam {
+public class UserPageQry extends PageQuery {
 
     /**
      * 用户账号，模糊匹配

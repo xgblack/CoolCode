@@ -1,6 +1,6 @@
 package com.xgblack.cool.module.system.service;
 
-import com.xgblack.cool.framework.common.pojo.PageResult;
+import com.xgblack.cool.framework.common.pojo.dto.PageResult;
 import com.xgblack.cool.module.system.api.UserServiceI;
 import com.xgblack.cool.module.system.dto.user.UserAddCmd;
 import com.xgblack.cool.module.system.dto.user.UserEditCmd;

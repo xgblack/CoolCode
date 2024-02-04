@@ -1,5 +1,6 @@
 package com.xgblack.cool.module.system.dto.student;
 
+import com.xgblack.cool.framework.common.pojo.dto.Query;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -9,6 +10,6 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class StudentListByNameQry {
+public class StudentListByNameQry extends Query {
     private String name;
 }

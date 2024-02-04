@@ -10,7 +10,6 @@ import java.util.Collections;
  * 自定义响应体
  * 作为示例，并无实际作用
  * @author <a href="https://www.xgblack.cn">xg black</a>
- * @date 2023/12/26 23:19
  */
 
 @Accessors(chain = true)

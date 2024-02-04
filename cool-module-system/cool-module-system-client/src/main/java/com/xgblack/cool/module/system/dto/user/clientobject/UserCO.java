@@ -1,5 +1,6 @@
 package com.xgblack.cool.module.system.dto.user.clientobject;
 
+import com.xgblack.cool.framework.common.pojo.ClientObject;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +16,7 @@ import java.util.Set;
 @Setter
 @ToString
 @Accessors(chain = true)
-public class UserCO {
+public class UserCO extends ClientObject {
 
     /**
      * 用户ID

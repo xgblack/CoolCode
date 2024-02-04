@@ -1,7 +1,7 @@
 package com.xgblack.cool.module.system.executor.student.query;
 
 
-import com.xgblack.cool.framework.common.pojo.PageResult;
+import com.xgblack.cool.framework.common.pojo.dto.PageResult;
 import com.xgblack.cool.module.system.convertor.StudentConvertor;
 import com.xgblack.cool.module.system.domain.gateway.StudentGateway;
 import com.xgblack.cool.module.system.dto.student.StudentPageQry;

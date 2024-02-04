@@ -1,5 +1,6 @@
 package com.xgblack.cool.module.system.dto.user;
 
+import com.xgblack.cool.framework.common.pojo.dto.Command;
 import com.xgblack.cool.framework.common.validator.Mobile;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -17,7 +18,7 @@ import java.util.Set;
 
 @Data
 @Accessors(chain = true)
-public class UserAddCmd {
+public class UserAddCmd extends Command {
 
     /**
      * 用户账号

@@ -1,6 +1,6 @@
 package com.xgblack.cool.module.system.executor.user.query;
 
-import com.xgblack.cool.framework.common.pojo.PageResult;
+import com.xgblack.cool.framework.common.pojo.dto.PageResult;
 import com.xgblack.cool.module.system.convertor.UserConvertor;
 import com.xgblack.cool.module.system.domain.gateway.UserGateway;
 import com.xgblack.cool.module.system.dto.user.UserPageQry;

@@ -3,7 +3,7 @@ package com.xgblack.cool.module.system.gateway;
 import cn.hutool.core.util.StrUtil;
 import com.mybatisflex.core.query.QueryChain;
 import com.mybatisflex.core.update.UpdateChain;
-import com.xgblack.cool.framework.common.pojo.PageResult;
+import com.xgblack.cool.framework.common.pojo.dto.PageResult;
 import com.xgblack.cool.framework.security.dto.UserInfo;
 import com.xgblack.cool.framework.security.service.RemoteUserService;
 import com.xgblack.cool.module.system.convertor.UserConvertor;

@@ -1,5 +1,6 @@
 package com.xgblack.cool.module.system.dto.user;
 
+import com.xgblack.cool.framework.common.pojo.dto.Command;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -9,7 +10,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class UserEditLockedCmd {
+public class UserEditLockedCmd extends Command {
     @NotNull(message = "用户ID不能为空")
     private Long id;
 

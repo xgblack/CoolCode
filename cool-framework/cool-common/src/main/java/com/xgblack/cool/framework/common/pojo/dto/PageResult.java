@@ -1,19 +1,17 @@
-package com.xgblack.cool.framework.common.pojo;
+package com.xgblack.cool.framework.common.pojo.dto;
 
 import com.mybatisflex.core.FlexGlobalConfig;
 import com.mybatisflex.core.paginate.Page;
 import lombok.*;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /**
  * 分页结果
- * @author xg BLACK
- * @date 2023/12/23 21:53
+ * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 
 @Getter
@@ -22,7 +20,7 @@ import java.util.List;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class PageResult<T> implements Serializable {
+public class PageResult<T> extends DTO {
     /**
      * 当前页数据。
      */

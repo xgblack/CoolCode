@@ -2,7 +2,7 @@ package com.xgblack.cool.module.system.convertor;
 
 import com.mybatisflex.core.paginate.Page;
 import com.xgblack.cool.framework.common.convertor.Convertor;
-import com.xgblack.cool.framework.common.pojo.PageResult;
+import com.xgblack.cool.framework.common.pojo.dto.PageResult;
 import com.xgblack.cool.module.system.domain.student.Student;
 import com.xgblack.cool.module.system.dto.student.StudentAddCmd;
 import com.xgblack.cool.module.system.dto.student.StudentEditCmd;
