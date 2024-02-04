@@ -1,10 +1,7 @@
 package com.xgblack.cool.module.system.api;
 
 import com.xgblack.cool.framework.common.pojo.dto.PageResult;
-import com.xgblack.cool.module.system.dto.user.UserAddCmd;
-import com.xgblack.cool.module.system.dto.user.UserEditCmd;
-import com.xgblack.cool.module.system.dto.user.UserEditLockedCmd;
-import com.xgblack.cool.module.system.dto.user.UserPageQry;
+import com.xgblack.cool.module.system.dto.user.*;
 import com.xgblack.cool.module.system.dto.user.clientobject.UserCO;
 
 /**
@@ -25,4 +22,7 @@ public interface UserServiceI {
 
     void editLocked(UserEditLockedCmd cmd);
 
+    void editPassword(UserEditPasswordCmd cmd);
+
+    void editUserProfile(UserProfileEditCmd cmd);
 }

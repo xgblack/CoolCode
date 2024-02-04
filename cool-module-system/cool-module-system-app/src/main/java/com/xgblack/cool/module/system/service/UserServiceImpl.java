@@ -2,15 +2,9 @@ package com.xgblack.cool.module.system.service;
 
 import com.xgblack.cool.framework.common.pojo.dto.PageResult;
 import com.xgblack.cool.module.system.api.UserServiceI;
-import com.xgblack.cool.module.system.dto.user.UserAddCmd;
-import com.xgblack.cool.module.system.dto.user.UserEditCmd;
-import com.xgblack.cool.module.system.dto.user.UserEditLockedCmd;
-import com.xgblack.cool.module.system.dto.user.UserPageQry;
+import com.xgblack.cool.module.system.dto.user.*;
 import com.xgblack.cool.module.system.dto.user.clientobject.UserCO;
-import com.xgblack.cool.module.system.executor.user.UserAddCmdExe;
-import com.xgblack.cool.module.system.executor.user.UserEditCmdExe;
-import com.xgblack.cool.module.system.executor.user.UserEditLockedCmdExe;
-import com.xgblack.cool.module.system.executor.user.UserRemoveCmdExe;
+import com.xgblack.cool.module.system.executor.user.*;
 import com.xgblack.cool.module.system.executor.user.query.UserByIdQryExe;
 import com.xgblack.cool.module.system.executor.user.query.UserPageQryExe;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +26,7 @@ public class UserServiceImpl implements UserServiceI {
     private final UserEditCmdExe userEditCmdExe;
     private final UserPageQryExe userPageQryExe;
     private final UserEditLockedCmdExe userEditLockedCmdExe;
+    private final UserEditPasswordCmdExe userEditPasswordCmdExe;
 
     @Override
     public void save(UserAddCmd cmd) {
@@ -62,4 +57,15 @@ public class UserServiceImpl implements UserServiceI {
     public void editLocked(UserEditLockedCmd cmd) {
         userEditLockedCmdExe.execute(cmd);
     }
+
+    @Override
+    public void editPassword(UserEditPasswordCmd cmd) {
+        userEditPasswordCmdExe.execute(cmd);
+    }
+
+    @Override
+    public void editUserProfile(UserProfileEditCmd cmd) {
+
+    }
+
 }

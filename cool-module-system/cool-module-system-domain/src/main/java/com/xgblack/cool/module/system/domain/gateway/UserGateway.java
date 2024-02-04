@@ -23,4 +23,6 @@ public interface UserGateway {
 
     void updateUserLocked(UserEditLockedCmd cmd);
 
+    void updatePassword(Long id, String password);
+
 }

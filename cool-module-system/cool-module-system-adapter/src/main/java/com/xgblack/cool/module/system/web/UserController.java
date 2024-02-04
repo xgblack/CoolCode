@@ -2,16 +2,16 @@ package com.xgblack.cool.module.system.web;
 
 import com.xgblack.cool.framework.common.pojo.dto.PageResult;
 import com.xgblack.cool.module.system.api.UserServiceI;
-import com.xgblack.cool.module.system.dto.user.UserAddCmd;
-import com.xgblack.cool.module.system.dto.user.UserEditCmd;
-import com.xgblack.cool.module.system.dto.user.UserEditLockedCmd;
-import com.xgblack.cool.module.system.dto.user.UserPageQry;
+import com.xgblack.cool.module.system.dto.user.*;
 import com.xgblack.cool.module.system.dto.user.clientobject.UserCO;
+import com.xgblack.cool.module.system.dto.user.clientobject.UserSimpleDTO;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * 管理后台 - 用户
@@ -52,19 +52,21 @@ public class UserController {
      */
     @DeleteMapping
     //@Operation(summary = "删除用户")
-    //@Parameter(name = "id", description = "编号", required = true, example = "1024")
     //@PreAuthorize("@ss.hasPermission('system:user:delete')")
     public void delete(@RequestParam("id") Long id) {
         userService.remove(id);
     }
 
-    /*@PutMapping("/update-password")
+    /**
+     * 修改用户密码
+     * @param cmd
+     */
+    @PutMapping("/update-password")
     //@Operation(summary = "重置用户密码")
     //@PreAuthorize("@ss.hasPermission('system:user:update-password')")
-    public void updateUserPassword(@Valid @RequestBody UserUpdatePasswordReqVO reqVO) {
-        userService.updateUserPassword(reqVO.getId(), reqVO.getPassword());
-        return success(true);
-    }*/
+    public void editPassword(@Validated @RequestBody UserEditPasswordCmd cmd) {
+        userService.editPassword(cmd);
+    }
 
     /**
      * 修改用户锁定状态
@@ -99,15 +101,16 @@ public class UserController {
         return userService.getPage(qry);
     }
 
-    /*@GetMapping({"/list-all-simple", "/simple-list"})
+    /**
+     * 获取用户精简信息列表
+     * @return
+     */
+    @GetMapping({"/list-all-simple", "/simple-list"})
     //@Operation(summary = "获取用户精简信息列表", description = "只包含被开启的用户，主要用于前端的下拉选项")
-    public List<UserSimpleRespVO> getSimpleUserList() {
-        List<AdminUserDO> list = userService.getUserListByStatus(CommonStatusEnum.ENABLE.getStatus());
-        // 拼接数据
-        Map<Long, DeptDO> deptMap = deptService.getDeptMap(
-                convertList(list, AdminUserDO::getDeptId));
-        return success(UserConvert.INSTANCE.convertSimpleList(list, deptMap));
-    }*/
+    public List<UserSimpleDTO> getSimpleUserList() {
+        //TODO
+        return null;
+    }
 
     /**
      * 查询用户详情
@@ -126,18 +129,6 @@ public class UserController {
         return userService.getDetail(id);
     }
 
-    /**
-     * 获取当前用户全部信息
-     * @return UserCO 当前用户信息
-     */
-    @GetMapping("info")
-    public UserCO info() {
-        /*AdminUserDO user = userService.getUser(id);
-        // 拼接数据
-        DeptDO dept = deptService.getDept(user.getDeptId());
-        return success(UserConvert.INSTANCE.convert(user, dept));*/
-        return null;
-    }
 
     /*@GetMapping("/export")
     //@Operation(summary = "导出用户")

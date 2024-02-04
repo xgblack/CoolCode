@@ -178,6 +178,7 @@ logging:
   level:
     com.xgblack: info
     org.springframework: warn
+    com.xgblack.cool.framework.security: info
 
 
 

@@ -3,7 +3,9 @@ package com.xgblack.cool.module.system.dto.user;
 import com.xgblack.cool.framework.common.pojo.dto.Command;
 import com.xgblack.cool.framework.common.validator.Mobile;
 import jakarta.validation.constraints.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.util.Set;
@@ -12,7 +14,9 @@ import java.util.Set;
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 
-@Data
+@Getter
+@Setter
+@ToString
 @Accessors(chain = true)
 public class UserEditCmd extends Command {
 
