@@ -25,6 +25,7 @@
         <module>cool-spring-boot-starter-security-api</module>
         <module>cool-spring-boot-starter-security</module>
         <module>cool-spring-boot-starter-biz-tenant</module>
+        <module>cool-spring-boot-starter-biz-address</module>
     </modules>
 
     <build>
