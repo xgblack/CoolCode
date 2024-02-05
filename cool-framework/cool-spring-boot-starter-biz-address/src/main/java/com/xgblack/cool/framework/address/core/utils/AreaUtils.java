@@ -8,6 +8,7 @@ import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.text.csv.CsvRow;
 import cn.hutool.core.text.csv.CsvUtil;
+import cn.hutool.core.util.StrUtil;
 import com.xgblack.cool.framework.address.core.Area;
 import com.xgblack.cool.framework.address.core.enums.AreaTypeEnum;
 import lombok.NonNull;
@@ -163,4 +164,114 @@ public class AreaUtils {
         return null;
     }
 
+    /**
+     * 根据省市区模糊搜索
+     * @param province 省份
+     * @param city 市
+     * @param region 区/县
+     * @return Area
+     */
+    public static Area queryArea(String province, String city, String region) {
+        if (province == null && city == null && region == null) {
+            return null;
+
+        }
+
+        if (province != null && city != null && region != null) {
+
+            List<Area> provinceList = areas.values().parallelStream()
+                    .filter(area -> AreaTypeEnum.PROVINCE.getType().equals(area.getType()) && StrUtil.contains(area.getName(), province))
+                    .toList();
+            if (CollUtil.isEmpty(provinceList)) {
+                return null;
+            }
+            List<Area> cityList = provinceList.parallelStream()
+                    .flatMap(area -> area.getChildren().stream())
+                    .filter(area -> AreaTypeEnum.CITY.getType().equals(area.getType()) && StrUtil.contains(area.getName(), city))
+                    .toList();
+            if (CollUtil.isEmpty(cityList)) {
+                return null;
+            }
+            return cityList.parallelStream()
+                    .flatMap(area -> area.getChildren().stream())
+                    .filter(area -> AreaTypeEnum.DISTRICT.getType().equals(area.getType()) && StrUtil.contains(area.getName(), region))
+                    .findFirst().orElse(null);
+
+        }
+
+        if (province != null && city != null && region == null) {
+
+            List<Area> provinceList = areas.values().parallelStream()
+                    .filter(area -> AreaTypeEnum.PROVINCE.getType().equals(area.getType()) && StrUtil.contains(area.getName(), province))
+                    .toList();
+            if (CollUtil.isEmpty(provinceList)) {
+                return null;
+            }
+            return provinceList.parallelStream()
+                    .flatMap(area -> area.getChildren().stream())
+                    .filter(area -> AreaTypeEnum.CITY.getType().equals(area.getType()) && StrUtil.contains(area.getName(), city))
+                    .findFirst().orElse(null);
+
+        }
+
+
+        if (province != null && city == null && region != null) {
+
+            List<Area> provinceList = areas.values().parallelStream()
+                    .filter(area -> AreaTypeEnum.PROVINCE.getType().equals(area.getType()) && StrUtil.contains(area.getName(), province))
+                    .toList();
+            if (CollUtil.isEmpty(provinceList)) {
+                return null;
+            }
+            return provinceList.parallelStream()
+                    .flatMap(area -> area.getChildren().stream())
+                    .flatMap(area -> area.getChildren().stream())
+                    .filter(area -> AreaTypeEnum.DISTRICT.getType().equals(area.getType()) && StrUtil.contains(area.getName(), region))
+                    .findFirst().orElse(null);
+
+        }
+
+        if (province != null && city == null && region == null) {
+
+            return areas.values().parallelStream()
+                    .filter(area -> AreaTypeEnum.PROVINCE.getType().equals(area.getType()) && StrUtil.contains(area.getName(), province))
+                    .findFirst().orElse(null);
+
+        }
+
+        if (province == null && city != null && region != null) {
+
+            List<Area> cityList = areas.values().parallelStream()
+                    .flatMap(area -> area.getChildren().stream())
+                    .filter(area -> AreaTypeEnum.CITY.getType().equals(area.getType()) && StrUtil.contains(area.getName(), city))
+                    .toList();
+            if (CollUtil.isEmpty(cityList)) {
+                return null;
+            }
+            return cityList.parallelStream()
+                    .flatMap(area -> area.getChildren().stream())
+                    .filter(area -> AreaTypeEnum.DISTRICT.getType().equals(area.getType()) && StrUtil.contains(area.getName(), region))
+                    .findFirst().orElse(null);
+
+        }
+
+        if (province == null && city != null && region == null) {
+
+            return areas.values().parallelStream()
+                    .flatMap(area -> area.getChildren().stream())
+                    .filter(area -> AreaTypeEnum.CITY.getType().equals(area.getType()) && StrUtil.contains(area.getName(), city))
+                    .findFirst().orElse(null);
+
+        }
+
+        if (province == null && city == null && region != null) {
+
+            return areas.values().parallelStream()
+                    .flatMap(area -> area.getChildren().stream())
+                    .filter(area -> AreaTypeEnum.DISTRICT.getType().equals(area.getType()) && StrUtil.contains(area.getName(), region))
+                    .findFirst().orElse(null);
+
+        }
+        return null;
+    }
 }
