@@ -62,6 +62,7 @@ public interface CoolUserDetailsService extends UserDetailsService, Ordered {
         SysUser user = info.getSysUser();
 
         // 构造security用户 TODO
+        //由于密码默认使用BCRYPT加密，所以这里需要添加前缀，DelegatingPasswordEncoder能够根据密码前缀来确定密码编码器
         return new LoginUser(user.getId(), user.getDeptId(), user.getTenantId(), user.getUsername(),
                 SecurityConstants.BCRYPT + user.getPassword(), user.getPhone(), true, true, true,
                 !user.getLocked(), authorities);

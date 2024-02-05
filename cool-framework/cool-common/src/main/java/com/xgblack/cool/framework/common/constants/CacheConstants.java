@@ -17,10 +17,8 @@
 package com.xgblack.cool.framework.common.constants;
 
 /**
- * @author lengleng
- * @date 2020年01月01日
- * <p>
  * 缓存的key 常量
+ * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 public interface CacheConstants {
 

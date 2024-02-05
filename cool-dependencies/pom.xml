@@ -18,17 +18,16 @@
         <revision>1.0.0</revision>
 
         <!-- 统一依赖管理 -->
-        <!--TODO 指定版本3.2.0，3.2.1版本认证服务有bug，见https://github.com/spring-projects/spring-authorization-server/issues/1505-->
-        <spring.boot.version>3.2.0</spring.boot.version>
+        <spring.boot.version>3.2.2</spring.boot.version>
 
-        <mysql.version>8.2.0</mysql.version>
+        <mysql.version>8.3.0</mysql.version>
         <druid-spring-boot.version>1.2.21</druid-spring-boot.version>
-        <mybatis-flex.version>1.7.7</mybatis-flex.version>
+        <mybatis-flex.version>1.7.9</mybatis-flex.version>
         <mybatis-spring.version>3.0.3</mybatis-spring.version>
         <guava.version>33.0.0-jre</guava.version>
 
         <lombok.version>1.18.30</lombok.version>
-        <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <mapstruct.version>1.6.0.Beta1</mapstruct.version>
 
         <hutool.version>5.8.25</hutool.version>
         <minio.version>8.5.7</minio.version>
@@ -84,6 +83,12 @@
             <dependency>
                 <groupId>com.xgblack</groupId>
                 <artifactId>cool-spring-boot-starter-security-api</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.xgblack</groupId>
+                <artifactId>cool-spring-boot-starter-biz-tenant</artifactId>
                 <version>${revision}</version>
             </dependency>
 

@@ -7,6 +7,7 @@ import java.lang.annotation.*;
 
 /**
  * 指定参数校验的异常码
+ * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

@@ -1,5 +1,6 @@
 package com.xgblack.cool.module.system.dto.student;
 
+import com.xgblack.cool.framework.common.pojo.dto.Command;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -14,7 +15,7 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-public class StudentEditCmd {
+public class StudentEditCmd extends Command {
 
     private Long id;
     private String name;

@@ -1,6 +1,7 @@
 package com.xgblack.cool.framework.common.validator;
 
 import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 
 import java.lang.annotation.*;
 
@@ -24,4 +25,11 @@ import java.lang.annotation.*;
         validatedBy = MobileValidator.class
 )
 public @interface Mobile {
+    boolean required() default true;
+
+    String message() default "手机号码格式错误";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
 }

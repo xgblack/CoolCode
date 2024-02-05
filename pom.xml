@@ -51,16 +51,15 @@
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<!--TODO 指定版本3.2.0，3.2.1版本认证服务有bug，见https://github.com/spring-projects/spring-authorization-server/issues/1505-->
-		<spring.boot.version>3.2.0</spring.boot.version>
-		<maven-surefire-plugin.version>3.2.3</maven-surefire-plugin.version>
-		<maven-compiler-plugin.version>3.12.0</maven-compiler-plugin.version>
-		<native-maven-plugin.version>0.9.28</native-maven-plugin.version>
+		<spring.boot.version>3.2.2</spring.boot.version>
+		<maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+		<maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
+		<native-maven-plugin.version>0.10.0</native-maven-plugin.version>
 
 
 		<lombok.version>1.18.30</lombok.version>
-		<mapstruct.version>1.5.5.Final</mapstruct.version>
-		<mybatis-flex.version>1.7.5</mybatis-flex.version>
+		<mapstruct.version>1.6.0.Beta1</mapstruct.version>
+		<mybatis-flex.version>1.7.9</mybatis-flex.version>
 	</properties>
 
 	<dependencyManagement>
@@ -95,6 +94,7 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>${maven-compiler-plugin.version}</version>
 					<configuration>
+						<fork>true</fork>
 						<parameters>true</parameters>
 						<source>${java.version}</source>
 						<target>${java.version}</target>

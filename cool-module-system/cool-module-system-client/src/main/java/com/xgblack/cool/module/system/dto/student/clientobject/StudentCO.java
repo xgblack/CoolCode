@@ -1,5 +1,6 @@
 package com.xgblack.cool.module.system.dto.student.clientobject;
 
+import com.xgblack.cool.framework.common.pojo.ClientObject;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,7 +19,7 @@ import java.util.List;
 @Setter
 @ToString
 @Accessors(chain = true)
-public class StudentCO {
+public class StudentCO extends ClientObject {
     private Long id;
     private String name;
     private Integer age;

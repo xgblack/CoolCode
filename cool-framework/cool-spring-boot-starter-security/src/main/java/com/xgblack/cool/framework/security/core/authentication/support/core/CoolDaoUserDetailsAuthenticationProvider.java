@@ -167,7 +167,7 @@ public class CoolDaoUserDetailsAuthenticationProvider extends AbstractUserDetail
 
     /**
      * 设置用于编码和验证密码的PasswordEncoder实例。如果未设置，密码将使用 {@link PasswordEncoderFactories#createDelegatingPasswordEncoder()}
-     *
+     * <p>DelegatingPasswordEncoder能够根据密码前缀来确定密码编码器</p>
      * @param passwordEncoder must be an instance of one of the {@code PasswordEncoder} types.
      */
     public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
@@ -185,16 +185,6 @@ public class CoolDaoUserDetailsAuthenticationProvider extends AbstractUserDetail
         return this.userDetailsService;
     }
 
-    /**
-     * 密码解密
-     *
-     * @param presentedPassword 加密密码
-     */
-    private String decode(String presentedPassword) {
-        // 构建前端对应解密AES 因子 FIXME: 优化为非对称加密
-        String key = SpringUtil.getBean(Environment.class).getProperty("gateway.encodeKey", "pigxpigxpigxpigx");
-        AES aes = new AES(Mode.CFB, Padding.NoPadding, new SecretKeySpec(key.getBytes(), "AES"), new IvParameterSpec(key.getBytes()));
-        return aes.decryptStr(presentedPassword);
-    }
+
 
 }

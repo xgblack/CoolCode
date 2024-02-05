@@ -1,7 +1,7 @@
 package com.xgblack.cool.framework.common.response;
 
 /**
- * @author <a href="mailto:qinyujie@gingo.cn">Yujie</a>
+ * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 public interface ResponseStatus {
     /**

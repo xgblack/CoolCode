@@ -1,23 +1,25 @@
 package com.xgblack.cool.framework.response.advice;
 
 
+import com.xgblack.cool.framework.common.annotation.response.ValidationStatusCode;
 import com.xgblack.cool.framework.common.constants.DefaultResponseConstants;
 import com.xgblack.cool.framework.common.response.Response;
 import com.xgblack.cool.framework.common.response.ResponseStatus;
 import com.xgblack.cool.framework.common.response.api.ResponseFactory;
 import com.xgblack.cool.framework.common.response.api.ResponseStatusFactory;
 import com.xgblack.cool.framework.response.config.CoolResponseProperties;
-import com.xgblack.cool.framework.common.annotation.response.ValidationStatusCode;
 import jakarta.annotation.Resource;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.Order;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestAttributes;
@@ -34,8 +36,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
-//@ControllerAdvice
-//@Order(100)
+@ControllerAdvice
+@Order(100)
 public class ValidationExceptionAdvice {
 
     @Resource
