@@ -53,11 +53,6 @@
             </dependency>
             <dependency>
                 <groupId>com.xgblack</groupId>
-                <artifactId>cool-spring-boot-starter-banner</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.xgblack</groupId>
                 <artifactId>cool-spring-boot-starter-web</artifactId>
                 <version>${revision}</version>
             </dependency>

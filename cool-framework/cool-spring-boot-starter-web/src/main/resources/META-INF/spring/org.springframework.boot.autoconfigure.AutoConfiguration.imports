@@ -1,2 +1,3 @@
 com.xgblack.cool.framework.web.config.CoolWebMvcAutoConfiguration
 com.xgblack.cool.framework.apilog.config.CoolApiLogAutoConfiguration
+com.xgblack.cool.framework.banner.config.CoolBannerAutoConfiguration
