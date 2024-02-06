@@ -1,7 +1,7 @@
 package com.xgblack.cool.framework.security.core.authentication.support.core;
 
 import com.xgblack.cool.framework.common.constants.SecurityConstants;
-import com.xgblack.cool.framework.security.core.service.LoginUser;
+import com.xgblack.cool.framework.security.dto.LoginUser;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenClaimsContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenClaimsSet;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;

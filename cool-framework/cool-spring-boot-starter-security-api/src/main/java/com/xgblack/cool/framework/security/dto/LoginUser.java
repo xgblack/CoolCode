@@ -1,4 +1,4 @@
-package com.xgblack.cool.framework.security.core.service;
+package com.xgblack.cool.framework.security.dto;
 
 import lombok.Getter;
 import lombok.ToString;
