@@ -1,6 +1,7 @@
 package com.xgblack.cool.framework.common.utils.date;
 
-import cn.hutool.core.date.LocalDateTimeUtil;
+
+import org.dromara.hutool.core.date.TimeUtil;
 
 import java.time.*;
 import java.util.Calendar;
@@ -174,7 +175,7 @@ public class DateUtils {
      * @return 是否
      */
     public static boolean isToday(LocalDateTime date) {
-        return LocalDateTimeUtil.isSameDay(date, LocalDateTime.now());
+        return TimeUtil.isSameDay(date, LocalDateTime.now());
     }
 
 }

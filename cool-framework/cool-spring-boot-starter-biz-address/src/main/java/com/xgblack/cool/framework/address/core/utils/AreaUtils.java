@@ -1,18 +1,17 @@
 package com.xgblack.cool.framework.address.core.utils;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.date.TimeInterval;
-import cn.hutool.core.io.resource.ResourceUtil;
-import cn.hutool.core.lang.Assert;
-import cn.hutool.core.text.csv.CsvRow;
-import cn.hutool.core.text.csv.CsvUtil;
-import cn.hutool.core.util.StrUtil;
 import com.xgblack.cool.framework.address.core.Area;
 import com.xgblack.cool.framework.address.core.enums.AreaTypeEnum;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.collection.CollUtil;
+import org.dromara.hutool.core.convert.Convert;
+import org.dromara.hutool.core.date.StopWatch;
+import org.dromara.hutool.core.io.resource.ResourceUtil;
+import org.dromara.hutool.core.lang.Assert;
+import org.dromara.hutool.core.text.StrUtil;
+import org.dromara.hutool.poi.csv.CsvRow;
+import org.dromara.hutool.poi.csv.CsvUtil;
 
 import java.util.*;
 import java.util.function.Function;
@@ -36,12 +35,13 @@ public class AreaUtils {
     private static Map<Integer, Area> areas;
 
     private AreaUtils() {
-        TimeInterval timer = DateUtil.timer();
+        StopWatch interval = StopWatch.of();
+        interval.start();
 
         areas = new HashMap<>();
         areas.put(Area.ID_GLOBAL, new Area(Area.ID_GLOBAL, "全球", 0, null, new ArrayList<>()));
         // 从 csv 中加载数据
-        List<CsvRow> rows = CsvUtil.getReader().read(ResourceUtil.getUtf8Reader("address/area.csv")).getRows();
+        List<CsvRow> rows = CsvUtil.getReader().read(ResourceUtil.getUtf8Reader("address/area.csv"), true).getRows();
         rows.removeFirst(); // 删除 header
         for (CsvRow row : rows) {
             // 创建 Area 对象
@@ -58,8 +58,9 @@ public class AreaUtils {
             area.setParent(parent);
             parent.getChildren().add(area);
         }
+        interval.stop();
 
-        log.info("启动加载 AreaUtils 成功，耗时 ({}) 毫秒", timer.interval());
+        log.info("启动加载 AreaUtils 成功，耗时 ({}) 毫秒", interval.getLastTaskTimeMillis());
     }
 
     /**

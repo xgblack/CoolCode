@@ -1,8 +1,8 @@
 package com.xgblack.cool.framework.mybatis.listener;
 
-import cn.hutool.core.exceptions.ExceptionUtil;
 import com.mybatisflex.annotation.UpdateListener;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.exception.ExceptionUtil;
 
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;

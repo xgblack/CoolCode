@@ -1,11 +1,11 @@
 package com.xgblack.cool.framework.common.utils.validation;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.lang.Assert;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
+import org.dromara.hutool.core.collection.CollUtil;
+import org.dromara.hutool.core.lang.Assert;
 import org.springframework.util.StringUtils;
 
 import java.util.Set;

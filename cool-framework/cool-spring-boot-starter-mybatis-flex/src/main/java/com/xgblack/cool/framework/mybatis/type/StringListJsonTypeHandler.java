@@ -1,6 +1,6 @@
 package com.xgblack.cool.framework.mybatis.type;
 
-import cn.hutool.json.JSONUtil;
+import org.dromara.hutool.json.JSONUtil;
 import com.mybatisflex.core.handler.BaseJsonTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;

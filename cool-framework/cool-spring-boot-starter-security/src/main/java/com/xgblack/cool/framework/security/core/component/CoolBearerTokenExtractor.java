@@ -1,7 +1,7 @@
 package com.xgblack.cool.framework.security.core.component;
 
-import cn.hutool.core.util.StrUtil;
 import jakarta.servlet.http.HttpServletRequest;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;

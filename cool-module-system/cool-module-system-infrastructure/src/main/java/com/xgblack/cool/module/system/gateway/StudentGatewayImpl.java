@@ -1,7 +1,6 @@
 package com.xgblack.cool.module.system.gateway;
 
 
-import cn.hutool.core.util.StrUtil;
 import com.mybatisflex.core.query.QueryChain;
 import com.xgblack.cool.framework.common.pojo.dto.PageResult;
 import com.xgblack.cool.module.system.convertor.StudentConvertor;
@@ -11,6 +10,7 @@ import com.xgblack.cool.module.system.dto.student.StudentPageQry;
 import com.xgblack.cool.module.system.gateway.database.mapper.StudentMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.stereotype.Component;
 
 import static com.xgblack.cool.module.system.gateway.database.dataobject.table.StudentTableDef.STUDENT;

@@ -1,9 +1,9 @@
 package com.xgblack.cool.framework.common.validator;
 
-import cn.hutool.core.text.CharSequenceUtil;
-import cn.hutool.core.util.PhoneUtil;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import org.dromara.hutool.core.data.PhoneUtil;
+import org.dromara.hutool.core.text.CharSequenceUtil;
 
 /**
  * @author xg BLACK

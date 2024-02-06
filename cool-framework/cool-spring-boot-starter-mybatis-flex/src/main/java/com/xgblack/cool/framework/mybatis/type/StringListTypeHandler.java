@@ -1,11 +1,11 @@
 package com.xgblack.cool.framework.mybatis.type;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
 import org.apache.ibatis.type.MappedTypes;
 import org.apache.ibatis.type.TypeHandler;
+import org.dromara.hutool.core.collection.CollUtil;
+import org.dromara.hutool.core.text.split.SplitUtil;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -51,6 +51,6 @@ public class StringListTypeHandler implements TypeHandler<List<String>> {
         if (value == null) {
             return null;
         }
-        return StrUtil.splitTrim(value, COMMA);
+        return SplitUtil.splitTrim(value, COMMA);
     }
 }

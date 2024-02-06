@@ -1,6 +1,6 @@
 package com.xgblack.cool.framework.security.core.utils;
 
-import cn.hutool.core.map.MapUtil;
+import org.dromara.hutool.core.map.MapUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.experimental.UtilityClass;
 import org.springframework.security.oauth2.core.*;

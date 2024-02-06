@@ -29,7 +29,8 @@
         <lombok.version>1.18.30</lombok.version>
         <mapstruct.version>1.6.0.Beta1</mapstruct.version>
 
-        <hutool.version>5.8.25</hutool.version>
+        <hutool5.version>5.8.25</hutool5.version>
+        <hutool.version>6.0.0-M10</hutool.version>
         <minio.version>8.5.7</minio.version>
         <tobato.version>1.27.2</tobato.version>
         <caffeine.version>3.1.8</caffeine.version>
@@ -181,8 +182,9 @@
                 <version>${mapstruct.version}</version>
             </dependency>
             <!-- MapStruct end -->
+
             <dependency>
-                <groupId>cn.hutool</groupId>
+                <groupId>org.dromara.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>

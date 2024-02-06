@@ -1,11 +1,11 @@
 package com.xgblack.cool.framework.security.utils;
 
-import cn.hutool.core.io.resource.ResourceUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.crypto.asymmetric.KeyType;
-import cn.hutool.crypto.asymmetric.RSA;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.io.resource.ResourceUtil;
+import org.dromara.hutool.core.text.StrUtil;
+import org.dromara.hutool.crypto.asymmetric.KeyType;
+import org.dromara.hutool.crypto.asymmetric.RSA;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 

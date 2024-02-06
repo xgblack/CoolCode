@@ -1,9 +1,9 @@
 package com.xgblack.cool.framework.common.validator;
 
-import cn.hutool.core.util.StrUtil;
 import com.xgblack.cool.framework.common.utils.validation.ValidationUtils;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import org.dromara.hutool.core.text.StrUtil;
 
 /**
  * @author xg BLACK

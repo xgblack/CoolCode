@@ -1,10 +1,10 @@
 package com.xgblack.cool.framework.common.utils.spring;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.map.MapUtil;
-import cn.hutool.core.util.ArrayUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.dromara.hutool.core.array.ArrayUtil;
+import org.dromara.hutool.core.collection.CollUtil;
+import org.dromara.hutool.core.map.MapUtil;
 import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.expression.EvaluationContext;

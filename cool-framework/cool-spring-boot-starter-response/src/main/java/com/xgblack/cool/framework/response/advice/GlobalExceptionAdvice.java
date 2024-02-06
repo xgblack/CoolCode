@@ -1,7 +1,6 @@
 package com.xgblack.cool.framework.response.advice;
 
 
-import cn.hutool.core.exceptions.ExceptionUtil;
 import com.xgblack.cool.framework.common.annotation.response.ExceptionAliasFor;
 import com.xgblack.cool.framework.common.annotation.response.ExceptionMapper;
 import com.xgblack.cool.framework.common.constants.DefaultResponseConstants;
@@ -15,6 +14,7 @@ import com.xgblack.cool.framework.response.config.CoolResponseProperties;
 import com.xgblack.cool.framework.response.config.ExceptionAliasRegister;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.exception.ExceptionUtil;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

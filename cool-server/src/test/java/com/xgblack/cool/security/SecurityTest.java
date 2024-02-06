@@ -1,6 +1,6 @@
 package com.xgblack.cool.security;
 
-import cn.hutool.crypto.asymmetric.RSA;
+import org.dromara.hutool.crypto.asymmetric.RSA;
 import com.xgblack.cool.framework.security.utils.PasswdUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;

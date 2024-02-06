@@ -1,13 +1,12 @@
 package com.xgblack.cool.address;
 
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.date.TimeInterval;
-import cn.hutool.core.io.resource.ResourceUtil;
 import com.xgblack.cool.framework.address.core.Area;
 import com.xgblack.cool.framework.address.core.utils.AreaUtils;
 import com.xgblack.cool.framework.address.core.utils.IPUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.date.StopWatch;
+import org.dromara.hutool.core.io.resource.ResourceUtil;
 import org.junit.jupiter.api.Test;
 import org.lionsoul.ip2region.xdb.Searcher;
 
@@ -39,14 +38,16 @@ public class AddressTest {
         //String search = SEARCHER.search("153.35.178.4");
         //log.info("search = {}", search);
 
-        TimeInterval timer = DateUtil.timer(true);
+        StopWatch interval = StopWatch.of();
         //String ip = "153.35.178.4";
         //String ip = "1.0.171.8";
         //String ip = "127.0.0.1";
         String ip = "186.7.8.1";
 
+        interval.start();
         String region = SEARCHER.search(ip);
-        log.info("region: {}, ioCount: {}, took: {} μs", region, SEARCHER.getIOCount(), timer.interval());
+        interval.stop();
+        log.info("region: {}, ioCount: {}, took: {} μs", region, SEARCHER.getIOCount(), interval.getLastTaskTimeMillis());
 
     }
 
