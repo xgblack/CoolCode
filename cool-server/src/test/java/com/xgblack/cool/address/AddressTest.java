@@ -6,9 +6,17 @@ import com.xgblack.cool.framework.address.core.utils.IPUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.dromara.hutool.core.date.StopWatch;
+import org.dromara.hutool.core.io.file.FileUtil;
 import org.dromara.hutool.core.io.resource.ResourceUtil;
+import org.dromara.hutool.core.lang.Console;
+import org.dromara.hutool.poi.csv.CsvData;
+import org.dromara.hutool.poi.csv.CsvReader;
+import org.dromara.hutool.poi.csv.CsvRow;
+import org.dromara.hutool.poi.csv.CsvUtil;
 import org.junit.jupiter.api.Test;
 import org.lionsoul.ip2region.xdb.Searcher;
+
+import java.util.List;
 
 /**
  * @author <a href="https://www.xgblack.cn">xg black</a>
@@ -75,5 +83,25 @@ public class AddressTest {
     public void testArea(){
         Area area = AreaUtils.getArea(320200);
         log.info("id = {},name = {}", area.getId(), area.getName());
+    }
+
+    @Test
+    public void testCsv(){
+        //  /Users/xgblack/tmp/test.csv
+        CsvReader reader = CsvUtil.getReader();
+        //从文件中读取CSV数据
+        CsvData data = reader.read(FileUtil.file("/Users/xgblack/tmp/test.csv"));
+        List<CsvRow> rows = data.getRows();
+
+
+        for (int i = 1; i < rows.size(); i++) {
+            CsvRow csvRow = rows.get(i);
+            String id = csvRow.get(0);
+            String pid = csvRow.get(1) + "00";
+            String deep = "4";
+            String name = csvRow.get(7);
+            Console.log("{},{},{},{}", id, name, deep, pid);
+        }
+
     }
 }
