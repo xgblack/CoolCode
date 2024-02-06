@@ -1,6 +1,5 @@
 package com.xgblack.cool.framework.common.utils.web;
 
-import cn.hutool.core.codec.Base64;
 import com.xgblack.cool.framework.common.exception.BaseException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,6 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.NotNull;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
+import org.dromara.hutool.core.codec.binary.Base64;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.context.request.RequestContextHolder;

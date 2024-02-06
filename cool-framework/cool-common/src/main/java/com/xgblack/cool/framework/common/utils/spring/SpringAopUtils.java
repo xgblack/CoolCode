@@ -1,6 +1,6 @@
 package com.xgblack.cool.framework.common.utils.spring;
 
-import cn.hutool.core.bean.BeanUtil;
+import org.dromara.hutool.core.bean.BeanUtil;
 import org.springframework.aop.framework.AdvisedSupport;
 import org.springframework.aop.framework.AopProxy;
 import org.springframework.aop.support.AopUtils;

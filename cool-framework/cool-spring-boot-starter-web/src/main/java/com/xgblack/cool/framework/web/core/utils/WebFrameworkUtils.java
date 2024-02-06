@@ -1,8 +1,8 @@
 package com.xgblack.cool.framework.web.core.utils;
 
-import cn.hutool.core.util.NumberUtil;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
+import org.dromara.hutool.core.math.NumberUtil;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;

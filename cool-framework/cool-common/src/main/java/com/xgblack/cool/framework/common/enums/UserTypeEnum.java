@@ -1,9 +1,9 @@
 package com.xgblack.cool.framework.common.enums;
 
-import cn.hutool.core.util.ArrayUtil;
 import com.xgblack.cool.framework.common.core.IntArrayValuable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.dromara.hutool.core.array.ArrayUtil;
 
 import java.util.Arrays;
 

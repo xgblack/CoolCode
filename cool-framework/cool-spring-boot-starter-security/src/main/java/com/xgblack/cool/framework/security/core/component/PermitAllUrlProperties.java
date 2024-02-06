@@ -1,11 +1,11 @@
 package com.xgblack.cool.framework.security.core.component;
 
-import cn.hutool.core.util.ReUtil;
-import cn.hutool.extra.spring.SpringUtil;
 import com.xgblack.cool.framework.security.annotation.Inner;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.regex.ReUtil;
+import org.dromara.hutool.extra.spring.SpringUtil;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.annotation.AnnotationUtils;

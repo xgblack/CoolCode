@@ -1,6 +1,7 @@
 package com.xgblack.cool.framework.common.utils.date;
 
-import cn.hutool.core.date.LocalDateTimeUtil;
+
+import org.dromara.hutool.core.date.TimeUtil;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.time.temporal.TemporalAdjusters;
 
 /**
  * 时间工具类，用于 {@link LocalDateTime}
+ * TODO: 考虑不单独写工具类
  *
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
@@ -48,8 +50,7 @@ public class LocalDateTimeUtils {
         return LocalDateTime.of(year, mouth, day, 0, 0, 0);
     }
 
-    public static LocalDateTime[] buildBetweenTime(int year1, int mouth1, int day1,
-                                                   int year2, int mouth2, int day2) {
+    public static LocalDateTime[] buildBetweenTime(int year1, int mouth1, int day1, int year2, int mouth2, int day2) {
         return new LocalDateTime[]{buildTime(year1, mouth1, day1), buildTime(year2, mouth2, day2)};
     }
 
@@ -64,7 +65,7 @@ public class LocalDateTimeUtils {
         if (startTime == null || endTime == null) {
             return false;
         }
-        return LocalDateTimeUtil.isIn(LocalDateTime.now(), startTime, endTime);
+        return TimeUtil.isIn(LocalDateTime.now(), startTime, endTime);
     }
 
     /**
@@ -79,7 +80,7 @@ public class LocalDateTimeUtils {
             return false;
         }
         LocalDate nowDate = LocalDate.now();
-        return LocalDateTimeUtil.isIn(LocalDateTime.now(),
+        return TimeUtil.isIn(LocalDateTime.now(),
                 LocalDateTime.of(nowDate, LocalTime.parse(startTime)),
                 LocalDateTime.of(nowDate, LocalTime.parse(endTime)));
     }
@@ -95,7 +96,7 @@ public class LocalDateTimeUtils {
      */
     public static boolean isOverlap(LocalTime startTime1, LocalTime endTime1, LocalTime startTime2, LocalTime endTime2) {
         LocalDate nowDate = LocalDate.now();
-        return LocalDateTimeUtil.isOverlap(LocalDateTime.of(nowDate, startTime1), LocalDateTime.of(nowDate, endTime1),
+        return TimeUtil.isOverlap(LocalDateTime.of(nowDate, startTime1), LocalDateTime.of(nowDate, endTime1),
                 LocalDateTime.of(nowDate, startTime2), LocalDateTime.of(nowDate, endTime2));
     }
 

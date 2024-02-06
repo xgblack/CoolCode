@@ -1,11 +1,11 @@
 package com.xgblack.cool.framework.security.core.utils;
 
-import cn.hutool.core.util.StrUtil;
 import com.xgblack.cool.framework.common.constants.SecurityConstants;
 import com.xgblack.cool.framework.security.core.service.LoginUser;
 import com.xgblack.cool.framework.web.core.utils.WebFrameworkUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.experimental.UtilityClass;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.lang.Nullable;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

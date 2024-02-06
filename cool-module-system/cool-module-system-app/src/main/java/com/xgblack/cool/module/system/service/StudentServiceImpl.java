@@ -1,6 +1,6 @@
 package com.xgblack.cool.module.system.service;
 
-import cn.hutool.core.lang.Assert;
+import org.dromara.hutool.core.lang.Assert;
 import com.xgblack.cool.framework.common.pojo.dto.PageResult;
 import com.xgblack.cool.module.system.api.StudentServiceI;
 import com.xgblack.cool.module.system.dto.student.StudentAddCmd;

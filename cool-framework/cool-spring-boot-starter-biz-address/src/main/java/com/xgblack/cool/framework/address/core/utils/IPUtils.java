@@ -1,13 +1,13 @@
 package com.xgblack.cool.framework.address.core.utils;
 
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.date.TimeInterval;
-import cn.hutool.core.io.resource.ResourceUtil;
-import cn.hutool.core.util.StrUtil;
 import com.xgblack.cool.framework.address.core.Area;
 import com.xgblack.cool.framework.common.address.IPInfo;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.date.StopWatch;
+import org.dromara.hutool.core.io.resource.ResourceUtil;
+import org.dromara.hutool.core.text.StrUtil;
+import org.dromara.hutool.core.text.split.SplitUtil;
 import org.lionsoul.ip2region.xdb.Searcher;
 
 import java.io.IOException;
@@ -46,11 +46,13 @@ public class IPUtils {
      */
     private IPUtils() {
         try {
-            TimeInterval timer = DateUtil.timer();
+            StopWatch interval = StopWatch.of();
+            interval.start();
 
             byte[] bytes = ResourceUtil.readBytes("address/ip2region.xdb");
             SEARCHER = Searcher.newWithBuffer(bytes);
-            log.info("启动加载 IPUtils 成功，耗时 ({}) 毫秒", timer.interval());
+            interval.stop();
+            log.info("启动加载 IPUtils 成功，耗时 ({}) 毫秒", interval.getLastTaskTimeMillis());
         } catch (IOException e) {
             log.error("启动加载 IPUtils 失败", e);
         }
@@ -67,7 +69,7 @@ public class IPUtils {
         if (StrUtil.isBlank(originalInfo)) {
             return null;
         }
-        List<String> split = StrUtil.split(originalInfo, DEFAULT_SEPARATOR);
+        List<String> split = SplitUtil.split(originalInfo, DEFAULT_SEPARATOR);
         //国家|区域|省份|城市|ISP    缺省为0
         //中国|0|江苏省|无锡市|联通
         String country = DEFAULT_NO_VALUE.equals(split.get(0)) ? null : split.get(0);

@@ -16,13 +16,13 @@
 
 package com.xgblack.cool.framework.security.core.authentication.support.handler;
 
-import cn.hutool.core.util.CharsetUtil;
-import cn.hutool.http.HttpUtil;
 import com.xgblack.cool.framework.common.utils.web.WebUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.net.url.UrlEncoder;
+import org.dromara.hutool.core.util.CharsetUtil;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
@@ -35,7 +35,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 public class FormAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
 	/**
-	 * 当身份验证尝试失败时调用。FIXME
+	 * 当身份验证尝试失败时调用。FIXME: 优化
 	 * @param request the request during which the authentication attempt occurred.
 	 * @param response the response.
 	 * @param exception the exception which was thrown to reject the authentication
@@ -44,7 +44,7 @@ public class FormAuthenticationFailureHandler implements AuthenticationFailureHa
 	@SneakyThrows
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) {
 		log.debug("表单登录失败:{}", exception.getLocalizedMessage());
-		String url = HttpUtil.encodeParams(String.format("/token/login?error=%s", exception.getMessage()), CharsetUtil.CHARSET_UTF_8);
+		String url = UrlEncoder.encodeAll(String.format("/token/login?error=%s", exception.getMessage()), CharsetUtil.UTF_8);
 		WebUtils.getResponse().sendRedirect(url);
 	}
 

@@ -1,6 +1,5 @@
 package com.xgblack.cool.module.system.gateway;
 
-import cn.hutool.core.util.StrUtil;
 import com.mybatisflex.core.query.QueryChain;
 import com.mybatisflex.core.update.UpdateChain;
 import com.xgblack.cool.framework.common.pojo.dto.PageResult;
@@ -15,6 +14,7 @@ import com.xgblack.cool.module.system.dto.user.UserPageQry;
 import com.xgblack.cool.module.system.gateway.database.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.stereotype.Component;
 
 import static com.xgblack.cool.module.system.gateway.database.dataobject.table.UserTableDef.USER;

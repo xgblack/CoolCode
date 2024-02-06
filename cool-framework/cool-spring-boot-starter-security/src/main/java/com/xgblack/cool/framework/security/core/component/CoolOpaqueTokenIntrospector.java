@@ -1,6 +1,6 @@
 package com.xgblack.cool.framework.security.core.component;
 
-import cn.hutool.extra.spring.SpringUtil;
+import org.dromara.hutool.extra.spring.SpringUtil;
 import com.xgblack.cool.framework.common.constants.SecurityConstants;
 import com.xgblack.cool.framework.security.core.service.CoolUserDetailsService;
 import com.xgblack.cool.framework.security.core.service.LoginUser;

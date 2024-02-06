@@ -1,6 +1,6 @@
 package com.xgblack.cool.framework.banner.core;
 
-import cn.hutool.core.thread.ThreadUtil;
+import org.dromara.hutool.core.thread.ThreadUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;

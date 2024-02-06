@@ -1,9 +1,9 @@
 package com.xgblack.cool.framework.security.core.service;
 
-import cn.hutool.core.util.ArrayUtil;
 import com.xgblack.cool.framework.common.constants.SecurityConstants;
 import com.xgblack.cool.framework.security.dto.SysUser;
 import com.xgblack.cool.framework.security.dto.UserInfo;
+import org.dromara.hutool.core.array.ArrayUtil;
 import org.springframework.core.Ordered;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;

@@ -1,13 +1,13 @@
 package com.xgblack.cool.framework.security.core.service;
 
-import cn.hutool.core.util.BooleanUtil;
-import cn.hutool.core.util.StrUtil;
 import com.xgblack.cool.framework.common.constants.CacheConstants;
 import com.xgblack.cool.framework.common.constants.SecurityConstants;
 import com.xgblack.cool.framework.security.dto.SysOauthClientDetails;
 import com.xgblack.cool.framework.security.service.RemoteClientDetailsService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.dromara.hutool.core.text.StrUtil;
+import org.dromara.hutool.core.util.BooleanUtil;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;

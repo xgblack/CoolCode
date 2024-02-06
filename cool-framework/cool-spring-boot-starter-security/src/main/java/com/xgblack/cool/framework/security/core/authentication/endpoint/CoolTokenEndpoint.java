@@ -1,6 +1,5 @@
 package com.xgblack.cool.framework.security.core.authentication.endpoint;
 
-import cn.hutool.core.util.StrUtil;
 import com.xgblack.cool.framework.common.constants.CacheConstants;
 import com.xgblack.cool.framework.security.annotation.Inner;
 import com.xgblack.cool.framework.security.core.authentication.support.handler.CoolAuthenticationFailureEventHandler;
@@ -12,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.cache.CacheManager;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpHeaders;
