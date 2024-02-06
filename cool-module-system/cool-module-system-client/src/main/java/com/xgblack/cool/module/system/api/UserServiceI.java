@@ -24,5 +24,7 @@ public interface UserServiceI {
 
     void editPassword(UserEditPasswordCmd cmd);
 
-    void editUserProfile(UserProfileEditCmd cmd);
+    void editUserProfile(Long id, UserProfileEditCmd cmd);
+
+    void editUserPassword(Long loginUserId, String oldPassword, String newPassword);
 }

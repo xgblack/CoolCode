@@ -1,11 +1,15 @@
 package com.xgblack.cool.module.system.web;
 
+import com.xgblack.cool.framework.common.utils.response.CoolThrowable;
+import com.xgblack.cool.framework.security.utils.SecurityUtils;
 import com.xgblack.cool.module.system.api.UserServiceI;
 import com.xgblack.cool.module.system.dto.user.UserProfileEditCmd;
 import com.xgblack.cool.module.system.dto.user.UserProfileEditPasswordCmd;
+import com.xgblack.cool.module.system.dto.user.clientobject.UserCO;
 import com.xgblack.cool.module.system.dto.user.clientobject.UserProfileDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.dromara.hutool.core.lang.Assert;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,6 +34,7 @@ public class UserProfileController {
      */
     @GetMapping
     public UserProfileDTO info() {
+        UserCO userCO = userService.getDetail(getLoginUserId());
         /*AdminUserDO user = userService.getUser(id);
         // 拼接数据
         DeptDO dept = deptService.getDept(user.getDeptId());
@@ -46,7 +51,7 @@ public class UserProfileController {
     @PutMapping
     //@Operation(summary = "修改用户个人信息")
     public void updateUserProfile(@Valid @RequestBody UserProfileEditCmd cmd) {
-        userService.editUserProfile(cmd);
+        userService.editUserProfile(getLoginUserId(), cmd);
     }
 
     /**
@@ -56,7 +61,7 @@ public class UserProfileController {
     @PutMapping("/update-password")
     //@Operation(summary = "修改用户个人密码")
     public void updateUserProfilePassword(@Valid @RequestBody UserProfileEditPasswordCmd cmd) {
-        //userService.updateUserPassword(getLoginUserId(), reqVO);
+        userService.editUserPassword(getLoginUserId(), cmd.getOldPassword(), cmd.getNewPassword());
     }
 
     /**
@@ -73,6 +78,12 @@ public class UserProfileController {
         }
         String avatar = userService.updateUserAvatar(getLoginUserId(), file.getInputStream());*/
         return null;
+    }
+
+    private Long getLoginUserId() {
+        Long loginUserId = SecurityUtils.getLoginUserId();
+        CoolThrowable.wrapAssert(() -> Assert.notNull(loginUserId, "未登录用户不能修改个人信息"));
+        return loginUserId;
     }
 
 }

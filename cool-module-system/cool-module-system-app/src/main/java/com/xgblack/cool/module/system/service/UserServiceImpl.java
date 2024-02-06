@@ -27,6 +27,8 @@ public class UserServiceImpl implements UserServiceI {
     private final UserPageQryExe userPageQryExe;
     private final UserEditLockedCmdExe userEditLockedCmdExe;
     private final UserEditPasswordCmdExe userEditPasswordCmdExe;
+    private final UserProfileEditCmdExe userProfileEditCmdExe;
+    private final UserProfileEditPasswordCmdExe userProfileEditPasswordCmdExe;
 
     @Override
     public void save(UserAddCmd cmd) {
@@ -64,8 +66,13 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
-    public void editUserProfile(UserProfileEditCmd cmd) {
+    public void editUserProfile(Long id, UserProfileEditCmd cmd) {
+        userProfileEditCmdExe.execute(id, cmd);
+    }
 
+    @Override
+    public void editUserPassword(Long loginUserId, String oldPassword, String newPassword) {
+        userProfileEditPasswordCmdExe.execute(loginUserId, oldPassword, newPassword);
     }
 
 }
