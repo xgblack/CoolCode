@@ -1,22 +1,17 @@
-package com.xgblack.cool.module.system.gateway.database.dataobject;
+package com.xgblack.cool.module.system.dto.permission.clientobject;
 
-import com.mybatisflex.annotation.Column;
-import com.mybatisflex.annotation.Id;
-import com.mybatisflex.annotation.KeyType;
-import com.mybatisflex.annotation.Table;
-import com.xgblack.cool.framework.core.db.TenantBaseDO;
-import com.xgblack.cool.framework.mybatis.listener.DataInsertListener;
-import com.xgblack.cool.framework.mybatis.listener.DataUpdateListener;
-import com.xgblack.cool.framework.mybatis.type.LongSetJsonTypeHandler;
+import com.xgblack.cool.framework.common.pojo.ClientObject;
 import com.xgblack.cool.module.system.common.enums.permission.DataScopeEnum;
 import com.xgblack.cool.module.system.common.enums.permission.RoleTypeEnum;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
- * 角色 DO
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 
@@ -24,14 +19,11 @@ import java.util.Set;
 @Setter
 @ToString
 @Accessors(chain = true)
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(value = "sys_role", onInsert = DataInsertListener.class, onUpdate = DataUpdateListener.class)
-public class RoleDO extends TenantBaseDO {
+public class RoleCO extends ClientObject {
+
     /**
      * 角色ID
      */
-    @Id(keyType = KeyType.Auto)
     private Long id;
     /**
      * 角色名称
@@ -73,7 +65,8 @@ public class RoleDO extends TenantBaseDO {
      *
      * 适用于 {@link #dataScope} 的值为 {@link DataScopeEnum#DEPT_CUSTOM} 时
      */
-    @Column(typeHandler = LongSetJsonTypeHandler.class)
     private Set<Long> dataScopeDeptIds;
+
+    private LocalDateTime createTime;
 
 }
