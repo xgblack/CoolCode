@@ -4,8 +4,7 @@ import com.mybatisflex.annotation.Column;
 import com.mybatisflex.annotation.Id;
 import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.annotation.Table;
-import com.xgblack.cool.framework.mybatis.listener.DataInsertListener;
-import com.xgblack.cool.framework.mybatis.listener.DataUpdateListener;
+import com.xgblack.cool.framework.mybatis.dataobject.TenantBaseDO;
 import com.xgblack.cool.framework.mybatis.type.StringListJsonTypeHandler;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,10 +22,11 @@ import java.util.List;
  */
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @Accessors(chain = true)
-@Table(value = "test_student", onInsert = DataInsertListener.class, onUpdate = DataUpdateListener.class)
-public class StudentDO {
+@Table(value = "test_student")
+public class StudentDO extends TenantBaseDO {
+
     @Id(keyType = KeyType.Auto)
     private Long id;
 
@@ -44,6 +44,10 @@ public class StudentDO {
     @Column(typeHandler = StringListJsonTypeHandler.class)
     private List<String> hobby;
 
-    private LocalDateTime createTime;
-    private LocalDateTime updateTime;
+    /**
+     * 是否删除
+     */
+    @Column(isLogicDelete = true)
+    private Boolean deleted;
+
 }

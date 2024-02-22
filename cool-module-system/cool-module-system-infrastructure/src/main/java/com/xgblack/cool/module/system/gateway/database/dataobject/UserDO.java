@@ -4,10 +4,9 @@ import com.mybatisflex.annotation.Column;
 import com.mybatisflex.annotation.Id;
 import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.annotation.Table;
-import com.xgblack.cool.framework.core.db.TenantBaseDO;
-import com.xgblack.cool.framework.mybatis.listener.DataInsertListener;
-import com.xgblack.cool.framework.mybatis.listener.DataUpdateListener;
+import com.xgblack.cool.framework.mybatis.dataobject.TenantBaseDO;
 import com.xgblack.cool.framework.mybatis.type.LongSetJsonTypeHandler;
+import com.xgblack.cool.module.system.common.enums.base.SexEnum;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -24,7 +23,7 @@ import java.util.Set;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(value = "sys_user", onInsert = DataInsertListener.class, onUpdate = DataUpdateListener.class)
+@Table(value = "sys_user")
 public class UserDO extends TenantBaseDO {
     /**
      * 用户ID
@@ -116,4 +115,10 @@ public class UserDO extends TenantBaseDO {
      * 开源中国唯一标识
      */
     private String oscId;
+
+    /**
+     * 是否删除
+     */
+    @Column(isLogicDelete = true)
+    private Boolean deleted;
 }

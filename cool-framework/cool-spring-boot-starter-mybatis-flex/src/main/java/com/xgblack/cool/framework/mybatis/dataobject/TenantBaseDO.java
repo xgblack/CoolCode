@@ -1,15 +1,17 @@
-package com.xgblack.cool.framework.core.db;
+package com.xgblack.cool.framework.mybatis.dataobject;
 
-import com.xgblack.cool.framework.mybatis.dataobject.BaseDO;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
+import lombok.experimental.FieldNameConstants;
 
 /**
  * 拓展多租户的 BaseDO 基类
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 
-@Data
+@Getter
+@Setter
+@ToString(callSuper = true)
+@FieldNameConstants
 @EqualsAndHashCode(callSuper = true)
 public abstract class TenantBaseDO extends BaseDO {
 

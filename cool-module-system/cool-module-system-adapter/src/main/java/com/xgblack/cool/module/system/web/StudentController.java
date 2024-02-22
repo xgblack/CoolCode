@@ -90,8 +90,9 @@ public class StudentController {
      * @param cmd
      */
     @PutMapping
-    public void edit(@RequestBody @Validated StudentEditCmd cmd) {
+    public boolean edit(@RequestBody @Validated StudentEditCmd cmd) {
         studentService.update(cmd);
+        return true;
     }
 
 }

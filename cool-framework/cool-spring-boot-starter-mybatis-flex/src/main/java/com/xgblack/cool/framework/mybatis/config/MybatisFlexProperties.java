@@ -2,13 +2,12 @@ package com.xgblack.cool.framework.mybatis.config;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
+ * MybatisFlex配置
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
-@Slf4j
 @Setter
 @Getter
 @ConfigurationProperties(prefix = "cc.sql")

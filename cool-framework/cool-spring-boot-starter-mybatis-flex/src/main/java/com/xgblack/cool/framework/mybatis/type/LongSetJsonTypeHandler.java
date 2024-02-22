@@ -14,6 +14,7 @@ import java.util.Set;
  * Set<Long>与json字符串转换
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
+
 @MappedJdbcTypes(JdbcType.VARCHAR)
 @MappedTypes(Set.class)
 public class LongSetJsonTypeHandler extends BaseJsonTypeHandler<Set<Long>> {

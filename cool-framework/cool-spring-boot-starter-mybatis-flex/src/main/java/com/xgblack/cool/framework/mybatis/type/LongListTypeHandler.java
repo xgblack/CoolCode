@@ -16,8 +16,7 @@ import java.util.List;
 
 /**
  * List 与 逗号分隔 Long 转换
- * @author xg black
- * @date 2023/11/23 16:09
+ * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 @MappedJdbcTypes(JdbcType.VARCHAR)
 @MappedTypes(List.class)

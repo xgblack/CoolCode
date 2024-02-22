@@ -3,15 +3,20 @@ package com.xgblack.cool.framework.mybatis.config;
 import com.mybatisflex.core.FlexGlobalConfig;
 import com.mybatisflex.core.audit.AuditManager;
 import com.mybatisflex.spring.boot.MyBatisFlexCustomizer;
+import com.xgblack.cool.framework.mybatis.dataobject.BaseDO;
+import com.xgblack.cool.framework.mybatis.listener.DataInsertListener;
+import com.xgblack.cool.framework.mybatis.listener.DataUpdateListener;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
- * @author xg BLACK
- * @date 2023/12/24 15:41
+ * MybatisFlex自动配置类
+ *
+ * @author <a href="https://www.xgblack.cn">xg black</a>
  */
+
 @Slf4j
 @AutoConfiguration
 @EnableConfigurationProperties(MybatisFlexProperties.class)
@@ -36,5 +41,10 @@ public class CoolMybatisAutoConfiguration implements MyBatisFlexCustomizer {
         AuditManager.setMessageCollector(auditMessage ->
                 log.debug("SQL audit [{}ms] :  ==>  {}   ", auditMessage.getElapsedTime(), auditMessage.getFullSql())
         );
+
+        //注册数据全局注入
+        globalConfig.registerInsertListener(new DataInsertListener(), BaseDO.class);//TODO: 考虑是否增加租户自动注入
+        globalConfig.registerUpdateListener(new DataUpdateListener(), BaseDO.class);
+
     }
 }

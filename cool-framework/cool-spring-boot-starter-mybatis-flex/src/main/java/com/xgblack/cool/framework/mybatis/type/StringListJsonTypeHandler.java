@@ -10,8 +10,7 @@ import java.util.List;
 
 /**
  * List<Price> 与 json字符串 互转
- * @author xg black
- * @date 2023/11/22 17:38
+ * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 
 @MappedJdbcTypes(JdbcType.VARCHAR)
