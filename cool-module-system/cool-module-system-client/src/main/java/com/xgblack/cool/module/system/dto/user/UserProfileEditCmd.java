@@ -37,7 +37,7 @@ public class UserProfileEditCmd extends Command {
      * 手机号码
      */
     @Length(min = 11, max = 11, message = "手机号长度必须 11 位")
-    private String mobile;
+    private String phone;
 
     /**
      * 用户性别

@@ -1,11 +1,11 @@
 package com.xgblack.cool.module.system.gateway.database.dataobject;
 
+import com.mybatisflex.annotation.Column;
 import com.mybatisflex.annotation.Id;
 import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.annotation.Table;
-import com.xgblack.cool.framework.core.db.TenantBaseDO;
-import com.xgblack.cool.framework.mybatis.listener.DataInsertListener;
-import com.xgblack.cool.framework.mybatis.listener.DataUpdateListener;
+import com.xgblack.cool.framework.mybatis.dataobject.TenantBaseDO;
+import com.xgblack.cool.module.system.common.enums.permission.MenuTypeEnum;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -20,7 +20,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(value = "sys_menu", onInsert = DataInsertListener.class, onUpdate = DataUpdateListener.class)
+@Table(value = "sys_menu")
 public class MenuDO extends TenantBaseDO {
     /**
      * 菜单编号 - 根节点
@@ -105,5 +105,11 @@ public class MenuDO extends TenantBaseDO {
      * 如果为 false 时，当该菜单只有一个子菜单时，不展示自己，直接展示子菜单
      */
     private Boolean alwaysShow;
+
+    /**
+     * 是否删除
+     */
+    @Column(isLogicDelete = true)
+    private Boolean deleted;
 
 }

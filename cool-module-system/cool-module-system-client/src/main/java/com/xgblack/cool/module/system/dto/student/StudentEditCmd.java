@@ -1,6 +1,7 @@
 package com.xgblack.cool.module.system.dto.student;
 
 import com.xgblack.cool.framework.common.pojo.dto.Command;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -17,7 +18,9 @@ import java.util.List;
 @Accessors(chain = true)
 public class StudentEditCmd extends Command {
 
+    @NotNull
     private Long id;
+
     private String name;
     private Integer age;
     private LocalDateTime birthday;

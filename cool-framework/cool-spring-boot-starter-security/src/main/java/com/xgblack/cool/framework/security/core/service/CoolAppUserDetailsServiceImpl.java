@@ -2,6 +2,7 @@ package com.xgblack.cool.framework.security.core.service;
 
 import com.xgblack.cool.framework.common.constants.CacheConstants;
 import com.xgblack.cool.framework.common.constants.SecurityConstants;
+import com.xgblack.cool.framework.security.dto.LoginUser;
 import com.xgblack.cool.framework.security.dto.UserInfo;
 import com.xgblack.cool.framework.security.service.RemoteUserService;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,7 @@
 package com.xgblack.cool.framework.security.core.service;
 
 import com.xgblack.cool.framework.common.constants.SecurityConstants;
+import com.xgblack.cool.framework.security.dto.LoginUser;
 import com.xgblack.cool.framework.security.dto.SysUser;
 import com.xgblack.cool.framework.security.dto.UserInfo;
 import org.dromara.hutool.core.array.ArrayUtil;

@@ -11,6 +11,7 @@ import com.xgblack.cool.module.system.domain.gateway.UserGateway;
 import com.xgblack.cool.module.system.domain.user.User;
 import com.xgblack.cool.module.system.dto.user.UserEditLockedCmd;
 import com.xgblack.cool.module.system.dto.user.UserPageQry;
+import com.xgblack.cool.module.system.dto.user.UserProfileEditCmd;
 import com.xgblack.cool.module.system.gateway.database.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -100,6 +101,17 @@ public class UserGatewayImpl implements UserGateway, RemoteUserService {
     public void updatePassword(Long id, String password) {
         UpdateChain.of(userMapper)
                 .set(USER.PASSWORD, password)
+                .where(USER.ID.eq(id))
+                .update();
+    }
+
+    @Override
+    public void updateUserProfile(Long id, UserProfileEditCmd cmd) {
+        UpdateChain.of(userMapper)
+                .set(USER.NICKNAME, cmd.getNickname(), StrUtil.isNotBlank(cmd.getNickname()))
+                .set(USER.EMAIL, cmd.getEmail(), StrUtil.isNotBlank(cmd.getEmail()))
+                .set(USER.PHONE, cmd.getPhone(), StrUtil.isNotBlank(cmd.getPhone()))
+                .set(USER.SEX, cmd.getSex(), cmd.getSex() != null)
                 .where(USER.ID.eq(id))
                 .update();
     }

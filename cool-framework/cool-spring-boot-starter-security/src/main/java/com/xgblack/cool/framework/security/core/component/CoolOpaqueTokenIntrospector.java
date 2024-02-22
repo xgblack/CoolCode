@@ -3,7 +3,7 @@ package com.xgblack.cool.framework.security.core.component;
 import org.dromara.hutool.extra.spring.SpringUtil;
 import com.xgblack.cool.framework.common.constants.SecurityConstants;
 import com.xgblack.cool.framework.security.core.service.CoolUserDetailsService;
-import com.xgblack.cool.framework.security.core.service.LoginUser;
+import com.xgblack.cool.framework.security.dto.LoginUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;

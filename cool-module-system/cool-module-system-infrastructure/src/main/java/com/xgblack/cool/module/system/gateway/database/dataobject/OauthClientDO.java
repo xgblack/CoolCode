@@ -5,8 +5,6 @@ import com.mybatisflex.annotation.Id;
 import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.annotation.Table;
 import com.xgblack.cool.framework.mybatis.dataobject.BaseDO;
-import com.xgblack.cool.framework.mybatis.listener.DataInsertListener;
-import com.xgblack.cool.framework.mybatis.listener.DataUpdateListener;
 import com.xgblack.cool.framework.mybatis.type.StringListTypeHandler;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -23,7 +21,7 @@ import java.util.List;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(value = "sys_oauth_client_detail", onInsert = DataInsertListener.class, onUpdate = DataUpdateListener.class)
+@Table(value = "sys_oauth_client_detail")
 public class OauthClientDO extends BaseDO {//TODO:看是否适配多租户
 
     @Serial
@@ -87,6 +85,12 @@ public class OauthClientDO extends BaseDO {//TODO:看是否适配多租户
      * 是否自动放行
      */
     private String autoapprove;
+
+    /**
+     * 是否删除
+     */
+    @Column(isLogicDelete = true)
+    private Boolean deleted;
 
 
 }
