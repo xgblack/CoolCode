@@ -1,9 +1,9 @@
 package com.xgblack.cool.framework.common.validator;
 
-import cn.hutool.core.collection.CollUtil;
 import com.xgblack.cool.framework.common.core.IntArrayValuable;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import org.dromara.hutool.core.collection.CollUtil;
 
 import java.util.Arrays;
 import java.util.Collection;

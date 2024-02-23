@@ -1,10 +1,5 @@
 package com.xgblack.cool.framework.security.core.authentication.support.core;
 
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.crypto.Mode;
-import cn.hutool.crypto.Padding;
-import cn.hutool.crypto.symmetric.AES;
-import cn.hutool.extra.spring.SpringUtil;
 import com.xgblack.cool.framework.common.constants.SecurityConstants;
 import com.xgblack.cool.framework.common.utils.web.WebUtils;
 import com.xgblack.cool.framework.security.core.service.CoolUserDetailsService;
@@ -12,8 +7,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.text.StrUtil;
+import org.dromara.hutool.extra.spring.SpringUtil;
 import org.springframework.core.Ordered;
-import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,8 +26,6 @@ import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.web.authentication.www.BasicAuthenticationConverter;
 import org.springframework.util.Assert;
 
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Optional;
@@ -167,7 +161,7 @@ public class CoolDaoUserDetailsAuthenticationProvider extends AbstractUserDetail
 
     /**
      * 设置用于编码和验证密码的PasswordEncoder实例。如果未设置，密码将使用 {@link PasswordEncoderFactories#createDelegatingPasswordEncoder()}
-     *
+     * <p>DelegatingPasswordEncoder能够根据密码前缀来确定密码编码器</p>
      * @param passwordEncoder must be an instance of one of the {@code PasswordEncoder} types.
      */
     public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
@@ -185,16 +179,6 @@ public class CoolDaoUserDetailsAuthenticationProvider extends AbstractUserDetail
         return this.userDetailsService;
     }
 
-    /**
-     * 密码解密
-     *
-     * @param presentedPassword 加密密码
-     */
-    private String decode(String presentedPassword) {
-        // 构建前端对应解密AES 因子 FIXME: 优化为非对称加密
-        String key = SpringUtil.getBean(Environment.class).getProperty("gateway.encodeKey", "pigxpigxpigxpigx");
-        AES aes = new AES(Mode.CFB, Padding.NoPadding, new SecretKeySpec(key.getBytes(), "AES"), new IvParameterSpec(key.getBytes()));
-        return aes.decryptStr(presentedPassword);
-    }
+
 
 }

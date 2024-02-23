@@ -35,7 +35,7 @@
             <artifactId>guava</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.hutool</groupId>
+            <groupId>org.dromara.hutool</groupId>
             <artifactId>hutool-all</artifactId>
         </dependency>
 
@@ -47,13 +47,13 @@
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
-            <scope>provided</scope> <!-- 设置为 provided，主要是 PageParam 使用到 -->
+            <scope>provided</scope> <!-- 设置为 provided，主要是 PageQuery 使用到 -->
         </dependency>
         <!--Mybatis Flex-->
         <dependency>
             <groupId>com.mybatis-flex</groupId>
-            <artifactId>mybatis-flex-spring-boot-starter</artifactId>
-            <scope>provided</scope> <!-- 设置为 provided，主要是 PageParam PageResult 使用到 -->
+            <artifactId>mybatis-flex-core</artifactId>
+            <scope>provided</scope> <!-- 设置为 provided，主要是 PageQuery PageResult 使用到 -->
         </dependency>
 
         <!-- Spring 核心 -->

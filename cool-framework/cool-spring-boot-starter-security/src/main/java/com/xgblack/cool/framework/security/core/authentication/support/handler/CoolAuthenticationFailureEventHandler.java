@@ -16,7 +16,6 @@
 
 package com.xgblack.cool.framework.security.core.authentication.support.handler;
 
-import cn.hutool.core.util.StrUtil;
 import com.xgblack.cool.framework.common.constants.SecurityConstants;
 import com.xgblack.cool.framework.common.utils.i18n.MsgUtils;
 import com.xgblack.cool.framework.common.utils.response.CoolRespUtils;
@@ -24,6 +23,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;

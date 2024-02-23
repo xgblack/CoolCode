@@ -1,6 +1,6 @@
 package com.xgblack.cool.framework.security.core.authentication.support.base;
 
-import cn.hutool.extra.spring.SpringUtil;
+import org.dromara.hutool.extra.spring.SpringUtil;
 import com.xgblack.cool.framework.security.core.utils.OAuth2ErrorCodesExpand;
 import com.xgblack.cool.framework.security.core.utils.ScopeException;
 import lombok.extern.slf4j.Slf4j;

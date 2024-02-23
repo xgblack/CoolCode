@@ -1,7 +1,7 @@
 package com.xgblack.cool.module.system.web;
 
 
-import com.xgblack.cool.framework.common.pojo.PageResult;
+import com.xgblack.cool.framework.common.pojo.dto.PageResult;
 import com.xgblack.cool.module.system.api.StudentServiceI;
 import com.xgblack.cool.module.system.dto.student.StudentAddCmd;
 import com.xgblack.cool.module.system.dto.student.StudentEditCmd;
@@ -90,8 +90,9 @@ public class StudentController {
      * @param cmd
      */
     @PutMapping
-    public void edit(@RequestBody @Validated StudentEditCmd cmd) {
+    public boolean edit(@RequestBody @Validated StudentEditCmd cmd) {
         studentService.update(cmd);
+        return true;
     }
 
 }

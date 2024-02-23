@@ -2,6 +2,7 @@ package com.xgblack.cool.framework.common.constants;
 
 /**
  * 默认的响应码和提示信息
+ * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 public interface DefaultResponseConstants {
 

@@ -1,6 +1,6 @@
 package com.xgblack.cool.module.system.dto.student;
 
-import com.xgblack.cool.framework.common.pojo.PageParam;
+import com.xgblack.cool.framework.common.pojo.dto.PageQuery;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
 @Setter
 @ToString
 @Accessors(chain = true)
-public class StudentPageQry extends PageParam {
+public class StudentPageQry extends PageQuery {
 
     private String name;
 

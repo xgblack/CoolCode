@@ -1,20 +1,20 @@
 package com.xgblack.cool.framework.common.convertor;
 
 import com.mybatisflex.core.paginate.Page;
-import com.xgblack.cool.framework.common.pojo.PageResult;
+import com.xgblack.cool.framework.common.pojo.dto.PageResult;
 
 import java.util.List;
 
 /**
  * 公共对象转换接口
  *
- * 自下而上 convertXXXXX  自上而下 toXXXXX
- * CO和DO直接转换使用ClientObj,CO和Entity使用简写CO
- * DTO往下层对象转换需要在实现类自己定义
+ * <p>自下而上 convertXXXXX  自上而下 toXXXXX
+ * <p>CO和DO直接转换使用ClientObj,CO和Entity使用简写CO
+ * <p>DTO往下层对象转换需要在实现类自己定义
  *
- *  C 客户端对象CO, E 领域实体Entity , D 数据库对象DO
- * @author xg BLACK
- * @date 2023/12/23 19:28
+ * <p>C 客户端对象CO, E 领域实体Entity , D 数据库对象DO
+ *
+ * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 
 public interface Convertor<C, E, D> {

@@ -4,7 +4,7 @@ package com.xgblack.cool.framework.common.response.api;
 import com.xgblack.cool.framework.common.response.ResponseStatus;
 
 /**
- * @author <a href="mailto:qinyujie@gingo.cn">Yujie</a>
+ * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 public interface ResponseStatusFactory {
     /**

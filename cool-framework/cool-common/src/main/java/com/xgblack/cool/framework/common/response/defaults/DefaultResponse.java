@@ -12,7 +12,6 @@ import java.util.Collections;
 /**
  * 默认响应体
  * @author <a href="https://www.xgblack.cn">xg black</a>
- * @date 2023/12/25 17:53
  */
 @Getter
 @Setter

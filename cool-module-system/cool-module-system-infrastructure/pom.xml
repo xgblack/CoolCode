@@ -37,6 +37,11 @@
             <artifactId>jakarta.annotation-api</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.xgblack</groupId>
+            <artifactId>cool-spring-boot-starter-biz-tenant</artifactId>
+        </dependency>
+
 
 
 

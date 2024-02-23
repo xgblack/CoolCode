@@ -4,13 +4,13 @@ import com.mybatisflex.annotation.Column;
 import com.mybatisflex.annotation.Id;
 import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.annotation.Table;
-import com.xgblack.cool.framework.mybatis.listener.DataInsertListener;
-import com.xgblack.cool.framework.mybatis.listener.DataUpdateListener;
+import com.xgblack.cool.framework.mybatis.dataobject.TenantBaseDO;
 import com.xgblack.cool.framework.mybatis.type.LongSetJsonTypeHandler;
+import com.xgblack.cool.module.system.common.enums.permission.DataScopeEnum;
+import com.xgblack.cool.module.system.common.enums.permission.RoleTypeEnum;
 import lombok.*;
 import lombok.experimental.Accessors;
 
-import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
@@ -24,8 +24,8 @@ import java.util.Set;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(value = "sys_role", onInsert = DataInsertListener.class, onUpdate = DataUpdateListener.class)
-public class RoleDO {
+@Table(value = "sys_role")
+public class RoleDO extends TenantBaseDO {
     /**
      * 角色ID
      */
@@ -75,28 +75,9 @@ public class RoleDO {
     private Set<Long> dataScopeDeptIds;
 
     /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-    /**
-     * 最后更新时间
-     */
-    private LocalDateTime updateTime;
-    /**
-     * 创建者id
-     */
-    private Long creator;
-    /**
-     * 更新者id
-     */
-    private Long updater;
-
-    /**
      * 是否删除
      */
     @Column(isLogicDelete = true)
     private Boolean deleted;
 
-
-    private Long tenantId;
 }

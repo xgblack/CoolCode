@@ -7,9 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * @author fenghua
- * @version 1.0
- * @date 2022/12/12 10:10 上午
+ * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 @Data
 public class TreeNode<R extends TreeNode> {

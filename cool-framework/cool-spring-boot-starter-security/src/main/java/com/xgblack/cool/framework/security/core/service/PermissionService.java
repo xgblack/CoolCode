@@ -1,6 +1,6 @@
 package com.xgblack.cool.framework.security.core.service;
 
-import cn.hutool.core.util.ArrayUtil;
+import org.dromara.hutool.core.array.ArrayUtil;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;

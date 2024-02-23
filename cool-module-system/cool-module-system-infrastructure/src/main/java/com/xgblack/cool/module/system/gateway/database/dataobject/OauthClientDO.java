@@ -4,15 +4,12 @@ import com.mybatisflex.annotation.Column;
 import com.mybatisflex.annotation.Id;
 import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.annotation.Table;
-import com.xgblack.cool.framework.mybatis.listener.DataInsertListener;
-import com.xgblack.cool.framework.mybatis.listener.DataUpdateListener;
+import com.xgblack.cool.framework.mybatis.dataobject.BaseDO;
 import com.xgblack.cool.framework.mybatis.type.StringListTypeHandler;
 import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.io.Serial;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -24,8 +21,8 @@ import java.util.List;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(value = "sys_oauth_client_detail", onInsert = DataInsertListener.class, onUpdate = DataUpdateListener.class)
-public class OauthClientDO implements Serializable {
+@Table(value = "sys_oauth_client_detail")
+public class OauthClientDO extends BaseDO {//TODO:看是否适配多租户
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -90,27 +87,10 @@ public class OauthClientDO implements Serializable {
     private String autoapprove;
 
     /**
-     * 删除标记
+     * 是否删除
      */
     @Column(isLogicDelete = true)
     private Boolean deleted;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-    /**
-     * 最后更新时间
-     */
-    private LocalDateTime updateTime;
-    /**
-     * 创建者id
-     */
-    private Long creator;
-    /**
-     * 更新者id
-     */
-    private Long updater;
 
 
 }

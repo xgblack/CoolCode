@@ -52,18 +52,21 @@ public class NotVoidResponseBodyAdvice implements ResponseBodyAdvice<Object> {
      * @return 是否支持
      */
     @Override
-    public boolean supports(MethodParameter methodParameter,
-                            Class<? extends HttpMessageConverter<?>> clazz) {
+    public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> clazz) {
         Method method = methodParameter.getMethod();
 
 
         //method为空、返回值为void、非JSON，直接跳过
-        if (Objects.isNull(method) || method.getReturnType().equals(Void.TYPE) ) {
-            //log.trace("Cool Response:method为空、返回值为void，跳过");
+        if (Objects.isNull(method) || method.getReturnType().equals(Void.TYPE) || method.getReturnType().equals(Response.class) ) {
+            if (log.isTraceEnabled()) {
+                log.trace("Cool Response:method为空、返回值为void和Response类型，跳过");
+            }
             return false;
         }
         if (!MappingJackson2HttpMessageConverter.class.isAssignableFrom(clazz)) {
-            log.trace("Cool Response:非JSON、非字符类型，跳过");
+            if (log.isTraceEnabled()) {
+                log.trace("Cool Response:非JSON、非字符类型，跳过");
+            }
             return false;
         }
 
@@ -81,7 +84,9 @@ public class NotVoidResponseBodyAdvice implements ResponseBodyAdvice<Object> {
             // 获取请求所在类的的包名
             String packageName = method.getDeclaringClass().getPackage().getName();
             if (excludePackages.stream().anyMatch(item -> ANT_PATH_MATCHER.match(item, packageName))) {
-                log.trace("Cool Response:匹配到excludePackages例外配置，跳过:packageName={},", packageName);
+                if (log.isTraceEnabled()) {
+                    log.trace("Cool Response:匹配到excludePackages例外配置，跳过:packageName={},", packageName);
+                }
                 return false;
             }
         }

@@ -1,8 +1,9 @@
 package com.xgblack.cool.framework.common.utils.spring;
 
-import cn.hutool.core.exceptions.UtilException;
-import cn.hutool.core.util.ArrayUtil;
+import com.xgblack.cool.framework.common.utils.response.CoolThrowable;
 import lombok.Getter;
+import org.dromara.hutool.core.array.ArrayUtil;
+import org.dromara.hutool.core.lang.Assert;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ListableBeanFactory;
@@ -161,9 +162,7 @@ public class SpringUtils implements BeanFactoryPostProcessor, ApplicationContext
 
     public static ListableBeanFactory getBeanFactory() {
         final ListableBeanFactory factory = null == beanFactory ? applicationContext : beanFactory;
-        if (null == factory) {
-            throw new UtilException("No ConfigurableListableBeanFactory or ApplicationContext injected, maybe not in the Spring environment?");
-        }
+        CoolThrowable.wrapAssert(() -> Assert.notNull(factory, "No ConfigurableListableBeanFactory or ApplicationContext injected, maybe not in the Spring environment?"));
         return factory;
     }
 

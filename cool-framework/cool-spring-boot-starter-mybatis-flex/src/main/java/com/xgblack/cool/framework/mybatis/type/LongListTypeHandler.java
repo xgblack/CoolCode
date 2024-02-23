@@ -1,12 +1,12 @@
 package com.xgblack.cool.framework.mybatis.type;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutool.core.collection.CollUtil;
+import org.dromara.hutool.core.convert.Convert;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
 import org.apache.ibatis.type.MappedTypes;
 import org.apache.ibatis.type.TypeHandler;
+import org.dromara.hutool.core.text.split.SplitUtil;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -16,8 +16,7 @@ import java.util.List;
 
 /**
  * List 与 逗号分隔 Long 转换
- * @author xg black
- * @date 2023/11/23 16:09
+ * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 @MappedJdbcTypes(JdbcType.VARCHAR)
 @MappedTypes(List.class)
@@ -52,7 +51,7 @@ public class LongListTypeHandler implements TypeHandler<List<Long>> {
         if (value == null) {
             return null;
         }
-        List<String> strings = StrUtil.splitTrim(value, COMMA);
+        List<String> strings = SplitUtil.splitTrim(value, COMMA);
         return strings.stream().map(Convert::toLong).toList();
     }
 }
