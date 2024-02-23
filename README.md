@@ -2,14 +2,15 @@
 
 
 <p align="center">
-<a href="https://gitee.com/xgblack/cool-code"><img src="https://img.shields.io/badge/version-v1.0.0-brightgreen.svg"></a>
-<img src="https://img.shields.io/badge/JDK-21-important.svg">
-<img src="https://img.shields.io/badge/SpringBoot-3.2.2-blue.svg">
-<a href="https://www.jetbrains.com/?from=cool-code"><img src="https://img.shields.io/badge/IntelliJ%20IDEA-提供支持-blue.svg"></a>
+<a href="https://gitee.com/xgblack/cool-code" target="_blank"><img src="https://img.shields.io/badge/version-v1.0.0-brightgreen.svg"></a>
+<img src="https://img.shields.io/badge/JDK-21-important.svg?logo=openjdk&logoColor=white">
+<img src="https://img.shields.io/badge/SpringBoot-3.2.2-blue.svg?logo=springboot">
+<a href="https://www.jetbrains.com/?from=cool-code" target="_blank"><img src="https://img.shields.io/badge/IntelliJ%20IDEA-提供支持-blue.svg?logo=intellijidea"></a>
 </p>
 <p align="center">
-<a href="https://gitee.com/xgblack/cool-code"><img src="https://gitee.com/xgblack/cool-code/badge/star.svg?theme=dark"></a>
-<a href="https://github.com/xgblack/CoolCode"><img src="https://img.shields.io/github/stars/xgblack/CoolCode.svg?style=social"></a>
+<a href="https://www.xgblack.cn" target="_blank"><img src="https://img.shields.io/badge/Author-xgblack-orange" alt="码匠君"></a>
+<a href="https://gitee.com/xgblack/cool-code" target="_blank"><img src="https://gitee.com/xgblack/cool-code/badge/star.svg?theme=dark"></a>
+<a href="https://github.com/xgblack/CoolCode" target="_blank"><img src="https://img.shields.io/github/stars/xgblack/CoolCode.svg?style=social"></a>
 </p>
 
 ## Planning
