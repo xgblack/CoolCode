@@ -6,6 +6,7 @@
 <img src="https://img.shields.io/badge/JDK-21-important.svg?logo=openjdk&logoColor=white">
 <img src="https://img.shields.io/badge/SpringBoot-3.2.2-blue.svg?logo=springboot">
 <a href="https://www.jetbrains.com/?from=cool-code" target="_blank"><img src="https://img.shields.io/badge/IntelliJ%20IDEA-提供支持-blue.svg?logo=intellijidea"></a>
+<a href="https://www.oscs1024.com/project/xgblack/CoolCode" target="_blank"><img src="https://www.oscs1024.com/platform/badge/xgblack/CoolCode.svg?size=small"></a>
 </p>
 <p align="center">
 <a href="https://www.xgblack.cn" target="_blank"><img src="https://img.shields.io/badge/Author-xgblack-orange" alt="码匠君"></a>
