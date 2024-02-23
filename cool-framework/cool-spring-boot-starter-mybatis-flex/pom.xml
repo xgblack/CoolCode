@@ -36,10 +36,10 @@
             <artifactId>mybatis-flex-spring-boot3-starter</artifactId>
         </dependency>
 
-        <!--阿里开源数据库连接池-->
+        <!--HikariCP数据库连接池-->
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
         </dependency>
 
         <!--数据库驱动-->
