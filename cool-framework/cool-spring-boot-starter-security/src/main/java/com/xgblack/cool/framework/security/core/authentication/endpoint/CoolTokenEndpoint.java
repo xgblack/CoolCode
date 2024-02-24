@@ -3,7 +3,7 @@ package com.xgblack.cool.framework.security.core.authentication.endpoint;
 import com.xgblack.cool.framework.common.constants.CacheConstants;
 import com.xgblack.cool.framework.security.annotation.Inner;
 import com.xgblack.cool.framework.security.core.authentication.support.handler.CoolAuthenticationFailureEventHandler;
-import com.xgblack.cool.framework.security.core.utils.OAuth2EndpointUtils;
+import com.xgblack.cool.framework.security.core.utils.CoolOAuth2EndpointUtils;
 import com.xgblack.cool.framework.security.core.utils.OAuth2ErrorCodesExpand;
 import com.xgblack.cool.framework.security.service.RemoteClientDetailsService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -128,7 +128,7 @@ public class CoolTokenEndpoint {
         }
 
         Map<String, Object> claims = authorization.getAccessToken().getClaims();
-        OAuth2AccessTokenResponse sendAccessTokenResponse = OAuth2EndpointUtils.sendAccessTokenResponse(authorization, claims);
+        OAuth2AccessTokenResponse sendAccessTokenResponse = CoolOAuth2EndpointUtils.sendAccessTokenResponse(authorization, claims);
         this.accessTokenHttpResponseConverter.write(sendAccessTokenResponse, MediaType.APPLICATION_JSON, httpResponse);
     }
 

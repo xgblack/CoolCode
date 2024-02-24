@@ -1,8 +1,8 @@
 package com.xgblack.cool.framework.security.core.utils;
 
-import org.dromara.hutool.core.map.MapUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.experimental.UtilityClass;
+import org.dromara.hutool.core.map.MapUtil;
 import org.springframework.security.oauth2.core.*;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AccessTokenResponse;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
@@ -10,6 +10,7 @@ import org.springframework.security.oauth2.core.endpoint.PkceParameterNames;
 import org.springframework.security.oauth2.server.authorization.OAuth2Authorization;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.time.temporal.ChronoUnit;
@@ -21,21 +22,28 @@ import java.util.Map;
  */
 
 @UtilityClass
-public class OAuth2EndpointUtils {
+public class CoolOAuth2EndpointUtils {
 
     public final String ACCESS_TOKEN_REQUEST_ERROR_URI = "https://datatracker.ietf.org/doc/html/rfc6749#section-5.2";
 
     /**
      * 解析Http请求参数
+     * <p>认证方式同spring官方方式修改，认证方式改为form-data，不再支持query parameter，
+     * 自spring-boot3.2.1版本起修改，参见{@link org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2EndpointUtils#getFormParameters(HttpServletRequest)}</p>
+     *
      * @param request
      * @return
      */
     public MultiValueMap<String, String> getParameters(HttpServletRequest request) {
         Map<String, String[]> parameterMap = request.getParameterMap();
-        MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>(parameterMap.size());
+        MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
         parameterMap.forEach((key, values) -> {
-            for (String value : values) {
-                parameters.add(key, value);
+            String queryString = StringUtils.hasText(request.getQueryString()) ? request.getQueryString() : "";
+            // If not query parameter then it's a form parameter
+            if (!queryString.contains(key) && values.length > 0) {
+                for (String value : values) {
+                    parameters.add(key, value);
+                }
             }
         });
         return parameters;

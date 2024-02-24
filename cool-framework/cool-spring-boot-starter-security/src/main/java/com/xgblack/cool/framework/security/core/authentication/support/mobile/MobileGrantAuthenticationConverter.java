@@ -2,7 +2,7 @@ package com.xgblack.cool.framework.security.core.authentication.support.mobile;
 
 import com.xgblack.cool.framework.common.constants.SecurityConstants;
 import com.xgblack.cool.framework.security.core.authentication.support.base.OAuth2ResourceOwnerBaseAuthenticationConverter;
-import com.xgblack.cool.framework.security.core.utils.OAuth2EndpointUtils;
+import com.xgblack.cool.framework.security.core.utils.CoolOAuth2EndpointUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
@@ -45,12 +45,12 @@ public class MobileGrantAuthenticationConverter extends OAuth2ResourceOwnerBaseA
      */
     @Override
     public void checkParams(HttpServletRequest request) {
-        MultiValueMap<String, String> parameters = OAuth2EndpointUtils.getParameters(request);
+        MultiValueMap<String, String> parameters = CoolOAuth2EndpointUtils.getParameters(request);
         // PHONE (REQUIRED)
         String phone = parameters.getFirst(SecurityConstants.SMS_PARAMETER_NAME);
 
         if (!StringUtils.hasText(phone) || parameters.get(SecurityConstants.SMS_PARAMETER_NAME).size() != 1) {
-            OAuth2EndpointUtils.throwError(OAuth2ErrorCodes.INVALID_REQUEST, SecurityConstants.SMS_PARAMETER_NAME, OAuth2EndpointUtils.ACCESS_TOKEN_REQUEST_ERROR_URI);
+            CoolOAuth2EndpointUtils.throwError(OAuth2ErrorCodes.INVALID_REQUEST, SecurityConstants.SMS_PARAMETER_NAME, CoolOAuth2EndpointUtils.ACCESS_TOKEN_REQUEST_ERROR_URI);
         }
     }
 
