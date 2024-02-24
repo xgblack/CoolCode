@@ -51,10 +51,10 @@
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<spring.boot.version>3.2.2</spring.boot.version>
+		<spring.boot.version>3.2.3</spring.boot.version>
 		<maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
 		<maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
-		<native-maven-plugin.version>0.10.0</native-maven-plugin.version>
+		<native-maven-plugin.version>0.10.1</native-maven-plugin.version>
 
 
 		<lombok.version>1.18.30</lombok.version>
