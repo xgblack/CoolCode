@@ -164,8 +164,8 @@
 
 	<repositories>
 		<repository>
-			<id>aliyun</id>
-			<url>https://maven.aliyun.com/repository/public</url>
+			<id>repo-huawei</id>
+			<url>https://repo.huaweicloud.com/repository/maven/</url>
 		</repository>
 		<repository>
 			<id>ossrh</id>

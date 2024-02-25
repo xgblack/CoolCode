@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserServiceI {
     private final UserProfileEditPasswordCmdExe userProfileEditPasswordCmdExe;
 
     @Override
-    public void save(UserAddCmd cmd) {
+    public void add(UserAddCmd cmd) {
         userAddCmdExe.execute(cmd);
     }
 
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
-    public void update(UserEditCmd cmd) {
+    public void edit(UserEditCmd cmd) {
         userEditCmdExe.execute(cmd);
     }
 

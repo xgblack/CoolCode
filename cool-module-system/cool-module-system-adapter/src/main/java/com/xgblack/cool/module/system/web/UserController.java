@@ -32,7 +32,7 @@ public class UserController {
     @PostMapping
     //@PreAuthorize("@ss.hasPermission('system:user:create')")
     public void add(@Validated @RequestBody UserAddCmd cmd) {
-        userService.save(cmd);
+        userService.add(cmd);
     }
 
     /**
@@ -43,7 +43,7 @@ public class UserController {
     //@Operation(summary = "修改用户")
     //@PreAuthorize("@ss.hasPermission('system:user:update')")
     public void edit(@Validated @RequestBody UserEditCmd cmd) {
-        userService.update(cmd);
+        userService.edit(cmd);
     }
 
     /**

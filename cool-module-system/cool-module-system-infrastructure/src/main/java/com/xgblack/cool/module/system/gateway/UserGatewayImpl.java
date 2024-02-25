@@ -30,6 +30,8 @@ public class UserGatewayImpl implements UserGateway, RemoteUserService {
 
     private final UserMapper userMapper;
 
+    private final static UserConvertor convertor = UserConvertor.INSTANCE;
+
     @Override
     public UserInfo info(String username, String phone) {
         SysUser sysUser = QueryChain.of(userMapper)
@@ -55,17 +57,17 @@ public class UserGatewayImpl implements UserGateway, RemoteUserService {
 
     @Override
     public void create(User user) {
-        userMapper.insertSelective(UserConvertor.INSTANCE.toDataObject(user));
+        userMapper.insertSelective(convertor.toDataObject(user));
     }
 
     @Override
     public User getById(Long id) {
-        return UserConvertor.INSTANCE.convertDO2Entity(userMapper.selectOneById(id));
+        return convertor.convertDO2Entity(userMapper.selectOneById(id));
     }
 
     @Override
     public void update(User user) {
-        userMapper.update(UserConvertor.INSTANCE.toDataObject(user));
+        userMapper.update(convertor.toDataObject(user));
     }
 
     @Override

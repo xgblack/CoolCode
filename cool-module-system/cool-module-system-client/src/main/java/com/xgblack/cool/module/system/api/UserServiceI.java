@@ -10,13 +10,13 @@ import com.xgblack.cool.module.system.dto.user.clientobject.UserCO;
 
 public interface UserServiceI {
 
-    void save(UserAddCmd cmd);
+    void add(UserAddCmd cmd);
 
     UserCO getDetail(Long id);
 
     void remove(Long id);
 
-    void update(UserEditCmd cmd);
+    void edit(UserEditCmd cmd);
 
     PageResult<UserCO> getPage(UserPageQry qry);
 

@@ -1,5 +1,6 @@
 package com.xgblack.cool.module.system.dto.permission;
 
+import com.xgblack.cool.framework.common.pojo.dto.PageQuery;
 import com.xgblack.cool.framework.common.pojo.dto.Query;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +20,7 @@ import static com.xgblack.cool.framework.common.utils.date.DateUtils.FORMAT_YEAR
 @Setter
 @ToString
 @Accessors(chain = true)
-public class RolePageQry extends Query {
+public class RolePageQry extends PageQuery {
 
     private String name;
 
