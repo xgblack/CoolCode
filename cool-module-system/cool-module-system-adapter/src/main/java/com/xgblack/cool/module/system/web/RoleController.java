@@ -40,7 +40,7 @@ public class RoleController {
      * 修改角色
      * @param cmd
      */
-    @PutMapping("/update")
+    @PutMapping
     //@PreAuthorize("@ss.hasPermission('system:role:update')")
     public void edit(@Valid @RequestBody RoleEditCmd cmd) {
         roleService.edit(cmd);
@@ -60,9 +60,9 @@ public class RoleController {
      * 删除角色
      * @param id
      */
-    @DeleteMapping("/delete")
+    @DeleteMapping("{id}")
     //@PreAuthorize("@ss.hasPermission('system:role:delete')")
-    public void remove(@RequestParam("id") Long id) {
+    public void remove(@PathVariable("id") Long id) {
         roleService.remove(id);
     }
 
@@ -71,9 +71,9 @@ public class RoleController {
      * @param id
      * @return
      */
-    @GetMapping("/get")
+    @GetMapping("detail/{id}")
     //@PreAuthorize("@ss.hasPermission('system:role:query')")
-    public RoleCO detail(@RequestParam("id") Long id) {
+    public RoleCO detail(@PathVariable Long id) {
         return roleService.detail(id);
     }
 

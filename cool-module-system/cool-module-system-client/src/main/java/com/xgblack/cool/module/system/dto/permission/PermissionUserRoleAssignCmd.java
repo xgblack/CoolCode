@@ -1,5 +1,6 @@
 package com.xgblack.cool.module.system.dto.permission;
 
+import com.xgblack.cool.framework.common.pojo.dto.Command;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +18,7 @@ import java.util.Set;
 @Setter
 @ToString
 @Accessors(chain = true)
-public class PermissionUserRoleAssignCmd {
+public class PermissionUserRoleAssignCmd extends Command {
 
     /**
      * 用户编号

@@ -1,16 +1,15 @@
-package com.xgblack.cool.module.system.gateway.database.dataobject;
+package com.xgblack.cool.module.system.dto.permission.clientobject;
 
-import com.mybatisflex.annotation.Column;
-import com.mybatisflex.annotation.Id;
-import com.mybatisflex.annotation.KeyType;
-import com.mybatisflex.annotation.Table;
-import com.xgblack.cool.framework.mybatis.dataobject.TenantBaseDO;
+import com.xgblack.cool.framework.common.pojo.ClientObject;
 import com.xgblack.cool.module.system.common.enums.permission.MenuTypeEnum;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
+import java.time.LocalDateTime;
+
 /**
- * 菜单 DO
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 
@@ -18,20 +17,12 @@ import lombok.experimental.Accessors;
 @Setter
 @ToString
 @Accessors(chain = true)
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(value = "sys_menu")
-public class MenuDO extends TenantBaseDO {
-    /**
-     * 菜单编号 - 根节点
-     */
-    public static final Long ID_ROOT = 0L;
-
+public class MenuCO extends ClientObject {
     /**
      * 菜单编号
      */
-    @Id(keyType = KeyType.Auto)
     private Long id;
+
     /**
      * 菜单名称
      */
@@ -105,10 +96,5 @@ public class MenuDO extends TenantBaseDO {
      */
     private Boolean alwaysShow;
 
-    /**
-     * 是否删除
-     */
-    @Column(isLogicDelete = true)
-    private Boolean deleted;
-
+    private LocalDateTime createTime;
 }
