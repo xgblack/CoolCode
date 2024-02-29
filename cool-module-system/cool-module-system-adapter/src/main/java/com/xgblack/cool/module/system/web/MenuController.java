@@ -33,7 +33,7 @@ public class MenuController {
     @PostMapping
     //@PreAuthorize("@ss.hasPermission('system:menu:add')")
     public void add(@Valid @RequestBody MenuAddCmd cmd) {
-
+        menuService.add(cmd);
     }
 
     /**
@@ -43,7 +43,7 @@ public class MenuController {
     @PutMapping
     //@PreAuthorize("@ss.hasPermission('system:menu:edit')")
     public void edit(@Valid @RequestBody MenuEditCmd cmd) {
-
+        menuService.edit(cmd);
     }
 
     /**
@@ -54,14 +54,14 @@ public class MenuController {
     //@Parameter(name = "id", description = "菜单编号", required= true, example = "1024")
     //@PreAuthorize("@ss.hasPermission('system:menu:remove')")
     public void remove(@PathVariable("id") Long id) {
-
+        menuService.remove(id);
     }
 
     @GetMapping("list")
     //@Operation(summary = "获取菜单列表", description = "用于【菜单管理】界面")
     //@PreAuthorize("@ss.hasPermission('system:menu:query')")
     public List<MenuCO> list(MenuListQry qry) {
-        return null;
+        return menuService.list(qry);
     }
 
     /*@GetMapping({"/list-all-simple", "simple-list"})
@@ -78,6 +78,6 @@ public class MenuController {
     //@Operation(summary = "获取菜单信息")
     //@PreAuthorize("@ss.hasPermission('system:menu:query')")
     public MenuCO detail(@PathVariable Long id) {
-        return new MenuCO();
+        return menuService.detail(id);
     }
 }

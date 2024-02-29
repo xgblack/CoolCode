@@ -10,7 +10,7 @@ import com.xgblack.cool.module.system.dto.permission.RolePageQry;
 
 public interface RoleGateway {
 
-    void create(Role role);
+    void insert(Role role);
 
     void delete(Long id);
 
