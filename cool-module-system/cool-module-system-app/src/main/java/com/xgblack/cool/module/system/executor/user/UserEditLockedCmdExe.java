@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class UserEditLockedCmdExe {
+
     private final UserGateway gateway;
 
 

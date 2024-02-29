@@ -59,7 +59,7 @@
 
 		<lombok.version>1.18.30</lombok.version>
 		<mapstruct.version>1.6.0.Beta1</mapstruct.version>
-		<mybatis-flex.version>1.7.9</mybatis-flex.version>
+		<mybatis-flex.version>1.8.0</mybatis-flex.version>
 	</properties>
 
 	<dependencyManagement>
@@ -164,8 +164,8 @@
 
 	<repositories>
 		<repository>
-			<id>aliyun</id>
-			<url>https://maven.aliyun.com/repository/public</url>
+			<id>repo-huawei</id>
+			<url>https://repo.huaweicloud.com/repository/maven/</url>
 		</repository>
 		<repository>
 			<id>ossrh</id>

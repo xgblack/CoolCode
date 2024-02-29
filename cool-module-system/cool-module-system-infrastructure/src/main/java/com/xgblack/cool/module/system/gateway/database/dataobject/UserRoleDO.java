@@ -1,6 +1,5 @@
 package com.xgblack.cool.module.system.gateway.database.dataobject;
 
-import com.mybatisflex.annotation.Column;
 import com.mybatisflex.annotation.Id;
 import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.annotation.Table;
@@ -37,10 +36,5 @@ public class UserRoleDO extends TenantBaseDO {
      */
     private Long roleId;
 
-    /**
-     * 是否删除
-     */
-    @Column(isLogicDelete = true)
-    private Boolean deleted;
 
 }

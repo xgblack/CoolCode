@@ -33,17 +33,17 @@ public class RoleController {
     @PostMapping
     //@PreAuthorize("@ss.hasPermission('system:role:create')")
     public void add(@Valid @RequestBody RoleAddCmd cmd) {
-
+        roleService.add(cmd);
     }
 
     /**
      * 修改角色
      * @param cmd
      */
-    @PutMapping("/update")
+    @PutMapping
     //@PreAuthorize("@ss.hasPermission('system:role:update')")
     public void edit(@Valid @RequestBody RoleEditCmd cmd) {
-
+        roleService.edit(cmd);
     }
 
     /**
@@ -53,17 +53,17 @@ public class RoleController {
     @PutMapping("/update-status")
     //@PreAuthorize("@ss.hasPermission('system:role:update')")
     public void editStatus(@Valid @RequestBody RoleEditStatusCmd cmd) {
-
+        roleService.editStatus(cmd);
     }
 
     /**
      * 删除角色
      * @param id
      */
-    @DeleteMapping("/delete")
+    @DeleteMapping("{id}")
     //@PreAuthorize("@ss.hasPermission('system:role:delete')")
-    public void remove(@RequestParam("id") Long id) {
-
+    public void remove(@PathVariable("id") Long id) {
+        roleService.remove(id);
     }
 
     /**
@@ -71,10 +71,10 @@ public class RoleController {
      * @param id
      * @return
      */
-    @GetMapping("/get")
+    @GetMapping("detail/{id}")
     //@PreAuthorize("@ss.hasPermission('system:role:query')")
-    public RoleCO detail(@RequestParam("id") Long id) {
-        return null;
+    public RoleCO detail(@PathVariable Long id) {
+        return roleService.detail(id);
     }
 
     /**
@@ -85,7 +85,7 @@ public class RoleController {
     @GetMapping("/page")
     //@PreAuthorize("@ss.hasPermission('system:role:query')")
     public PageResult<RoleCO> getRolePage(RolePageQry qry) {
-        return null;
+        return roleService.page(qry);
     }
 
     /*@GetMapping({"/list-all-simple", "/simple-list"})

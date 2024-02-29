@@ -32,7 +32,7 @@ public class UserController {
     @PostMapping
     //@PreAuthorize("@ss.hasPermission('system:user:create')")
     public void add(@Validated @RequestBody UserAddCmd cmd) {
-        userService.save(cmd);
+        userService.add(cmd);
     }
 
     /**
@@ -43,17 +43,17 @@ public class UserController {
     //@Operation(summary = "修改用户")
     //@PreAuthorize("@ss.hasPermission('system:user:update')")
     public void edit(@Validated @RequestBody UserEditCmd cmd) {
-        userService.update(cmd);
+        userService.edit(cmd);
     }
 
     /**
      * 删除用户
      * @param id 用户id
      */
-    @DeleteMapping
+    @DeleteMapping("{id}")
     //@Operation(summary = "删除用户")
     //@PreAuthorize("@ss.hasPermission('system:user:delete')")
-    public void delete(@RequestParam("id") Long id) {
+    public void delete(@PathVariable Long id) {
         userService.remove(id);
     }
 
@@ -117,11 +117,11 @@ public class UserController {
      * @param id
      * @return
      */
-    @GetMapping
+    @GetMapping("detail/{id}")
     //@Operation(summary = "获得用户详情")
     //@Parameter(name = "id", description = "编号", required = true, example = "1024")
     //@PreAuthorize("@ss.hasPermission('system:user:query')")
-    public UserCO detail(@RequestParam("id") Long id) {
+    public UserCO detail(@PathVariable("id") Long id) {
         /*AdminUserDO user = userService.getUser(id);
         // 拼接数据
         DeptDO dept = deptService.getDept(user.getDeptId());
