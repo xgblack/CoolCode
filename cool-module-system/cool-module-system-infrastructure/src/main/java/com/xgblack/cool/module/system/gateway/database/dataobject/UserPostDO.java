@@ -1,5 +1,6 @@
 package com.xgblack.cool.module.system.gateway.database.dataobject;
 
+import com.mybatisflex.annotation.Column;
 import com.mybatisflex.annotation.Id;
 import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.annotation.Table;
@@ -8,32 +9,37 @@ import lombok.*;
 import lombok.experimental.Accessors;
 
 /**
- * 角色菜单关联
+ * 用户岗位表 实体类。
+ *
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
-
 @Getter
 @Setter
 @ToString
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(value = "sys_role_menu")
-public class RoleMenuDO extends TenantBaseDO {
+@Table(value = "sys_user_post")
+public class UserPostDO extends TenantBaseDO {
 
     /**
-     * 自增主键
+     * id
      */
     @Id(keyType = KeyType.Auto)
     private Long id;
+
     /**
-     * 角色ID
+     * 用户ID
      */
-    private Long roleId;
+    @Column(value = "user_id")
+    private Long userId;
+
     /**
-     * 菜单ID
+     * 岗位ID
      */
-    private Long menuId;
+    @Column(value = "post_id")
+    private Long postId;
+
 
 
 }
