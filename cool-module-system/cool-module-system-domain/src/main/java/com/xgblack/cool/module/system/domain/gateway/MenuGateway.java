@@ -2,7 +2,6 @@ package com.xgblack.cool.module.system.domain.gateway;
 
 import com.xgblack.cool.module.system.domain.permission.Menu;
 import com.xgblack.cool.module.system.dto.permission.MenuListQry;
-import com.xgblack.cool.module.system.dto.permission.clientobject.MenuCO;
 
 import java.util.List;
 
@@ -18,7 +17,7 @@ public interface MenuGateway {
 
     void delete(Long id);
 
-    List<MenuCO> getList(MenuListQry qry);
+    List<Menu> getList(MenuListQry qry);
 
-    MenuCO getById(Long id);
+    Menu getById(Long id);
 }

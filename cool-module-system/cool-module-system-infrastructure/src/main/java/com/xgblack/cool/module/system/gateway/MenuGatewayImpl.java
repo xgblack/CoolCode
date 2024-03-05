@@ -5,7 +5,6 @@ import com.xgblack.cool.module.system.convertor.MenuConvertor;
 import com.xgblack.cool.module.system.domain.gateway.MenuGateway;
 import com.xgblack.cool.module.system.domain.permission.Menu;
 import com.xgblack.cool.module.system.dto.permission.MenuListQry;
-import com.xgblack.cool.module.system.dto.permission.clientobject.MenuCO;
 import com.xgblack.cool.module.system.gateway.database.dataobject.table.MenuTableDef;
 import com.xgblack.cool.module.system.gateway.database.mapper.MenuMapper;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +28,7 @@ public class MenuGatewayImpl implements MenuGateway {
 
     @Override
     public void insert(Menu entity) {
-        menuMapper.insert(convertor.toDataObject(entity));
+        menuMapper.insertSelective(convertor.toDataObject(entity));
     }
 
     @Override
@@ -43,16 +42,16 @@ public class MenuGatewayImpl implements MenuGateway {
     }
 
     @Override
-    public List<MenuCO> getList(MenuListQry qry) {
+    public List<Menu> getList(MenuListQry qry) {
         return QueryChain.of(menuMapper)
                 .from(MenuTableDef.MENU)
                 .and(MenuTableDef.MENU.NAME.like(qry.getName(), StrUtil.isNotBlank(qry.getName())))
                 .and(MenuTableDef.MENU.STATUS.eq(qry.getStatus(), qry.getStatus() != null))
-                .listAs(MenuCO.class);
+                .listAs(Menu.class);
     }
 
     @Override
-    public MenuCO getById(Long id) {
-        return menuMapper.selectOneWithRelationsByIdAs(id, MenuCO.class);
+    public Menu getById(Long id) {
+        return menuMapper.selectOneWithRelationsByIdAs(id, Menu.class);
     }
 }
