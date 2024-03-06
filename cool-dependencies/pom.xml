@@ -21,22 +21,20 @@
         <spring.boot.version>3.2.3</spring.boot.version>
 
         <mysql.version>8.3.0</mysql.version>
-        <mybatis-flex.version>1.8.0</mybatis-flex.version>
-        <mybatis-spring.version>3.0.3</mybatis-spring.version>
+        <mybatis-flex.version>1.8.2</mybatis-flex.version>
         <guava.version>33.0.0-jre</guava.version>
 
         <lombok.version>1.18.30</lombok.version>
         <mapstruct.version>1.6.0.Beta1</mapstruct.version>
 
-        <hutool5.version>5.8.25</hutool5.version>
         <hutool.version>6.0.0-M11</hutool.version>
-        <minio.version>8.5.7</minio.version>
-        <tobato.version>1.27.2</tobato.version>
-        <caffeine.version>3.1.8</caffeine.version>
+        <!--<minio.version>8.5.7</minio.version>-->
+        <!--<tobato.version>1.27.2</tobato.version>-->
+        <!--<caffeine.version>3.1.8</caffeine.version>-->
         <easyexcel.version>3.3.3</easyexcel.version>
         <sms4j.starter.version>3.1.1</sms4j.starter.version>
-        <wx-java.version>4.6.0</wx-java.version>
-        <infinispan.version>15.0.0.Dev10</infinispan.version>
+        <!--<wx-java.version>4.6.0</wx-java.version>-->
+        <!--<infinispan.version>15.0.0.Dev10</infinispan.version>-->
         <captcha.version>2.2.3</captcha.version>
         <ip2region.version>2.7.0</ip2region.version>
     </properties>
@@ -129,13 +127,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>com.mybatis-flex</groupId>
-                <artifactId>mybatis-flex-dependencies</artifactId>
-                <version>${mybatis-flex.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+
 
             <dependency>
                 <groupId>com.google.guava</groupId>
@@ -148,9 +140,14 @@
                 <version>${mysql.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis-spring</artifactId>
-                <version>${mybatis-spring.version}</version>
+                <groupId>com.mybatis-flex</groupId>
+                <artifactId>mybatis-flex-spring-boot3-starter</artifactId>
+                <version>${mybatis-flex.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mybatis-flex</groupId>
+                <artifactId>mybatis-flex-core</artifactId>
+                <version>${mybatis-flex.version}</version>
             </dependency>
 
             <dependency>

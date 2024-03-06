@@ -28,7 +28,7 @@ public class RoleGatewayImpl implements RoleGateway {
     private final static RoleConvertor convertor = RoleConvertor.INSTANCE;
 
     @Override
-    public void create(Role role) {
+    public void insert(Role role) {
         roleMapper.insertSelective(convertor.toDataObject(role));
     }
 

@@ -32,11 +32,11 @@ public class PermissionUserRoleAssignCmdExe {
 
         // 计算新增和删除的角色编号
         Set<Long> createRoleIds = SetUtil.of(CollUtil.subtract(roleIdList, dbRoleIds));
-        Set<Long> deleteMenuIds = SetUtil.of(CollUtil.subtract(dbRoleIds, roleIdList));
+        Set<Long> deleteRoleIds = SetUtil.of(CollUtil.subtract(dbRoleIds, roleIdList));
 
         // 执行新增和删除。对于已经授权的角色，不用做任何处理
         gateway.insertUserRole(cmd.getUserId(), createRoleIds);
-        gateway.deleteUserRole(cmd.getUserId(), deleteMenuIds);
+        gateway.deleteUserRole(cmd.getUserId(), deleteRoleIds);
 
     }
 }

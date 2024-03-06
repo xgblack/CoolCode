@@ -13,4 +13,10 @@ public interface PermissionGateway {
     void insertUserRole(Long userId, Set<Long> roleIds);
 
     void deleteUserRole(Long userId, Set<Long> roleIds);
+
+    Set<Long> getMenuIdsByRoleId(Long roleId);
+
+    void insertRoleMenu(Long roleId, Set<Long> menuIds);
+
+    void deleteRoleMenu(Long roleId, Set<Long> menuIds);
 }

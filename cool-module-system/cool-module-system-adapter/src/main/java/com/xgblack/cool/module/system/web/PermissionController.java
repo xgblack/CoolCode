@@ -1,6 +1,7 @@
 package com.xgblack.cool.module.system.web;
 
 import com.xgblack.cool.module.system.api.PermissionServiceI;
+import com.xgblack.cool.module.system.dto.permission.PermissionRoleMenuAssignCmd;
 import com.xgblack.cool.module.system.dto.permission.PermissionUserRoleAssignCmd;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -20,25 +21,31 @@ public class PermissionController {
 
     private final PermissionServiceI permissionService;
 
-    /*@Operation(summary = "获得角色拥有的菜单编号")
-    @Parameter(name = "roleId", description = "角色编号", required = true)
+    /**
+     * 获得角色拥有的菜单编号
+     * @param roleId
+     * @return
+     */
+    //@Parameter(name = "roleId", description = "角色编号", required = true)
     @GetMapping("/list-role-menus")
-    @PreAuthorize("@ss.hasPermission('system:permission:assign-role-menu')")
-    public CommonResult<Set<Long>> getRoleMenuList(Long roleId) {
-        return success(permissionService.getRoleMenuListByRoleId(roleId));
-    }*/
+    //@PreAuthorize("@ss.hasPermission('system:permission:assign-role-menu')")
+    public Set<Long> getRoleMenuList(Long roleId) {
+        return permissionService.getRoleMenuListByRoleId(roleId);
+    }
 
-    /*@PostMapping("/assign-role-menu")
-    @Operation(summary = "赋予角色菜单")
-    @PreAuthorize("@ss.hasPermission('system:permission:assign-role-menu')")
-    public CommonResult<Boolean> assignRoleMenu(@Validated @RequestBody PermissionAssignRoleMenuReqVO reqVO) {
-        // 开启多租户的情况下，需要过滤掉未开通的菜单
-        tenantService.handleTenantMenu(menuIds -> reqVO.getMenuIds().removeIf(menuId -> !CollUtil.contains(menuIds, menuId)));
-
+    /**
+     * 赋予角色菜单
+     * @param cmd
+     */
+    @PostMapping("/assign-role-menu")
+    //@Operation(summary = "赋予角色菜单")
+    //@PreAuthorize("@ss.hasPermission('system:permission:assign-role-menu')")
+    public void assignRoleMenu(@Validated @RequestBody PermissionRoleMenuAssignCmd cmd) {
+        // TODO: 开启多租户的情况下，需要过滤掉未开通的菜单
+        //tenantService.handleTenantMenu(menuIds -> reqVO.getMenuIds().removeIf(menuId -> !CollUtil.contains(menuIds, menuId)));
         // 执行菜单的分配
-        permissionService.assignRoleMenu(reqVO.getRoleId(), reqVO.getMenuIds());
-        return success(true);
-    }*/
+        permissionService.assignRoleMenu(cmd);
+    }
 
     /*@PostMapping("/assign-role-data-scope")
     @Operation(summary = "赋予角色数据权限")
