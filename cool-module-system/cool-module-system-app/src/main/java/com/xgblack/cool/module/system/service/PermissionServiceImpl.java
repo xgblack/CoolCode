@@ -1,8 +1,10 @@
 package com.xgblack.cool.module.system.service;
 
 import com.xgblack.cool.module.system.api.PermissionServiceI;
+import com.xgblack.cool.module.system.dto.permission.PermissionRoleDataScopeAssignCmd;
 import com.xgblack.cool.module.system.dto.permission.PermissionRoleMenuAssignCmd;
 import com.xgblack.cool.module.system.dto.permission.PermissionUserRoleAssignCmd;
+import com.xgblack.cool.module.system.executor.permission.PermissionRoleDataScopeAssignCmdExe;
 import com.xgblack.cool.module.system.executor.permission.PermissionRoleMenuAssignCmdExe;
 import com.xgblack.cool.module.system.executor.permission.PermissionUserRoleAssignCmdExe;
 import com.xgblack.cool.module.system.executor.permission.query.PermissionMenuIdsByRoleIdQryExe;
@@ -25,6 +27,7 @@ public class PermissionServiceImpl implements PermissionServiceI {
     private final PermissionRoleIdsByUserIdQryExe permissionRoleIdsByUserIdQryExe;
     private final PermissionMenuIdsByRoleIdQryExe permissionMenuIdsByRoleIdQryExe;
     private final PermissionRoleMenuAssignCmdExe permissionRoleMenuAssignCmdExe;
+    private final PermissionRoleDataScopeAssignCmdExe permissionRoleDataScopeAssignCmdExe;
 
     @Override
     public void assignUserRole(PermissionUserRoleAssignCmd cmd) {
@@ -44,6 +47,11 @@ public class PermissionServiceImpl implements PermissionServiceI {
     @Override
     public void assignRoleMenu(PermissionRoleMenuAssignCmd cmd) {
         permissionRoleMenuAssignCmdExe.execute(cmd);
+    }
+
+    @Override
+    public void assignRoleDataScope(PermissionRoleDataScopeAssignCmd cmd) {
+        permissionRoleDataScopeAssignCmdExe.execute(cmd);
     }
 
 }

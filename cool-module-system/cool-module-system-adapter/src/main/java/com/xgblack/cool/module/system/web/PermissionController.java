@@ -1,8 +1,10 @@
 package com.xgblack.cool.module.system.web;
 
 import com.xgblack.cool.module.system.api.PermissionServiceI;
+import com.xgblack.cool.module.system.dto.permission.PermissionRoleDataScopeAssignCmd;
 import com.xgblack.cool.module.system.dto.permission.PermissionRoleMenuAssignCmd;
 import com.xgblack.cool.module.system.dto.permission.PermissionUserRoleAssignCmd;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -47,13 +49,16 @@ public class PermissionController {
         permissionService.assignRoleMenu(cmd);
     }
 
-    /*@PostMapping("/assign-role-data-scope")
-    @Operation(summary = "赋予角色数据权限")
-    @PreAuthorize("@ss.hasPermission('system:permission:assign-role-data-scope')")
-    public CommonResult<Boolean> assignRoleDataScope(@Valid @RequestBody PermissionAssignRoleDataScopeReqVO reqVO) {
-        permissionService.assignRoleDataScope(reqVO.getRoleId(), reqVO.getDataScope(), reqVO.getDataScopeDeptIds());
-        return success(true);
-    }*/
+    /**
+     * 赋予角色数据权限
+     * @param cmd
+     */
+    @PostMapping("/assign-role-data-scope")
+    //@Operation(summary = "赋予角色数据权限")
+    //@PreAuthorize("@ss.hasPermission('system:permission:assign-role-data-scope')")
+    public void assignRoleDataScope(@Valid @RequestBody PermissionRoleDataScopeAssignCmd cmd) {
+        permissionService.assignRoleDataScope(cmd);
+    }
 
     /**
      * 获得管理员拥有的角色编号列表
