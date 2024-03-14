@@ -1,5 +1,6 @@
 package com.xgblack.cool.module.system.api;
 
+import com.xgblack.cool.module.system.dto.permission.PermissionRoleDataScopeAssignCmd;
 import com.xgblack.cool.module.system.dto.permission.PermissionRoleMenuAssignCmd;
 import com.xgblack.cool.module.system.dto.permission.PermissionUserRoleAssignCmd;
 
@@ -18,4 +19,6 @@ public interface PermissionServiceI {
     Set<Long> getRoleMenuListByRoleId(Long roleId);
 
     void assignRoleMenu(PermissionRoleMenuAssignCmd cmd);
+
+    void assignRoleDataScope(PermissionRoleDataScopeAssignCmd cmd);
 }

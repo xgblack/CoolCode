@@ -1,6 +1,10 @@
 package com.xgblack.cool.module.system.dto.company.post.clientobject;
 
 import com.xgblack.cool.framework.common.pojo.ClientObject;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 
@@ -8,6 +12,10 @@ import java.time.LocalDateTime;
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 
+@Getter
+@Setter
+@ToString
+@Accessors(chain = true)
 public class PostCO extends ClientObject {
 
     /**
