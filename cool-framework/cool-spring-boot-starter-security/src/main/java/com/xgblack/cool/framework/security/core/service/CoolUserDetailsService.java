@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -54,9 +53,9 @@ public interface CoolUserDetailsService extends UserDetailsService, Ordered {
 
         if (ArrayUtil.isNotEmpty(info.getRoles())) {
             // 获取角色
-            Arrays.stream(info.getRoles()).forEach(role -> dbAuthsSet.add(SecurityConstants.ROLE + role));
+            info.getRoles().forEach(role -> dbAuthsSet.add(SecurityConstants.ROLE + role));
             // 获取资源
-            dbAuthsSet.addAll(Arrays.asList(info.getPermissions()));
+            dbAuthsSet.addAll(info.getPermissions());
         }
 
         Collection<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(dbAuthsSet.toArray(new String[0]));

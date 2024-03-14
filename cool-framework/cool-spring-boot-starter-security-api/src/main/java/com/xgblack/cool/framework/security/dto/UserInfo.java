@@ -6,6 +6,7 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * 用户信息
@@ -24,10 +25,10 @@ public class UserInfo implements Serializable {
     /**
      * 权限标识集合
      */
-    private String[] permissions;
+    private Set<String> permissions;
 
     /**
      * 角色集合
      */
-    private Long[] roles;
+    private Set<Long> roles;
 }
