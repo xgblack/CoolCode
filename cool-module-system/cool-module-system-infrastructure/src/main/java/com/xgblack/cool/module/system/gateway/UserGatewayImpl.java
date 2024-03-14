@@ -22,9 +22,7 @@ import org.dromara.hutool.core.collection.CollUtil;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.xgblack.cool.module.system.gateway.database.dataobject.table.UserTableDef.USER;
@@ -105,6 +103,14 @@ public class UserGatewayImpl implements UserGateway, RemoteUserService {
 
     @Override
     public PageResult<User> getPage(UserPageQry qry) {
+        //TODO: 处理部门 同时筛选子部门
+        Set<Long> deptIds = Set.of();
+        if (Objects.nonNull(qry.getDeptId())) {
+
+        }
+        Set<Long> deptIds = convertSet(deptService.getChildDeptList(deptId), DeptDO::getId);
+        deptIds.add(deptId); // 包括自身
+        return deptIds;
         return PageResult.of(
                 QueryChain.of(userMapper)
                         .from(USER)
@@ -112,7 +118,6 @@ public class UserGatewayImpl implements UserGateway, RemoteUserService {
                         .and(USER.PHONE.like(qry.getPhone(), StrUtil.isNotBlank(qry.getPhone())))
                         .and(USER.LOCKED.eq(qry.getLocked(), qry.getLocked() != null))
                         .and(USER.CREATE_TIME.between(qry.getCreateTime(), qry.getCreateTime() != null))
-                        //TODO: 处理部门
                         .orderBy(USER.ID.desc())
                         .pageAs(qry.buildPage(),User.class)
         );

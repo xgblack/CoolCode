@@ -21,4 +21,6 @@ public interface DeptGateway {
 
     List<Dept> getList(DeptListQry qry);
 
+    List<Dept> getChildDeptList(Long id);
+
 }
