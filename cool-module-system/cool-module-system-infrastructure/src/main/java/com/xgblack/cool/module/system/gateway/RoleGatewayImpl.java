@@ -14,6 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+import java.util.List;
+
 /**
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
@@ -45,6 +48,14 @@ public class RoleGatewayImpl implements RoleGateway {
     @Override
     public Role getById(Long id) {
         return convertor.convertDO2Entity(roleMapper.selectOneById(id));
+    }
+
+    @Override
+    public List<Role> getRolesByIds(Collection<Long> ids) {
+        return QueryChain.of(roleMapper)
+                .from(RoleTableDef.ROLE)
+                .and(RoleTableDef.ROLE.ID.in(ids))
+                .listAs(Role.class);
     }
 
     @Override

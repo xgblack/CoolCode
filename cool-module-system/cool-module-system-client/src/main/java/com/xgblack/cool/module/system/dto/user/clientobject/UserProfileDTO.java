@@ -1,6 +1,9 @@
 package com.xgblack.cool.module.system.dto.user.clientobject;
 
 import com.xgblack.cool.framework.common.pojo.dto.DTO;
+import com.xgblack.cool.module.system.dto.company.dept.clientobject.DeptSimpleCO;
+import com.xgblack.cool.module.system.dto.company.post.clientobject.PostSimpleCO;
+import com.xgblack.cool.module.system.dto.permission.clientobject.RoleSimpleCO;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -53,19 +56,19 @@ public class UserProfileDTO extends DTO {
     private LocalDateTime createTime;
 
     /**
-     * 所属角色 TODO
+     * 所属角色
      */
-    //private List<RoleSimpleRespVO> roles;
+    private List<RoleSimpleCO> roles;
 
     /**
-     * 所在部门 TODO
+     * 所在部门
      */
-    //private DeptSimpleRespVO dept;
+    private DeptSimpleCO dept;
 
     /**
-     * 所属岗位数组 TODO
+     * 所属岗位数组
      */
-    //private List<PostSimpleRespVO> posts;
+    private List<PostSimpleCO> posts;
 
     /**
      * 社交用户数组

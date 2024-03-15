@@ -5,9 +5,12 @@ import com.xgblack.cool.module.system.domain.company.dept.Dept;
 import com.xgblack.cool.module.system.dto.company.dept.DeptAddCmd;
 import com.xgblack.cool.module.system.dto.company.dept.DeptEditCmd;
 import com.xgblack.cool.module.system.dto.company.dept.clientobject.DeptCO;
+import com.xgblack.cool.module.system.dto.company.dept.clientobject.DeptSimpleCO;
 import com.xgblack.cool.module.system.gateway.database.dataobject.DeptDO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 /**
  * @author <a href="https://www.xgblack.cn">xg black</a>
@@ -22,4 +25,7 @@ public interface DeptConvertor extends Convertor<DeptCO, Dept, DeptDO> {
 
     Dept toEntity(DeptEditCmd cmd);
 
+    DeptSimpleCO convertEntity2SimpleCO(Dept dept);
+
+    List<DeptSimpleCO> convertEntity2SimpleCOList(List<Dept> list);
 }

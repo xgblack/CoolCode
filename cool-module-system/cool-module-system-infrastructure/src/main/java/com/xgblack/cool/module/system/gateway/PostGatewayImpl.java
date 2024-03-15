@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -57,5 +59,13 @@ public class PostGatewayImpl implements PostGateway {
                 .and(PostTableDef.POST.NAME.like(qry.getName(), StrUtil.isNotBlank(qry.getName())))
                 .and(PostTableDef.POST.STATUS.eq(qry.getStatus(), Objects.nonNull(qry.getStatus())))
                 .pageAs(qry.buildPage(), Post.class));
+    }
+
+    @Override
+    public List<Post> getPostsByIds(Collection<Long> postIds) {
+        return QueryChain.of(postMapper)
+                .from(PostTableDef.POST)
+                .and(PostTableDef.POST.ID.in(postIds))
+                .listAs(Post.class);
     }
 }
