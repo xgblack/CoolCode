@@ -5,7 +5,6 @@ import com.xgblack.cool.module.system.convertor.DeptConvertor;
 import com.xgblack.cool.module.system.domain.company.dept.Dept;
 import com.xgblack.cool.module.system.domain.gateway.DeptGateway;
 import com.xgblack.cool.module.system.dto.company.dept.DeptListQry;
-import com.xgblack.cool.module.system.gateway.database.dataobject.DeptDO;
 import com.xgblack.cool.module.system.gateway.database.dataobject.table.DeptTableDef;
 import com.xgblack.cool.module.system.gateway.database.mapper.DeptMapper;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +17,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author <a href="https://www.xgblack.cn">xg black</a>
@@ -78,7 +78,7 @@ public class DeptGatewayImpl implements DeptGateway {
             }
             // 2. 如果有子部门，继续遍历
             children.addAll(depts);
-            parentIds = convertSet(depts, DeptDO::getId);
+            parentIds = depts.stream().map(Dept::getId).collect(Collectors.toSet());
         }
         return children;
     }
