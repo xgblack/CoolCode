@@ -26,4 +26,5 @@ public interface RoleGateway {
     PageResult<Role> getPage(RolePageQry qry);
 
     void updateStatus(Long id, Boolean status);
+
 }
