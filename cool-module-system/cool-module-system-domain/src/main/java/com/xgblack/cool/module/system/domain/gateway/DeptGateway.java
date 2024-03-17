@@ -23,4 +23,6 @@ public interface DeptGateway {
 
     List<Dept> getChildDeptList(Long id);
 
+    List<Dept> getEnableList();
+
 }

@@ -4,6 +4,7 @@ import com.xgblack.cool.module.system.dto.company.dept.DeptAddCmd;
 import com.xgblack.cool.module.system.dto.company.dept.DeptEditCmd;
 import com.xgblack.cool.module.system.dto.company.dept.DeptListQry;
 import com.xgblack.cool.module.system.dto.company.dept.clientobject.DeptCO;
+import com.xgblack.cool.module.system.dto.company.dept.clientobject.DeptSimpleCO;
 
 import java.util.List;
 
@@ -23,4 +24,5 @@ public interface DeptServiceI {
 
     DeptCO detail(Long id);
 
+    List<DeptSimpleCO> getSimpleList();
 }

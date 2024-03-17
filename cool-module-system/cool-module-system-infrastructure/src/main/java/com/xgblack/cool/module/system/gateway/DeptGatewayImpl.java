@@ -82,4 +82,13 @@ public class DeptGatewayImpl implements DeptGateway {
         }
         return children;
     }
+
+    @Override
+    public List<Dept> getEnableList() {
+        return QueryChain.of(deptMapper)
+                .from(DeptTableDef.DEPT)
+                .and(DeptTableDef.DEPT.STATUS.eq(true))
+                .orderBy(DeptTableDef.DEPT.SORT.asc(), DeptTableDef.DEPT.ID.desc())
+                .listAs(Dept.class);
+    }
 }
