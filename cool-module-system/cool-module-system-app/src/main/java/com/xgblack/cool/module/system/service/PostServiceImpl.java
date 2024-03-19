@@ -6,6 +6,7 @@ import com.xgblack.cool.module.system.dto.company.post.PostAddCmd;
 import com.xgblack.cool.module.system.dto.company.post.PostEditCmd;
 import com.xgblack.cool.module.system.dto.company.post.PostPageQry;
 import com.xgblack.cool.module.system.dto.company.post.clientobject.PostCO;
+import com.xgblack.cool.module.system.dto.company.post.clientobject.PostSimpleCO;
 import com.xgblack.cool.module.system.executor.company.post.PostAddCmdExe;
 import com.xgblack.cool.module.system.executor.company.post.PostEditCmdExe;
 import com.xgblack.cool.module.system.executor.company.post.PostRemoveCmdExe;
@@ -14,6 +15,8 @@ import com.xgblack.cool.module.system.executor.company.post.query.PostPageQryExe
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author <a href="https://www.xgblack.cn">xg black</a>
@@ -53,5 +56,10 @@ public class PostServiceImpl implements PostServiceI {
     @Override
     public PageResult<PostCO> page(PostPageQry qry) {
         return postPageQryExe.execute(qry);
+    }
+
+    @Override
+    public List<PostSimpleCO> getSimpleList() {
+        return List.of();
     }
 }

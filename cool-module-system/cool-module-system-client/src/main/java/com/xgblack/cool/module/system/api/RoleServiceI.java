@@ -6,6 +6,9 @@ import com.xgblack.cool.module.system.dto.permission.RoleEditCmd;
 import com.xgblack.cool.module.system.dto.permission.RoleEditStatusCmd;
 import com.xgblack.cool.module.system.dto.permission.RolePageQry;
 import com.xgblack.cool.module.system.dto.permission.clientobject.RoleCO;
+import com.xgblack.cool.module.system.dto.permission.clientobject.RoleSimpleCO;
+
+import java.util.List;
 
 /**
  * @author <a href="https://www.xgblack.cn">xg black</a>
@@ -26,4 +29,5 @@ public interface RoleServiceI {
 
     RoleCO detail(Long id);
 
+    List<RoleSimpleCO> getSimpleList();
 }

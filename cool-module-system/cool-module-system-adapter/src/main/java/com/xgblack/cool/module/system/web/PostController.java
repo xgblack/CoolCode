@@ -6,10 +6,13 @@ import com.xgblack.cool.module.system.dto.company.post.PostAddCmd;
 import com.xgblack.cool.module.system.dto.company.post.PostEditCmd;
 import com.xgblack.cool.module.system.dto.company.post.PostPageQry;
 import com.xgblack.cool.module.system.dto.company.post.clientobject.PostCO;
+import com.xgblack.cool.module.system.dto.company.post.clientobject.PostSimpleCO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author <a href="https://www.xgblack.cn">xg black</a>
@@ -69,15 +72,16 @@ public class PostController {
         return postService.detail(id);
     }
 
-    /*@GetMapping(value = {"/list-all-simple", "simple-list"})
-    @Operation(summary = "获取岗位全列表", description = "只包含被开启的岗位，主要用于前端的下拉选项")
-    public CommonResult<List<PostSimpleRespVO>> getSimplePostList() {
+    /**
+     * 获取岗位精简列表
+     * @return
+     */
+    @GetMapping(value = {"/list-all-simple", "simple-list"})
+    //@Operation(summary = "获取岗位全列表", description = "只包含被开启的岗位，主要用于前端的下拉选项")
+    public List<PostSimpleCO> getSimpleList() {
         // 获得岗位列表，只要开启状态的
-        List<PostDO> list = postService.getPostList(null, Collections.singleton(CommonStatusEnum.ENABLE.getStatus()));
-        // 排序后，返回给前端
-        list.sort(Comparator.comparing(PostDO::getSort));
-        return success(BeanUtils.toBean(list, PostSimpleRespVO.class));
-    }*/
+        return postService.getSimpleList();
+    }
 
     /**
      * 获得岗位分页列表

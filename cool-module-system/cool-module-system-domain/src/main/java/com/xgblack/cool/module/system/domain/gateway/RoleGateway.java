@@ -27,4 +27,5 @@ public interface RoleGateway {
 
     void updateStatus(Long id, Boolean status);
 
+    List<Role> getEnableList();
 }

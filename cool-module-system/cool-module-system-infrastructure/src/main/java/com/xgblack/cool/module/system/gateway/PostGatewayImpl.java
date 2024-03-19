@@ -58,6 +58,7 @@ public class PostGatewayImpl implements PostGateway {
                 .and(PostTableDef.POST.CODE.like(qry.getCode(), StrUtil.isNotBlank(qry.getCode())))
                 .and(PostTableDef.POST.NAME.like(qry.getName(), StrUtil.isNotBlank(qry.getName())))
                 .and(PostTableDef.POST.STATUS.eq(qry.getStatus(), Objects.nonNull(qry.getStatus())))
+                .orderBy(PostTableDef.POST.SORT.asc(), PostTableDef.POST.ID.asc())
                 .pageAs(qry.buildPage(), Post.class));
     }
 
@@ -66,6 +67,16 @@ public class PostGatewayImpl implements PostGateway {
         return QueryChain.of(postMapper)
                 .from(PostTableDef.POST)
                 .and(PostTableDef.POST.ID.in(postIds))
+                .orderBy(PostTableDef.POST.SORT.asc(), PostTableDef.POST.ID.asc())
+                .listAs(Post.class);
+    }
+
+    @Override
+    public List<Post> getEnableList() {
+        return QueryChain.of(postMapper)
+                .from(PostTableDef.POST)
+                .and(PostTableDef.POST.STATUS.eq(Boolean.TRUE))
+                .orderBy(PostTableDef.POST.SORT.asc(), PostTableDef.POST.ID.asc())
                 .listAs(Post.class);
     }
 }

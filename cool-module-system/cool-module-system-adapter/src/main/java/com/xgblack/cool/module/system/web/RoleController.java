@@ -7,10 +7,14 @@ import com.xgblack.cool.module.system.dto.permission.RoleEditCmd;
 import com.xgblack.cool.module.system.dto.permission.RoleEditStatusCmd;
 import com.xgblack.cool.module.system.dto.permission.RolePageQry;
 import com.xgblack.cool.module.system.dto.permission.clientobject.RoleCO;
+import com.xgblack.cool.module.system.dto.permission.clientobject.RoleSimpleCO;
+import com.xgblack.cool.module.system.gateway.database.dataobject.RoleDO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 管理后台 - 角色
@@ -88,13 +92,11 @@ public class RoleController {
         return roleService.page(qry);
     }
 
-    /*@GetMapping({"/list-all-simple", "/simple-list"})
-    @Operation(summary = "获取角色精简信息列表", description = "只包含被开启的角色，主要用于前端的下拉选项")
-    public CommonResult<List<RoleSimpleRespVO>> getSimpleRoleList() {
-        List<RoleDO> list = roleService.getRoleListByStatus(singleton(CommonStatusEnum.ENABLE.getStatus()));
-        list.sort(Comparator.comparing(RoleDO::getSort));
-        return success(BeanUtils.toBean(list, RoleSimpleRespVO.class));
-    }*/
+    @GetMapping({"/list-all-simple", "/simple-list"})
+    //@Operation(summary = "获取角色精简信息列表", description = "只包含被开启的角色，主要用于前端的下拉选项")
+    public List<RoleSimpleCO> getSimpleList() {
+        return roleService.getSimpleList();
+    }
 
     /*@GetMapping("/export-excel")
     @Operation(summary = "导出角色 Excel")

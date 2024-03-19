@@ -5,6 +5,7 @@ import com.xgblack.cool.module.system.dto.permission.MenuAddCmd;
 import com.xgblack.cool.module.system.dto.permission.MenuEditCmd;
 import com.xgblack.cool.module.system.dto.permission.MenuListQry;
 import com.xgblack.cool.module.system.dto.permission.clientobject.MenuCO;
+import com.xgblack.cool.module.system.dto.permission.clientobject.MenuSimpleCO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -57,6 +58,11 @@ public class MenuController {
         menuService.remove(id);
     }
 
+    /**
+     * 获取菜单列表
+     * @param qry
+     * @return
+     */
     @GetMapping("list")
     //@Operation(summary = "获取菜单列表", description = "用于【菜单管理】界面")
     //@PreAuthorize("@ss.hasPermission('system:menu:query')")
@@ -64,12 +70,15 @@ public class MenuController {
         return menuService.list(qry);
     }
 
-    /*@GetMapping({"/list-all-simple", "simple-list"})
+    /**
+     * 获取菜单精简信息列表
+     * @return
+     */
+    @GetMapping({"/list-all-simple", "simple-list"})
     //@Operation(summary = "获取菜单精简信息列表", description = "只包含被开启的菜单，用于【角色分配菜单】功能的选项。" + "在多租户的场景下，会只返回租户所在套餐有的菜单")
     public List<MenuSimpleCO> getSimpleList() {
-        //TODO
-        List<MenuDO> list = menuService.getMenuListByTenant( new MenuListReqVO().setStatus(CommonStatusEnum.ENABLE.getStatus()));
-    }*/
+        return menuService.getSimpleListByTenant();
+    }
 
     @GetMapping("detail/{id}")
     //@Operation(summary = "获取菜单信息")

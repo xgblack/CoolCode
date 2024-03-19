@@ -55,6 +55,7 @@ public class RoleGatewayImpl implements RoleGateway {
         return QueryChain.of(roleMapper)
                 .from(RoleTableDef.ROLE)
                 .and(RoleTableDef.ROLE.ID.in(ids))
+                .orderBy(RoleTableDef.ROLE.SORT.asc(),RoleTableDef.ROLE.ID.desc())
                 .listAs(Role.class);
     }
 
@@ -67,7 +68,7 @@ public class RoleGatewayImpl implements RoleGateway {
                         .and(RoleTableDef.ROLE.CODE.eq(qry.getCode(), StrUtil.isNotBlank(qry.getCode())))
                         .and(RoleTableDef.ROLE.STATUS.eq(qry.getStatus(), qry.getStatus() != null))
                         .and(RoleTableDef.ROLE.CREATE_TIME.between(qry.getCreateTime(), qry.getCreateTime() != null))
-                        .orderBy(RoleTableDef.ROLE.ID.desc())
+                        .orderBy(RoleTableDef.ROLE.SORT.asc(),RoleTableDef.ROLE.ID.desc())
                         .pageAs(qry.buildPage(), Role.class)
         );
     }
@@ -78,5 +79,14 @@ public class RoleGatewayImpl implements RoleGateway {
                 .set(RoleTableDef.ROLE.STATUS, status)
                 .where(RoleTableDef.ROLE.ID.eq(id))
                 .update();
+    }
+
+    @Override
+    public List<Role> getEnableList() {
+        return QueryChain.of(roleMapper)
+                .from(RoleTableDef.ROLE)
+                .and(RoleTableDef.ROLE.STATUS.eq(Boolean.TRUE))
+                .orderBy(RoleTableDef.ROLE.SORT.asc(),RoleTableDef.ROLE.ID.desc())
+                .listAs(Role.class);
     }
 }

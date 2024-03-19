@@ -58,6 +58,7 @@ public class DeptGatewayImpl implements DeptGateway {
                 .from(DeptTableDef.DEPT)
                 .and(DeptTableDef.DEPT.NAME.like(qry.getName(), StrUtil.isNotBlank(qry.getName())))
                 .and(DeptTableDef.DEPT.STATUS.eq(qry.getStatus(), qry.getStatus() != null))
+                .orderBy(DeptTableDef.DEPT.SORT.asc(), DeptTableDef.DEPT.ID.asc())
                 .listAs(Dept.class);
     }
 
@@ -87,8 +88,8 @@ public class DeptGatewayImpl implements DeptGateway {
     public List<Dept> getEnableList() {
         return QueryChain.of(deptMapper)
                 .from(DeptTableDef.DEPT)
-                .and(DeptTableDef.DEPT.STATUS.eq(true))
-                .orderBy(DeptTableDef.DEPT.SORT.asc(), DeptTableDef.DEPT.ID.desc())
+                .and(DeptTableDef.DEPT.STATUS.eq(Boolean.TRUE))
+                .orderBy(DeptTableDef.DEPT.SORT.asc(), DeptTableDef.DEPT.ID.asc())
                 .listAs(Dept.class);
     }
 }

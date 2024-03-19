@@ -24,4 +24,6 @@ public interface PostGateway {
     PageResult<Post> page(PostPageQry qry);
 
     List<Post> getPostsByIds(Collection<Long> postIds);
+
+    List<Post> getEnableList();
 }

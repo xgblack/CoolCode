@@ -4,6 +4,7 @@ import com.xgblack.cool.module.system.dto.permission.MenuAddCmd;
 import com.xgblack.cool.module.system.dto.permission.MenuEditCmd;
 import com.xgblack.cool.module.system.dto.permission.MenuListQry;
 import com.xgblack.cool.module.system.dto.permission.clientobject.MenuCO;
+import com.xgblack.cool.module.system.dto.permission.clientobject.MenuSimpleCO;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface MenuServiceI {
     List<MenuCO> list(MenuListQry qry);
 
     MenuCO detail(Long id);
+
+    List<MenuSimpleCO> getSimpleListByTenant();
 }
