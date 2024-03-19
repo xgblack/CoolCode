@@ -25,4 +25,5 @@ public interface DeptServiceI {
     DeptCO detail(Long id);
 
     List<DeptSimpleCO> getSimpleList();
+
 }

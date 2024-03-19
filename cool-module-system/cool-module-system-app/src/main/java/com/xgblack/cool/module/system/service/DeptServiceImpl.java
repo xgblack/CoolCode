@@ -64,4 +64,5 @@ public class DeptServiceImpl implements DeptServiceI {
         return deptSimpleListQryExe.execute();
     }
 
+
 }
