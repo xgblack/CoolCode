@@ -31,7 +31,7 @@
         <!--<minio.version>8.5.7</minio.version>-->
         <!--<tobato.version>1.27.2</tobato.version>-->
         <!--<caffeine.version>3.1.8</caffeine.version>-->
-        <easyexcel.version>3.3.3</easyexcel.version>
+        <easyexcel.version>3.3.4</easyexcel.version>
         <sms4j.starter.version>3.1.1</sms4j.starter.version>
         <!--<wx-java.version>4.6.0</wx-java.version>-->
         <!--<infinispan.version>15.0.0.Dev10</infinispan.version>-->

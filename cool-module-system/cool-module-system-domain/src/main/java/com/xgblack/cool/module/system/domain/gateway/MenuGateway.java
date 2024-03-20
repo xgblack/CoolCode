@@ -20,4 +20,6 @@ public interface MenuGateway {
     List<Menu> getList(MenuListQry qry);
 
     Menu getById(Long id);
+
+    List<Menu> getEnableList();
 }

@@ -5,11 +5,13 @@ import com.xgblack.cool.module.system.dto.company.dept.DeptAddCmd;
 import com.xgblack.cool.module.system.dto.company.dept.DeptEditCmd;
 import com.xgblack.cool.module.system.dto.company.dept.DeptListQry;
 import com.xgblack.cool.module.system.dto.company.dept.clientobject.DeptCO;
+import com.xgblack.cool.module.system.dto.company.dept.clientobject.DeptSimpleCO;
 import com.xgblack.cool.module.system.executor.company.dept.DeptAddCmdExe;
 import com.xgblack.cool.module.system.executor.company.dept.DeptEditCmdExe;
 import com.xgblack.cool.module.system.executor.company.dept.DeptRemoveCmdExe;
 import com.xgblack.cool.module.system.executor.company.dept.query.DeptByIdQryExe;
 import com.xgblack.cool.module.system.executor.company.dept.query.DeptListQryExe;
+import com.xgblack.cool.module.system.executor.company.dept.query.DeptSimpleListQryExe;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,7 @@ public class DeptServiceImpl implements DeptServiceI {
     private final DeptRemoveCmdExe deptRemoveCmdExe;
     private final DeptListQryExe deptListQryExe;
     private final DeptByIdQryExe deptByIdQryExe;
+    private final DeptSimpleListQryExe deptSimpleListQryExe;
 
     @Override
     public void add(DeptAddCmd cmd) {
@@ -55,5 +58,11 @@ public class DeptServiceImpl implements DeptServiceI {
     public DeptCO detail(Long id) {
         return deptByIdQryExe.execute(id);
     }
+
+    @Override
+    public List<DeptSimpleCO> getSimpleList() {
+        return deptSimpleListQryExe.execute();
+    }
+
 
 }

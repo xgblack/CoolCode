@@ -5,11 +5,13 @@ import com.xgblack.cool.module.system.dto.permission.MenuAddCmd;
 import com.xgblack.cool.module.system.dto.permission.MenuEditCmd;
 import com.xgblack.cool.module.system.dto.permission.MenuListQry;
 import com.xgblack.cool.module.system.dto.permission.clientobject.MenuCO;
+import com.xgblack.cool.module.system.dto.permission.clientobject.MenuSimpleCO;
 import com.xgblack.cool.module.system.executor.permission.MenuAddCmdExe;
 import com.xgblack.cool.module.system.executor.permission.MenuEditCmdExe;
 import com.xgblack.cool.module.system.executor.permission.MenuRemoveCmdExe;
 import com.xgblack.cool.module.system.executor.permission.query.MenuByIdQryExe;
 import com.xgblack.cool.module.system.executor.permission.query.MenuListQryExe;
+import com.xgblack.cool.module.system.executor.permission.query.MenuSimpleListByTenantQryExe;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,7 @@ public class MenuServiceImpl implements MenuServiceI {
     private final MenuRemoveCmdExe menuRemoveCmdExe;
     private final MenuListQryExe menuListQryExe;
     private final MenuByIdQryExe menuByIdQryExe;
+    private final MenuSimpleListByTenantQryExe menuSimpleListByTenantQryExe;
 
 
 
@@ -56,5 +59,10 @@ public class MenuServiceImpl implements MenuServiceI {
     @Override
     public MenuCO detail(Long id) {
         return menuByIdQryExe.execute(id);
+    }
+
+    @Override
+    public List<MenuSimpleCO> getSimpleListByTenant() {
+        return menuSimpleListByTenantQryExe.execute();
     }
 }

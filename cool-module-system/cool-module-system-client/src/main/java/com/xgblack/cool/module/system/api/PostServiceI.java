@@ -5,6 +5,9 @@ import com.xgblack.cool.module.system.dto.company.post.PostAddCmd;
 import com.xgblack.cool.module.system.dto.company.post.PostEditCmd;
 import com.xgblack.cool.module.system.dto.company.post.PostPageQry;
 import com.xgblack.cool.module.system.dto.company.post.clientobject.PostCO;
+import com.xgblack.cool.module.system.dto.company.post.clientobject.PostSimpleCO;
+
+import java.util.List;
 
 /**
  * @author <a href="https://www.xgblack.cn">xg black</a>
@@ -22,4 +25,5 @@ public interface PostServiceI {
 
     PageResult<PostCO> page(PostPageQry qry);
 
+    List<PostSimpleCO> getSimpleList();
 }

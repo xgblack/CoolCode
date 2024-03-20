@@ -3,6 +3,7 @@ package com.xgblack.cool.module.system.api;
 import com.xgblack.cool.framework.common.pojo.dto.PageResult;
 import com.xgblack.cool.module.system.dto.user.*;
 import com.xgblack.cool.module.system.dto.user.clientobject.UserCO;
+import com.xgblack.cool.module.system.dto.user.clientobject.UserProfileDTO;
 
 /**
  * @author <a href="https://www.xgblack.cn">xg black</a>
@@ -27,4 +28,6 @@ public interface UserServiceI {
     void editUserProfile(Long id, UserProfileEditCmd cmd);
 
     void editUserPassword(Long loginUserId, String oldPassword, String newPassword);
+
+    UserProfileDTO getUserProfileInfo(Long loginUserId);
 }

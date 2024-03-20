@@ -47,11 +47,21 @@ public class MenuGatewayImpl implements MenuGateway {
                 .from(MenuTableDef.MENU)
                 .and(MenuTableDef.MENU.NAME.like(qry.getName(), StrUtil.isNotBlank(qry.getName())))
                 .and(MenuTableDef.MENU.STATUS.eq(qry.getStatus(), qry.getStatus() != null))
+                .orderBy(MenuTableDef.MENU.SORT.asc(), MenuTableDef.MENU.ID.asc())
                 .listAs(Menu.class);
     }
 
     @Override
     public Menu getById(Long id) {
         return menuMapper.selectOneWithRelationsByIdAs(id, Menu.class);
+    }
+
+    @Override
+    public List<Menu> getEnableList() {
+        return QueryChain.of(menuMapper)
+                .from(MenuTableDef.MENU)
+                .and(MenuTableDef.MENU.STATUS.eq(Boolean.TRUE))
+                .orderBy(MenuTableDef.MENU.SORT.asc(), MenuTableDef.MENU.ID.asc())
+                .listAs(Menu.class);
     }
 }

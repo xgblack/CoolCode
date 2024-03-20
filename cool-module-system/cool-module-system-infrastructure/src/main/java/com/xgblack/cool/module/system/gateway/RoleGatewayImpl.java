@@ -14,6 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+import java.util.List;
+
 /**
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
@@ -48,6 +51,15 @@ public class RoleGatewayImpl implements RoleGateway {
     }
 
     @Override
+    public List<Role> getRolesByIds(Collection<Long> ids) {
+        return QueryChain.of(roleMapper)
+                .from(RoleTableDef.ROLE)
+                .and(RoleTableDef.ROLE.ID.in(ids))
+                .orderBy(RoleTableDef.ROLE.SORT.asc(),RoleTableDef.ROLE.ID.desc())
+                .listAs(Role.class);
+    }
+
+    @Override
     public PageResult<Role> getPage(RolePageQry qry) {
         return PageResult.of(
                 QueryChain.of(roleMapper)
@@ -56,7 +68,7 @@ public class RoleGatewayImpl implements RoleGateway {
                         .and(RoleTableDef.ROLE.CODE.eq(qry.getCode(), StrUtil.isNotBlank(qry.getCode())))
                         .and(RoleTableDef.ROLE.STATUS.eq(qry.getStatus(), qry.getStatus() != null))
                         .and(RoleTableDef.ROLE.CREATE_TIME.between(qry.getCreateTime(), qry.getCreateTime() != null))
-                        .orderBy(RoleTableDef.ROLE.ID.desc())
+                        .orderBy(RoleTableDef.ROLE.SORT.asc(),RoleTableDef.ROLE.ID.desc())
                         .pageAs(qry.buildPage(), Role.class)
         );
     }
@@ -67,5 +79,14 @@ public class RoleGatewayImpl implements RoleGateway {
                 .set(RoleTableDef.ROLE.STATUS, status)
                 .where(RoleTableDef.ROLE.ID.eq(id))
                 .update();
+    }
+
+    @Override
+    public List<Role> getEnableList() {
+        return QueryChain.of(roleMapper)
+                .from(RoleTableDef.ROLE)
+                .and(RoleTableDef.ROLE.STATUS.eq(Boolean.TRUE))
+                .orderBy(RoleTableDef.ROLE.SORT.asc(),RoleTableDef.ROLE.ID.desc())
+                .listAs(Role.class);
     }
 }

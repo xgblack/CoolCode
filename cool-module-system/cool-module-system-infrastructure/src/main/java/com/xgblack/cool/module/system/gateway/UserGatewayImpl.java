@@ -7,16 +7,28 @@ import com.xgblack.cool.framework.security.dto.SysUser;
 import com.xgblack.cool.framework.security.dto.UserInfo;
 import com.xgblack.cool.framework.security.service.RemoteUserService;
 import com.xgblack.cool.module.system.convertor.UserConvertor;
+import com.xgblack.cool.module.system.domain.company.dept.Dept;
+import com.xgblack.cool.module.system.domain.gateway.DeptGateway;
+import com.xgblack.cool.module.system.domain.gateway.PermissionGateway;
 import com.xgblack.cool.module.system.domain.gateway.UserGateway;
 import com.xgblack.cool.module.system.domain.user.User;
 import com.xgblack.cool.module.system.dto.user.UserEditLockedCmd;
 import com.xgblack.cool.module.system.dto.user.UserPageQry;
 import com.xgblack.cool.module.system.dto.user.UserProfileEditCmd;
+import com.xgblack.cool.module.system.gateway.database.dataobject.MenuDO;
+import com.xgblack.cool.module.system.gateway.database.mapper.MenuMapper;
 import com.xgblack.cool.module.system.gateway.database.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.collection.CollUtil;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.stereotype.Component;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.xgblack.cool.module.system.gateway.database.dataobject.table.UserTableDef.USER;
 
@@ -30,6 +42,12 @@ public class UserGatewayImpl implements UserGateway, RemoteUserService {
 
     private final UserMapper userMapper;
 
+    private final PermissionGateway permissionGateway;
+
+    private final MenuMapper menuMapper;
+
+    private final DeptGateway deptGateway;
+
     private final static UserConvertor convertor = UserConvertor.INSTANCE;
 
     @Override
@@ -40,10 +58,25 @@ public class UserGatewayImpl implements UserGateway, RemoteUserService {
                 .and(USER.PHONE.eq(phone, StrUtil.isNotBlank(phone)))
                 .oneAs(SysUser.class);
 
-        // TODO:设置角色列表 （ID）
-        // TODO:设置权限列表（menu.permission）
         UserInfo info = new UserInfo();
-        info.setSysUser(sysUser);
+        // 设置角色列表 （ID）
+        Set<Long> roleIds = permissionGateway.getRoleIdsByUserId(sysUser.getId());
+        // 权限列表（menu.permission）
+        Set<String> permissions = new HashSet<>();
+        Set<Long> menuIds = new HashSet<>();
+        roleIds.forEach(roleId -> {
+            Set<Long> menuIdSet = permissionGateway.getMenuIdsByRoleId(roleId);
+            menuIds.addAll(menuIdSet);
+        });
+
+        if (CollUtil.isNotEmpty(menuIds)) {
+            List<MenuDO> menuDOS = menuMapper.selectListByIds(menuIds);
+            permissions = menuDOS.stream().map(MenuDO::getPermission).collect(Collectors.toSet());
+        }
+        info.setSysUser(sysUser)
+                .setRoles(roleIds)
+                .setPermissions(permissions);
+
         return info;
     }
 
@@ -77,6 +110,13 @@ public class UserGatewayImpl implements UserGateway, RemoteUserService {
 
     @Override
     public PageResult<User> getPage(UserPageQry qry) {
+        Set<Long> deptIds = new HashSet<>();
+        if (Objects.nonNull(qry.getDeptId())) {
+            List<Dept> childDeptList = deptGateway.getChildDeptList(qry.getDeptId());
+            Set<Long> ids = childDeptList.stream().map(Dept::getId).collect(Collectors.toSet());
+            deptIds.addAll(ids);
+        }
+        deptIds.add(qry.getDeptId()); // 包括自身
         return PageResult.of(
                 QueryChain.of(userMapper)
                         .from(USER)
@@ -84,7 +124,7 @@ public class UserGatewayImpl implements UserGateway, RemoteUserService {
                         .and(USER.PHONE.like(qry.getPhone(), StrUtil.isNotBlank(qry.getPhone())))
                         .and(USER.LOCKED.eq(qry.getLocked(), qry.getLocked() != null))
                         .and(USER.CREATE_TIME.between(qry.getCreateTime(), qry.getCreateTime() != null))
-                        //TODO: 处理部门
+                        .and(USER.DEPT_ID.in(deptIds)) // 处理部门 同时筛选子部门
                         .orderBy(USER.ID.desc())
                         .pageAs(qry.buildPage(),User.class)
         );

@@ -4,9 +4,11 @@ import com.xgblack.cool.framework.common.pojo.dto.PageResult;
 import com.xgblack.cool.module.system.api.UserServiceI;
 import com.xgblack.cool.module.system.dto.user.*;
 import com.xgblack.cool.module.system.dto.user.clientobject.UserCO;
+import com.xgblack.cool.module.system.dto.user.clientobject.UserProfileDTO;
 import com.xgblack.cool.module.system.executor.user.*;
 import com.xgblack.cool.module.system.executor.user.query.UserByIdQryExe;
 import com.xgblack.cool.module.system.executor.user.query.UserPageQryExe;
+import com.xgblack.cool.module.system.executor.user.query.UserProfileInfoQryExe;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,7 @@ public class UserServiceImpl implements UserServiceI {
     private final UserEditPasswordCmdExe userEditPasswordCmdExe;
     private final UserProfileEditCmdExe userProfileEditCmdExe;
     private final UserProfileEditPasswordCmdExe userProfileEditPasswordCmdExe;
+    private final UserProfileInfoQryExe userProfileInfoQryExe;
 
     @Override
     public void add(UserAddCmd cmd) {
@@ -73,6 +76,11 @@ public class UserServiceImpl implements UserServiceI {
     @Override
     public void editUserPassword(Long loginUserId, String oldPassword, String newPassword) {
         userProfileEditPasswordCmdExe.execute(loginUserId, oldPassword, newPassword);
+    }
+
+    @Override
+    public UserProfileDTO getUserProfileInfo(Long loginUserId) {
+        return userProfileInfoQryExe.execute(loginUserId);
     }
 
 }

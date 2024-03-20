@@ -7,14 +7,18 @@ import com.xgblack.cool.module.system.dto.permission.RoleEditCmd;
 import com.xgblack.cool.module.system.dto.permission.RoleEditStatusCmd;
 import com.xgblack.cool.module.system.dto.permission.RolePageQry;
 import com.xgblack.cool.module.system.dto.permission.clientobject.RoleCO;
+import com.xgblack.cool.module.system.dto.permission.clientobject.RoleSimpleCO;
 import com.xgblack.cool.module.system.executor.permission.RoleAddCmdExe;
 import com.xgblack.cool.module.system.executor.permission.RoleEditCmdExe;
 import com.xgblack.cool.module.system.executor.permission.RoleRemoveCmdExe;
 import com.xgblack.cool.module.system.executor.permission.query.RoleByIdQryExe;
 import com.xgblack.cool.module.system.executor.permission.query.RolePageQryExe;
+import com.xgblack.cool.module.system.executor.permission.query.RoleSimpleListQryExe;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author <a href="https://www.xgblack.cn">xg black</a>
@@ -30,6 +34,7 @@ public class RoleServiceImpl implements RoleServiceI {
     private final RoleRemoveCmdExe roleRemoveCmdExe;
     private final RoleEditCmdExe roleEditCmdExe;
     private final RolePageQryExe rolePageQryExe;
+    private final RoleSimpleListQryExe roleSimpleListQryExe;
 
 
     @Override
@@ -60,5 +65,10 @@ public class RoleServiceImpl implements RoleServiceI {
     @Override
     public RoleCO detail(Long id) {
         return roleByIdQryExe.execute(id);
+    }
+
+    @Override
+    public List<RoleSimpleCO> getSimpleList() {
+        return roleSimpleListQryExe.execute();
     }
 }

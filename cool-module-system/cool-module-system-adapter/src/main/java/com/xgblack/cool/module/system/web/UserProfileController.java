@@ -5,7 +5,6 @@ import com.xgblack.cool.framework.security.utils.SecurityUtils;
 import com.xgblack.cool.module.system.api.UserServiceI;
 import com.xgblack.cool.module.system.dto.user.UserProfileEditCmd;
 import com.xgblack.cool.module.system.dto.user.UserProfileEditPasswordCmd;
-import com.xgblack.cool.module.system.dto.user.clientobject.UserCO;
 import com.xgblack.cool.module.system.dto.user.clientobject.UserProfileDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -32,15 +31,11 @@ public class UserProfileController {
      * 获取当前用户全部信息
      * @return UserProfileDTO 当前用户信息
      */
-    @GetMapping
+    @GetMapping("info")
+    //@Operation(summary = "获得登录用户信息")
+    //@DataPermission(enable = false) // TODO 关闭数据权限，避免只查看自己时，查询不到部门。
     public UserProfileDTO info() {
-        UserCO userCO = userService.getDetail(getLoginUserId());
-        /*AdminUserDO user = userService.getUser(id);
-        // 拼接数据
-        DeptDO dept = deptService.getDept(user.getDeptId());
-        return success(UserConvert.INSTANCE.convert(user, dept));*/
-        //TODO
-        return null;
+        return userService.getUserProfileInfo(getLoginUserId());
     }
 
     /**

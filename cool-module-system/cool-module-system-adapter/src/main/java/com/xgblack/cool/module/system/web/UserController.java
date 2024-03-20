@@ -109,6 +109,9 @@ public class UserController {
     //@Operation(summary = "获取用户精简信息列表", description = "只包含被开启的用户，主要用于前端的下拉选项")
     public List<UserSimpleDTO> getSimpleUserList() {
         //TODO
+        //List<AdminUserDO> list = userService.getUserListByStatus(CommonStatusEnum.ENABLE.getStatus());
+        // 拼接数据
+        //Map<Long, DeptDO> deptMap = deptService.getDeptMap( convertList(list, AdminUserDO::getDeptId));
         return null;
     }
 
