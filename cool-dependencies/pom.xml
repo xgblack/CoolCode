@@ -37,6 +37,7 @@
         <!--<infinispan.version>15.0.0.Dev10</infinispan.version>-->
         <captcha.version>2.2.3</captcha.version>
         <ip2region.version>2.7.0</ip2region.version>
+        <log-record.version>1.6.1</log-record.version>
     </properties>
 
     <dependencyManagement>
@@ -234,6 +235,13 @@
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>wx-java-pay-spring-boot-starter</artifactId>
                 <version>${wx-java.version}</version>
+            </dependency>
+
+            <!-- 操作日志 -->
+            <dependency>
+                <groupId>cn.monitor4all</groupId>
+                <artifactId>log-record-springboot3-starter</artifactId>
+                <version>${log-record.version}</version>
             </dependency>
 
         </dependencies>
