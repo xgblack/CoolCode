@@ -3,7 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.xgblack</groupId>
+	<parent>
+		<groupId>com.xgblack</groupId>
+		<artifactId>cool-dependencies</artifactId>
+		<version>${revision}</version>
+		<relativePath>cool-dependencies/pom.xml</relativePath>
+	</parent>
+
 	<artifactId>cool-code</artifactId>
 	<version>${revision}</version>
 	<packaging>pom</packaging>
@@ -43,111 +49,8 @@
 
     </modules>
 
-	<properties>
-		<revision>1.0.0</revision>
-		<!-- Maven 相关 -->
-		<java.version>21</java.version>
-		<maven.compiler.source>${java.version}</maven.compiler.source>
-		<maven.compiler.target>${java.version}</maven.compiler.target>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-		<spring.boot.version>3.2.4</spring.boot.version>
-		<maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
-		<maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-		<native-maven-plugin.version>0.10.1</native-maven-plugin.version>
-
-
-		<lombok.version>1.18.32</lombok.version>
-		<mapstruct.version>1.6.0.Beta1</mapstruct.version>
-		<mybatis-flex.version>1.8.2</mybatis-flex.version>
-	</properties>
-
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>com.xgblack</groupId>
-				<artifactId>cool-dependencies</artifactId>
-				<version>${revision}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.graalvm.buildtools</groupId>
-					<artifactId>native-maven-plugin</artifactId>
-					<version>${native-maven-plugin.version}</version>
-				</plugin>
-				<!-- maven-surefire-plugin 插件，用于运行单元测试。 -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>${maven-surefire-plugin.version}</version>
-				</plugin>
-				<!-- maven-compiler-plugin 插件，解决 Lombok + MapStruct 组合 -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>${maven-compiler-plugin.version}</version>
-					<configuration>
-						<fork>true</fork>
-						<parameters>true</parameters>
-						<source>${java.version}</source>
-						<target>${java.version}</target>
-						<encoding>${project.build.sourceEncoding}</encoding>
-						<annotationProcessorPaths>
-							<path>
-								<groupId>org.projectlombok</groupId>
-								<artifactId>lombok</artifactId>
-								<version>${lombok.version}</version>
-							</path>
-							<path>
-								<groupId>org.mapstruct</groupId>
-								<artifactId>mapstruct-processor</artifactId>
-								<version>${mapstruct.version}</version>
-							</path>
-							<path>
-								<groupId>com.mybatis-flex</groupId>
-								<artifactId>mybatis-flex-processor</artifactId>
-								<version>${mybatis-flex.version}</version>
-							</path>
-						</annotationProcessorPaths>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>com.ly.smart-doc</groupId>
-					<artifactId>smart-doc-maven-plugin</artifactId>
-					<version>3.0.2</version>
-					<configuration>
-						<configFile>./src/main/resources/smart-doc.json</configFile>
-						<projectName>${project.description}</projectName>
-						<includes>
-							<!-- 使用了mybatis-plus的Page分页需要include所使用的源码包 -->
-							<!--<include>com.baomidou:mybatis-plus-extension</include>-->
-							<!-- 使用了mybatis-plus的IPage分页需要include mybatis-plus-core-->
-							<!--<include>com.baomidou:mybatis-plus-core</include>-->
-							<!-- 使用了jpa的分页需要include所使用的源码包 -->
-							<!--<include>org.springframework.data:spring-data-commons</include>-->
-						</includes>
-					</configuration>
-					<executions>
-						<execution>
-							<!--如果不需要在执行编译时启动smart-doc，则将phase注释掉-->
-							<phase>compile</phase>
-							<goals>
-								<!--smart-doc提供了html、openapi、markdown等goal，可按需配置-->
-								<goal>openapi</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-
 		<plugins>
 			<plugin>
 				<groupId>com.ly.smart-doc</groupId>
@@ -156,21 +59,33 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<fork>true</fork>
+					<parameters>true</parameters>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${mapstruct.version}</version>
+						</path>
+						<path>
+							<groupId>com.mybatis-flex</groupId>
+							<artifactId>mybatis-flex-processor</artifactId>
+							<version>${mybatis-flex.version}</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
 			</plugin>
 		</plugins>
 
 	</build>
-
-
-	<repositories>
-		<repository>
-			<id>repo-huawei</id>
-			<url>https://repo.huaweicloud.com/repository/maven/</url>
-		</repository>
-		<repository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-	</repositories>
 
 </project>
