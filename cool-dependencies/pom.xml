@@ -39,6 +39,7 @@
         <captcha.version>2.2.3</captcha.version>
         <ip2region.version>2.7.0</ip2region.version>
         <log-record.version>1.6.1</log-record.version>
+        <bizlog.version>3.0.6</bizlog.version>
 
         <!--插件版本-->
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
@@ -249,10 +250,11 @@
 
             <!-- 操作日志 -->
             <dependency>
-                <groupId>cn.monitor4all</groupId>
-                <artifactId>log-record-springboot3-starter</artifactId>
-                <version>${log-record.version}</version>
+                <groupId>io.github.mouzt</groupId>
+                <artifactId>bizlog-sdk</artifactId>
+                <version>${bizlog.version}</version>
             </dependency>
+
 
         </dependencies>
     </dependencyManagement>
