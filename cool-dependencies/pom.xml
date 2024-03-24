@@ -38,7 +38,6 @@
         <!--<infinispan.version>15.0.0.Final</infinispan.version>-->
         <captcha.version>2.2.3</captcha.version>
         <ip2region.version>2.7.0</ip2region.version>
-        <log-record.version>1.6.1</log-record.version>
         <bizlog.version>3.0.6</bizlog.version>
 
         <!--插件版本-->
