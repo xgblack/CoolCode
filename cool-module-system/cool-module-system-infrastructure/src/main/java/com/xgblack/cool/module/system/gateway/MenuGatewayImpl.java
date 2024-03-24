@@ -5,6 +5,7 @@ import com.xgblack.cool.module.system.convertor.MenuConvertor;
 import com.xgblack.cool.module.system.domain.gateway.MenuGateway;
 import com.xgblack.cool.module.system.domain.permission.Menu;
 import com.xgblack.cool.module.system.dto.permission.MenuListQry;
+import com.xgblack.cool.module.system.gateway.database.dataobject.MenuDO;
 import com.xgblack.cool.module.system.gateway.database.dataobject.table.MenuTableDef;
 import com.xgblack.cool.module.system.gateway.database.mapper.MenuMapper;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +28,10 @@ public class MenuGatewayImpl implements MenuGateway {
     private final MenuConvertor convertor = MenuConvertor.INSTANCE;
 
     @Override
-    public void insert(Menu entity) {
-        menuMapper.insertSelective(convertor.toDataObject(entity));
+    public Long insert(Menu entity) {
+        MenuDO menuDO = convertor.toDataObject(entity);
+        menuMapper.insertSelective(menuDO);
+        return menuDO.getId();
     }
 
     @Override

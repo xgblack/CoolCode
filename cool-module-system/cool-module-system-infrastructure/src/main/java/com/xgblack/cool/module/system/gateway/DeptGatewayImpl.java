@@ -5,6 +5,7 @@ import com.xgblack.cool.module.system.convertor.DeptConvertor;
 import com.xgblack.cool.module.system.domain.company.dept.Dept;
 import com.xgblack.cool.module.system.domain.gateway.DeptGateway;
 import com.xgblack.cool.module.system.dto.company.dept.DeptListQry;
+import com.xgblack.cool.module.system.gateway.database.dataobject.DeptDO;
 import com.xgblack.cool.module.system.gateway.database.dataobject.table.DeptTableDef;
 import com.xgblack.cool.module.system.gateway.database.mapper.DeptMapper;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +34,10 @@ public class DeptGatewayImpl implements DeptGateway {
     private final DeptConvertor convertor = DeptConvertor.INSTANCE;
 
     @Override
-    public void insert(Dept entity) {
-        deptMapper.insertSelective(convertor.toDataObject(entity));
+    public Long insert(Dept entity) {
+        DeptDO deptDO = convertor.toDataObject(entity);
+        deptMapper.insertSelective(deptDO);
+        return deptDO.getId();
     }
 
     @Override

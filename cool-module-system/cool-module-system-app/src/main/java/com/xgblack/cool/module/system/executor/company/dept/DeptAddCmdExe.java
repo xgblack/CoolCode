@@ -18,7 +18,7 @@ public class DeptAddCmdExe {
 
     private final DeptGateway gateway;
 
-    public void execute(DeptAddCmd cmd) {
-        gateway.insert(DeptConvertor.INSTANCE.toEntity(cmd));
+    public Long execute(DeptAddCmd cmd) {
+        return gateway.insert(DeptConvertor.INSTANCE.toEntity(cmd));
     }
 }

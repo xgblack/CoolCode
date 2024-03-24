@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface RoleGateway {
 
-    void insert(Role role);
+    Long insert(Role role);
 
     void delete(Long id);
 

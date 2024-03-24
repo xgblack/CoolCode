@@ -7,6 +7,7 @@ import com.xgblack.cool.module.system.convertor.RoleConvertor;
 import com.xgblack.cool.module.system.domain.gateway.RoleGateway;
 import com.xgblack.cool.module.system.domain.permission.Role;
 import com.xgblack.cool.module.system.dto.permission.RolePageQry;
+import com.xgblack.cool.module.system.gateway.database.dataobject.RoleDO;
 import com.xgblack.cool.module.system.gateway.database.dataobject.table.RoleTableDef;
 import com.xgblack.cool.module.system.gateway.database.mapper.RoleMapper;
 import lombok.RequiredArgsConstructor;
@@ -31,8 +32,10 @@ public class RoleGatewayImpl implements RoleGateway {
     private final static RoleConvertor convertor = RoleConvertor.INSTANCE;
 
     @Override
-    public void insert(Role role) {
-        roleMapper.insertSelective(convertor.toDataObject(role));
+    public Long insert(Role role) {
+        RoleDO roleDO = convertor.toDataObject(role);
+        roleMapper.insertSelective(roleDO);
+        return roleDO.getId();
     }
 
     @Override

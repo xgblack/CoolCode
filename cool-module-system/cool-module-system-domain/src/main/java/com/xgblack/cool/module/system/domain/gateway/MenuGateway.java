@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface MenuGateway {
 
-    void insert(Menu entity);
+    Long insert(Menu entity);
 
     void update(Menu entity);
 

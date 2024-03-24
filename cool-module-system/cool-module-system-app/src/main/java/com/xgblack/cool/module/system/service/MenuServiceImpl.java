@@ -37,8 +37,8 @@ public class MenuServiceImpl implements MenuServiceI {
 
 
     @Override
-    public void add(MenuAddCmd cmd) {
-        menuAddCmdExe.execute(cmd);
+    public Long add(MenuAddCmd cmd) {
+        return menuAddCmdExe.execute(cmd);
     }
 
     @Override

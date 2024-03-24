@@ -62,7 +62,7 @@ public class StudentController {
      * @return
      */
     //@PreAuthorize("hasAuthority('SCOPE_profile')")
-    @LogRecord(success = "查询学生分页,查询结果:{{#_ret}}", type = "system", bizNo = "123")
+    @LogRecord(success = "查询学生分页,查询第{{#_ret.pageNumber}}页，共{{#_ret.totalPage}}页，{{#_ret.totalRow}}条", type = "student", bizNo = "")
     @GetMapping
     public PageResult<StudentCO> page(StudentPageQry qry) {
         return studentService.getPage(qry);

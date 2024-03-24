@@ -19,8 +19,8 @@ public class RoleAddCmdExe {
     private final RoleGateway gateway;
 
 
-    public void execute(RoleAddCmd cmd) {
-        gateway.insert(RoleConvertor.INSTANCE.toEntity(cmd));
+    public Long execute(RoleAddCmd cmd) {
+        return gateway.insert(RoleConvertor.INSTANCE.toEntity(cmd));
     }
 
 }

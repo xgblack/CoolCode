@@ -35,8 +35,8 @@ public class DeptServiceImpl implements DeptServiceI {
     private final DeptSimpleListQryExe deptSimpleListQryExe;
 
     @Override
-    public void add(DeptAddCmd cmd) {
-        deptAddCmdExe.execute(cmd);
+    public Long add(DeptAddCmd cmd) {
+        return deptAddCmdExe.execute(cmd);
     }
 
     @Override

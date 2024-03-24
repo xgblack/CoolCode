@@ -31,8 +31,8 @@ public class UserController {
      */
     @PostMapping
     //@PreAuthorize("@ss.hasPermission('system:user:create')")
-    public void add(@Validated @RequestBody UserAddCmd cmd) {
-        userService.add(cmd);
+    public Long add(@Validated @RequestBody UserAddCmd cmd) {
+        return userService.add(cmd);
     }
 
     /**

@@ -36,8 +36,8 @@ public class RoleController {
      */
     @PostMapping
     //@PreAuthorize("@ss.hasPermission('system:role:create')")
-    public void add(@Valid @RequestBody RoleAddCmd cmd) {
-        roleService.add(cmd);
+    public Long add(@Valid @RequestBody RoleAddCmd cmd) {
+        return roleService.add(cmd);
     }
 
     /**

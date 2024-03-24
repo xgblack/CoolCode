@@ -33,8 +33,8 @@ public class MenuController {
      */
     @PostMapping
     //@PreAuthorize("@ss.hasPermission('system:menu:add')")
-    public void add(@Valid @RequestBody MenuAddCmd cmd) {
-        menuService.add(cmd);
+    public Long add(@Valid @RequestBody MenuAddCmd cmd) {
+        return menuService.add(cmd);
     }
 
     /**

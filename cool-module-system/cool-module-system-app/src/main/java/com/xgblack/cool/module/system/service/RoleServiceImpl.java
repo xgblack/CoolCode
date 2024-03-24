@@ -38,8 +38,8 @@ public class RoleServiceImpl implements RoleServiceI {
 
 
     @Override
-    public void add(RoleAddCmd cmd) {
-        roleAddCmdExe.execute(cmd);
+    public Long add(RoleAddCmd cmd) {
+        return roleAddCmdExe.execute(cmd);
     }
 
     @Override

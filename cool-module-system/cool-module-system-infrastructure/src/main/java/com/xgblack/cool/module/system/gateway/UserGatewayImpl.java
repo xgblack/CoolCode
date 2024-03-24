@@ -16,6 +16,7 @@ import com.xgblack.cool.module.system.dto.user.UserEditLockedCmd;
 import com.xgblack.cool.module.system.dto.user.UserPageQry;
 import com.xgblack.cool.module.system.dto.user.UserProfileEditCmd;
 import com.xgblack.cool.module.system.gateway.database.dataobject.MenuDO;
+import com.xgblack.cool.module.system.gateway.database.dataobject.UserDO;
 import com.xgblack.cool.module.system.gateway.database.mapper.MenuMapper;
 import com.xgblack.cool.module.system.gateway.database.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
@@ -89,8 +90,10 @@ public class UserGatewayImpl implements UserGateway, RemoteUserService {
     }
 
     @Override
-    public void create(User user) {
-        userMapper.insertSelective(convertor.toDataObject(user));
+    public Long create(User user) {
+        UserDO userDO = convertor.toDataObject(user);
+        userMapper.insertSelective(userDO);
+        return userDO.getId();
     }
 
     @Override

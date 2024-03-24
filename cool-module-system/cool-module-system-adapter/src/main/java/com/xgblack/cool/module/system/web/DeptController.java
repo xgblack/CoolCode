@@ -29,12 +29,13 @@ public class DeptController {
     /**
      * 创建部门
      * @param cmd
+     * @return
      */
     @PostMapping
     //@Operation(summary = "创建部门")
     //@PreAuthorize("@ss.hasPermission('system:dept:create')")
-    public void add(@Valid @RequestBody DeptAddCmd cmd) {
-        deptService.add(cmd);
+    public Long add(@Valid @RequestBody DeptAddCmd cmd) {
+        return deptService.add(cmd);
     }
 
     /**

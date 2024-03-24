@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
+ * 操作日志表
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 
@@ -64,10 +65,13 @@ public class OperateLogDO implements Serializable {
     private String extra;
 
     /**
-     * 打印日志的代码信息
+     * 打印日志的代码信息，类名
      */
     private String className;
 
+    /**
+     * 打印日志的代码信息，方法名
+     */
     private String methodName;
 
 }
