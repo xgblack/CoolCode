@@ -1,6 +1,7 @@
 package com.xgblack.cool.framework.security.core.service;
 
 import lombok.RequiredArgsConstructor;
+import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.lang.Nullable;
@@ -119,7 +120,7 @@ public class CoolRedisOAuth2AuthorizationService implements OAuth2AuthorizationS
     }
 
     private String buildKey(String type, String id) {
-        return String.format("%s::%s::%s", AUTHORIZATION, type, id);
+        return StrUtil.format("{}::{}::{}", AUTHORIZATION, type, id);
     }
 
     private static boolean isState(OAuth2Authorization authorization) {

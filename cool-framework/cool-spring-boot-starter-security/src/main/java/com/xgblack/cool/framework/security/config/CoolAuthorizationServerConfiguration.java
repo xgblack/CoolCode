@@ -86,11 +86,7 @@ public class CoolAuthorizationServerConfiguration {
                         .clientAuthentication(oAuth2ClientAuthenticationConfigurer -> // 个性化客户端认证
                                 oAuth2ClientAuthenticationConfigurer.errorResponseHandler(failureEventHandler))// 处理客户端认证异常
                         .authorizationEndpoint(authorizationEndpoint -> authorizationEndpoint// 授权码端点个性化confirm页面
-                                .consentPage(SecurityConstants.CUSTOM_CONSENT_PAGE_URI)), Customizer.withDefaults())
-                .with(authorizationServerConfigurer.authorizationService(authorizationService)// redis存储token的实现
-                                .authorizationServerSettings(
-                                        AuthorizationServerSettings.builder().issuer(SecurityConstants.PROJECT_LICENSE).build()),//TODO:证书
-                        Customizer.withDefaults());
+                                .consentPage(SecurityConstants.CUSTOM_CONSENT_PAGE_URI)), Customizer.withDefaults());
 
         AntPathRequestMatcher[] requestMatchers = permitAllUrl.getUrls()
                 .stream()
@@ -111,8 +107,7 @@ public class CoolAuthorizationServerConfiguration {
                 .csrf(AbstractHttpConfigurer::disable);
 
         http.with(authorizationServerConfigurer.authorizationService(authorizationService)// redis存储token的实现
-                        .authorizationServerSettings(
-                                AuthorizationServerSettings.builder().issuer(SecurityConstants.PROJECT_LICENSE).build()),
+                        .authorizationServerSettings(AuthorizationServerSettings.builder().build()),
                 Customizer.withDefaults());
         DefaultSecurityFilterChain securityFilterChain = http.build();
 
