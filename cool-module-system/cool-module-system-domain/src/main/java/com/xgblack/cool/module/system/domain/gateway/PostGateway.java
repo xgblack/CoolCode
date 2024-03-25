@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface PostGateway {
 
-    void insert(Post entity);
+    Long insert(Post entity);
 
     void update(Post entity);
 

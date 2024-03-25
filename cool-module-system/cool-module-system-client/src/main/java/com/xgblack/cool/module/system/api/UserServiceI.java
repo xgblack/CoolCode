@@ -11,7 +11,7 @@ import com.xgblack.cool.module.system.dto.user.clientobject.UserProfileDTO;
 
 public interface UserServiceI {
 
-    void add(UserAddCmd cmd);
+    Long add(UserAddCmd cmd);
 
     UserCO getDetail(Long id);
 

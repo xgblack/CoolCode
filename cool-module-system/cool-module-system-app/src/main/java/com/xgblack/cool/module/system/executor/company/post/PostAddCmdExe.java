@@ -19,7 +19,7 @@ public class PostAddCmdExe {
 
     private final PostGateway gateway;
 
-    public void execute(PostAddCmd cmd) {
-        gateway.insert(PostConvertor.INSTANCE.toEntity(cmd));
+    public Long execute(PostAddCmd cmd) {
+        return gateway.insert(PostConvertor.INSTANCE.toEntity(cmd));
     }
 }

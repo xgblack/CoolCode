@@ -42,6 +42,12 @@
             <artifactId>cool-spring-boot-starter-biz-tenant</artifactId>
         </dependency>
 
+        <!-- 操作日志 -->
+        <dependency>
+            <groupId>io.github.mouzt</groupId>
+            <artifactId>bizlog-sdk</artifactId>
+        </dependency>
+
 
 
 

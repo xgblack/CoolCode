@@ -17,7 +17,7 @@ import java.util.List;
 public interface RoleServiceI {
 
 
-    void add(RoleAddCmd cmd);
+    Long add(RoleAddCmd cmd);
 
     void edit(RoleEditCmd cmd);
 

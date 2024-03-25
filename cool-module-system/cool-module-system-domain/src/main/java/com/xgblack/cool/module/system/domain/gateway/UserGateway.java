@@ -12,7 +12,7 @@ import com.xgblack.cool.module.system.dto.user.UserProfileEditCmd;
 
 public interface UserGateway {
 
-    void create(User user);
+    Long create(User user);
 
     User getById(Long id);
 

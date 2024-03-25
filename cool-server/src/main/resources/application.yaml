@@ -19,7 +19,8 @@ server:
 
 cc:
   info:
-    version: 1.0.0
+    version: @project.version@
+    build-time: @timestamp@
     base-package: com.xgblack.cool
   sql:
     # SQL审计日志

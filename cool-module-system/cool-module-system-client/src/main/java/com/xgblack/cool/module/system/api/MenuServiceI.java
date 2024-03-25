@@ -14,7 +14,7 @@ import java.util.List;
 
 public interface MenuServiceI {
 
-    void add(MenuAddCmd cmd);
+    Long add(MenuAddCmd cmd);
 
     void edit(MenuEditCmd cmd);
 

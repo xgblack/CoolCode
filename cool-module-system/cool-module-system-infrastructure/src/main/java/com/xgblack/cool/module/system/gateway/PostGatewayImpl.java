@@ -6,6 +6,7 @@ import com.xgblack.cool.module.system.convertor.PostConvertor;
 import com.xgblack.cool.module.system.domain.company.post.Post;
 import com.xgblack.cool.module.system.domain.gateway.PostGateway;
 import com.xgblack.cool.module.system.dto.company.post.PostPageQry;
+import com.xgblack.cool.module.system.gateway.database.dataobject.PostDO;
 import com.xgblack.cool.module.system.gateway.database.dataobject.table.PostTableDef;
 import com.xgblack.cool.module.system.gateway.database.mapper.PostMapper;
 import lombok.RequiredArgsConstructor;
@@ -32,8 +33,10 @@ public class PostGatewayImpl implements PostGateway {
 
 
     @Override
-    public void insert(Post entity) {
-        postMapper.insertSelective(convertor.toDataObject(entity));
+    public Long insert(Post entity) {
+        PostDO postDO = convertor.toDataObject(entity);
+        postMapper.insertSelective(postDO);
+        return postDO.getId();
     }
 
     @Override

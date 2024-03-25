@@ -34,8 +34,8 @@ public class PostServiceImpl implements PostServiceI {
     private final PostPageQryExe postPageQryExe;
 
     @Override
-    public void add(PostAddCmd cmd) {
-        postAddCmdExe.execute(cmd);
+    public Long add(PostAddCmd cmd) {
+        return postAddCmdExe.execute(cmd);
     }
 
     @Override

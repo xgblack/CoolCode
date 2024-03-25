@@ -15,7 +15,7 @@ import java.util.List;
 
 public interface PostServiceI {
 
-    void add(PostAddCmd cmd);
+    Long add(PostAddCmd cmd);
 
     void edit(PostEditCmd cmd);
 

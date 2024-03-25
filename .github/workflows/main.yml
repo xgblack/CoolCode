@@ -2,7 +2,7 @@ name: "MurphySec代码扫描"
 on:
   push:
     branches:
-      - develop
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest

@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface DeptGateway {
 
-    void insert(Dept entity);
+    Long insert(Dept entity);
 
     void update(Dept entity);
 

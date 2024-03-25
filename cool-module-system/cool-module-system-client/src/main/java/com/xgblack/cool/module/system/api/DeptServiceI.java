@@ -14,7 +14,7 @@ import java.util.List;
 
 public interface DeptServiceI {
 
-    void add(DeptAddCmd cmd);
+    Long add(DeptAddCmd cmd);
 
     void edit(DeptEditCmd cmd);
 

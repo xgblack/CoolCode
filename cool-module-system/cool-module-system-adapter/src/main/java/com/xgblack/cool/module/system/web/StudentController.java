@@ -1,6 +1,7 @@
 package com.xgblack.cool.module.system.web;
 
 
+import com.mzt.logapi.starter.annotation.LogRecord;
 import com.xgblack.cool.framework.common.pojo.dto.PageResult;
 import com.xgblack.cool.module.system.api.StudentServiceI;
 import com.xgblack.cool.module.system.dto.student.StudentAddCmd;
@@ -61,6 +62,7 @@ public class StudentController {
      * @return
      */
     //@PreAuthorize("hasAuthority('SCOPE_profile')")
+    @LogRecord(success = "查询学生分页,查询第{{#_ret.pageNumber}}页，共{{#_ret.totalPage}}页，{{#_ret.totalRow}}条", type = "student", bizNo = "")
     @GetMapping
     public PageResult<StudentCO> page(StudentPageQry qry) {
         return studentService.getPage(qry);
@@ -70,6 +72,9 @@ public class StudentController {
      * 新增
      * @param cmd
      */
+    @LogRecord(
+            success = "新建了一个学生,姓名「{{#cmd.name}}」,年龄「{{#cmd.age}}」,创建结果:{{#_ret}}",
+            type = "system", bizNo = "123")
     @PostMapping
     public void add(@RequestBody @Validated StudentAddCmd cmd) {
         studentService.save(cmd);

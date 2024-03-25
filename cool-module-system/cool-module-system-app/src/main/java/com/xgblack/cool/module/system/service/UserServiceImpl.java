@@ -34,8 +34,8 @@ public class UserServiceImpl implements UserServiceI {
     private final UserProfileInfoQryExe userProfileInfoQryExe;
 
     @Override
-    public void add(UserAddCmd cmd) {
-        userAddCmdExe.execute(cmd);
+    public Long add(UserAddCmd cmd) {
+        return userAddCmdExe.execute(cmd);
     }
 
     @Override

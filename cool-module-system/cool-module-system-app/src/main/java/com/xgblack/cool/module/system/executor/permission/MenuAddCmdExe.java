@@ -18,7 +18,7 @@ public class MenuAddCmdExe {
 
     private final MenuGateway gateway;
 
-    public void execute(MenuAddCmd cmd) {
-        gateway.insert(MenuConvertor.INSTANCE.toEntity(cmd));
+    public Long execute(MenuAddCmd cmd) {
+        return gateway.insert(MenuConvertor.INSTANCE.toEntity(cmd));
     }
 }

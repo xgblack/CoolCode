@@ -19,9 +19,9 @@ public class UserAddCmdExe {
 
     private final UserGateway gateway;
 
-    public void execute(UserAddCmd cmd) {
+    public Long execute(UserAddCmd cmd) {
         cmd.setPassword(PasswdUtils.decodeAndEncryptPassword(cmd.getPassword()));
 
-        gateway.create(UserConvertor.INSTANCE.toEntity(cmd));
+        return gateway.create(UserConvertor.INSTANCE.toEntity(cmd));
     }
 }

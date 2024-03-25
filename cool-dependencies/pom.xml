@@ -16,17 +16,18 @@
 
     <properties>
         <revision>1.0.0</revision>
+        <java.version>21</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- 统一依赖管理 -->
-        <spring.boot.version>3.2.3</spring.boot.version>
-
+        <spring.boot.version>3.2.4</spring.boot.version>
         <mysql.version>8.3.0</mysql.version>
-        <mybatis-flex.version>1.8.2</mybatis-flex.version>
-        <guava.version>33.0.0-jre</guava.version>
-
-        <lombok.version>1.18.30</lombok.version>
+        <mybatis-flex.version>1.8.3</mybatis-flex.version>
+        <guava.version>33.1.0-jre</guava.version>
+        <lombok.version>1.18.32</lombok.version>
         <mapstruct.version>1.6.0.Beta1</mapstruct.version>
-
         <hutool.version>6.0.0-M11</hutool.version>
         <!--<minio.version>8.5.7</minio.version>-->
         <!--<tobato.version>1.27.2</tobato.version>-->
@@ -34,14 +35,24 @@
         <easyexcel.version>3.3.4</easyexcel.version>
         <sms4j.starter.version>3.1.1</sms4j.starter.version>
         <!--<wx-java.version>4.6.0</wx-java.version>-->
-        <!--<infinispan.version>15.0.0.Dev10</infinispan.version>-->
+        <!--<infinispan.version>15.0.0.Final</infinispan.version>-->
         <captcha.version>2.2.3</captcha.version>
         <ip2region.version>2.7.0</ip2region.version>
+        <bizlog.version>3.0.6</bizlog.version>
+
+        <!--插件版本-->
+        <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+        <native-maven-plugin.version>0.10.1</native-maven-plugin.version>
+        <smart-doc-maven-plugin.version>3.0.2</smart-doc-maven-plugin.version>
+
+        <!--maven.build.timestamp保存了maven编译时间戳-->
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-
 
             <dependency>
                 <groupId>com.xgblack</groupId>
@@ -236,7 +247,82 @@
                 <version>${wx-java.version}</version>
             </dependency>
 
+            <!-- 操作日志 -->
+            <dependency>
+                <groupId>io.github.mouzt</groupId>
+                <artifactId>bizlog-sdk</artifactId>
+                <version>${bizlog.version}</version>
+            </dependency>
+
+
         </dependencies>
     </dependencyManagement>
+
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.graalvm.buildtools</groupId>
+                    <artifactId>native-maven-plugin</artifactId>
+                    <version>${native-maven-plugin.version}</version>
+                </plugin>
+                <!-- maven-surefire-plugin 插件，用于运行单元测试。 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                </plugin>
+                <!-- maven-compiler-plugin 插件，解决 Lombok + MapStruct 组合 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <fork>true</fork>
+                        <parameters>true</parameters>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                            <path>
+                                <groupId>org.mapstruct</groupId>
+                                <artifactId>mapstruct-processor</artifactId>
+                                <version>${mapstruct.version}</version>
+                            </path>
+                            <path>
+                                <groupId>com.mybatis-flex</groupId>
+                                <artifactId>mybatis-flex-processor</artifactId>
+                                <version>${mybatis-flex.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>com.ly.smart-doc</groupId>
+                    <artifactId>smart-doc-maven-plugin</artifactId>
+                    <version>${smart-doc-maven-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+    </build>
+
+
+    <repositories>
+        <repository>
+            <id>repo-huawei</id>
+            <url>https://repo.huaweicloud.com/repository/maven/</url>
+        </repository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </repositories>
 
 </project>

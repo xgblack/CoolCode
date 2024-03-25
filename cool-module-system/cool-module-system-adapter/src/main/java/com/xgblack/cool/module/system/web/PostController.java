@@ -33,8 +33,8 @@ public class PostController {
     @PostMapping
     //@Operation(summary = "创建岗位")
     //@PreAuthorize("@ss.hasPermission('system:post:create')")
-    public void add(@Valid @RequestBody PostAddCmd cmd) {
-        postService.add(cmd);
+    public Long add(@Valid @RequestBody PostAddCmd cmd) {
+        return postService.add(cmd);
     }
 
     /**
