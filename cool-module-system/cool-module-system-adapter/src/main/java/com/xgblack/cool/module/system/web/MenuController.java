@@ -1,6 +1,8 @@
 package com.xgblack.cool.module.system.web;
 
+import com.mzt.logapi.starter.annotation.LogRecord;
 import com.xgblack.cool.module.system.api.MenuServiceI;
+import com.xgblack.cool.module.system.common.constans.ModuleType;
 import com.xgblack.cool.module.system.dto.permission.MenuAddCmd;
 import com.xgblack.cool.module.system.dto.permission.MenuEditCmd;
 import com.xgblack.cool.module.system.dto.permission.MenuListQry;
@@ -33,6 +35,9 @@ public class MenuController {
      */
     @PostMapping
     //@PreAuthorize("@ss.hasPermission('system:menu:add')")
+    @LogRecord(success = "创建菜单, 名称「{{#cmd.name}}」",
+            fail = "创建菜单失败，失败原因：「{{#_errorMsg}}」",
+            type = ModuleType.MENU, bizNo = "{{#_ret}}")
     public Long add(@Valid @RequestBody MenuAddCmd cmd) {
         return menuService.add(cmd);
     }

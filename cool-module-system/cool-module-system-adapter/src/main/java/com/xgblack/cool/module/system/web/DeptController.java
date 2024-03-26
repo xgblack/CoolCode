@@ -1,6 +1,8 @@
 package com.xgblack.cool.module.system.web;
 
+import com.mzt.logapi.starter.annotation.LogRecord;
 import com.xgblack.cool.module.system.api.DeptServiceI;
+import com.xgblack.cool.module.system.common.constans.ModuleType;
 import com.xgblack.cool.module.system.dto.company.dept.DeptAddCmd;
 import com.xgblack.cool.module.system.dto.company.dept.DeptEditCmd;
 import com.xgblack.cool.module.system.dto.company.dept.DeptListQry;
@@ -32,8 +34,10 @@ public class DeptController {
      * @return
      */
     @PostMapping
-    //@Operation(summary = "创建部门")
     //@PreAuthorize("@ss.hasPermission('system:dept:create')")
+    @LogRecord(success = "创建部门, 名称「{{#cmd.name}}」",
+            fail = "创建部门失败，失败原因：「{{#_errorMsg}}」",
+            type = ModuleType.DEPT, bizNo = "{{#_ret}}")
     public Long add(@Valid @RequestBody DeptAddCmd cmd) {
         return deptService.add(cmd);
     }

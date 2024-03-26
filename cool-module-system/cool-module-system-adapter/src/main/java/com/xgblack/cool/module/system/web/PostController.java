@@ -1,7 +1,9 @@
 package com.xgblack.cool.module.system.web;
 
+import com.mzt.logapi.starter.annotation.LogRecord;
 import com.xgblack.cool.framework.common.pojo.dto.PageResult;
 import com.xgblack.cool.module.system.api.PostServiceI;
+import com.xgblack.cool.module.system.common.constans.ModuleType;
 import com.xgblack.cool.module.system.dto.company.post.PostAddCmd;
 import com.xgblack.cool.module.system.dto.company.post.PostEditCmd;
 import com.xgblack.cool.module.system.dto.company.post.PostPageQry;
@@ -31,8 +33,10 @@ public class PostController {
      * @param cmd
      */
     @PostMapping
-    //@Operation(summary = "创建岗位")
     //@PreAuthorize("@ss.hasPermission('system:post:create')")
+    @LogRecord(success = "创建岗位, 名称「{{#cmd.name}}」",
+            fail = "创建岗位失败，失败原因：「{{#_errorMsg}}」",
+            type = ModuleType.POST, bizNo = "{{#_ret}}")
     public Long add(@Valid @RequestBody PostAddCmd cmd) {
         return postService.add(cmd);
     }

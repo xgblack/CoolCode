@@ -1,7 +1,9 @@
 package com.xgblack.cool.module.system.web;
 
+import com.mzt.logapi.starter.annotation.LogRecord;
 import com.xgblack.cool.framework.common.pojo.dto.PageResult;
 import com.xgblack.cool.module.system.api.UserServiceI;
+import com.xgblack.cool.module.system.common.constans.ModuleType;
 import com.xgblack.cool.module.system.dto.user.*;
 import com.xgblack.cool.module.system.dto.user.clientobject.UserCO;
 import com.xgblack.cool.module.system.dto.user.clientobject.UserSimpleDTO;
@@ -31,6 +33,9 @@ public class UserController {
      */
     @PostMapping
     //@PreAuthorize("@ss.hasPermission('system:user:create')")
+    @LogRecord(success = "新增用户, 用户名「{{#cmd.username}}」，昵称「{{#cmd.nickname}}」",
+            fail = "新增用户失败，失败原因：「{{#_errorMsg}}」",
+            type = ModuleType.USER, bizNo = "{{#_ret}}")
     public Long add(@Validated @RequestBody UserAddCmd cmd) {
         return userService.add(cmd);
     }
