@@ -43,12 +43,15 @@ public class DeptController {
     }
 
     /**
-     * 更新部门
+     * 修改部门
      * @param cmd
      */
     @PutMapping
-    //@Operation(summary = "更新部门")
     //@PreAuthorize("@ss.hasPermission('system:dept:update')")
+    @LogRecord(success = "修改部门, 名称「{{#cmd.name}}」",
+            fail = "修改部门失败，失败原因：「{{#_errorMsg}}」",
+            extra = "{{#cmd.toJson()}}",
+            type = ModuleType.DEPT, bizNo = "{{#cmd.id}}")
     public void edit(@Valid @RequestBody DeptEditCmd cmd) {
         deptService.edit(cmd);
     }
@@ -58,9 +61,10 @@ public class DeptController {
      * @param id
      */
     @DeleteMapping("{id}")
-    //@Operation(summary = "删除部门")
-    //@Parameter(name = "id", description = "编号", required = true, example = "1024")
     //@PreAuthorize("@ss.hasPermission('system:dept:delete')")
+    @LogRecord(success = "删除部门, 编号「{{#id}}」",
+            fail = "删除部门失败，失败原因：「{{#_errorMsg}}」",
+            type = ModuleType.DEPT, bizNo = "{{#id}}")
     public void remove(@PathVariable("id") Long id) {
         deptService.remove(id);
     }
@@ -71,7 +75,6 @@ public class DeptController {
      * @return
      */
     @GetMapping("/list")
-    //@Operation(summary = "获取部门列表")
     //@PreAuthorize("@ss.hasPermission('system:dept:query')")
     public List<DeptCO> getDeptList(DeptListQry qry) {
         return deptService.list(qry);
@@ -93,8 +96,6 @@ public class DeptController {
      * @return
      */
     @GetMapping("detail/{id}")
-    //@Operation(summary = "获得部门信息")
-    //@Parameter(name = "id", description = "编号", required = true, example = "1024")
     //@PreAuthorize("@ss.hasPermission('system:dept:query')")
     public DeptCO detail(@PathVariable("id") Long id) {
         return deptService.detail(id);
