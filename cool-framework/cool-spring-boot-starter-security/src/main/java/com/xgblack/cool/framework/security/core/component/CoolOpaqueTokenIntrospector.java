@@ -1,11 +1,15 @@
 package com.xgblack.cool.framework.security.core.component;
 
-import org.dromara.hutool.extra.spring.SpringUtil;
 import com.xgblack.cool.framework.common.constants.SecurityConstants;
+import com.xgblack.cool.framework.security.config.MockSecurityProperties;
 import com.xgblack.cool.framework.security.core.service.CoolUserDetailsService;
 import com.xgblack.cool.framework.security.dto.LoginUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.convert.Convert;
+import org.dromara.hutool.core.math.NumberUtil;
+import org.dromara.hutool.core.text.StrUtil;
+import org.dromara.hutool.extra.spring.SpringUtil;
 import org.springframework.core.Ordered;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -37,10 +41,32 @@ public class CoolOpaqueTokenIntrospector implements OpaqueTokenIntrospector {
 
     private final OAuth2AuthorizationService authorizationService;
 
+    private final MockSecurityProperties mockSecurityProperties;
+
+    private final CoolUserDetailsService userDetailsService;
+
     @Override
     public OAuth2AuthenticatedPrincipal introspect(String token) {
         OAuth2Authorization oldAuthorization = authorizationService.findByToken(token, OAuth2TokenType.ACCESS_TOKEN);
+
         if (Objects.isNull(oldAuthorization)) {
+            if (mockSecurityProperties.getMockEnable() && StrUtil.isNotBlank(token) && token.startsWith(mockSecurityProperties.getMockSecret())) {
+                // 判断 为模拟登录
+                // 构建模拟用户
+                String userIdStr = StrUtil.subAfter(token, mockSecurityProperties.getMockSecret(), true).trim();
+                if (StrUtil.isBlank(userIdStr) || !NumberUtil.isNumber(userIdStr)) {
+                    log.error("mock模式token错误，请使用固定token+数字(用户id)");
+                    throw new InvalidBearerTokenException(token);
+                }
+                Long userId = Convert.toLong(userIdStr);
+                try {
+                    UserDetails userDetails = userDetailsService.loadUserById(userId);
+                    return (LoginUser) userDetails;
+                } catch (Exception e) {
+                    log.error("mock模式token错误，加载用户失败，用户id={}", userId);
+                    throw new InvalidBearerTokenException(token);
+                }
+            }
             throw new InvalidBearerTokenException(token);
         }
 

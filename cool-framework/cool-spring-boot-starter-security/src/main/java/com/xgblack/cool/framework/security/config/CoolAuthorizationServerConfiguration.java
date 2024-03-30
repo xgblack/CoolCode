@@ -10,7 +10,6 @@ import com.xgblack.cool.framework.security.core.authentication.support.mobile.Mo
 import com.xgblack.cool.framework.security.core.authentication.support.password.PasswordGrantAuthenticationConverter;
 import com.xgblack.cool.framework.security.core.authentication.support.password.PasswordGrantAuthenticationProvider;
 import com.xgblack.cool.framework.security.core.component.CoolBearerTokenExtractor;
-import com.xgblack.cool.framework.security.core.component.PermitAllUrlProperties;
 import com.xgblack.cool.framework.security.core.component.ResourceAuthExceptionEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

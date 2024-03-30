@@ -56,4 +56,10 @@ public class CoolUserDetailsServiceImpl implements CoolUserDetailsService {
         return Integer.MIN_VALUE;
     }
 
+    @Override
+    public UserDetails loadUserById(Long userId) {
+        UserInfo info = remoteUserService.info(userId);
+        return getUserDetails(info);
+    }
+
 }

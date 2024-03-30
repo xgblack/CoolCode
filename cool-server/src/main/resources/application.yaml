@@ -29,6 +29,7 @@ cc:
   security:
     mock-enable: true
     mock-secret: coolcode
+    mock-sms-code: 223311
   response:
     # 全局的参数校验错误码，默认等于default-error-code=-1
     default-validate-error-code: -1

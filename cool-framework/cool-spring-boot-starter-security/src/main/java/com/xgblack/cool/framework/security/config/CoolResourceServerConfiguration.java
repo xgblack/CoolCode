@@ -1,7 +1,6 @@
 package com.xgblack.cool.framework.security.config;
 
 import com.xgblack.cool.framework.security.core.component.CoolBearerTokenExtractor;
-import com.xgblack.cool.framework.security.core.component.PermitAllUrlProperties;
 import com.xgblack.cool.framework.security.core.component.ResourceAuthExceptionEntryPoint;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
