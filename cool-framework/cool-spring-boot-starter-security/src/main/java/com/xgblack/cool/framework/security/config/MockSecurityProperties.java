@@ -12,7 +12,7 @@ import org.springframework.validation.annotation.Validated;
 
 @Validated
 @Data
-@ConfigurationProperties(prefix = "app.security")
+@ConfigurationProperties(prefix = "cc.security")
 public class MockSecurityProperties {
 
     /**
