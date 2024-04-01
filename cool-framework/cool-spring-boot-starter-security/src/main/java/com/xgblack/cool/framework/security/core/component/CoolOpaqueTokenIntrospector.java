@@ -61,6 +61,10 @@ public class CoolOpaqueTokenIntrospector implements OpaqueTokenIntrospector {
                 Long userId = Convert.toLong(userIdStr);
                 try {
                     UserDetails userDetails = userDetailsService.loadUserById(userId);
+                    if (Objects.isNull(userDetails)) {
+                        log.error("mock模式token错误，加载用户失败，用户id={}", userId);
+                        throw new InvalidBearerTokenException(token);
+                    }
                     return (LoginUser) userDetails;
                 } catch (Exception e) {
                     log.error("mock模式token错误，加载用户失败，用户id={}", userId);
