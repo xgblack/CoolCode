@@ -103,6 +103,7 @@ public class CoolOpaqueTokenIntrospector implements OpaqueTokenIntrospector {
         }
         catch (Exception ex) {
             log.error("资源服务器 introspect Token error {}", ex.getLocalizedMessage());
+            //TODO 抛出异常？
         }
 
         // 注入客户端信息，方便上下文中获取
