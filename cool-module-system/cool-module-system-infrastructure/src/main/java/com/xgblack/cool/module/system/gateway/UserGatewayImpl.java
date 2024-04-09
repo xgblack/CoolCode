@@ -90,6 +90,35 @@ public class UserGatewayImpl implements UserGateway, RemoteUserService {
     }
 
     @Override
+    public UserInfo info(Long userId) {
+        SysUser sysUser = userMapper.selectOneWithRelationsByIdAs(userId, SysUser.class);
+        if (sysUser == null) {
+            log.error("用户不存在,用户id={}", userId);
+            return null;
+        }
+        UserInfo info = new UserInfo();
+        // 设置角色列表 （ID）
+        Set<Long> roleIds = permissionGateway.getRoleIdsByUserId(sysUser.getId());
+        // 权限列表（menu.permission）
+        Set<String> permissions = new HashSet<>();
+        Set<Long> menuIds = new HashSet<>();
+        roleIds.forEach(roleId -> {
+            Set<Long> menuIdSet = permissionGateway.getMenuIdsByRoleId(roleId);
+            menuIds.addAll(menuIdSet);
+        });
+
+        if (CollUtil.isNotEmpty(menuIds)) {
+            List<MenuDO> menuDOS = menuMapper.selectListByIds(menuIds);
+            permissions = menuDOS.stream().map(MenuDO::getPermission).collect(Collectors.toSet());
+        }
+        info.setSysUser(sysUser)
+                .setRoles(roleIds)
+                .setPermissions(permissions);
+
+        return info;
+    }
+
+    @Override
     public Long create(User user) {
         UserDO userDO = convertor.toDataObject(user);
         userMapper.insertSelective(userDO);

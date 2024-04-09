@@ -3,8 +3,8 @@ package com.xgblack.cool.framework.security.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xgblack.cool.framework.security.core.component.CoolBearerTokenExtractor;
 import com.xgblack.cool.framework.security.core.component.CoolOpaqueTokenIntrospector;
-import com.xgblack.cool.framework.security.core.component.PermitAllUrlProperties;
 import com.xgblack.cool.framework.security.core.component.ResourceAuthExceptionEntryPoint;
+import com.xgblack.cool.framework.security.core.service.CoolUserDetailsService;
 import com.xgblack.cool.framework.security.core.service.PermissionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -18,7 +18,7 @@ import org.springframework.security.oauth2.server.resource.introspection.OpaqueT
  * @author <a href="https://www.xgblack.cn">xg black</a>
  */
 @RequiredArgsConstructor
-@EnableConfigurationProperties(PermitAllUrlProperties.class)
+@EnableConfigurationProperties({PermitAllUrlProperties.class, MockSecurityProperties.class})
 public class CoolResourceServerAutoConfiguration {
     /**
      * 鉴权具体的实现逻辑
@@ -52,11 +52,14 @@ public class CoolResourceServerAutoConfiguration {
 
     /**
      * 资源服务器toke内省处理器
+     *
      * @param authorizationService token 存储实现
+     * @param mockSecurityProperties 模拟模式配置
+     * @param userDetailsService 用户信息
      * @return TokenIntrospect
      */
     @Bean
-    public OpaqueTokenIntrospector opaqueTokenIntrospector(OAuth2AuthorizationService authorizationService) {
-        return new CoolOpaqueTokenIntrospector(authorizationService);
+    public OpaqueTokenIntrospector opaqueTokenIntrospector(OAuth2AuthorizationService authorizationService, MockSecurityProperties mockSecurityProperties, CoolUserDetailsService userDetailsService) {
+        return new CoolOpaqueTokenIntrospector(authorizationService, mockSecurityProperties, userDetailsService);
     }
 }

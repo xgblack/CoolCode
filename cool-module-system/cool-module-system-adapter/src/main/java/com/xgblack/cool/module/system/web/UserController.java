@@ -1,7 +1,9 @@
 package com.xgblack.cool.module.system.web;
 
+import com.mzt.logapi.starter.annotation.LogRecord;
 import com.xgblack.cool.framework.common.pojo.dto.PageResult;
 import com.xgblack.cool.module.system.api.UserServiceI;
+import com.xgblack.cool.module.system.common.constans.ModuleType;
 import com.xgblack.cool.module.system.dto.user.*;
 import com.xgblack.cool.module.system.dto.user.clientobject.UserCO;
 import com.xgblack.cool.module.system.dto.user.clientobject.UserSimpleDTO;
@@ -31,6 +33,9 @@ public class UserController {
      */
     @PostMapping
     //@PreAuthorize("@ss.hasPermission('system:user:create')")
+    @LogRecord(success = "新增用户, 用户名「{{#cmd.username}}」，昵称「{{#cmd.nickname}}」",
+            fail = "新增用户失败，失败原因：「{{#_errorMsg}}」",
+            type = ModuleType.USER, bizNo = "{{#_ret}}")
     public Long add(@Validated @RequestBody UserAddCmd cmd) {
         return userService.add(cmd);
     }
@@ -40,8 +45,11 @@ public class UserController {
      * @param cmd
      */
     @PutMapping
-    //@Operation(summary = "修改用户")
     //@PreAuthorize("@ss.hasPermission('system:user:update')")
+    @LogRecord(success = "修改用户, 名称「{{#cmd.name}}」",
+            fail = "修改用户失败，失败原因：「{{#_errorMsg}}」",
+            extra = "{{#cmd.toJson()}}",
+            type = ModuleType.USER, bizNo = "{{#cmd.id}}")
     public void edit(@Validated @RequestBody UserEditCmd cmd) {
         userService.edit(cmd);
     }
@@ -51,8 +59,10 @@ public class UserController {
      * @param id 用户id
      */
     @DeleteMapping("{id}")
-    //@Operation(summary = "删除用户")
     //@PreAuthorize("@ss.hasPermission('system:user:delete')")
+    @LogRecord(success = "删除用户, 编号「{{#id}}」",
+            fail = "删除用户失败，失败原因：「{{#_errorMsg}}」",
+            type = ModuleType.USER, bizNo = "{{#id}}")
     public void delete(@PathVariable Long id) {
         userService.remove(id);
     }
@@ -62,8 +72,10 @@ public class UserController {
      * @param cmd
      */
     @PutMapping("/update-password")
-    //@Operation(summary = "重置用户密码")
     //@PreAuthorize("@ss.hasPermission('system:user:update-password')")
+    @LogRecord(success = "修改用户密码, 编号「{{#cmd.id}}」",
+            fail = "修改用户密码失败，失败原因：「{{#_errorMsg}}」",
+            type = ModuleType.USER, bizNo = "{{#cmd.id}}")
     public void editPassword(@Validated @RequestBody UserEditPasswordCmd cmd) {
         userService.editPassword(cmd);
     }
@@ -73,19 +85,21 @@ public class UserController {
      * @param cmd
      */
     @PutMapping("/update-locked")
-    //@Operation(summary = "修改用户状态")
     //@PreAuthorize("@ss.hasPermission('system:user:update')")
+    @LogRecord(success = "修改用户锁定状态, 编号「{{#cmd.id}}」",
+            fail = "修改用户锁定状态失败，失败原因：「{{#_errorMsg}}」",
+            extra = "{{#cmd.toJson()}}",
+            type = ModuleType.USER, bizNo = "{{#cmd.id}}")
     public void editLocked(@Validated @RequestBody UserEditLockedCmd cmd) {
         userService.editLocked(cmd);
     }
 
     /**
-     * 分页查询
+     * 获得用户分页列表
      * @param qry
      * @return
      */
     @GetMapping("/page")
-    //@Operation(summary = "获得用户分页列表")
     //@PreAuthorize("@ss.hasPermission('system:user:list')")
     public PageResult<UserCO> page(@Validated UserPageQry qry) {
         // 获得用户分页列表
@@ -103,10 +117,10 @@ public class UserController {
 
     /**
      * 获取用户精简信息列表
+     * <p>只包含被开启的用户，主要用于前端的下拉选项
      * @return
      */
     @GetMapping({"/list-all-simple", "/simple-list"})
-    //@Operation(summary = "获取用户精简信息列表", description = "只包含被开启的用户，主要用于前端的下拉选项")
     public List<UserSimpleDTO> getSimpleUserList() {
         //TODO
         //List<AdminUserDO> list = userService.getUserListByStatus(CommonStatusEnum.ENABLE.getStatus());
@@ -121,8 +135,6 @@ public class UserController {
      * @return
      */
     @GetMapping("detail/{id}")
-    //@Operation(summary = "获得用户详情")
-    //@Parameter(name = "id", description = "编号", required = true, example = "1024")
     //@PreAuthorize("@ss.hasPermission('system:user:query')")
     public UserCO detail(@PathVariable("id") Long id) {
         /*AdminUserDO user = userService.getUser(id);
@@ -152,7 +164,6 @@ public class UserController {
      * 获得导入用户模板
      */
     @GetMapping("/get-import-template")
-    //@Operation(summary = "获得导入用户模板")
     public void importTemplate(HttpServletResponse response) {
         // 手动创建导出 demo
         /*List<UserImportExcelVO> list = Arrays.asList(
@@ -174,6 +185,9 @@ public class UserController {
      */
     @PostMapping("/import")
     //@PreAuthorize("@ss.hasPermission('system:user:import')")
+    @LogRecord(success = "导入用户, ",//TODO
+            fail = "导入用户失败，失败原因：「{{#_errorMsg}}」",
+            type = ModuleType.USER, bizNo = "")
     public Object importExcel(@RequestParam("file") MultipartFile file, @RequestParam(value = "updateSupport", required = false, defaultValue = "false") Boolean updateSupport) throws Exception {
         /*List<UserImportExcelVO> list = ExcelUtils.read(file, UserImportExcelVO.class);
         return success(userService.importUserList(list, updateSupport));*/

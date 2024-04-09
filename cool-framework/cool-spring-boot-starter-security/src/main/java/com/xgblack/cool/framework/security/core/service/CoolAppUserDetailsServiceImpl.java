@@ -55,6 +55,12 @@ public class CoolAppUserDetailsServiceImpl implements CoolUserDetailsService {
         return this.loadUserByUsername(loginUser.getPhone());
     }
 
+    @Override
+    public UserDetails loadUserById(Long userId) {
+        // TODO
+        return null;
+    }
+
     /**
      * 是否支持此客户端校验
      * @param clientId 目标客户端

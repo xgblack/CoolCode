@@ -1,5 +1,6 @@
 package com.xgblack.cool.framework.security.core.component;
 
+import com.xgblack.cool.framework.security.config.PermitAllUrlProperties;
 import jakarta.servlet.http.HttpServletRequest;
 import org.dromara.hutool.core.text.StrUtil;
 import org.springframework.http.HttpHeaders;

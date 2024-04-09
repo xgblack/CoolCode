@@ -1,6 +1,8 @@
 package com.xgblack.cool.module.system.web;
 
+import com.mzt.logapi.starter.annotation.LogRecord;
 import com.xgblack.cool.module.system.api.DeptServiceI;
+import com.xgblack.cool.module.system.common.constans.ModuleType;
 import com.xgblack.cool.module.system.dto.company.dept.DeptAddCmd;
 import com.xgblack.cool.module.system.dto.company.dept.DeptEditCmd;
 import com.xgblack.cool.module.system.dto.company.dept.DeptListQry;
@@ -32,19 +34,24 @@ public class DeptController {
      * @return
      */
     @PostMapping
-    //@Operation(summary = "创建部门")
     //@PreAuthorize("@ss.hasPermission('system:dept:create')")
+    @LogRecord(success = "创建部门, 名称「{{#cmd.name}}」",
+            fail = "创建部门失败，失败原因：「{{#_errorMsg}}」",
+            type = ModuleType.DEPT, bizNo = "{{#_ret}}")
     public Long add(@Valid @RequestBody DeptAddCmd cmd) {
         return deptService.add(cmd);
     }
 
     /**
-     * 更新部门
+     * 修改部门
      * @param cmd
      */
     @PutMapping
-    //@Operation(summary = "更新部门")
     //@PreAuthorize("@ss.hasPermission('system:dept:update')")
+    @LogRecord(success = "修改部门, 名称「{{#cmd.name}}」",
+            fail = "修改部门失败，失败原因：「{{#_errorMsg}}」",
+            extra = "{{#cmd.toJson()}}",
+            type = ModuleType.DEPT, bizNo = "{{#cmd.id}}")
     public void edit(@Valid @RequestBody DeptEditCmd cmd) {
         deptService.edit(cmd);
     }
@@ -54,9 +61,10 @@ public class DeptController {
      * @param id
      */
     @DeleteMapping("{id}")
-    //@Operation(summary = "删除部门")
-    //@Parameter(name = "id", description = "编号", required = true, example = "1024")
     //@PreAuthorize("@ss.hasPermission('system:dept:delete')")
+    @LogRecord(success = "删除部门, 编号「{{#id}}」",
+            fail = "删除部门失败，失败原因：「{{#_errorMsg}}」",
+            type = ModuleType.DEPT, bizNo = "{{#id}}")
     public void remove(@PathVariable("id") Long id) {
         deptService.remove(id);
     }
@@ -67,7 +75,6 @@ public class DeptController {
      * @return
      */
     @GetMapping("/list")
-    //@Operation(summary = "获取部门列表")
     //@PreAuthorize("@ss.hasPermission('system:dept:query')")
     public List<DeptCO> getDeptList(DeptListQry qry) {
         return deptService.list(qry);
@@ -89,8 +96,6 @@ public class DeptController {
      * @return
      */
     @GetMapping("detail/{id}")
-    //@Operation(summary = "获得部门信息")
-    //@Parameter(name = "id", description = "编号", required = true, example = "1024")
     //@PreAuthorize("@ss.hasPermission('system:dept:query')")
     public DeptCO detail(@PathVariable("id") Long id) {
         return deptService.detail(id);

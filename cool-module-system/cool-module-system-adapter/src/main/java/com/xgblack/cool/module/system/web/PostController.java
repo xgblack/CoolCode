@@ -1,7 +1,9 @@
 package com.xgblack.cool.module.system.web;
 
+import com.mzt.logapi.starter.annotation.LogRecord;
 import com.xgblack.cool.framework.common.pojo.dto.PageResult;
 import com.xgblack.cool.module.system.api.PostServiceI;
+import com.xgblack.cool.module.system.common.constans.ModuleType;
 import com.xgblack.cool.module.system.dto.company.post.PostAddCmd;
 import com.xgblack.cool.module.system.dto.company.post.PostEditCmd;
 import com.xgblack.cool.module.system.dto.company.post.PostPageQry;
@@ -31,8 +33,10 @@ public class PostController {
      * @param cmd
      */
     @PostMapping
-    //@Operation(summary = "创建岗位")
     //@PreAuthorize("@ss.hasPermission('system:post:create')")
+    @LogRecord(success = "创建岗位, 名称「{{#cmd.name}}」",
+            fail = "创建岗位失败，失败原因：「{{#_errorMsg}}」",
+            type = ModuleType.POST, bizNo = "{{#_ret}}")
     public Long add(@Valid @RequestBody PostAddCmd cmd) {
         return postService.add(cmd);
     }
@@ -42,8 +46,11 @@ public class PostController {
      * @param cmd
      */
     @PutMapping
-    //@Operation(summary = "修改岗位")
     //@PreAuthorize("@ss.hasPermission('system:post:update')")
+    @LogRecord(success = "修改岗位, 名称「{{#cmd.name}}」",
+            fail = "修改岗位失败，失败原因：「{{#_errorMsg}}」",
+            extra = "{{#cmd.toJson()}}",
+            type = ModuleType.POST, bizNo = "{{#cmd.id}}")
     public void edit(@Valid @RequestBody PostEditCmd cmd) {
         postService.edit(cmd);
     }
@@ -53,8 +60,10 @@ public class PostController {
      * @param id
      */
     @DeleteMapping("{id}")
-    //@Operation(summary = "删除岗位")
     //@PreAuthorize("@ss.hasPermission('system:post:delete')")
+    @LogRecord(success = "删除岗位, 编号「{{#id}}」",
+            fail = "删除岗位失败，失败原因：「{{#_errorMsg}}」",
+            type = ModuleType.POST, bizNo = "{{#id}}")
     public void remove(@PathVariable("id") Long id) {
         postService.remove(id);
     }
@@ -65,7 +74,6 @@ public class PostController {
      * @return
      */
     @GetMapping(value = "detail/{id}")
-    //@Operation(summary = "获得岗位信息")
     //@Parameter(name = "id", description = "岗位编号", required = true, example = "1024")
     //@PreAuthorize("@ss.hasPermission('system:post:query')")
     public PostCO detail(@PathVariable("id") Long id) {
@@ -74,10 +82,10 @@ public class PostController {
 
     /**
      * 获取岗位精简列表
+     * <p>只包含被开启的岗位，主要用于前端的下拉选项
      * @return
      */
     @GetMapping(value = {"/list-all-simple", "simple-list"})
-    //@Operation(summary = "获取岗位全列表", description = "只包含被开启的岗位，主要用于前端的下拉选项")
     public List<PostSimpleCO> getSimpleList() {
         // 获得岗位列表，只要开启状态的
         return postService.getSimpleList();
@@ -89,7 +97,6 @@ public class PostController {
      * @return
      */
     @GetMapping("/page")
-    //@Operation(summary = "获得岗位分页列表")
     //@PreAuthorize("@ss.hasPermission('system:post:query')")
     public PageResult<PostCO> page(@Validated PostPageQry qry) {
         return postService.page(qry);

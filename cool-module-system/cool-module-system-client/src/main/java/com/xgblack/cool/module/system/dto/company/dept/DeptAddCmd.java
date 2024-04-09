@@ -20,9 +20,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class DeptAddCmd extends Command {
 
-    //@Schema(description = "部门编号", example = "1024")
-    //private Long id;
-
     /** 部门名称 */
     @NotBlank(message = "部门名称不能为空")
     @Size(max = 30, message = "部门名称长度不能超过 30 个字符")

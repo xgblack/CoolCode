@@ -1,14 +1,15 @@
 package com.xgblack.cool.module.system.web;
 
+import com.mzt.logapi.starter.annotation.LogRecord;
 import com.xgblack.cool.framework.common.pojo.dto.PageResult;
 import com.xgblack.cool.module.system.api.RoleServiceI;
+import com.xgblack.cool.module.system.common.constans.ModuleType;
 import com.xgblack.cool.module.system.dto.permission.RoleAddCmd;
 import com.xgblack.cool.module.system.dto.permission.RoleEditCmd;
 import com.xgblack.cool.module.system.dto.permission.RoleEditStatusCmd;
 import com.xgblack.cool.module.system.dto.permission.RolePageQry;
 import com.xgblack.cool.module.system.dto.permission.clientobject.RoleCO;
 import com.xgblack.cool.module.system.dto.permission.clientobject.RoleSimpleCO;
-import com.xgblack.cool.module.system.gateway.database.dataobject.RoleDO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -36,6 +37,9 @@ public class RoleController {
      */
     @PostMapping
     //@PreAuthorize("@ss.hasPermission('system:role:create')")
+    @LogRecord(success = "创建角色, 名称「{{#cmd.name}}」",
+            fail = "创建角色失败，失败原因：「{{#_errorMsg}}」",
+            type = ModuleType.ROLE, bizNo = "{{#_ret}}")
     public Long add(@Valid @RequestBody RoleAddCmd cmd) {
         return roleService.add(cmd);
     }
@@ -46,6 +50,10 @@ public class RoleController {
      */
     @PutMapping
     //@PreAuthorize("@ss.hasPermission('system:role:update')")
+    @LogRecord(success = "修改角色, 名称「{{#cmd.name}}」",
+            fail = "修改角色失败，失败原因：「{{#_errorMsg}}」",
+            extra = "{{#cmd.toJson()}}",
+            type = ModuleType.ROLE, bizNo = "{{#cmd.id}}")
     public void edit(@Valid @RequestBody RoleEditCmd cmd) {
         roleService.edit(cmd);
     }
@@ -56,6 +64,10 @@ public class RoleController {
      */
     @PutMapping("/update-status")
     //@PreAuthorize("@ss.hasPermission('system:role:update')")
+    @LogRecord(success = "修改角色状态, 名称「{{#cmd.name}}」",
+            fail = "修改角色状态失败，失败原因：「{{#_errorMsg}}」",
+            extra = "{{#cmd.toJson()}}",
+            type = ModuleType.ROLE, bizNo = "{{#cmd.id}}")
     public void editStatus(@Valid @RequestBody RoleEditStatusCmd cmd) {
         roleService.editStatus(cmd);
     }
@@ -66,6 +78,9 @@ public class RoleController {
      */
     @DeleteMapping("{id}")
     //@PreAuthorize("@ss.hasPermission('system:role:delete')")
+    @LogRecord(success = "删除角色, 编号「{{#id}}」",
+            fail = "删除角色失败，失败原因：「{{#_errorMsg}}」",
+            type = ModuleType.ROLE, bizNo = "{{#id}}")
     public void remove(@PathVariable("id") Long id) {
         roleService.remove(id);
     }
@@ -92,8 +107,12 @@ public class RoleController {
         return roleService.page(qry);
     }
 
+    /**
+     * 获取角色精简信息列表
+     * <p>只包含被开启的角色，主要用于前端的下拉选项
+     * @return
+     */
     @GetMapping({"/list-all-simple", "/simple-list"})
-    //@Operation(summary = "获取角色精简信息列表", description = "只包含被开启的角色，主要用于前端的下拉选项")
     public List<RoleSimpleCO> getSimpleList() {
         return roleService.getSimpleList();
     }

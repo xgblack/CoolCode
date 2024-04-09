@@ -25,4 +25,10 @@ public interface RemoteUserService {
     boolean lockUser(String username);
 
 
+    /**
+     * 根据用户id查询用户信息
+     * @param userId
+     * @return
+     */
+    UserInfo info(Long userId);
 }

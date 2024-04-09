@@ -61,7 +61,7 @@ public interface CoolUserDetailsService extends UserDetailsService, Ordered {
         Collection<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(dbAuthsSet.toArray(new String[0]));
         SysUser user = info.getSysUser();
 
-        // 构造security用户 TODO
+        // 构造security用户
         //由于密码默认使用BCRYPT加密，所以这里需要添加前缀，DelegatingPasswordEncoder能够根据密码前缀来确定密码编码器
         return new LoginUser(user.getId(), user.getDeptId(), user.getTenantId(), user.getUsername(),
                 SecurityConstants.BCRYPT + user.getPassword(), user.getPhone(), true, true, true,
@@ -77,4 +77,5 @@ public interface CoolUserDetailsService extends UserDetailsService, Ordered {
         return this.loadUserByUsername(user.getUsername());
     }
 
+    UserDetails loadUserById(Long userId);
 }

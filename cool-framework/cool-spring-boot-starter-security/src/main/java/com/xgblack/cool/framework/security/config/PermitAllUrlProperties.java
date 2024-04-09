@@ -1,4 +1,4 @@
-package com.xgblack.cool.framework.security.core.component;
+package com.xgblack.cool.framework.security.config;
 
 import com.xgblack.cool.framework.security.annotation.Inner;
 import lombok.Getter;
