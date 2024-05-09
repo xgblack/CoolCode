@@ -28,7 +28,7 @@
         <guava.version>33.1.0-jre</guava.version>
         <lombok.version>1.18.32</lombok.version>
         <mapstruct.version>1.6.0.Beta1</mapstruct.version>
-        <hutool.version>6.0.0-M11</hutool.version>
+        <hutool.version>6.0.0-M12</hutool.version>
         <!--<minio.version>8.5.7</minio.version>-->
         <!--<tobato.version>1.27.2</tobato.version>-->
         <!--<caffeine.version>3.1.8</caffeine.version>-->
