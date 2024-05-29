@@ -22,7 +22,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- 统一依赖管理 -->
-        <spring.boot.version>3.2.5</spring.boot.version>
+        <spring.boot.version>3.3.0</spring.boot.version>
         <mysql.version>8.3.0</mysql.version>
         <mybatis-flex.version>1.8.9</mybatis-flex.version>
         <guava.version>33.1.0-jre</guava.version>
