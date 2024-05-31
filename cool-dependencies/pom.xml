@@ -24,7 +24,7 @@
         <!-- 统一依赖管理 -->
         <spring.boot.version>3.3.0</spring.boot.version>
         <mysql.version>8.3.0</mysql.version>
-        <mybatis-flex.version>1.8.9</mybatis-flex.version>
+        <mybatis-flex.version>1.9.0</mybatis-flex.version>
         <guava.version>33.1.0-jre</guava.version>
         <lombok.version>1.18.32</lombok.version>
         <mapstruct.version>1.6.0.Beta1</mapstruct.version>
